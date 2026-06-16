@@ -1,0 +1,10 @@
+.home-page {
+  background: #fafafa;
+  min-height: 100vh;
+}
+
+/* global section spacing = premium feel */
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+}

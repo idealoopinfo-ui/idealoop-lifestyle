@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, Arial, sans-serif;
+}
+
+body {
+  background: #fafafa;
+  color: #111;
+}
+
+/* 🔥 GLOBAL PREMIUM SPACING SYSTEM */
+section {
+  padding: 90px 20px;
+}
+
+/* center all content blocks */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* section breathing space separation */
+section + section {
+  margin-top: 20px;
+}
