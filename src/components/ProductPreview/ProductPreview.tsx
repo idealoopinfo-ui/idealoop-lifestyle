@@ -1,38 +1,58 @@
-import ProductCard from '../ProductCard/ProductCard';
-import './ProductPreview.css';
+import "./ProductPreview.css";
 
 const products = [
   {
-    title: 'Minimal Desk Lamp',
-    price: '$29.99',
-    image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c',
-    category: 'Home',
+    title: "Minimal Desk Lamp",
+    image:
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c",
   },
   {
-    title: 'Soft Cotton Shirt',
-    price: '$19.99',
-    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab',
-    category: 'Clothing',
+    title: "Soft Cotton Shirt",
+    image:
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
   },
   {
-    title: 'Glow Skincare Kit',
-    price: '$39.99',
-    image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571',
-    category: 'Beauty',
+    title: "Glow Skincare Kit",
+    image:
+      "https://images.unsplash.com/photo-1556228578-0d85b1a4d571",
+  },
+  {
+    title: "Modern Vase Decor",
+    image:
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511",
+  },
+  {
+    title: "Beauty Essentials",
+    image:
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9",
   },
 ];
 
 export default function ProductPreview() {
   return (
-    <section className="product-section">
-      <h2>Trending Now</h2>
-      <p>Handpicked products for your lifestyle</p>
+    <section className="product-preview">
 
-      <div className="product-row">
-        {products.map((item, index) => (
-          <ProductCard key={index} {...item} />
-        ))}
+      <div className="section-header">
+        <h2>✨ Category Spotlight</h2>
+        <p>Discover curated lifestyle picks in one place</p>
       </div>
+
+      <div className="spotlight-container">
+
+        <div className="big-image">
+          <img src={products[0].image} alt={products[0].title} />
+        </div>
+
+        <div className="small-grid">
+          {products.slice(1).map((item, index) => (
+            <div className="small-card" key={index}>
+              <img src={item.image} alt={item.title} />
+            </div>
+          ))}
+        </div>
+
+      </div>
+
     </section>
   );
 }

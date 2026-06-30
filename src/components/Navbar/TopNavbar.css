@@ -1,0 +1,64 @@
+.top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  /* LEFT */
+  .top-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .logo {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .company-name {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  
+  /* RIGHT */
+  .top-right {
+    position: relative;
+  }
+  
+  .login-btn {
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  /* DROPDOWN */
+  .login-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    background: white;
+    color: black;
+    min-width: 120px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .login-menu a {
+    display: block;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+  }
+  
+  .login-dropdown:hover .login-menu {
+    display: block;
+  }

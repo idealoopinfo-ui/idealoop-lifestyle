@@ -1,0 +1,78 @@
+.category-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  /* LEFT */
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* RIGHT */
+  .nav-right {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .nav-right input {
+    padding: 6px;
+    border-radius: 4px;
+    border: none;
+  }
+  
+  /* DROPDOWN */
+  .dropdown {
+    position: relative;
+  }
+  
+  .drop-btn {
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* MENU */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    background: white;
+    color: black;
+    min-width: 200px;
+    border-radius: 6px;
+    z-index: 999;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-content a {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .dropdown-content a:hover {
+    background: #eee;
+  }
+  
+  /* GENDER */
+  .gender-group {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+  }

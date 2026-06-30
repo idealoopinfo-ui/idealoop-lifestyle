@@ -1,87 +1,80 @@
-.product-section {
-  padding: 80px 40px;
-  max-width: 1200px;
-  margin: 0 auto;
+.product-preview {
+  padding: 70px 5%;
 }
 
-.product-section h2 {
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-
-.product-section p {
-  color: #666;
+.section-header {
+  text-align: center;
   margin-bottom: 30px;
 }
 
-.product-row {
-  display: flex;
+.section-header h2 {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.section-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* MAIN CONTAINER */
+.spotlight-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   gap: 20px;
-  overflow-x: auto;
-  padding-bottom: 10px;
+  height: 500px;
 }
 
-/* hide scrollbar */
-.product-row::-webkit-scrollbar {
-  display: none;
-}
-
-.product-card {
-  min-width: 220px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  transition: 0.3s;
-}
-
-.product-card:hover {
-  transform: translateY(-6px);
-}
-
-.image-box {
-  width: 100%;
-  height: 160px;
+/* BIG IMAGE */
+.big-image {
+  height: 100%;
+  border-radius: 18px;
   overflow: hidden;
 }
 
-.image-box img {
+.big-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: 0.4s;
 }
 
-.product-card:hover img {
-  transform: scale(1.1);
+/* SMALL GRID */
+.small-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 12px;
 }
 
-.info {
-  padding: 15px;
+.small-card {
+  border-radius: 14px;
+  overflow: hidden;
 }
 
-.info h3 {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-.info p {
-  color: #c8a96a;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.info button {
+.small-card img {
   width: 100%;
-  padding: 8px;
-  border: none;
-  border-radius: 20px;
-  background: #111;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s;
+  height: 100%;
+  object-fit: cover;
 }
 
-.info button:hover {
-  background: #c8a96a;
+/* HOVER EFFECT */
+img {
+  transition: 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .spotlight-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .small-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
 }
