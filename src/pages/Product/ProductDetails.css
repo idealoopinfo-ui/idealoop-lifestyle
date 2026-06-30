@@ -1,0 +1,42 @@
+.product-details {
+    display: flex;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 20px;
+    font-family: Arial;
+  }
+  
+  .product-image img {
+    width: 400px;
+    border-radius: 12px;
+  }
+  
+  .product-info {
+    flex: 1;
+  }
+  
+  .price {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .desc {
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .buy-btn {
+    margin-top: 20px;
+    padding: 12px 18px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .buy-btn:hover {
+    opacity: 0.8;
+  }

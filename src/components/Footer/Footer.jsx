@@ -40,7 +40,7 @@ export default function Footer() {
           <h3>Legal</h3>
           <Link to="/privacy">Privacy Policy</Link>
           <Link to="/terms">Terms & Conditions</Link>
-          <Link to="/disclosure">Affiliate Disclosure</Link>
+          <Link to="/affiliate-disclosure">Affiliate Disclosure</Link>
         </div>
 
       </div>
@@ -50,7 +50,10 @@ export default function Footer() {
 
       {/* BOTTOM */}
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Idealoop Lifestyle. All rights reserved.</p>
+        <p>
+          © {new Date().getFullYear()} Idealoop Lifestyle. All rights reserved.
+        </p>
+
         <p className="footer-note">
           Some links may be affiliate links. We may earn a commission at no extra cost to you.
         </p>
