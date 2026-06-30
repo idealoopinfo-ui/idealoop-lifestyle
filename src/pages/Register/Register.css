@@ -1,9 +1,10 @@
 .auth-container {
-    height: 100vh;
+    min-height: calc(100vh - 140px);
     display: flex;
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, #0f172a, #1e293b);
+    padding-top: 10px;
   }
   
   .auth-box {
@@ -37,18 +38,9 @@
     cursor: pointer;
   }
   
-  .auth-box button:hover {
-    background: #4338ca;
-  }
-  
   .message {
-    color: #fbbf24;
     margin-top: 10px;
-  }
-  
-  .links {
-    margin-top: 15px;
-    font-size: 13px;
+    color: #fbbf24;
   }
   
   .links a {

@@ -1,5 +1,3 @@
-import TopNavbar from "../../components/Navbar/TopNavbar";
-import CategoryNavbar from "../../components/Navbar/CategoryNavbar";
 import Hero from '../../components/Hero/Hero';
 import Categories from '../../components/Categories/Categories';
 import Collections from '../../components/Collections/Collections';
@@ -13,8 +11,7 @@ import Footer from "../../components/Footer/Footer";
 export default function Home() {
   return (
     <>
-      <TopNavbar />
-      <CategoryNavbar />
+     
 
       <div className="container">
         <Hero />
@@ -25,7 +22,7 @@ export default function Home() {
         <WhyChoose />
         <About />
         <ProductPreview />
-        <Footer />
+        
       </div>
     </>
   );

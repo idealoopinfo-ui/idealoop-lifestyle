@@ -27,7 +27,7 @@ export default function Admin() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
-  // 📦 fetch products
+  // Fetch products
   const fetchProducts = async () => {
     const { data } = await supabase.from('products').select('*');
     setProducts(data || []);
@@ -37,15 +37,18 @@ export default function Admin() {
     fetchProducts();
   }, []);
 
-  // 🔐 auth protection
-  if (loading) return <p>Loading...</p>;
+  // Redirect if not authenticated
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/auth');
+    }
+  }, [loading, user, navigate]);
 
-  if (!user) {
-    navigate('/login');
-    return null;
-  }
+  if (loading) return <div>Loading...</div>;
 
-  // 💾 save (create / update)
+  if (!user) return null;
+
+  // Save (create/update)
   const saveProduct = async () => {
     if (editingId) {
       await supabase
@@ -75,18 +78,19 @@ export default function Admin() {
     setTitle('');
     setPrice('');
     setImage('');
+    setCategory('home');
     setLink('');
 
     fetchProducts();
   };
 
-  // 🗑️ delete
+  // Delete
   const deleteProduct = async (id: number) => {
     await supabase.from('products').delete().eq('id', id);
     fetchProducts();
   };
 
-  // ✏️ edit
+  // Edit
   const startEdit = (product: Product) => {
     setEditingId(product.id);
     setTitle(product.title);
@@ -96,11 +100,17 @@ export default function Admin() {
     setLink(product.link || '');
   };
 
+  // Logout
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/auth');
+  };
+
   return (
-    <div className="admin">
+    <div className="admin-container">
       <h1>Admin Panel</h1>
 
-      {/* FORM */}
+      {/* Form */}
       <input
         placeholder="Product Title"
         value={title}
@@ -125,7 +135,10 @@ export default function Admin() {
         onChange={(e) => setLink(e.target.value)}
       />
 
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      >
         <option value="home">Home</option>
         <option value="clothing">Clothing</option>
         <option value="beauty">Beauty</option>
@@ -135,18 +148,10 @@ export default function Admin() {
         {editingId ? 'Update Product' : 'Add Product'}
       </button>
 
-      <button
-        onClick={async () => {
-          await supabase.auth.signOut();
-          navigate('/login');
-        }}
-      >
-        Logout
-      </button>
+      <button onClick={handleLogout}>Logout</button>
 
       <hr />
 
-      {/* PRODUCTS LIST */}
       <h2>All Products</h2>
 
       <div className="admin-grid">

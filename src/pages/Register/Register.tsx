@@ -2,11 +2,14 @@ import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
-import "./Login.css";
+import "./Register.css";
 
-export default function Login() {
+export default function Register() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const [message, setMessage] = useState("");
@@ -14,21 +17,32 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setMessage("");
 
-    const { error } = await supabase.auth.signInWithPassword({
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+        },
+      },
     });
 
     if (error) {
-      setError("Invalid login details");
+      setError(error.message);
     } else {
-      setMessage("Login successful!");
-      setTimeout(() => navigate("/"), 1500);
+      setMessage("Account created successfully!");
+      setTimeout(() => navigate("/login"), 2000);
     }
   };
 
@@ -41,9 +55,12 @@ export default function Login() {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h2>Welcome Back</h2>
+        <h2>Create Account</h2>
 
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleRegister}>
+          <input placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />
+          <input placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} />
+
           <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
 
           <div className="password-box">
@@ -57,7 +74,13 @@ export default function Login() {
             </span>
           </div>
 
-          <button type="submit">Login</button>
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+
+          <button type="submit">Register</button>
         </form>
 
         {error && <div className="error-popup">{error}</div>}
@@ -76,11 +99,7 @@ export default function Login() {
 </button>
 
         <p>
-          <Link to="/forgot-password">Forgot Password?</Link>
-        </p>
-
-        <p>
-          Don’t have account? <Link to="/register">Register</Link>
+          Already have account? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>

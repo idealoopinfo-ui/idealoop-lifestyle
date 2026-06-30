@@ -10,17 +10,113 @@ body {
   color: #111;
 }
 
-/* 🔥 GLOBAL PREMIUM SPACING SYSTEM */
+/* GLOBAL LAYOUT */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* SECTIONS */
 section {
   padding: 90px 20px;
 }
 
-/* center all content blocks */
 .container {
   max-width: 1200px;
   margin: 0 auto;
 }
-/* section breathing space separation */
+
 section + section {
   margin-top: 20px;
+}
+
+/* ========================= */
+/* AUTH PAGE (FIXED CLEAN) */
+/* ========================= */
+
+.auth-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+  /* choose ONE behavior */
+  align-items: flex-start;
+
+  min-height: calc(100vh - 120px);
+  background: radial-gradient(circle at top, #1e293b, #0f172a);
+  padding: 80px 20px 20px;
+}
+.auth-box {
+  width: 420px;
+  padding: 35px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  color: white;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.auth-box button:hover {
+  background: #4338ca;
+}
+
+/* GOOGLE BUTTON */
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+  background: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.google-icon {
+  display: flex;
 }
