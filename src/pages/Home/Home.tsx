@@ -8,6 +8,7 @@ import Trending from '../../components/Trending/Trending';
 import CategoryHighlights from '../../components/CategoryHighlights/CategoryHighlights';
 import WhyChoose from "../../components/WhyChoose/WhyChoose";
 import About from "../../components/About/About";
+import Footer from "../../components/Footer/Footer";
 
 export default function Home() {
   return (
@@ -19,11 +20,12 @@ export default function Home() {
         <Hero />
         <Categories />
         <Trending />
-        <CategoryHighlights />
+        
         <Collections />
         <WhyChoose />
         <About />
         <ProductPreview />
+        <Footer />
       </div>
     </>
   );

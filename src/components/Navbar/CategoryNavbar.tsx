@@ -15,7 +15,9 @@ export default function CategoryNavbar() {
 
         {categories.map((category) => (
           <div className="dropdown" key={category.title}>
-            <button className="drop-btn">{category.title}</button>
+            <button className="drop-btn">
+              {category.title}
+            </button>
 
             <div className="dropdown-content">
 
@@ -39,6 +41,7 @@ export default function CategoryNavbar() {
                         {item}
                       </Link>
                     ))}
+
                   </div>
                 ))
               ) : (

@@ -5,20 +5,7 @@ export type Category = {
   };
   
   export const categories: Category[] = [
-    {
-      title: "Furniture",
-      gendered: false,
-      items: [
-        "Sofas",
-        "Beds",
-        "Dining Tables",
-        "Chairs",
-        "Coffee Tables",
-        "TV Units",
-        "Wardrobes",
-        "Office Furniture"
-      ]
-    },
+    
     {
       title: "Home Decor",
       gendered: false,
@@ -32,29 +19,7 @@ export type Category = {
         "Decor Accents"
       ]
     },
-    {
-      title: "Lighting",
-      gendered: false,
-      items: [
-        "Ceiling Lights",
-        "Table Lamps",
-        "Floor Lamps",
-        "Wall Lights",
-        "Pendant Lights",
-        "Outdoor Lighting"
-      ]
-    },
-    {
-      title: "Kitchen",
-      gendered: false,
-      items: [
-        "Cookware",
-        "Dinnerware",
-        "Storage",
-        "Kitchen Tools",
-        "Small Appliances"
-      ]
-    },
+    
     {
       title: "Beauty",
       gendered: true,
