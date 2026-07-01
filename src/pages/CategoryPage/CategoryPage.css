@@ -1,0 +1,43 @@
+.category-page {
+    padding: 30px;
+  }
+  
+  .category-hero {
+    margin-bottom: 20px;
+  }
+  
+  .category-hero h1 {
+    font-size: 28px;
+  }
+  
+  .category-filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .category-filters select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  .product-card {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 10px;
+    background: #fff;
+  }
+  
+  .product-image {
+    height: 140px;
+    background: #f3f3f3;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }

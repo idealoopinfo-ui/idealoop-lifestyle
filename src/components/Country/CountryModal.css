@@ -1,0 +1,120 @@
+.country-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+  
+    width: 280px;
+    background: #ffffff;
+  
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+  
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  
+    z-index: 99999;
+  
+    padding: 10px;
+  
+    display: flex;
+    flex-direction: column;
+  
+    color: #111; /* IMPORTANT FIX */
+  }
+  
+  /* HEADER */
+  .country-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  
+    color: #111;
+  }
+  
+  /* INFO TEXT */
+  .country-info {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  
+  /* SEARCH BOX */
+  .country-search {
+    width: 100%;
+    padding: 8px;
+  
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  
+    margin-bottom: 10px;
+  
+    color: #111;
+    background: #fff;
+  }
+  
+  /* LIST */
+  .country-list {
+    max-height: 220px;
+    overflow-y: auto;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  /* ITEM */
+  .country-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+  
+    padding: 10px;
+    border-radius: 8px;
+  
+    cursor: pointer;
+  
+    color: #111 !important;
+    transition: background 0.2s ease;
+  }
+  
+  .country-item:hover {
+    background: #f5f5f5;
+  }
+  
+  /* FLAG */
+  .flag {
+    font-size: 18px;
+    line-height: 1;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+  }
+  
+  /* CLOSE BUTTON */
+  .close-btn {
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+  
+    color: #111;
+  }
+  
+  /* FORCE SAFE TEXT (fixes white text bugs) */
+  .country-dropdown * {
+    color: #111;
+  }
+  .country-dropdown,
+  .country-dropdown * {
+    color: #111 !important;
+  }
+.country-item span,
+.country-header,
+.country-info,
+.country-search {
+  color: #111 !important;
+}
+.country-search {
+    color: #111 !important;
+    background: #fff !important;
+  }

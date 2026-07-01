@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+
+import CountryButton from "../Country/CountryButton";
+
 import "./TopNavbar.css";
 
 export default function TopNavbar() {
@@ -34,6 +37,8 @@ export default function TopNavbar() {
             </Link>
           </>
         )}
+
+        <CountryButton />
 
         {/* AUTH AREA */}
         {!isLoggedIn ? (

@@ -9,47 +9,48 @@ import Admin from "./pages/Admin/Admin";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
-
 import Profile from "./pages/Profile/Profile";
 import ProductDetails from "./pages/Product/ProductDetails";
-
-import CategoryPage from "./pages/Category/CategoryPage";
-
+import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import Contact from "./pages/Contact/Contact";
+
+import { CountryProvider } from "./context/CountryContext";
 
 export default function App() {
   return (
-    <div className="app-layout">
+    <CountryProvider>
+      <div className="app-container">
 
-      {/* 🔝 GLOBAL NAVBAR */}
-      <TopNavbar />
+        {/* 🔝 GLOBAL NAVBAR */}
+        <TopNavbar />
 
-      {/* 📂 CATEGORY NAVBAR */}
-      <CategoryNavbar />
+        {/* 📂 CATEGORY NAVBAR */}
+        <CategoryNavbar />
 
-      {/* 📄 MAIN CONTENT AREA */}
-      <main className="app-main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
+        {/* 📄 MAIN CONTENT AREA */}
+        <main className="app-main">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/admin" element={<Admin />} />
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
 
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/product/:slug" element={<ProductDetails />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/product/:slug" element={<ProductDetails />} />
 
-          {/* 🧭 CATEGORY ROUTE */}
-          <Route path="/category/:slug" element={<CategoryPage />} />
+            {/* 🧭 CATEGORY ROUTE */}
+            <Route path="/category/:slug" element={<CategoryPage />} />
 
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
 
-      {/* 🔻 FOOTER */}
-      <Footer />
+        {/* 🔻 FOOTER */}
+        <Footer />
 
-    </div>
+      </div>
+    </CountryProvider>
   );
 }
