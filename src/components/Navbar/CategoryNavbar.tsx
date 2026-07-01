@@ -4,58 +4,83 @@ import { categories } from "../../data/categories";
 import "./CategoryNavbar.css";
 
 export default function CategoryNavbar() {
+  const [openId, setOpenId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
   return (
     <nav className="category-navbar">
 
-      {/* LEFT: CATEGORIES */}
+      {/* LEFT: MAIN CATEGORIES */}
       <div className="nav-left">
 
         {categories.map((category) => (
-          <div className="dropdown" key={category.title}>
+          <div
+            key={category.id}
+            className="dropdown"
+            onMouseEnter={() => setOpenId(category.id)}
+            onMouseLeave={() => setOpenId(null)}
+          >
+
+            {/* MAIN BUTTON */}
             <button className="drop-btn">
-              {category.title}
+              {category.name} ▼
             </button>
 
-            <div className="dropdown-content">
+            {/* DROPDOWN */}
+            {openId === category.id && (
+              <div className="dropdown-content">
 
-              {category.gendered ? (
-                Object.entries(category.items).map(([gender, items]) => (
-                  <div key={gender} className="gender-group">
-
-                    <strong
+                {category.items.map((item: any, index: number) =>
+                  typeof item === "string" ? (
+                    <div
+                      key={item + index}
+                      className="dropdown-item"
                       onClick={() =>
-                        navigate(`/products?category=${category.title}&gender=${gender}`)
+                        navigate(`/category/${category.slug}?sub=${item}`)
                       }
                     >
-                      {gender}
-                    </strong>
+                      {item}
+                    </div>
+                  ) : (
+                    <div key={item.name + index} className="dropdown-group">
 
-                    {items.map((item) => (
-                      <Link
-                        key={item}
-                        to={`/products?category=${category.title}&gender=${gender}&subcategory=${item}`}
+                      {/* MAIN SUB CATEGORY */}
+                      <div
+                        className="dropdown-item main-item"
+                        onClick={() =>
+                          navigate(
+                            `/category/${category.slug}?sub=${item.name}`
+                          )
+                        }
                       >
-                        {item}
-                      </Link>
-                    ))}
+                        {item.name}
+                      </div>
 
-                  </div>
-                ))
-              ) : (
-                category.items.map((item) => (
-                  <Link
-                    key={item}
-                    to={`/products?category=${category.title}&subcategory=${item}`}
-                  >
-                    {item}
-                  </Link>
-                ))
-              )}
+                      {/* INNER SUB ITEMS */}
+                      <div className="dropdown-sub">
+                        {item.sub.map((subItem: string, subIndex: number) => (
+                          <div
+                            key={subItem + subIndex}
+                            className="dropdown-sub-item"
+                            onClick={() =>
+                              navigate(
+                                `/category/${category.slug}?sub=${item.name}&type=${subItem}`
+                              )
+                            }
+                          >
+                            {subItem}
+                          </div>
+                        ))}
+                      </div>
 
-            </div>
+                    </div>
+                  )
+                )}
+
+              </div>
+            )}
+
           </div>
         ))}
 

@@ -120,3 +120,58 @@ section + section {
 .google-icon {
   display: flex;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+}
+body {
+  overflow-x: hidden;
+}
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.page-wrapper {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 20px;
+
+  box-sizing: border-box;
+}
+
+.category-page {
+  width: 100%;
+}
+
+.not-found {
+  width: 100%;
+  text-align: center;
+
+  margin-top: 80px;
+
+  font-size: 18px;
+  font-weight: 600;
+  color: #666;
+}

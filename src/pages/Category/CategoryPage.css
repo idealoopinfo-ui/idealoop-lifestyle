@@ -1,0 +1,16 @@
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+  .not-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+  
+    font-size: 18px;
+    font-weight: 600;
+    color: #666;
+  }

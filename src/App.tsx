@@ -13,11 +13,14 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Profile from "./pages/Profile/Profile";
 import ProductDetails from "./pages/Product/ProductDetails";
 
+import CategoryPage from "./pages/Category/CategoryPage";
+
 import Contact from "./pages/Contact/Contact";
 
 export default function App() {
   return (
-    <>
+    <div className="app-layout">
+
       {/* 🔝 GLOBAL NAVBAR */}
       <TopNavbar />
 
@@ -36,12 +39,17 @@ export default function App() {
 
           <Route path="/profile" element={<Profile />} />
           <Route path="/product/:slug" element={<ProductDetails />} />
+
+          {/* 🧭 CATEGORY ROUTE */}
+          <Route path="/category/:slug" element={<CategoryPage />} />
+
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
 
       {/* 🔻 FOOTER */}
       <Footer />
-    </>
+
+    </div>
   );
 }
