@@ -1,24 +1,44 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./DiscoverNavbar.css";
 
 export default function DiscoverNavbar() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="discover-navbar">
+    <nav className="discover-navbar">
 
-      <Link to="/" className="logo">
-        🛍 Idealoop
-      </Link>
+      <div className="nav-left">
 
-      <div className="nav-center">
-        <Link to="/discover" className="active">
-          📌 Discover
-        </Link>
+        <img
+          src="https://lxvoytlpnbzwxplxfnxj.supabase.co/storage/v1/object/public/my/Untitled_design-removebg-preview.png"
+          className="logo-icon"
+        />
 
-        <Link to="/" className="nav-link">
-          Shop
-        </Link>
+<div className="category-wrapper">
+<span className="category-btn">
+  Category
+</span>
+
+  {open && (
+    <div className="dropdown">
+      <Link to="/category/fashion">Fashion</Link>
+      <Link to="/category/home">Home</Link>
+      <Link to="/category/beauty">Beauty</Link>
+      <Link to="/category/tech">Tech</Link>
+      <Link to="/category/travel">Travel</Link>
+    </div>
+  )}
+</div>
+</div>
+
+      <div className="nav-description">
+        <h1>Discover</h1>
+        <p>
+          Find inspiration and products you'll love — curated collections across fashion, home, beauty, tech, and lifestyle ideas.
+        </p>
       </div>
 
-    </div>
+    </nav>
   );
 }

@@ -6,6 +6,7 @@ import "./DiscoverPage.css";
 interface Product {
   id: number;
   main_image_url: string;
+  likes?: number;
 }
 
 export default function DiscoverPage() {
@@ -16,60 +17,85 @@ export default function DiscoverPage() {
     const fetchProducts = async () => {
       const { data, error } = await supabase
         .from("products")
-        .select("id, main_image_url");
+        .select("id, main_image_url, likes");
 
       if (error) {
-        console.error("Error fetching products:", error.message);
+        console.error(error.message);
         return;
       }
 
-      if (data) {
-        setProducts(data);
-      }
+      setProducts(data || []);
     };
 
     fetchProducts();
   }, []);
 
+  const handleLike = async (productId: number, currentLikes: number) => {
+    const newLikes = (currentLikes || 0) + 1;
+
+    const { error } = await supabase
+      .from("products")
+      .update({ likes: newLikes })
+      .eq("id", productId);
+
+    if (error) {
+      console.error(error.message);
+      return;
+    }
+
+    // update UI instantly
+    setProducts((prev) =>
+      prev.map((p) =>
+        p.id === productId ? { ...p, likes: newLikes } : p
+      )
+    );
+  };
+
   return (
     <div className="discover-page">
-  
-      {/* FLOATING TOP BAR */}
-      <div className="top-bar">
-        <h2>IDEALOOP</h2>
-  
-        <div className="categories">
-          <button className="active">All</button>
-          <button>Fashion</button>
-          <button>Home</button>
-          <button>Beauty</button>
-          <button>Kitchen</button>
-          <button>Travel</button>
-        </div>
+
+      {/* HEADER */}
+      <div className="discover-header">
+        <h1>Discover</h1>
+        <p>Find inspiration and products you'll love</p>
       </div>
-  
+
       {/* PINTEREST GRID */}
       <div className="pinterest-grid">
         {products.map((product) => (
           <div
             key={product.id}
-            className={`pin-card size-${(product.id % 4) + 1}`}
+            className="pin-card"
             onClick={() => navigate(`/product/${product.id}`)}
           >
+
+            {/* IMAGE */}
             <img
               src={product.main_image_url}
-              alt={`Product ${product.id}`}
+              alt=""
               loading="lazy"
             />
+
+            {/* LIKE BUTTON */}
+            <div
+              className="like-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleLike(product.id, product.likes || 0);
+              }}
+            >
+              ❤️ {product.likes || 0}
+            </div>
+
           </div>
         ))}
       </div>
-  
+
       {/* MINIMAL FOOTER */}
-      <footer className="mini-footer">
+      <div className="mini-footer">
         © {new Date().getFullYear()} Idealoop
-      </footer>
-  
+      </div>
+
     </div>
   );
-        }
+}
