@@ -22,7 +22,6 @@ export default function CountryModal({ onClose, onSelect }: Props) {
 
   return (
     <div className="country-overlay">
-
       <div className="country-modal">
 
         {/* HEADER */}
@@ -56,13 +55,12 @@ export default function CountryModal({ onClose, onSelect }: Props) {
               }}
             >
               <span className="flag">{c.flag}</span>
-              <span>{c.name}</span>
+              <span className="country-name">{c.name}</span>
             </div>
           ))}
         </div>
 
       </div>
-
     </div>
   );
 }

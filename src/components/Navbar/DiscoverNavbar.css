@@ -1,0 +1,33 @@
+.discover-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    padding: 12px 24px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .discover-navbar .logo {
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text);
+  }
+  
+  .nav-center {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-center a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+  
+  .nav-center .active {
+    background: black;
+    color: white;
+  }

@@ -41,10 +41,16 @@ export default function Login() {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h2>Welcome Back</h2>
 
-        <form onSubmit={handleLogin}>
-          <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+        <h2>Login</h2>
+
+        <form onSubmit={handleLogin} className="auth-form">
+
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
           <div className="password-box">
             <input
@@ -52,36 +58,42 @@ export default function Login() {
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <span onClick={() => setShowPassword(!showPassword)}>
+
+            <span
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
 
-          <button type="submit">Login</button>
+          {/* LOGIN BUTTON */}
+          <div className="auth-actions">
+            <button type="submit" className="auth-btn">
+              Login
+            </button>
+          </div>
+
         </form>
 
+        {/* MESSAGES */}
         {error && <div className="error-popup">{error}</div>}
         {message && <div className="success-popup">{message}</div>}
 
-        <button className="google-btn">
-  <span className="google-icon">
-    <svg width="18" height="18" viewBox="0 0 48 48">
-      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.69 30.3 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.2C12.43 13.13 17.73 9.5 24 9.5z"/>
-      <path fill="#4285F4" d="M46.1 24.55c0-1.57-.14-3.09-.4-4.55H24v9.02h12.34c-.53 2.84-2.18 5.23-4.63 6.84l7.19 5.6C43.98 37.18 46.1 31.35 46.1 24.55z"/>
-      <path fill="#FBBC05" d="M10.54 28.42c-.48-1.43-.76-2.95-.76-4.52s.28-3.09.76-4.52l-7.98-6.2C.86 16.18 0 20.01 0 24s.86 7.82 2.56 11.22l7.98-6.8z"/>
-      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.15 15.91-5.86l-7.19-5.6c-2 1.35-4.59 2.16-8.72 2.16-6.27 0-11.57-3.63-13.46-8.82l-7.98 6.2C6.51 42.62 14.62 48 24 48z"/>
-    </svg>
-  </span>
-  Continue with Google
-</button>
+        {/* GOOGLE LOGIN */}
+        <button className="google-btn" onClick={handleGoogle}>
+          <FaGoogle /> Continue with Google
+        </button>
 
+        {/* LINKS */}
         <p>
           <Link to="/forgot-password">Forgot Password?</Link>
         </p>
 
         <p>
-          Don’t have account? <Link to="/register">Register</Link>
+          Don’t have an account? <Link to="/register">Register</Link>
         </p>
+
       </div>
     </div>
   );

@@ -12,7 +12,8 @@ interface Country {
 const CountryButton = () => {
   const [open, setOpen] = useState(false);
   const { country, setCountry } = useCountry();
-  const ref = useRef<HTMLDivElement>(null);
+
+  const ref = useRef<HTMLDivElement | null>(null);
 
   // close when clicking outside
   useEffect(() => {
@@ -31,16 +32,18 @@ const CountryButton = () => {
 
       {/* BUTTON */}
       <button
-        className="country-button"
+        className="country-btn"
         onClick={() => setOpen(!open)}
       >
         {country ? (
           <span className="country-selected">
-            <span className="flag">{country.flag}</span>
-            <span>{country.name}</span>
+          <span className="flag">{country.flag}</span>
+          <span className="country-name">
+            {country.name.replace(/^[A-Z]{2}\s/, "")}
           </span>
+        </span>
         ) : (
-          <span>🌍 Select Country</span>
+          <span className="country-name">🌍 Select Country</span>
         )}
       </button>
 
@@ -78,7 +81,7 @@ const CountryButton = () => {
                 }}
               >
                 <span className="flag">{c.flag}</span>
-                <span>{c.name}</span>
+                <span className="country-name">{c.name}</span>
               </div>
             ))}
           </div>

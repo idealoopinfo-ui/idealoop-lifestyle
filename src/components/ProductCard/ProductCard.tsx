@@ -1,32 +1,26 @@
-import './productCard.css';
+import { useNavigate } from "react-router-dom";
+import "./ProductCard.css";
 
-type Product = {
+interface Props {
+  id: string;
   title: string;
-  price: string;
   image: string;
-  category: string;
-};
+}
 
-export default function ProductCard({
-  title,
-  price,
-  image,
-  category,
-}: Product) {
+export default function ProductCard({ id, title, image }: Props) {
+  const navigate = useNavigate();
+
   return (
-    <div className="product-card">
-      <div className="image-wrapper">
-        <span className="tag">{category}</span>
-        <span className="wishlist">♡</span>
+    <div
+      className="product-card"
+      onClick={() => navigate(`/product/${id}`)}
+    >
+      {/* IMAGE CONTAINER (STEP 2 READY FOR ROTATION) */}
+      <div className="image-container">
         <img src={image} alt={title} />
       </div>
 
-      <div className="content">
-        <h3>{title}</h3>
-        <p className="price">{price}</p>
-
-        <button>Shop Now</button>
-      </div>
+      <h3>{title}</h3>
     </div>
   );
 }

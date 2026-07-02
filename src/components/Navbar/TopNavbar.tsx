@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
 import CountryButton from "../Country/CountryButton";
+import { useTheme } from "../../context/ThemeContext";
 
 import "./TopNavbar.css";
 
 export default function TopNavbar() {
   const user = null;
   const isLoggedIn = !!user;
-
+  const { theme, toggleTheme } = useTheme();
   const firstName = "Amitha";
 
   const handleLogout = () => {
@@ -16,16 +17,30 @@ export default function TopNavbar() {
 
   return (
     <div className="top-navbar">
+
       {/* LEFT */}
       <div className="top-left">
-        <Link to="/" className="logo">
-          🛍 Idealoop
-        </Link>
-        <span className="company-name">Lifestyle Store</span>
+      <Link to="/" className="logo">
+  <img
+    src="https://lxvoytlpnbzwxplxfnxj.supabase.co/storage/v1/object/public/my/Untitled_design-removebg-preview.png"
+    alt="Idealoop"
+    className="logo-img"
+  />
+</Link>
+
+        <span className="company-name">
+          IDEALOOP Lifestyle Store
+        </span>
       </div>
 
       {/* RIGHT */}
       <div className="top-right">
+
+        {/* 📌 ADD THIS */}
+        <Link to="/discover" className="nav-btn">
+          📌 Discover
+        </Link>
+
         {isLoggedIn && (
           <>
             <Link to="/wishlist" className="nav-btn">
@@ -69,6 +84,10 @@ export default function TopNavbar() {
 
               <button className="logout-btn" onClick={handleLogout}>
                 🚪 Logout
+              </button>
+
+              <button className="theme-btn" onClick={toggleTheme}>
+                {theme === "light" ? "🌙 Dark" : "☀ Light"}
               </button>
             </div>
           </div>

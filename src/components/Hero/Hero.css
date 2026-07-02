@@ -2,82 +2,78 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 80px 10%;
-  gap: 60px;
-  background: #0f172a;
-  color: white;
+
+  padding: 80px 40px 40px; /* 👈 fixes missing top space */
+  gap: 40px;
+
+  margin-top: 20px; /* 👈 prevents navbar clash */
 }
 
+.hero-container {
+  width: 100%;
+  background:skyblue;  /* 👈 gives banner feel */
+  padding: 60px 0;
+}
+
+.hero {
+  max-width: 1200px;   /* 👈 container width restored */
+  margin: 0 auto;      /* center container */
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 40px;
+  padding: 20px 40px;
+}
+/* LEFT TEXT */
 .hero-content {
-  flex: 1;
+  max-width: 500px;
 }
 
 .hero-content h1 {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 15px;
+  font-size: 42px;
+  font-weight: 800;
+  color: #111;
 }
 
 .hero-content p {
-  font-size: 18px;
-  color: #cbd5e1;
-  margin-bottom: 25px;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
 }
 
-.buttons {
+/* RIGHT IMAGE CONTAINER */
+.hero-images {
   display: flex;
   gap: 12px;
-  flex-wrap: wrap;
+  align-items: stretch;
 }
 
-.buttons button {
-  padding: 12px 18px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background: #2563eb;
-  color: white;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.buttons button:hover {
-  background: #1d4ed8;
-}
-
-/* IMAGE SECTION */
-.hero-images {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 10px;
-}
-
-.hero-images img {
-  width: 100%;
-  height: 180px;
+/* LARGE IMAGE */
+.hero-main img {
+  width: 220px;
+  height: 320px;
   object-fit: cover;
   border-radius: 12px;
 }
 
-.hero-images img:first-child {
-  grid-column: span 2;
-  height: 200px;
+/* SIDE IMAGES STACK */
+.hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-  }
+.hero-side img {
+  width: 120px;
+  height: 154px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: 0.3s;
+}
 
-  .hero-images {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-images img:first-child {
-    grid-column: auto;
-  }
+.hero-side img:hover {
+  transform: scale(1.05);
 }

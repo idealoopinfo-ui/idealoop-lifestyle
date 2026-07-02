@@ -1,17 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./CategoryPage.css";
 
 export default function CategoryPage() {
   const { slug } = useParams();
+  const navigate = useNavigate();
 
   return (
     <div className="category-page">
 
+      {/* HERO */}
       <div className="category-hero">
-        <h1>Category: {slug}</h1>
+        <h1>{slug?.replace("-", " ")}</h1>
         <p>Explore the best products in this category</p>
       </div>
 
+      {/* FILTERS */}
       <div className="category-filters">
         <select>
           <option>Sort by: Popular</option>
@@ -27,25 +30,64 @@ export default function CategoryPage() {
         </select>
       </div>
 
+      {/* PRODUCT GRID */}
       <div className="product-grid">
 
-        {/* Sample Product Cards */}
         <div className="product-card">
           <div className="product-image"></div>
+
           <h3>Minimal Desk Lamp</h3>
-          <p>$29.99</p>
+
+          {/* ACTIONS */}
+          <div className="product-actions">
+
+            <button
+              className="shop-btn"
+              onClick={() => navigate("/product/1")}
+            >
+              🛒 Shop Now
+            </button>
+
+            <button
+              className="view-btn"
+              onClick={() => navigate("/product/1")}
+            >
+              View Details
+            </button>
+
+          </div>
         </div>
 
         <div className="product-card">
           <div className="product-image"></div>
+
           <h3>Modern Chair</h3>
-          <p>$89.99</p>
+
+          <div className="product-actions">
+            <button className="shop-btn" onClick={() => navigate("/product/2")}>
+              🛒 Shop Now
+            </button>
+
+            <button className="view-btn" onClick={() => navigate("/product/2")}>
+              View Details
+            </button>
+          </div>
         </div>
 
         <div className="product-card">
           <div className="product-image"></div>
+
           <h3>Wooden Table</h3>
-          <p>$129.99</p>
+
+          <div className="product-actions">
+            <button className="shop-btn" onClick={() => navigate("/product/3")}>
+              🛒 Shop Now
+            </button>
+
+            <button className="view-btn" onClick={() => navigate("/product/3")}>
+              View Details
+            </button>
+          </div>
         </div>
 
       </div>

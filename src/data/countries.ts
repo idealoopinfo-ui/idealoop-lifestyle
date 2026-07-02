@@ -7,7 +7,7 @@ export interface Country {
   
   export const countries: Country[] = [
     // 🌏 Asia
-    { name: "Sri Lanka", code: "LK", flag: "🇱🇰", region: "Asia" },
+    { name: "Sri Lanka", flag: "🇱🇰", region: "Asia" },
     { name: "India", code: "IN", flag: "🇮🇳", region: "Asia" },
     { name: "Pakistan", code: "PK", flag: "🇵🇰", region: "Asia" },
     { name: "Bangladesh", code: "BD", flag: "🇧🇩", region: "Asia" },

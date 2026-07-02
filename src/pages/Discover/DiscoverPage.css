@@ -1,0 +1,188 @@
+/* =========================
+DISCOVER PAGE
+========================= */
+
+.discover-page {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 90px 20px 40px;
+    background: #fafafa;
+  }
+  
+  /* =========================
+  HERO
+  ========================= */
+  
+  .discover-hero {
+    text-align: center;
+    margin-bottom: 35px;
+  }
+  
+  .discover-hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 12px;
+  }
+  
+  .discover-hero p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #666;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  
+  /* =========================
+  CATEGORY FILTERS
+  ========================= */
+  
+  .categories {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    max-width: 70%;
+  }
+  
+  .categories button {
+    border: none;
+    padding: 7px 14px;
+    border-radius: 20px;
+    background: #eee;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.2s;
+  }
+  
+  .categories button:hover {
+    background: #111;
+    color: white;
+  }
+  
+  .categories .active {
+    background: #111;
+    color: white;
+  }
+  
+  /* =========================
+  PINTEREST GRID
+  ========================= */
+  
+  .pinterest-grid {
+    column-count: 5;
+    column-gap: 16px;
+  }
+  
+  /* =========================
+  PRODUCT CARD
+  ========================= */
+  
+  .pin-card {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    background: white;
+    transition: transform 0.2s ease;
+  }
+  
+  .pin-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .pin-card img {
+    width: 100%;
+    display: block;
+    border-radius: 14px;
+    object-fit: cover;
+  }
+  /* IMAGE SIZES */
+  .size-1 img {
+    height: 220px;
+  }
+  
+  .size-2 img {
+    height: 300px;
+  }
+  
+  .size-3 img {
+    height: 420px;
+  }
+  
+  .size-4 img {
+    height: 260px;
+  }
+  
+  /* =========================
+  RESPONSIVE
+  ========================= */
+  
+  @media (max-width: 1200px) {
+    .pinterest-grid {
+      column-count: 4;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .pinterest-grid {
+      column-count: 3;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .pinterest-grid {
+      column-count: 2;
+    }
+  
+    .categories {
+      max-width: 100%;
+    }
+  }
+  
+    .discover-hero h1 {
+      font-size: 32px;
+    }
+  
+    .discover-hero p {
+      font-size: 15px;
+    }
+  
+    .pinterest-grid {
+      column-count: 2;
+      column-gap: 12px;
+    }
+  
+    .pin-card {
+      margin-bottom: 12px;
+    }
+  }
+  .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    padding: 12px 25px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+  
+    z-index: 1000;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .top-bar h2 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .mini-footer {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+    font-size: 13px;
+  }
