@@ -1,8 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+
 import { ThemeProvider } from "./context/ThemeContext";
 import { CountryProvider } from "./context/CountryContext";
 
-import DiscoverNavbar from "./components/Navbar/DiscoverNavbar";
 import TopNavbar from "./components/Navbar/TopNavbar";
 import CategoryNavbar from "./components/Navbar/CategoryNavbar";
 import Footer from "./components/Footer/Footer";
@@ -29,8 +29,8 @@ export default function App() {
     <ThemeProvider>
       <CountryProvider>
 
-        {/* 🔝 NAVBAR SWITCH */}
-        {isDiscover ? <DiscoverNavbar /> : <TopNavbar />}
+        {/* 🔝 TOP NAVBAR */}
+        <TopNavbar />
 
         {/* 📂 CATEGORY NAVBAR (HIDE ON DISCOVER) */}
         {!isDiscover && <CategoryNavbar />}
@@ -52,7 +52,7 @@ export default function App() {
           </Routes>
         </main>
 
-        {/* 🔻 FOOTER (HIDE ON DISCOVER FOR CLEAN PINTEREST LOOK) */}
+        {/* 🔻 FOOTER */}
         {!isDiscover && <Footer />}
 
       </CountryProvider>

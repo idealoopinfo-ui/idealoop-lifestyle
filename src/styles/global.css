@@ -158,3 +158,6 @@ section {
   /* CRITICAL FIX for emojis */
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
 }
+body {
+  background: #111;
+}

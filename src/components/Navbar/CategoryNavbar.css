@@ -1,9 +1,9 @@
 .category-navbar {
   height: 64px;
-  padding: 0 32px;
-  margin-bottom: 28px;
+  padding: 0 24px;
+  margin-bottom: 20px;
 
-  background: #222;
+  background: #111;
   color: white;
 
   display: flex;
@@ -11,13 +11,14 @@
   align-items: center;
 
   font-family: inherit;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 /* LEFT */
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 18px;
 }
 
 /* RIGHT */
@@ -29,39 +30,50 @@
 
 /* SEARCH */
 .nav-right input {
-  width: 260px;
-  height: 38px;
+  width: 240px;
+  height: 36px;
 
-  padding: 0 14px;
+  padding: 0 12px;
 
   border-radius: 20px;
-  border: none;
+  border: 1px solid rgba(255,255,255,0.15);
   outline: none;
 
   font-size: 14px;
+
+  background: rgba(255,255,255,0.05);
+  color: white;
+}
+
+.nav-right input::placeholder {
+  color: rgba(255,255,255,0.5);
 }
 
 .nav-right button {
-  height: 38px;
-  padding: 0 18px;
+  height: 36px;
+  padding: 0 16px;
 
   border-radius: 20px;
   border: none;
 
   cursor: pointer;
   font-weight: 500;
+
+  background: white;
+  color: black;
 }
 
-/* CATEGORY DROPDOWN */
+/* DROPDOWN WRAPPER */
 .dropdown {
   position: relative;
 }
 
+/* BUTTON */
 .drop-btn {
   height: 64px;
   padding: 0 14px;
 
-  background: none;
+  background: transparent;
   border: none;
   color: white;
 
@@ -69,9 +81,15 @@
   font-weight: 600;
 
   cursor: pointer;
+
+  transition: 0.2s;
 }
 
-/* IMPORTANT FIX */
+.drop-btn:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* DROPDOWN BOX */
 .dropdown-content {
   position: absolute;
   top: 64px;
@@ -81,15 +99,15 @@
   max-height: 400px;
   overflow-y: auto;
 
-  background: #fff;
-  color: #111;
+  background: #1a1a1a;   /* FIXED: no more white box */
+  color: white;
 
   border-radius: 10px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
 
   z-index: 9999;
 
-  padding: 8px 0;
+  padding: 6px 0;
 }
 
 /* ITEMS */
@@ -99,36 +117,40 @@
 
   font-size: 14px;
   transition: 0.2s;
+
+  color: white;
 }
 
 .dropdown-item:hover {
-  background: #f3f3f3;
+  background: rgba(255,255,255,0.08);
   padding-left: 18px;
 }
 
-/* GROUP TITLE (MEN / WOMEN / KIDS) */
+/* GROUP TITLE */
 .dropdown-group {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
+/* MAIN CATEGORY */
 .main-item {
   font-weight: 600;
-  background: #fafafa;
+  background: rgba(255,255,255,0.04);
 }
 
 /* SUB ITEMS */
 .dropdown-sub {
   padding-left: 12px;
-  background: #fff;
+  background: transparent;
 }
 
 .dropdown-sub-item {
   padding: 8px 12px;
   font-size: 13px;
-  color: #444;
+  color: rgba(255,255,255,0.8);
   cursor: pointer;
 }
 
 .dropdown-sub-item:hover {
-  background: #f5f5f5;
+  background: rgba(255,255,255,0.08);
+  color: white;
 }

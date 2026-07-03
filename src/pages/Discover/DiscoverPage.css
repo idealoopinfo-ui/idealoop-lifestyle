@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 20px;
   background: #fafafa;
+  display: flex;
+  flex-direction: column;
 }
 
 /* HEADER */
@@ -19,16 +21,21 @@
 .discover-header p {
   color: #666;
   font-size: 14px;
+  margin-bottom: 50px;
 }
 
-/* PINTEREST GRID */
+/* GRID */
 .pinterest-grid {
   column-count: 5;
   column-gap: 16px;
+  position: relative;
+  z-index: 1;
 }
 
 /* CARD */
+/* CARD */
 .pin-card {
+  position: relative;   /* IMPORTANT */
   break-inside: avoid;
   margin-bottom: 16px;
   border-radius: 16px;
@@ -37,15 +44,42 @@
   transition: transform 0.2s ease;
 }
 
-.pin-card:hover {
-  transform: scale(1.02);
-}
-
 /* IMAGE */
 .pin-card img {
   width: 100%;
   display: block;
   border-radius: 16px;
+}
+
+/* LIKE BUTTON (HIDDEN BY DEFAULT) */
+.like-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  background: rgba(255, 255, 255, 0.9);
+  padding: 6px 10px;
+  border-radius: 20px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  opacity: 0;              /* HIDE */
+  transform: translateY(-5px);
+  transition: all 0.2s ease;
+}
+
+/* SHOW ON HOVER */
+.pin-card:hover .like-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* OPTIONAL HOVER SCALE */
+.pin-card:hover {
+  transform: scale(1.02);
 }
 
 /* FOOTER */
@@ -67,56 +101,4 @@
 
 @media (max-width: 600px) {
   .pinterest-grid { column-count: 2; }
-}
-/* WRAPPER */
-.image-wrapper {
-  position: relative;
-}
-
-/* LIKE BUTTON */
-.like-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
-  background: rgba(255, 255, 255, 0.9);
-  padding: 6px 10px;
-  border-radius: 20px;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-/* HOVER EFFECT */
-.pin-card:hover .like-btn {
-  transform: scale(1.05);
-}
-
-/* IMAGE CLEAN */
-.image-wrapper img {
-  width: 100%;
-  display: block;
-  border-radius: 16px;
-}
-.like-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
-  background: rgba(255, 255, 255, 0.9);
-  padding: 6px 10px;
-  border-radius: 20px;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.like-btn:hover {
-  transform: scale(1.1);
 }
