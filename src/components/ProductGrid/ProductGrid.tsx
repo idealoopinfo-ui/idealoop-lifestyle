@@ -1,5 +1,11 @@
-import ProductCard, { Product } from "./ProductCard";
+import ProductCard from "../ProductCard/ProductCard";
 import "./ProductGrid.css";
+
+type Product = {
+  id: string;
+  title: string;
+  image: string;
+};
 
 const products: Product[] = [
   {
@@ -21,7 +27,7 @@ const products: Product[] = [
 
 export default function ProductGrid() {
   return (
-    <div className="product-grid">
+    <div className="pinterest-grid">
       {products.map((p) => (
         <ProductCard key={p.id} product={p} />
       ))}

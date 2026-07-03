@@ -1,0 +1,87 @@
+.clothing-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* =========================
+     FILTER BAR
+  ========================= */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  
+    margin: 15px 0 25px 0;
+    padding: 10px 0;
+  
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* FILTER BUTTONS */
+  .filters button {
+    padding: 8px 14px;
+    border-radius: 20px;
+  
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fff;
+    color: #111;
+  
+    font-size: 13px;
+    font-weight: 500;
+  
+    cursor: pointer;
+  
+    transition: all 0.2s ease;
+  }
+  
+  /* HOVER EFFECT */
+  .filters button:hover {
+    background: #111;
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  
+  /* ACTIVE STATE */
+  .filters button.active {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+  }
+  
+  /* =========================
+     PINTEREST GRID
+  ========================= */
+  .pinterest-grid {
+    column-count: 4;
+    column-gap: 16px;
+  }
+  
+  /* CARD IMAGE HANDLING (optional safety) */
+  .pin-card img {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+  }
+  
+  /* =========================
+     RESPONSIVE GRID
+  ========================= */
+  @media (max-width: 1200px) {
+    .pinterest-grid {
+      column-count: 3;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .pinterest-grid {
+      column-count: 2;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .pinterest-grid {
+      column-count: 1;
+    }
+  }

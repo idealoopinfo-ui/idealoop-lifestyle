@@ -6,7 +6,7 @@ import { CountryProvider } from "./context/CountryContext";
 import TopNavbar from "./components/Navbar/TopNavbar";
 import CategoryNavbar from "./components/Navbar/CategoryNavbar";
 import Footer from "./components/Footer/Footer";
-
+import ClothingCategory from "./pages/ClothingCategory/ClothingCategory";
 import DiscoverPage from "./pages/Discover/DiscoverPage";
 import Home from "./pages/Home/Home";
 import Admin from "./pages/Admin/Admin";
@@ -48,6 +48,7 @@ export default function App() {
             <Route path="/category/:category" element={<CategoryPage />} />
             <Route path="/category/:category/:subcategory" element={<CategoryPage />} />
             <Route path="/discover" element={<DiscoverPage />} />
+            <Route path="/clothing" element={<ClothingCategory />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>

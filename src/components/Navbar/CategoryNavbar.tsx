@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { categories } from "../../data/categories";
+import SearchBar from "../Search/SearchBar";
 import "./CategoryNavbar.css";
 
 export default function CategoryNavbar() {
@@ -91,18 +92,7 @@ export default function CategoryNavbar() {
       </div>
 
       {/* RIGHT: SEARCH */}
-      <div className="nav-right">
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-
-        <button onClick={() => navigate(`/products?search=${search}`)}>
-          Search
-        </button>
-      </div>
+      <input placeholder="Search..." />
 
     </nav>
   );

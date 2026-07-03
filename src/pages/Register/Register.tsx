@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { Link, useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./Register.css";
 
 export default function Register() {
@@ -50,9 +50,22 @@ export default function Register() {
       return;
     }
 
+    const user = data.user;
+
+    if (user) {
+      await supabase.from("profiles").insert([
+        {
+          id: user.id,
+          email: user.email,
+          first_name: firstName,
+          last_name: lastName,
+        },
+      ]);
+    }
+
     setMessage("Account created successfully!");
 
-    setTimeout(() => navigate("/login"), 2000);
+    setTimeout(() => navigate("/"), 1200);
   };
 
   const handleGoogle = async () => {
@@ -67,21 +80,25 @@ export default function Register() {
 
         <h2>Create Account</h2>
 
-        <form onSubmit={handleRegister} className="auth-form">
-
+        {/* FORM */}
+        <form className="auth-form" onSubmit={handleRegister}>
+          
           <input
             placeholder="First Name"
+            value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
 
           <input
             placeholder="Last Name"
+            value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
 
           <input
             type="email"
             placeholder="Email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
@@ -90,6 +107,7 @@ export default function Register() {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <span onClick={() => setShowPassword(!showPassword)}>
@@ -102,6 +120,7 @@ export default function Register() {
             <input
               type={showConfirm ? "text" : "password"}
               placeholder="Confirm Password"
+              value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <span onClick={() => setShowConfirm(!showConfirm)}>
@@ -111,23 +130,21 @@ export default function Register() {
 
           {/* BUTTON */}
           <div className="auth-actions">
-            <button type="submit" className="auth-btn" disabled={loading}>
+            <button className="auth-btn" disabled={loading} type="submit">
               {loading ? "Creating..." : "Create Account"}
             </button>
           </div>
-
         </form>
+
+        {/* GOOGLE */}
+        <button className="google-btn" onClick={handleGoogle}>
+          Continue with Google
+        </button>
 
         {/* MESSAGES */}
         {error && <div className="error-popup">{error}</div>}
         {message && <div className="success-popup">{message}</div>}
 
-        {/* GOOGLE LOGIN */}
-        <button className="google-btn" onClick={handleGoogle}>
-          <FaGoogle /> Continue with Google
-        </button>
-
-        {/* LINK */}
         <p>
           Already have an account? <Link to="/login">Login</Link>
         </p>
