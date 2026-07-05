@@ -1,52 +1,58 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../../lib/supabase";
+import { Link } from "react-router-dom";
 import "./Trending.css";
 
-const items = [
-  {
-    title: "Minimal Home Decor",
-    image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-    link: "/category/home",
-  },
-  {
-    title: "Summer Fashion Picks",
-    image:
-      "https://images.unsplash.com/photo-1496747611176-843222e1e57c",
-    link: "/category/clothing",
-  },
-  {
-    title: "Glow Skincare Essentials",
-    image:
-      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9",
-    link: "/category/beauty",
-  },
-  {
-    title: "Modern Lifestyle Tools",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    link: "/category/tools",
-  },
-];
+type Product = {
+  id: string;
+  title: string;
+  main_image_url: string;
+  category: string;
+};
 
 export default function Trending() {
+  const [items, setItems] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetchTrending();
+  }, []);
+
+  const fetchTrending = async () => {
+    const { data } = await supabase
+      .from("products")
+      .select("*")
+      .eq("trending", true);
+
+    setItems(data || []);
+  };
+
   return (
-    <section className="trending">
-      <div className="section-header">
-        <h2>🔥 Trending This Week</h2>
-        <p>Discover what's popular right now</p>
-      </div>
+    <section>
+
+      <h2>🔥 Trending This Week</h2>
+      <p>Discover what's popular right now</p>
 
       <div className="trending-grid">
-        {items.map((item, index) => (
-          <a href={item.link} className="trend-card" key={index}>
-            <img src={item.image} alt={item.title} />
+        {items.length === 0 ? (
+          <p>No trending products yet</p>
+        ) : (
+          items.map((item) => (
+            <Link
+              to={`/category/${item.category}`}
+              className="trend-card"
+              key={item.id}
+            >
+              <img src={item.main_image_url} alt={item.title} />
 
-            <div className="trend-content">
-              <h3>{item.title}</h3>
-              <span>Explore →</span>
-            </div>
-          </a>
-        ))}
+              <div className="trend-content">
+                <h3>{item.title}</h3>
+                <span>Explore →</span>
+              </div>
+            </Link>
+          ))
+        )}
       </div>
+
     </section>
   );
 }

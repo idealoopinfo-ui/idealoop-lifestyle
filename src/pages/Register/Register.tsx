@@ -64,7 +64,6 @@ export default function Register() {
     }
 
     setMessage("Account created successfully!");
-
     setTimeout(() => navigate("/"), 1200);
   };
 
@@ -74,15 +73,23 @@ export default function Register() {
     });
   };
 
+  // ✅ Multicolor Google Icon
+  const GoogleIcon = () => (
+    <svg width="18" height="18" viewBox="0 0 48 48">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.9-6.9C35.98 2.69 30.36 0 24 0 14.62 0 6.51 5.38 2.56 13.22l8.05 6.26C12.44 13.13 17.77 9.5 24 9.5z"/>
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.14-3.08-.4-4.55H24v9.1h12.94c-.56 3-2.24 5.54-4.78 7.25l7.34 5.7C43.98 37.15 46.98 31.37 46.98 24.55z"/>
+      <path fill="#FBBC05" d="M10.61 28.48a14.5 14.5 0 010-8.96L2.56 13.22A24 24 0 000 24c0 3.84.92 7.45 2.56 10.78l8.05-6.3z"/>
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.34-5.7c-2.04 1.37-4.65 2.2-8.57 2.2-6.23 0-11.56-3.63-13.39-8.85l-8.05 6.3C6.51 42.62 14.62 48 24 48z"/>
+    </svg>
+  );
+
   return (
     <div className="auth-container">
       <div className="auth-box">
 
         <h2>Create Account</h2>
 
-        {/* FORM */}
         <form className="auth-form" onSubmit={handleRegister}>
-          
           <input
             placeholder="First Name"
             value={firstName}
@@ -102,7 +109,6 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          {/* PASSWORD */}
           <div className="password-box">
             <input
               type={showPassword ? "text" : "password"}
@@ -115,7 +121,6 @@ export default function Register() {
             </span>
           </div>
 
-          {/* CONFIRM PASSWORD */}
           <div className="password-box">
             <input
               type={showConfirm ? "text" : "password"}
@@ -128,16 +133,14 @@ export default function Register() {
             </span>
           </div>
 
-          {/* BUTTON */}
-          <div className="auth-actions">
-            <button className="auth-btn" disabled={loading} type="submit">
-              {loading ? "Creating..." : "Create Account"}
-            </button>
-          </div>
+          <button className="auth-btn" disabled={loading} type="submit">
+            {loading ? "Creating..." : "Create Account"}
+          </button>
         </form>
 
-        {/* GOOGLE */}
+        {/* GOOGLE LOGIN */}
         <button className="google-btn" onClick={handleGoogle}>
+          <GoogleIcon />
           Continue with Google
         </button>
 

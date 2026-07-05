@@ -133,3 +133,14 @@
   color: white;
   padding-left: 18px;
 }
+header,
+nav,
+.header-text,
+.nav-text {
+  color: #ffffff;
+}
+
+header p,
+nav p {
+  color: #ffffff;
+}

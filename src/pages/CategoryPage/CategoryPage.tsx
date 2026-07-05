@@ -1,20 +1,51 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "../../lib/supabase";
 import "./CategoryPage.css";
 
 export default function CategoryPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
 
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [slug]);
+
+  const fetchProducts = async () => {
+    setLoading(true);
+
+    let query = supabase.from("products").select("*");
+
+    // ✅ FIX: safer category matching
+    if (slug && slug !== "all") {
+      query = query.eq("category", slug.toLowerCase().trim());
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.log("Error loading products:", error);
+    }
+
+    setProducts(data || []);
+    setLoading(false);
+  };
+
   return (
     <div className="category-page">
 
       {/* HERO */}
       <div className="category-hero">
-        <h1>{slug?.replace("-", " ")}</h1>
+        <h1>
+          {slug ? slug.replace("-", " ").toUpperCase() : "ALL PRODUCTS"}
+        </h1>
         <p>Explore the best products in this category</p>
       </div>
 
-      {/* FILTERS */}
+      {/* FILTERS (UI only) */}
       <div className="category-filters">
         <select>
           <option>Sort by: Popular</option>
@@ -30,65 +61,48 @@ export default function CategoryPage() {
         </select>
       </div>
 
-      {/* PRODUCT GRID */}
+      {/* GRID */}
       <div className="product-grid">
 
-        <div className="product-card">
-          <div className="product-image"></div>
+        {loading ? (
+          <p className="state-text">Loading products...</p>
+        ) : products.length === 0 ? (
+          <p className="state-text">No products found in this category</p>
+        ) : (
+          products.map((product) => (
+            <div className="product-card" key={product.id}>
 
-          <h3>Minimal Desk Lamp</h3>
+              <img
+                src={product.main_image_url}
+                alt={product.title}
+                className="product-image"
+              />
 
-          {/* ACTIONS */}
-          <div className="product-actions">
+              <h3 className="product-title">
+                {product.title}
+              </h3>
 
-            <button
-              className="shop-btn"
-              onClick={() => navigate("/product/1")}
-            >
-              🛒 Shop Now
-            </button>
+              <div className="product-actions">
 
-            <button
-              className="view-btn"
-              onClick={() => navigate("/product/1")}
-            >
-              View Details
-            </button>
+                <button
+                  className="shop-btn"
+                  onClick={() => navigate(`/product/${product.id}`)}
+                >
+                  🛒 Shop Now
+                </button>
 
-          </div>
-        </div>
+                <button
+                  className="view-btn"
+                  onClick={() => navigate(`/product/${product.id}`)}
+                >
+                  View Details
+                </button>
 
-        <div className="product-card">
-          <div className="product-image"></div>
+              </div>
 
-          <h3>Modern Chair</h3>
-
-          <div className="product-actions">
-            <button className="shop-btn" onClick={() => navigate("/product/2")}>
-              🛒 Shop Now
-            </button>
-
-            <button className="view-btn" onClick={() => navigate("/product/2")}>
-              View Details
-            </button>
-          </div>
-        </div>
-
-        <div className="product-card">
-          <div className="product-image"></div>
-
-          <h3>Wooden Table</h3>
-
-          <div className="product-actions">
-            <button className="shop-btn" onClick={() => navigate("/product/3")}>
-              🛒 Shop Now
-            </button>
-
-            <button className="view-btn" onClick={() => navigate("/product/3")}>
-              View Details
-            </button>
-          </div>
-        </div>
+            </div>
+          ))
+        )}
 
       </div>
 

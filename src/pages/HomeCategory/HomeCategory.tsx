@@ -5,7 +5,7 @@ import ProductGrid from '../../components/ProductGrid/ProductGrid';
 
 export default function HomeCategory() {
   const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('home');
+  const [category, setCategory] = useState('all');
 
   return (
     <>

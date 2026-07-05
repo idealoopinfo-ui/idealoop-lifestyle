@@ -1,16 +1,43 @@
 .category-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 🔥 RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+  .category-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
-  .not-found {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60vh;
-  
-    font-size: 18px;
-    font-weight: 600;
-    color: #666;
+}
+
+@media (max-width: 992px) {
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
+
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ❌ empty state */
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+
+  font-size: 18px;
+  font-weight: 600;
+  color: #666;
+}

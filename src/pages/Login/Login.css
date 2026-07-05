@@ -1,55 +1,50 @@
-
 /* =========================
-   GLOBAL FIX
-========================= */
-* {
-  box-sizing: border-box;
-}
-
-/* =========================
-   PAGE WRAPPER
+   AUTH CONTAINER
 ========================= */
 .auth-container {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  padding: 20px;
+  padding-top: 40px;  /* ~1 inch top spacing */
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+
+  margin: 0;
 }
 
 /* =========================
    AUTH CARD
 ========================= */
 .auth-box {
-  width: 380px;
+  width: 100%;
+  max-width: 420px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-
-  padding: 32px;
-  gap: 14px;
-
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-
+  padding: 20px 15px; /* slightly reduced */
   border-radius: 16px;
 
-  color: white;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
 
-  border: none;
-  outline: none;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: var(--text);
+
+  margin-top: 0; /* ensure no extra push */
 }
 
-/* TITLE (optional if you use h2) */
+/* =========================
+   TITLE
+========================= */
 .auth-box h2 {
+  margin: 0 0 24px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
   text-align: center;
-  margin: 0 0 10px 0;
-  font-size: 22px;
 }
 
 /* =========================
@@ -57,37 +52,38 @@
 ========================= */
 .auth-form {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  margin: 0;
-  padding: 0;
 }
 
 /* =========================
    INPUTS
 ========================= */
-.auth-form input {
+.auth-box input {
   width: 100%;
-  padding: 14px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
 
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border);
 
-  background: rgba(255, 255, 255, 0.12);
-  color: white;
+  background: var(--bg);
+  color: var(--text);
 
-  outline: none;
   font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
 }
 
-.auth-form input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+.auth-box input:focus {
+  border-color: var(--primary);
+}
+
+.auth-box input::placeholder {
+  color: var(--text-muted);
 }
 
 /* =========================
-   PASSWORD FIELD
+   PASSWORD BOX
 ========================= */
 .password-box {
   position: relative;
@@ -95,126 +91,104 @@
 }
 
 .password-box input {
-  width: 100%;
   padding-right: 42px;
+  margin-bottom: 0;
 }
 
 .password-box span {
   position: absolute;
-  right: 12px;
   top: 50%;
+  right: 14px;
   transform: translateY(-50%);
 
   cursor: pointer;
-  color: #ccc;
-
+  color: var(--text-muted);
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 /* =========================
-   BUTTON WRAPPER
-========================= */
-.auth-actions {
-  width: 100%;
-  margin-top: 8px;
-}
-
-/* =========================
-   PRIMARY BUTTON
+   LOGIN BUTTON
 ========================= */
 .auth-btn {
   width: 100%;
-  height: 46px;
+  padding: 12px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: #2563eb;
-  color: white;
+  margin-top: 10px; /* reduced from 18px */
 
   border: none;
   border-radius: 10px;
+
+  background: var(--primary);
+  color: #fff;
 
   font-size: 15px;
   font-weight: 600;
 
   cursor: pointer;
-  transition: 0.25s;
+  transition: 0.25s ease;
 }
 
 .auth-btn:hover {
-  background: #1d4ed8;
-  transform: translateY(-2px);
-}
-
-.auth-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  background: var(--primary-dark);
 }
 
 /* =========================
-   GOOGLE BUTTON (IMPORTANT FIX)
+   GOOGLE BUTTON
 ========================= */
 .google-btn {
   width: 100%;
-  height: 46px;
+  margin-top: 12px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 
-  background: white;
-  color: #111;
-
-  border: none;
+  padding: 12px;
   border-radius: 10px;
 
-  font-size: 14px;
-  font-weight: 500;
+  border: 1px solid #ddd;
+  background: #fff;
 
   cursor: pointer;
-  transition: 0.2s;
+  font-weight: 500;
 }
 
 .google-btn:hover {
-  background: #f3f3f3;
-  transform: translateY(-1px);
+  background: var(--bg-soft);
 }
 
-/* GOOGLE ICON */
-.google-btn svg {
-  font-size: 18px;
+/* =========================
+   LINKS
+========================= */
+.auth-box p {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.auth-box a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-box a:hover {
+  text-decoration: underline;
 }
 
 /* =========================
    MESSAGES
 ========================= */
 .error-popup {
-  color: #f87171;
-  font-size: 13px;
-  text-align: center;
+  margin-top: 12px;
+  color: #ef4444;
+  font-size: 14px;
 }
 
 .success-popup {
-  color: #34d399;
-  font-size: 13px;
-  text-align: center;
-}
-
-/* =========================
-   FOOTER TEXT
-========================= */
-.auth-box p {
-  text-align: center;
-  font-size: 13px;
-  margin-top: 6px;
-}
-
-.auth-box a {
-  color: #60a5fa;
-  text-decoration: none;
+  margin-top: 12px;
+  color: #22c55e;
+  font-size: 14px;
 }
