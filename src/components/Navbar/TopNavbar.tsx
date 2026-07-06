@@ -1,10 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import CountryButton from "../Country/CountryButton";
-import { useTheme } from "../../context/ThemeContext";
+
 import "./TopNavbar.css";
 
 export default function TopNavbar() {
-  const user = null;
+  const user = null; // replace with auth later
   const isLoggedIn = Boolean(user);
 
   const location = useLocation();
@@ -41,12 +41,12 @@ export default function TopNavbar() {
       {/* RIGHT */}
       <div className="top-right">
 
-        {/* TOGGLE BUTTON ALWAYS */}
+        {/* DISCOVER BUTTON */}
         <button className="nav-toggle-btn" onClick={handleToggle}>
           {isDiscover ? "Home" : "Discover"}
         </button>
 
-        {/* HIDE EVERYTHING ELSE ON DISCOVER */}
+        {/* ONLY SHOW WHEN NOT DISCOVER */}
         {!isDiscover && (
           <>
             {isLoggedIn && (
@@ -82,7 +82,6 @@ export default function TopNavbar() {
             )}
           </>
         )}
-
       </div>
     </div>
   );

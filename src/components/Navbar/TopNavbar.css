@@ -1,138 +1,173 @@
-/* =========================
-   MAIN NAVBAR
-========================= */
 
+/* =========================
+   TOP NAVBAR
+========================= */
 .top-navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
+  width: 100%;
+  height: 72px;
+
+  padding: 0 24px;
   background: #111;
-  color: white;
+  color: #fff;
 
-  padding: 14px 24px;
-  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* =========================
-   LEFT SECTION
+   LEFT
 ========================= */
-
 .top-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-shrink: 0;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
-  height: 50px;
-  color: white;
+  color: #fff;
 }
 
 .logo-img {
-  height: 58px;
-  width: 58px;
+  width: 54px;
+  height: 54px;
   object-fit: contain;
 }
 
 .company-name {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
+  font-size: 18px;
+  font-weight: 700;
   color: white;
-}
-
-.brand-text {
-  font-size: 16px;
-  font-weight: 800;
-  color: white;
-}
-
-.tagline {
-  font-size: 10px;
-  color: #9ca3af;
+  white-space: nowrap;
 }
 
 /* =========================
-   LOGO + TEXT ALIGNMENT FIX
-   (IMPORTANT)
+   CENTER (SEARCH)
 ========================= */
+.top-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0 40px;
+}
 
-.top-left {
+.top-center .search-bar {
+  width: 100%;
+  max-width: 650px;
+}
+
+/* =========================
+   RIGHT
+========================= */
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* =========================
+   NAV BUTTONS
+========================= */
+.nav-btn,
+.auth-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 14px;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.25);
+
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: all .25s ease;
+}
+
+.nav-btn:hover,
+.auth-btn:hover {
+  background: rgba(255,255,255,.12);
+}
+
+/* =========================
+   DISCOVER BUTTON
+========================= */
+.nav-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 110px;
+  height: 40px;
+
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #fff;
+  color: #111;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: .25s;
+}
+
+.nav-toggle-btn:hover {
+  background: #e60023;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.nav-toggle-btn:active {
+  transform: scale(.97);
+}
+
+.nav-toggle-btn.active {
+  background: #e60023;
+  color: white;
+}
+
+/* =========================
+   HIGHLIGHT BUTTON
+========================= */
+.nav-btn.highlight {
+  background: #ff3b3b;
+  border: none;
+}
+
+.nav-btn.highlight:hover {
+  background: #d92e2e;
+}
+
+/* =========================
+   AUTH
+========================= */
+.auth-group {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-
 /* =========================
-   RIGHT AREA
+   PROFILE
 ========================= */
-
-.top-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* =========================
-   BASE BUTTONS
-========================= */
-
-.nav-btn,
-.auth-btn {
-  color: white;
-  text-decoration: none;
-  font-size: 13px;
-
-  padding: 6px 10px;
-  border-radius: 8px;
-
-  border: 1px solid rgba(255,255,255,0.3);
-
-  transition: 0.2s;
-
-  display: inline-flex;
-  align-items: center;
-}
-
-.nav-btn:hover,
-.auth-btn:hover {
-  background: rgba(255,255,255,0.1);
-}
-
-/* =========================
-   PRIMARY CTA
-========================= */
-
-.nav-btn.highlight {
-  background: #ff3b3b;
-  border: none;
-  font-weight: 600;
-}
-
-.nav-btn.highlight:hover {
-  opacity: 0.85;
-}
-
-/* =========================
-   AUTH GROUP
-========================= */
-
-.auth-group {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-/* =========================
-   PROFILE DROPDOWN
-========================= */
-
 .profile-dropdown {
   position: relative;
 }
@@ -142,13 +177,15 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  color: white;
 }
 
-/* avatar */
 .avatar {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
+
   border-radius: 50%;
+
   background: white;
   color: black;
 
@@ -159,47 +196,53 @@
   font-weight: bold;
 }
 
-/* dropdown */
+/* =========================
+   DROPDOWN
+========================= */
 .profile-menu {
   display: none;
+
   position: absolute;
   right: 0;
-  top: 45px;
+  top: 48px;
+
+  width: 200px;
 
   background: white;
   color: black;
-  min-width: 180px;
 
   border-radius: 10px;
+
   overflow: hidden;
 
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
 }
 
-.profile-dropdown:hover .profile-menu,
-.profile-menu:hover {
+.profile-dropdown:hover .profile-menu {
   display: block;
 }
 
-/* menu items */
 .menu-item {
   display: block;
-  padding: 10px 12px;
-  text-decoration: none;
+  padding: 12px 16px;
+
   color: black;
-  font-size: 14px;
+  text-decoration: none;
+
+  transition: .2s;
 }
 
 .menu-item:hover {
   background: #f4f4f4;
 }
 
-/* logout */
 .logout-btn {
   width: 100%;
-  padding: 10px;
+
+  padding: 12px;
 
   border: none;
+
   background: #111;
   color: white;
 
@@ -207,63 +250,63 @@
 }
 
 .logout-btn:hover {
-  opacity: 0.85;
+  background: #333;
 }
 
 /* =========================
    THEME BUTTON
 ========================= */
-
 .theme-btn {
-  padding: 6px 12px;
-  border: 1px solid rgba(255,255,255,0.3);
+  padding: 8px 14px;
+
+  border-radius: 8px;
+
+  border: 1px solid rgba(255,255,255,.25);
+
   background: transparent;
   color: white;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 13px;
-}
-
-.nav-toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 8px 18px;
-  border-radius: 10px;
-  width: 100px;
-
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-
-  color: #111;
-  background: #fff;
-
-  border: 1px solid rgba(0,0,0,0.08);
 
   cursor: pointer;
-
-  transition: all 0.25s ease;
-
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-/* hover like Pinterest UI */
-.nav-toggle-btn:hover {
-  background: #e60023; /* Pinterest red */
-  color: #fff;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(230,0,35,0.25);
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1100px) {
+  .company-name {
+    display: none;
+  }
+
+  .top-center {
+    padding: 0 20px;
+  }
 }
 
-/* click effect */
-.nav-toggle-btn:active {
-  transform: scale(0.96);
-}
+@media (max-width: 900px) {
+  .top-navbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 12px 16px;
+    gap: 10px;
+  }
 
-/* optional active state look */
-.nav-toggle-btn.active {
-  background: #e60023;
-  color: #fff;
+  .top-left,
+  .top-center,
+  .top-right {
+    width: 100%;
+  }
+
+  .top-center {
+    order: 3;
+    padding: 0;
+  }
+
+  .top-right {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .top-center .search-bar {
+    max-width: 100%;
+  }
 }

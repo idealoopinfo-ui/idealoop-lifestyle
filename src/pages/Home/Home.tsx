@@ -1,29 +1,52 @@
-import Hero from '../../components/Hero/Hero';
-import Categories from '../../components/Categories/Categories';
-import Collections from '../../components/Collections/Collections';
-import ProductPreview from '../../components/ProductPreview/ProductPreview';
-import Trending from '../../components/Trending/Trending';
-import CategoryHighlights from '../../components/CategoryHighlights/CategoryHighlights';
+import Hero from "../../components/Hero/Hero";
+import Categories from "../../components/Categories/Categories";
+import Collections from "../../components/Collections/Collections";
+import ProductPreview from "../../components/ProductPreview/ProductPreview";
+import TrendingProducts from "../../components/TrendingProducts/TrendingProducts";
 import WhyChoose from "../../components/WhyChoose/WhyChoose";
 import About from "../../components/About/About";
-import Footer from "../../components/Footer/Footer";
+
+import "./Home.css";
 
 export default function Home() {
   return (
-    <>
-     
+    <div className="home-page">
 
-      <div className="container">
+      {/* HERO */}
+      <section>
         <Hero />
+      </section>
+
+      {/* TRENDING */}
+      <section>
+        <TrendingProducts />
+      </section>
+
+      {/* CATEGORIES */}
+      <section>
         <Categories />
-        <Trending />
-        
+      </section>
+
+      {/* COLLECTIONS */}
+      <section>
         <Collections />
-        <WhyChoose />
-        <About />
+      </section>
+
+      {/* PRODUCT PREVIEW */}
+      <section>
         <ProductPreview />
-        
-      </div>
-    </>
+      </section>
+
+      {/* WHY CHOOSE */}
+      <section>
+        <WhyChoose />
+      </section>
+
+      {/* ABOUT */}
+      <section>
+        <About />
+      </section>
+
+    </div>
   );
 }

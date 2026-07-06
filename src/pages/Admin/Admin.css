@@ -1,62 +1,63 @@
-.admin {
-  max-width: 900px;
-  margin: 60px auto;
+.admin-container {
   padding: 30px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  max-width: 1200px;
+  margin: auto;
 }
 
-.admin h1 {
+.admin-title {
+  font-size: 24px;
   margin-bottom: 20px;
 }
 
-.admin input,
-.admin select {
-  display: block;
-  width: 100%;
-  margin-bottom: 10px;
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  font-size: 14px;
 }
 
-.admin button {
-  padding: 10px 15px;
+.admin-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.add-btn {
   background: #111;
-  color: white;
+  color: #fff;
+  padding: 10px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
-.admin button:hover {
-  background: #c8a96a;
+.add-btn:hover {
+  background: #333;
 }
 
-/* product grid */
-.admin-grid {
+.product-list {
+  margin-top: 30px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
-  margin-top: 20px;
 }
 
-.admin-card {
-  background: #fafafa;
-  padding: 10px;
+.product-item {
+  padding: 15px;
+  background: #f7f7f7;
   border-radius: 10px;
-  text-align: center;
-}
-
-.admin-card img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.admin-card button {
-  margin-top: 10px;
-  width: 100%;
+  font-size: 14px;
 }

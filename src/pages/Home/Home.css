@@ -3,8 +3,31 @@
   min-height: 100vh;
 }
 
-/* global section spacing = premium feel */
+/* GLOBAL SECTION SPACING */
 section {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 60px 20px;
+}
+
+/* REMOVE TOP GAP ON FIRST SECTION */
+section:first-child {
+  padding-top: 30px;
+}
+
+/* SECTION CONSISTENCY */
+section > * {
+  width: 100%;
+}
+
+/* OPTIONAL: smooth spacing feel */
+section:not(:last-child) {
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  section {
+    padding: 40px 15px;
+  }
 }

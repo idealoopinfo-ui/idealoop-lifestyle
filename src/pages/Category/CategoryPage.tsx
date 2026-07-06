@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import ProductCard from "../../components/ProductCard/ProductCard";
 
@@ -16,17 +16,28 @@ export default function CategoryPage() {
   const fetchProducts = async () => {
     setLoading(true);
 
-    let query = supabase.from("products").select("*");
+    let query = supabase
+      .from("products")
+      .select("*");
 
-    if (category && category !== "all") {
-      query = query.eq("category", category.toLowerCase());
+    // filter by category slug via join
+    if (category) {
+      const { data: cat } = await supabase
+        .from("categories")
+        .select("id")
+        .eq("slug", category)
+        .single();
+
+      if (cat) {
+        query = query.eq("category_id", cat.id);
+      }
     }
 
-    const { data, error } = await query;
+    const { data, error } = await query.order("created_at", {
+      ascending: false,
+    });
 
-    if (error) {
-      console.log("Error loading products:", error);
-    }
+    if (error) console.log(error);
 
     setProducts(data || []);
     setLoading(false);
@@ -34,21 +45,17 @@ export default function CategoryPage() {
 
   return (
     <div className="category-page">
-
-      {/* ✅ CATEGORY TITLE */}
       <h1 className="category-title">
-        {category ? category.toUpperCase() : "CATEGORY"}
+        {category?.replace("-", " ").toUpperCase()}
       </h1>
 
-      {/* ✅ CONTENT */}
       <div className="product-grid">
-
         {loading ? (
-          <p>Loading products...</p>
+          <p>Loading...</p>
         ) : products.length === 0 ? (
           <p>No products found</p>
         ) : (
-          products.map((p: any) => (
+          products.map((p) => (
             <ProductCard
               key={p.id}
               id={p.id}
@@ -57,9 +64,7 @@ export default function CategoryPage() {
             />
           ))
         )}
-
       </div>
-
     </div>
   );
 }
