@@ -13,55 +13,29 @@ export const categories: CategoryNode[] = [
         name: "Women",
         slug: "women",
         children: [
-          {
-            name: "Clothing",
-            slug: "clothing",
-            children: [
-              { name: "Dresses", slug: "dresses", children: [] },
-              { name: "Tops", slug: "tops", children: [] },
-              { name: "Jeans", slug: "jeans", children: [] },
-              { name: "Skirts", slug: "skirts", children: [] },
-              { name: "Pants", slug: "pants", children: [] },
-              { name: "Shorts", slug: "shorts", children: [] },
-              { name: "Jackets", slug: "jackets", children: [] },
-              { name: "Hoodies", slug: "hoodies", children: [] },
-              { name: "Activewear", slug: "activewear", children: [] },
-              { name: "Sleepwear", slug: "sleepwear", children: [] },
-              { name: "Under Garments", slug: "under-garments", children: [] }
-            ]
-          },
-          {
-            name: "Shoes",
-            slug: "shoes",
-            children: [
-              { name: "Sneakers", slug: "sneakers", children: [] },
-              { name: "Heels", slug: "heels", children: [] },
-              { name: "Boots", slug: "boots", children: [] },
-              { name: "Sandals", slug: "sandals", children: [] },
-              { name: "Flats", slug: "flats", children: [] }
-            ]
-          },
-          {
-            name: "Bags",
-            slug: "bags",
-            children: [
-              { name: "Handbags", slug: "handbags", children: [] },
-              { name: "Tote Bags", slug: "tote-bags", children: [] },
-              { name: "Crossbody Bags", slug: "crossbody-bags", children: [] },
-              { name: "Backpacks", slug: "backpacks", children: [] },
-              { name: "Wallets", slug: "wallets", children: [] }
-            ]
-          },
-          {
-            name: "Jewelry",
-            slug: "jewelry",
-            children: []
-          },
-          {
-            name: "Accessories",
-            slug: "accessories",
-            children: []
-          }
+          { name: "Dresses", slug: "dresses", children: [] },
+          { name: "Tops", slug: "tops", children: [] },
+          { name: "Jeans", slug: "jeans", children: [] },
+          { name: "Skirts", slug: "skirts", children: [] },
+          { name: "Pants", slug: "pants", children: [] },
+          { name: "Shorts", slug: "shorts", children: [] },
+          { name: "Jackets", slug: "jackets", children: [] },
+          { name: "Hoodies", slug: "hoodies", children: [] },
+          { name: "Activewear", slug: "activewear", children: [] },
+          { name: "Sleepwear", slug: "sleepwear", children: [] },
+          { name: "Under Garments", slug: "under-garments", children: [] },
+          { name: "Sneakers", slug: "sneakers", children: [] },
+          { name: "Heels", slug: "heels", children: [] },
+          { name: "Boots", slug: "boots", children: [] },
+          { name: "Sandals", slug: "sandals", children: [] },
+          { name: "Flats", slug: "flats", children: [] },
+          { name: "Handbags", slug: "handbags", children: [] },
+          { name: "Tote Bags", slug: "tote-bags", children: [] },
+          { name: "Crossbody Bags", slug: "crossbody-bags", children: [] },
+          { name: "Backpacks", slug: "backpacks", children: [] },
+          { name: "Wallets", slug: "wallets", children: [] },
+          { name: "Jewelry", slug: "jewelry", children: [] },
+          { name: "Accessories", slug: "accessories", children: [] }
         ]
       },
 
@@ -69,48 +43,22 @@ export const categories: CategoryNode[] = [
         name: "Men",
         slug: "men",
         children: [
-          {
-            name: "Clothing",
-            slug: "clothing",
-            children: [
-              { name: "Shirts", slug: "shirts", children: [] },
-              { name: "T-Shirts", slug: "t-shirts", children: [] },
-              { name: "Jeans", slug: "jeans", children: [] },
-              { name: "Trousers", slug: "trousers", children: [] },
-              { name: "Jackets", slug: "jackets", children: [] },
-              { name: "Hoodies", slug: "hoodies", children: [] },
-              { name: "Under Garments", slug: "under-garments", children: [] }
-            ]
-          },
-          {
-            name: "Shoes",
-            slug: "shoes",
-            children: [
-              { name: "Sneakers", slug: "sneakers", children: [] },
-              { name: "Formal Shoes", slug: "formal-shoes", children: [] },
-              { name: "Boots", slug: "boots", children: [] },
-              { name: "Sandals", slug: "sandals", children: [] }
-            ]
-          },
-          {
-            name: "Bags",
-            slug: "bags",
-            children: [
-              { name: "Backpacks", slug: "backpacks", children: [] },
-              { name: "Messenger Bags", slug: "messenger-bags", children: [] },
-              { name: "Wallets", slug: "wallets", children: [] }
-            ]
-          },
-          {
-            name: "Watches",
-            slug: "watches",
-            children: []
-          },
-          {
-            name: "Accessories",
-            slug: "accessories",
-            children: []
-          }
+          { name: "Shirts", slug: "shirts", children: [] },
+          { name: "T-Shirts", slug: "t-shirts", children: [] },
+          { name: "Jeans", slug: "jeans", children: [] },
+          { name: "Trousers", slug: "trousers", children: [] },
+          { name: "Jackets", slug: "jackets", children: [] },
+          { name: "Hoodies", slug: "hoodies", children: [] },
+          { name: "Under Garments", slug: "under-garments", children: [] },
+          { name: "Sneakers", slug: "sneakers", children: [] },
+          { name: "Formal Shoes", slug: "formal-shoes", children: [] },
+          { name: "Boots", slug: "boots", children: [] },
+          { name: "Sandals", slug: "sandals", children: [] },
+          { name: "Backpacks", slug: "backpacks", children: [] },
+          { name: "Messenger Bags", slug: "messenger-bags", children: [] },
+          { name: "Wallets", slug: "wallets", children: [] },
+          { name: "Watches", slug: "watches", children: [] },
+          { name: "Accessories", slug: "accessories", children: [] }
         ]
       },
 
@@ -118,26 +66,22 @@ export const categories: CategoryNode[] = [
         name: "Kids",
         slug: "kids",
         children: [
-          {
-            name: "Categories",
-            slug: "categories",
-            children: [
-              { name: "Boys", slug: "boys", children: [] },
-              { name: "Girls", slug: "girls", children: [] },
-              { name: "Baby", slug: "baby", children: [] }
-            ]
-          }
+          { name: "Boys", slug: "boys", children: [] },
+          { name: "Girls", slug: "girls", children: [] },
+          { name: "Baby", slug: "baby", children: [] }
         ]
       },
 
       {
         name: "Unisex",
         slug: "unisex",
-        children: []
+        children: [
+          { name: "New Arrivals", slug: "new-arrivals", children: [] },
+          { name: "Accessories", slug: "accessories", children: [] }
+        ]
       }
     ]
   },
-
   {
     name: "Beauty",
     slug: "beauty",
@@ -153,6 +97,7 @@ export const categories: CategoryNode[] = [
           { name: "Tools", slug: "tools", children: [] }
         ]
       },
+
       {
         name: "Skincare",
         slug: "skincare",
@@ -165,6 +110,7 @@ export const categories: CategoryNode[] = [
           { name: "Masks", slug: "masks", children: [] }
         ]
       },
+
       {
         name: "Hair Care",
         slug: "hair-care",
@@ -176,30 +122,71 @@ export const categories: CategoryNode[] = [
           { name: "Hair Tools", slug: "hair-tools", children: [] }
         ]
       },
-      { name: "Fragrances", slug: "fragrances", children: [] },
-      { name: "Bath & Body", slug: "bath-body", children: [] },
-      { name: "Personal Care", slug: "personal-care", children: [] },
-      { name: "Beauty Tools", slug: "beauty-tools", children: [] }
+
+      {
+        name: "Fragrances",
+        slug: "fragrances",
+        children: []
+      },
+
+      {
+        name: "Bath & Body",
+        slug: "bath-body",
+        children: []
+      },
+
+      {
+        name: "Personal Care",
+        slug: "personal-care",
+        children: []
+      },
+
+      {
+        name: "Beauty Tools",
+        slug: "beauty-tools",
+        children: []
+      }
     ]
   },
-
   {
     name: "Home & Living",
     slug: "home-living",
     children: [
       {
-        name: "Living",
-        slug: "living",
+        name: "Furniture",
+        slug: "furniture",
         children: [
-          { name: "Furniture", slug: "furniture", children: [] },
-          { name: "Home Decor", slug: "home-decor", children: [] },
-          { name: "Rugs", slug: "rugs", children: [] },
-          { name: "Bedding", slug: "bedding", children: [] },
-          { name: "Curtains", slug: "curtains", children: [] },
-          { name: "Lighting", slug: "lighting", children: [] },
-          { name: "Storage", slug: "storage", children: [] }
+          { name: "Sofas", slug: "sofas", children: [] },
+          { name: "Beds", slug: "beds", children: [] },
+          { name: "Tables", slug: "tables", children: [] },
+          { name: "Chairs", slug: "chairs", children: [] },
+          { name: "Cabinets", slug: "cabinets", children: [] }
         ]
       },
+
+      {
+        name: "Home Decor",
+        slug: "home-decor",
+        children: [
+          { name: "Wall Decor", slug: "wall-decor", children: [] },
+          { name: "Clocks", slug: "clocks", children: [] },
+          { name: "Mirrors", slug: "mirrors", children: [] },
+          { name: "Vases", slug: "vases", children: [] },
+          { name: "Decor Items", slug: "decor-items", children: [] }
+        ]
+      },
+
+      {
+        name: "Bedding",
+        slug: "bedding",
+        children: [
+          { name: "Bedsheets", slug: "bedsheets", children: [] },
+          { name: "Pillows", slug: "pillows", children: [] },
+          { name: "Blankets", slug: "blankets", children: [] },
+          { name: "Comforters", slug: "comforters", children: [] }
+        ]
+      },
+
       {
         name: "Kitchen & Dining",
         slug: "kitchen-dining",
@@ -207,17 +194,32 @@ export const categories: CategoryNode[] = [
           { name: "Dinnerware", slug: "dinnerware", children: [] },
           { name: "Cookware", slug: "cookware", children: [] },
           { name: "Kitchen Tools", slug: "kitchen-tools", children: [] },
+          { name: "Storage Containers", slug: "storage-containers", children: [] },
           { name: "Small Appliances", slug: "small-appliances", children: [] }
         ]
       },
+
+      {
+        name: "Lighting",
+        slug: "lighting",
+        children: [
+          { name: "Ceiling Lights", slug: "ceiling-lights", children: [] },
+          { name: "Table Lamps", slug: "table-lamps", children: [] },
+          { name: "Outdoor Lights", slug: "outdoor-lights", children: [] }
+        ]
+      },
+
       {
         name: "Office Furniture",
         slug: "office-furniture",
-        children: []
+        children: [
+          { name: "Office Chairs", slug: "office-chairs", children: [] },
+          { name: "Desks", slug: "desks", children: [] },
+          { name: "Storage", slug: "storage", children: [] }
+        ]
       }
     ]
   },
-
   {
     name: "Toys & Gifts",
     slug: "toys-gifts",
@@ -234,6 +236,7 @@ export const categories: CategoryNode[] = [
           { name: "Plush Toys", slug: "plush-toys", children: [] }
         ]
       },
+
       {
         name: "Gifts",
         slug: "gifts",
@@ -245,6 +248,7 @@ export const categories: CategoryNode[] = [
           { name: "Gift Cards", slug: "gift-cards", children: [] }
         ]
       },
+
       {
         name: "Stationery",
         slug: "stationery",

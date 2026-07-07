@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CountryProvider } from "./context/CountryContext";
 
+import NoticePanel from "./components/NoticePanel/NoticePanel";
 import TopNavbar from "./components/Navbar/TopNavbar";
 import CategoryNavbar from "./components/Navbar/CategoryNavbar";
 import Footer from "./components/Footer/Footer";
@@ -32,6 +33,7 @@ export default function App() {
     <ThemeProvider>
       <CountryProvider>
         <div className="app-layout">
+        <NoticePanel />
 
           {/* 🔝 TOP NAVBAR */}
           <TopNavbar />

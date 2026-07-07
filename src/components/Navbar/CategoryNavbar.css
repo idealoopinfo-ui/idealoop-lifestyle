@@ -14,22 +14,27 @@
   padding: 0 24px;
 
   background: #ffffff;
+
   border-bottom: 1px solid #e5e7eb;
 
   z-index: 999;
 }
 
+
 /* ==========================
-   TOP MENU
+   CATEGORY MENU
 ========================== */
 
-.nav-left {
+.category-menu {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
 }
 
+
 .nav-item {
+  position: relative;
+
   padding: 16px 4px;
 
   cursor: pointer;
@@ -42,9 +47,11 @@
   transition: .2s;
 }
 
+
 .nav-item:hover {
   color: #e60023;
 }
+
 
 /* ==========================
    SEARCH
@@ -54,153 +61,233 @@
   width: 320px;
 }
 
+
+
 /* ==========================
-   DROPDOWN PANEL
+   NIKE STYLE DROPDOWN
 ========================== */
 
 .dropdown {
+
   position: absolute;
 
   top: 52px;
-  left: 0;
+  left: 24px;
+
 
   display: flex;
 
-  background: #fff;
 
-  min-width: 700px;
-  min-height: 320px;
+  background: #ffffff;
 
-  border: 1px solid #ececec;
 
-  border-radius: 0 0 12px 12px;
+  min-width: 420px;
 
-  box-shadow: 0 15px 35px rgba(0,0,0,.12);
+
+  border-radius: 12px;
+
+
+  border: 1px solid #eeeeee;
+
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.12);
+
 
   overflow: hidden;
+
+
+  animation: dropdownShow .18s ease;
 }
 
+
+/* animation */
+
+@keyframes dropdownShow {
+
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+
 /* ==========================
-   COLUMNS
+   DROPDOWN COLUMNS
 ========================== */
+
 
 .dropdown-column {
-  width: 240px;
 
-  border-right: 1px solid #f1f1f1;
+  width: 210px;
 
-  background: #fff;
-}
+  padding: 12px 0;
 
-.dropdown-column:last-child {
-  border-right: none;
-}
+  max-height: 420px;
 
-/* ==========================
-   LEVEL 2
-========================== */
-
-.dropdown-item {
-  padding: 14px 18px;
-
-  cursor: pointer;
-
-  font-size: 14px;
-  font-weight: 500;
-
-  transition: .2s;
-}
-
-.dropdown-item:hover,
-.dropdown-item.active {
-  background: #fff3f5;
-  color: #e60023;
-}
-
-/* ==========================
-   GROUP
-========================== */
-
-.dropdown-group {
-  border-bottom: 1px solid #f4f4f4;
-}
-
-.group-title {
-  padding: 14px 18px;
-
-  font-size: 14px;
-  font-weight: 700;
-
-  color: #111;
-
-  background: #fafafa;
-
-  border-bottom: 1px solid #efefef;
-}
-
-/* ==========================
-   ITEMS
-========================== */
-
-.group-items {
-  display: flex;
-  flex-direction: column;
-}
-
-.group-item {
-  padding: 10px 22px;
-
-  cursor: pointer;
-
-  font-size: 14px;
-
-  color: #444;
-
-  transition: .2s;
-}
-
-.group-item:hover {
-  background: #f8f8f8;
-  color: #e60023;
-}
-
-/* ==========================
-   SCROLL
-========================== */
-
-.dropdown-column {
-  max-height: 500px;
   overflow-y: auto;
 }
 
-.dropdown-column::-webkit-scrollbar {
-  width: 6px;
+
+
+.dropdown-column:first-child {
+
+  border-right: 1px solid #eeeeee;
+
 }
+
+
+
+/* ==========================
+   MAIN CATEGORY ITEMS
+========================== */
+
+
+.dropdown-item {
+
+  padding: 12px 20px;
+
+
+  cursor: pointer;
+
+
+  font-size: 14px;
+
+
+  font-weight: 500;
+
+
+  color: #333;
+
+
+  transition: .2s;
+}
+
+
+
+.dropdown-item:hover,
+.dropdown-item.active {
+
+  background: #f6f6f6;
+
+  color: #111;
+
+}
+
+
+
+/* ==========================
+   PRODUCT ITEMS
+========================== */
+
+
+.group-item {
+
+
+  padding: 11px 20px;
+
+
+  cursor: pointer;
+
+
+  font-size: 14px;
+
+
+  color: #444;
+
+
+  transition: .2s;
+
+}
+
+
+
+.group-item:hover {
+
+  background: #f8f8f8;
+
+  color: #e60023;
+
+}
+
+
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+
+.dropdown-column::-webkit-scrollbar {
+
+  width: 5px;
+
+}
+
 
 .dropdown-column::-webkit-scrollbar-thumb {
-  background: #ddd;
-  border-radius: 10px;
-}
 
+  background: #d8d8d8;
+
+  border-radius: 10px;
+
+}
 /* ==========================
    RESPONSIVE
 ========================== */
 
-@media (max-width: 900px) {
 
-  .nav-right {
-    display: none;
-  }
+@media(max-width:900px){
+.category-menu {
 
-  .dropdown {
-    min-width: 100%;
-    flex-direction: column;
-  }
-
-  .dropdown-column {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #eee;
-  }
+  gap:18px;
 
 }
+.dropdown {
+
+  left:0;
+
+  width:100%;
+
+  flex-direction:column;
+
+}
+.dropdown-column {
+
+ width:100%;
+
+}
+
+}
+.category-menu {
+
+  display:flex;
+  
+  align-items:center;
+  
+  gap:28px;
+  
+  }
+  
+  .category-search {
+  
+  width:320px;
+  
+  display:flex;
+  
+  justify-content:flex-end;
+  
+  }
+  
+  .static-link {
+  
+  text-decoration:none;
+  
+  }

@@ -1,6 +1,7 @@
 /* =========================
    AUTH CONTAINER
 ========================= */
+
 .auth-container {
   flex: 1;
   width: 100%;
@@ -20,176 +21,253 @@
   box-sizing: border-box;
 }
 
+
 /* =========================
    AUTH CARD
 ========================= */
+
 .auth-box {
   width: 100%;
   max-width: 420px;
 
   padding: 40px 35px;
+
   border-radius: 16px;
 
   background: var(--bg-soft);
+
   border: 1px solid var(--border);
 
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.15);
 
   color: var(--text);
+
   text-align: center;
 }
+
 
 /* =========================
    TITLE
 ========================= */
+
 .auth-box h2 {
   margin: 0 0 24px;
+
   font-size: 28px;
+
   font-weight: 700;
+
   color: var(--text);
 }
+
 
 /* =========================
    FORM
 ========================= */
+
 .auth-form {
   width: 100%;
 }
 
+
+/* =========================
+   INPUTS
+========================= */
+
 .auth-box input {
   width: 100%;
+
   padding: 12px 14px;
+
   margin-bottom: 14px;
 
   border-radius: 10px;
+
   border: 1px solid var(--border);
 
   background: var(--bg);
+
   color: var(--text);
 
   outline: none;
+
   font-size: 14px;
 
-  transition: border-color 0.2s;
   box-sizing: border-box;
+
+  transition: border-color 0.2s;
 }
+
 
 .auth-box input:focus {
   border-color: var(--primary);
 }
 
+
 .auth-box input::placeholder {
   color: var(--text-muted);
 }
 
+
 /* =========================
    PASSWORD
 ========================= */
+
 .password-box {
   position: relative;
+
   width: 100%;
 }
+
 
 .password-box input {
   margin-bottom: 0;
+
   padding-right: 42px;
 }
 
+
 .password-box span {
   position: absolute;
+
   right: 14px;
+
   top: 50%;
+
   transform: translateY(-50%);
 
   cursor: pointer;
+
   color: var(--text-muted);
 }
 
+
 /* =========================
-   BUTTONS
+   REGISTER BUTTON
 ========================= */
-.auth-btn {
+
+.register-submit-btn {
   width: 100%;
+
   padding: 12px;
 
   margin-top: 18px;
 
   border: none;
+
   border-radius: 10px;
 
   background: var(--primary);
+
   color: white;
 
   font-size: 15px;
+
   font-weight: 600;
 
   cursor: pointer;
-  transition: 0.25s;
+
+  transition: 0.25s ease;
 }
 
-.auth-btn:hover {
+
+.register-submit-btn:hover {
   background: var(--primary-dark);
 }
+
+
+.register-submit-btn:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
 
 /* =========================
    GOOGLE BUTTON
 ========================= */
+
 .google-btn {
   width: 100%;
+
   padding: 12px;
 
   margin-top: 14px;
+
   margin-bottom: 22px;
 
   border-radius: 10px;
+
   border: 1px solid var(--border);
 
   background: var(--bg);
+
   color: var(--text);
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 10px;
 
   cursor: pointer;
+
   transition: 0.25s;
 }
+
 
 .google-btn:hover {
   background: var(--bg-soft);
 }
 
+
 /* =========================
    LINKS
 ========================= */
+
 .auth-box p {
   margin-top: 14px;
+
   color: var(--text-muted);
+
   font-size: 14px;
 }
 
+
 .auth-box a {
   color: var(--primary);
+
   text-decoration: none;
+
   font-weight: 500;
 }
+
 
 .auth-box a:hover {
   text-decoration: underline;
 }
 
+
 /* =========================
    MESSAGES
 ========================= */
+
 .error-popup {
   margin-top: 14px;
+
   color: #ef4444;
+
   font-size: 14px;
 }
 
+
 .success-popup {
   margin-top: 14px;
+
   color: #22c55e;
+
   font-size: 14px;
 }
