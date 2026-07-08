@@ -147,7 +147,7 @@ listener.subscription.unsubscribe();
 };
 
 
-},
+},[]);
 
 
 
