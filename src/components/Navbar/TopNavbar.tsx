@@ -76,92 +76,27 @@ useEffect(() => {
   };
 }, []);
 
+useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      profileRef.current &&
+      !profileRef.current.contains(event.target as Node)
+    ) {
+      setProfileOpen(false);
+    }
+  };
 
-const {
-  data: listener
-  } = supabase.auth.onAuthStateChange(
-  async (_event, session) => {
-  
-  
-  setUser(
-  session?.user ?? null
-  );
-  
-  
-  // reset previous admin state
-  setIsAdmin(false);
-  
-  
-  
-  if(session?.user){
-  
-  
-  const {
-  data: profile,
-  error: profileError
-  
-  } = await supabase
-  
-  .from("profiles")
-  
-  .select("is_admin")
-  
-  .eq("id", session.user.id)
-  
-  .single();
-  
-  
-  
-  if(profileError){
-  
-  console.log(
-  "Admin check error:",
-  profileError.message
-  );
-  
-  return;
-  
-  }
-  
-  
-  
-  if(profile?.is_admin){
-  
-  setIsAdmin(true);
-  
-  }
-  
-  
-  }
-  
-  
-  }
-  );
+  document.addEventListener("mousedown", handleClickOutside);
 
-
-
-return()=>{
-
-listener.subscription.unsubscribe();
-
-};
-
-
-},[]);
-
-
-
-
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
 
 const isDiscover =
 location.pathname.startsWith("/discover");
 
-
-
-
 const handleToggle=()=>{
-
-
 navigate(
 
 isDiscover
@@ -174,11 +109,6 @@ isDiscover
 
 
 };
-
-
-
-
-
 
 const handleLogout=async()=>{
 
@@ -193,17 +123,9 @@ navigate("/");
 
 
 };
-
-
-
-
-
 return(
 
 <div className="top-navbar">
-
-
-
 <div className="top-left">
 
 
@@ -262,11 +184,6 @@ isDiscover
 
 
 </button>
-
-
-
-
-
 
 {!isDiscover && (
 
@@ -342,15 +259,13 @@ Register
 
 
 </div>
-
-
-
 :
 
 
-<div className="profile-dropdown">
-
-
+<div
+  className="profile-dropdown"
+  ref={profileRef}
+>
 <button
 
 className="profile-btn"

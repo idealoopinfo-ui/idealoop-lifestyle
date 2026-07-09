@@ -6,300 +6,356 @@ import { FcGoogle } from "react-icons/fc";
 import "./Login.css";
 
 
-export default function Login() {
+export default function Login(){
 
-  const [email, setEmail] = useState("");
+const navigate = useNavigate();
 
-  const [password, setPassword] = useState("");
 
-  const [showPassword, setShowPassword] = useState(false);
+const [email,setEmail] = useState("");
+const [password,setPassword] = useState("");
 
-  const [error, setError] = useState("");
+const [showPassword,setShowPassword] = useState(false);
 
-  const [message, setMessage] = useState("");
+const [error,setError] = useState("");
+const [message,setMessage] = useState("");
 
-  const [loading, setLoading] = useState(false);
+const [loading,setLoading] = useState(false);
 
 
-  const navigate = useNavigate();
 
+const handleLogin = async(
+e:React.FormEvent
+)=>{
 
+e.preventDefault();
 
-  const handleLogin = async (
-    e: React.FormEvent
-  ) => {
 
-    e.preventDefault();
+setError("");
+setMessage("");
 
+setLoading(true);
 
-    setError("");
 
-    setMessage("");
 
-    setLoading(true);
+const {
+data,
+error
+}=await supabase.auth.signInWithPassword({
 
+email,
+password
 
+});
 
-    const { error } =
-      await supabase.auth.signInWithPassword({
 
-        email,
 
-        password,
+if(error){
 
-      });
+setError(error.message);
+setLoading(false);
+return;
 
+}
 
 
-    setLoading(false);
 
+const user = data.user;
 
 
-    if(error){
 
-      setError(
-        "Invalid login details"
-      );
+if(user){
 
-      return;
 
-    }
+const {
+data:profile
+}=await supabase
 
+.from("profiles")
 
+.select("*")
 
-    setMessage(
-      "Login successful!"
-    );
+.eq("id",user.id)
 
+.single();
 
-    setTimeout(()=>{
 
-      navigate("/");
 
-    },1200);
+if(!profile){
 
 
-  };
+await supabase
 
+.from("profiles")
 
+.insert({
 
+id:user.id,
 
+email:user.email,
 
-  const handleGoogle = async()=>{
+first_name:
+user.user_metadata.first_name || "",
 
-    await supabase.auth.signInWithOAuth({
+last_name:
+user.user_metadata.last_name || "",
 
-      provider:"google"
+country:
+user.user_metadata.country || "",
 
-    });
+country_code:
+user.user_metadata.country_code || "",
 
-  };
+avatar_url:null
 
+});
 
 
+}
 
 
-  return (
 
-    <div className="auth-container">
+}
 
 
-      <div className="auth-box">
 
+setMessage("Login successful");
 
-        <h2>
-          Login
-        </h2>
 
+setTimeout(()=>{
 
+navigate("/");
 
-        <form
-          onSubmit={handleLogin}
-          className="auth-form"
-        >
+},1000);
 
 
 
-          <input
+setLoading(false);
 
-            type="email"
 
-            placeholder="Email"
 
-            value={email}
+};
 
-            onChange={(e)=>
-              setEmail(e.target.value)
-            }
 
-            required
 
-          />
 
 
+const handleGoogle = async()=>{
 
 
-          <div className="password-box">
+const {
+error
+}=await supabase.auth.signInWithOAuth({
 
+provider:"google"
 
-            <input
+});
 
-              type={
-                showPassword
-                ?
-                "text"
-                :
-                "password"
-              }
 
+if(error){
 
-              placeholder="Password"
+setError(error.message);
 
+}
 
-              value={password}
 
+};
 
-              onChange={(e)=>
-                setPassword(
-                  e.target.value
-                )
-              }
 
 
-              required
 
-            />
 
+return (
 
+<div className="auth-container">
 
-            <span
 
-              onClick={()=>
-                setShowPassword(
-                  !showPassword
-                )
-              }
+<div className="auth-card">
 
-            >
 
-              {
-                showPassword
-                ?
-                <FaEyeSlash />
-                :
-                <FaEye />
-              }
+<h1>Idealoop</h1>
 
 
-            </span>
+<h2>Welcome Back</h2>
 
 
-          </div>
 
+<form onSubmit={handleLogin}>
 
 
+<input
 
+type="email"
 
-          <button
+placeholder="Email Address"
 
-            type="submit"
+value={email}
 
-            className="login-submit-btn"
+onChange={(e)=>setEmail(e.target.value)}
 
-            disabled={loading}
+required
 
-          >
+/>
 
-            {
-              loading
-              ?
-              "Logging in..."
-              :
-              "Login"
-            }
 
 
-          </button>
 
+<div className="password-box">
 
 
-        </form>
+<input
 
+type={
+showPassword?
+"text":
+"password"
+}
 
+placeholder="Password"
 
+value={password}
 
+onChange={(e)=>setPassword(e.target.value)}
 
+required
 
-        {
-          error &&
-          <p className="error-popup">
-            {error}
-          </p>
-        }
+/>
 
 
 
-        {
-          message &&
-          <p className="success-popup">
-            {message}
-          </p>
-        }
+<span
 
+onClick={()=>
+setShowPassword(!showPassword)
+}
 
+>
 
+{
+showPassword?
+<FaEyeSlash/>
+:
+<FaEye/>
+}
 
+</span>
 
 
+</div>
 
-        <button
 
-          className="google-btn"
 
-          onClick={handleGoogle}
 
-        >
+<div className="forgot-link">
 
-          <FcGoogle size={22}/>
+<Link to="/forgot-password">
 
-          Continue with Google
+Forgot Password?
 
+</Link>
 
-        </button>
+</div>
 
 
 
 
+<button disabled={loading}>
 
 
-        <p>
+{
+loading?
+"Signing in..."
+:
+"Sign In"
+}
 
-          <Link to="/forgot-password">
 
-            Forgot Password?
+</button>
 
-          </Link>
 
-        </p>
 
+</form>
 
 
 
 
-        <p>
+<div className="divider">
 
-          Don't have an account?
+OR
 
-          {" "}
+</div>
 
-          <Link to="/register">
 
-            Register
-          </Link>
-        </p>
-      </div>
-    </div>
 
-  );
+
+<button
+
+className="google-btn"
+
+onClick={handleGoogle}
+
+>
+
+
+<FcGoogle/>
+
+Continue with Google
+
+
+</button>
+
+
+
+
+
+{
+error &&
+
+<p className="error">
+
+{error}
+
+</p>
+
+}
+
+
+
+{
+message &&
+
+<p className="success">
+
+{message}
+
+</p>
+
+}
+
+
+
+
+
+<p>
+
+Don't have an account?
+
+<Link to="/register">
+
+Create Account
+
+</Link>
+
+</p>
+
+
+
+
+</div>
+
+
+</div>
+
+);
+
 
 }

@@ -59,13 +59,6 @@ export default function NoticePanel() {
       <div className="notice-content">
         {notices[index]}
       </div>
-
-
-      <button className="notice-close">
-        ×
-      </button>
-
-
     </div>
 
   );

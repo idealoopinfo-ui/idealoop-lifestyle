@@ -1,0 +1,35 @@
+/* =========================
+PRODUCT MANAGER CONTAINER
+========================= */
+
+.product-manager {
+
+    width:100%;
+    
+    max-width:1200px;
+    
+    padding:30px;
+    
+    background:#ffffff;
+    
+    border-radius:16px;
+    
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+    
+    }
+    .product-manager h1 {
+
+        font-size:28px;
+        
+        font-weight:700;
+        
+        margin-bottom:25px;
+        
+        color:#111827;
+        
+        }
+        .admin-content {
+            flex:1;
+            padding:40px;
+          }

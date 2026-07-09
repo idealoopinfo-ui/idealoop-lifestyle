@@ -6,7 +6,7 @@
   padding: 80px 40px 40px; /* 👈 fixes missing top space */
   gap: 40px;
 
-  margin-top: 20px; /* 👈 prevents navbar clash */
+  margin-top: 10px; /* 👈 prevents navbar clash */
 }
 
 .hero-container {

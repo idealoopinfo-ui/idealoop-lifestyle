@@ -1,205 +1,336 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../../lib/supabase";
+import { useState } from "react";
+
+import ProductManager from "../../components/Admin/ProductManager";
+
 import "./Admin.css";
 
+
 export default function Admin() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [shortDescription, setShortDescription] = useState("");
-  const [mainImage, setMainImage] = useState("");
-  const [image1, setImage1] = useState("");
-  const [image2, setImage2] = useState("");
-  const [image3, setImage3] = useState("");
-  const [image4, setImage4] = useState("");
-  const [productUrl, setProductUrl] = useState("");
-  const [shopName, setShopName] = useState("");
 
-  const [departments, setDepartments] = useState<any[]>([]);
-  const [categories, setCategories] = useState<any[]>([]);
-  const [subcategories, setSubcategories] = useState<any[]>([]);
 
-  const [departmentId, setDepartmentId] = useState<number | "">("");
-  const [categoryId, setCategoryId] = useState<number | "">("");
-  const [subcategoryId, setSubcategoryId] = useState<number | "">("");
+const [activeTab,setActiveTab] = useState("dashboard");
 
-  const [products, setProducts] = useState<any[]>([]);
 
-  useEffect(() => {
-    fetchInitialData();
-    fetchProducts();
-  }, []);
 
-  const fetchInitialData = async () => {
-    const { data: d } = await supabase.from("departments").select("*");
-    const { data: c } = await supabase.from("categories").select("*");
-    const { data: s } = await supabase.from("subcategories").select("*");
+return (
 
-    setDepartments(d || []);
-    setCategories(c || []);
-    setSubcategories(s || []);
-  };
+<div className="admin-layout">
 
-  const fetchProducts = async () => {
-    const { data } = await supabase
-      .from("products")
-      .select("*")
-      .order("created_at", { ascending: false });
 
-    setProducts(data || []);
-  };
 
-  // cascading filters
-  const filteredCategories = categories.filter(
-    (c) => c.department_id === Number(departmentId)
-  );
+{/* SIDEBAR */}
 
-  const filteredSubcategories = subcategories.filter(
-    (s) => s.category_id === Number(categoryId)
-  );
+<div className="admin-sidebar">
 
-  // reset logic
-  useEffect(() => {
-    setCategoryId("");
-    setSubcategoryId("");
-  }, [departmentId]);
 
-  useEffect(() => {
-    setSubcategoryId("");
-  }, [categoryId]);
+<h2>
+Idealoop Admin
+</h2>
 
-  const addProduct = async () => {
-    const { error } = await supabase.from("products").insert([
-      {
-        title,
-        description,
-        short_description: shortDescription,
-        main_image_url: mainImage,
-        image_1: image1,
-        image_2: image2,
-        image_3: image3,
-        image_4: image4,
-        product_url: productUrl,
-        shop_name: shopName,
-        department_id: departmentId || null,
-        category_id: categoryId || null,
-        subcategory_id: subcategoryId || null,
-      },
-    ]);
 
-    if (!error) {
-      setTitle("");
-      setDescription("");
-      setShortDescription("");
-      setMainImage("");
-      setImage1("");
-      setImage2("");
-      setImage3("");
-      setImage4("");
-      setProductUrl("");
-      setShopName("");
-      setDepartmentId("");
-      setCategoryId("");
-      setSubcategoryId("");
-      fetchProducts();
-    }
-  };
 
-  return (
-    <div className="admin-container">
-      <h2 className="admin-title">Admin Panel</h2>
+<button
 
-      <div className="admin-form">
+onClick={()=>setActiveTab("dashboard")}
 
-        <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+>
 
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+Dashboard
 
-        <input
-          placeholder="Short Description"
-          value={shortDescription}
-          onChange={(e) => setShortDescription(e.target.value)}
-        />
+</button>
 
-        <input
-          placeholder="Main Image URL"
-          value={mainImage}
-          onChange={(e) => setMainImage(e.target.value)}
-        />
 
-        <input placeholder="Image 1 URL" value={image1} onChange={(e) => setImage1(e.target.value)} />
-        <input placeholder="Image 2 URL" value={image2} onChange={(e) => setImage2(e.target.value)} />
-        <input placeholder="Image 3 URL" value={image3} onChange={(e) => setImage3(e.target.value)} />
-        <input placeholder="Image 4 URL" value={image4} onChange={(e) => setImage4(e.target.value)} />
 
-        <input
-          placeholder="Product URL"
-          value={productUrl}
-          onChange={(e) => setProductUrl(e.target.value)}
-        />
 
-        <input
-          placeholder="Shop Name"
-          value={shopName}
-          onChange={(e) => setShopName(e.target.value)}
-        />
+<button
 
-        {/* Department */}
-        <select
-          value={departmentId}
-          onChange={(e) => setDepartmentId(Number(e.target.value))}
-        >
-          <option value="">Select Department</option>
-          {departments.map((d) => (
-            <option key={d.id} value={d.id}>
-              {d.name}
-            </option>
-          ))}
-        </select>
+onClick={()=>setActiveTab("products")}
 
-        {/* Category */}
-        <select
-          value={categoryId}
-          onChange={(e) => setCategoryId(Number(e.target.value))}
-          disabled={!departmentId}
-        >
-          <option value="">Select Category</option>
-          {filteredCategories.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.name}
-            </option>
-          ))}
-        </select>
+>
 
-        {/* Subcategory */}
-        <select
-          value={subcategoryId}
-          onChange={(e) => setSubcategoryId(Number(e.target.value))}
-          disabled={!categoryId}
-        >
-          <option value="">Select Subcategory</option>
-          {filteredSubcategories.map((s) => (
-            <option key={s.id} value={s.id}>
-              {s.name}
-            </option>
-          ))}
-        </select>
+Products
 
-        <button className="add-btn" onClick={addProduct}>
-          Add Product
-        </button>
-      </div>
+</button>
 
-      <div className="product-list">
-        {products.map((p) => (
-          <div key={p.id} className="product-item">
-            {p.title}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+
+
+
+<button
+
+onClick={()=>setActiveTab("messages")}
+
+>
+
+Messages
+
+</button>
+
+
+
+
+<button
+
+onClick={()=>setActiveTab("notice")}
+
+>
+
+Notice Panel
+
+</button>
+
+
+
+
+<button
+
+onClick={()=>setActiveTab("maintenance")}
+
+>
+
+Maintenance
+
+</button>
+
+
+
+
+<button
+
+onClick={()=>setActiveTab("users")}
+
+>
+
+Users
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+{/* MAIN CONTENT */}
+
+<div className="admin-content">
+
+
+
+
+
+{
+activeTab==="dashboard" && (
+
+<div>
+
+
+<h1>
+Dashboard Overview
+</h1>
+
+
+
+<div className="stats-grid">
+
+
+
+<div className="stat-card">
+
+<h3>
+Products
+</h3>
+
+<p>
+0
+</p>
+
+</div>
+
+
+
+
+<div className="stat-card">
+
+<h3>
+Users
+</h3>
+
+<p>
+0
+</p>
+
+</div>
+
+
+
+
+
+<div className="stat-card">
+
+<h3>
+New Messages
+</h3>
+
+<p>
+0
+</p>
+
+</div>
+
+
+
+
+
+<div className="stat-card">
+
+<h3>
+Messages
+</h3>
+
+<p>
+0
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+)
+
+}
+
+
+
+
+
+{
+activeTab==="products" && (
+
+<ProductManager />
+
+)
+
+}
+
+
+
+
+
+{
+activeTab==="messages" && (
+
+<div>
+
+<h1>
+Messages
+</h1>
+
+
+<p>
+Message management will be added here.
+</p>
+
+
+</div>
+
+)
+
+}
+
+
+
+
+
+{
+activeTab==="notice" && (
+
+<div>
+
+<h1>
+Notice Panel
+</h1>
+
+
+<p>
+Notice controls will be added here.
+</p>
+
+
+</div>
+
+)
+
+}
+
+
+
+
+
+{
+activeTab==="maintenance" && (
+
+<div>
+
+<h1>
+Maintenance Mode
+</h1>
+
+
+<p>
+Maintenance controls will be added here.
+</p>
+
+
+</div>
+
+)
+
+}
+
+
+
+
+
+{
+activeTab==="users" && (
+
+<div>
+
+<h1>
+Users
+</h1>
+
+
+<p>
+User management will be added here.
+</p>
+
+
+</div>
+
+)
+
+}
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+);
+
+
 }

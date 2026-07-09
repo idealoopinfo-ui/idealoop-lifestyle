@@ -1,210 +1,307 @@
-/* ==========================
+/* =========================
    CATEGORY NAVBAR
-========================== */
+========================= */
+
+/* =========================
+   CATEGORY NAVBAR
+========================= */
 
 .category-navbar {
-  position: relative;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  height:54px;
+  width:100%;
 
-  height: 52px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 
-  padding: 0 24px;
+  padding:0 24px;
 
-  background: #ffffff;
+  background:#111827; /* premium dark background */
 
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom:1px solid #374151;
 
-  z-index: 999;
+  position:relative;
+
+  box-sizing:border-box;
+
 }
 
 
-/* ==========================
-   CATEGORY MENU
-========================== */
 
-.category-menu {
-  display: flex;
-  align-items: center;
-  gap: 32px;
+/* =========================
+   LEFT MENU
+========================= */
+
+.category-left {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:28px;
+
+  height:100%;
+
 }
+
 
 
 .nav-item {
-  position: relative;
 
-  padding: 16px 4px;
+  height:100%;
 
-  cursor: pointer;
+  display:flex;
+  align-items:center;
 
-  font-size: 15px;
-  font-weight: 600;
+  position:relative;
 
-  color: #222;
+  cursor:pointer;
 
-  transition: .2s;
+  font-size:14px;
+
+  font-weight:500;
+
+  color:#ffffff;
+
+  white-space:nowrap;
+
+  transition:.2s ease;
+
 }
 
 
 .nav-item:hover {
-  color: #e60023;
+
+  color:#ff9900;
+
+}
+
+.static-link {
+
+  text-decoration:none;
+
+  color:#ffffff;
+
+}
+
+/* =========================
+   SEARCH AREA
+========================= */
+
+.category-search {
+
+  display:flex;
+
+  align-items:center;
+
 }
 
 
-/* ==========================
-   SEARCH
-========================== */
-
-.nav-right {
-  width: 320px;
-}
 
 
 
-/* ==========================
-   NIKE STYLE DROPDOWN
-========================== */
+/* =========================
+   DROPDOWN CONTAINER
+========================= */
 
 .dropdown {
 
-  position: absolute;
+  position:absolute;
 
-  top: 52px;
-  left: 24px;
+  top:52px;
 
+  left:24px;
 
-  display: flex;
+  width:650px;
 
+  max-height:430px;
 
-  background: #ffffff;
+  display:flex;
 
-
-  min-width: 420px;
-
-
-  border-radius: 12px;
+  overflow:hidden;
 
 
-  border: 1px solid #eeeeee;
+  background:#ffffff;
+
+
+  border:1px solid #e5e7eb;
+
+  border-radius:0 0 12px 12px;
 
 
   box-shadow:
-    0 15px 40px rgba(0,0,0,.12);
+
+  0 10px 30px rgba(0,0,0,0.12);
 
 
-  overflow: hidden;
-
-
-  animation: dropdownShow .18s ease;
-}
-
-
-/* animation */
-
-@keyframes dropdownShow {
-
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  z-index:2000;
 
 }
 
 
 
-/* ==========================
+/* =========================
    DROPDOWN COLUMNS
-========================== */
-
+========================= */
 
 .dropdown-column {
 
-  width: 210px;
 
-  padding: 12px 0;
+  width:50%;
 
-  max-height: 420px;
 
-  overflow-y: auto;
+  padding:18px 0;
+
+
+  max-height:430px;
+
+
+  overflow-y:auto;
+
+
 }
 
 
 
-.dropdown-column:first-child {
+.main-column {
 
-  border-right: 1px solid #eeeeee;
+
+  border-right:1px solid #e5e7eb;
+
+
+  background:#fafafa;
+
 
 }
 
 
 
-/* ==========================
-   MAIN CATEGORY ITEMS
-========================== */
+/* =========================
+   COLUMN SCROLL
+========================= */
+
+
+.dropdown-column::-webkit-scrollbar {
+
+  width:5px;
+
+}
+
+
+
+.dropdown-column::-webkit-scrollbar-track {
+
+  background:transparent;
+
+}
+
+
+
+.dropdown-column::-webkit-scrollbar-thumb {
+
+  background:#d1d5db;
+
+  border-radius:20px;
+
+}
+
+
+
+.dropdown-column::-webkit-scrollbar-thumb:hover {
+
+  background:#9ca3af;
+
+}
+
+
+
+
+
+/* =========================
+   DROPDOWN ITEMS
+========================= */
 
 
 .dropdown-item {
 
-  padding: 12px 20px;
+
+  padding:12px 22px;
 
 
-  cursor: pointer;
+  font-size:14px;
 
 
-  font-size: 14px;
+  color:#374151;
 
 
-  font-weight: 500;
+  cursor:pointer;
 
 
-  color: #333;
+  display:flex;
 
 
-  transition: .2s;
+  justify-content:space-between;
+
+
+  align-items:center;
+
+
+  transition:.2s ease;
+
+
 }
 
 
 
-.dropdown-item:hover,
+.dropdown-item:hover {
+
+
+  background:#ffffff;
+
+
+  color:#ff9900;
+
+
+}
+
+
+
 .dropdown-item.active {
 
-  background: #f6f6f6;
 
-  color: #111;
+  background:#ffffff;
+
+
+  color:#ff9900;
+
+
+  font-weight:600;
+
 
 }
 
 
 
-/* ==========================
-   PRODUCT ITEMS
-========================== */
 
 
 .group-item {
 
 
-  padding: 11px 20px;
+  padding:12px 22px;
 
 
-  cursor: pointer;
+  font-size:14px;
 
 
-  font-size: 14px;
+  color:#374151;
 
 
-  color: #444;
+  cursor:pointer;
 
 
-  transition: .2s;
+  transition:.2s ease;
+
 
 }
 
@@ -212,82 +309,50 @@
 
 .group-item:hover {
 
-  background: #f8f8f8;
 
-  color: #e60023;
+  background:#f9fafb;
+
+
+  color:#ff9900;
+
 
 }
 
 
 
-/* ==========================
-   SCROLLBAR
-========================== */
 
 
-.dropdown-column::-webkit-scrollbar {
-
-  width: 5px;
-
-}
-
-
-.dropdown-column::-webkit-scrollbar-thumb {
-
-  background: #d8d8d8;
-
-  border-radius: 10px;
-
-}
-/* ==========================
-   RESPONSIVE
-========================== */
+/* =========================
+   MOBILE
+========================= */
 
 
 @media(max-width:900px){
-.category-menu {
 
-  gap:18px;
+
+.category-navbar {
+
+  padding:0 12px;
 
 }
+
+
+
+.category-left {
+
+  gap:15px;
+
+}
+
+
+
 .dropdown {
 
-  left:0;
+  width:95vw;
 
-  width:100%;
-
-  flex-direction:column;
-
-}
-.dropdown-column {
-
- width:100%;
+  left:2.5vw;
 
 }
 
-}
-.category-menu {
 
-  display:flex;
-  
-  align-items:center;
-  
-  gap:28px;
-  
-  }
-  
-  .category-search {
-  
-  width:320px;
-  
-  display:flex;
-  
-  justify-content:flex-end;
-  
-  }
-  
-  .static-link {
-  
-  text-decoration:none;
-  
-  }
+}

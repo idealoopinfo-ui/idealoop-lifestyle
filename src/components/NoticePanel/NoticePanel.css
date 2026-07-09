@@ -3,100 +3,102 @@
 ========================== */
 
 .notice-panel {
-    width: 100%;
-    height: 38px;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    position: relative;
-  
-    background: #111827;
-    color: white;
-  
-    font-size: 14px;
-    font-weight: 500;
-  
-    letter-spacing: 0.2px;
-  
-    overflow: hidden;
-  
-    z-index: 1100;
+
+  width:100%;
+  height:38px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#111827;
+  color:white;
+
+}
+/* MESSAGE */
+
+.notice-content {
+
+  animation: fadeNotice 0.5s ease-in-out;
+
+}
+
+
+/* CLOSE BUTTON */
+
+.notice-close {
+
+  position:absolute;
+
+  right:22px;
+
+  border:none;
+
+  background:transparent;
+
+  color:white;
+
+  font-size:22px;
+
+  cursor:pointer;
+
+  opacity:.8;
+
+}
+
+
+.notice-close:hover {
+
+  opacity:1;
+
+}
+
+
+/* ANIMATION */
+
+@keyframes fadeNotice {
+
+  from {
+
+    opacity:0;
+
+    transform:translateY(-5px);
+
   }
-  
-  
-  /* MESSAGE */
-  
-  .notice-content {
-    animation: fadeNotice 0.5s ease-in-out;
+
+
+  to {
+
+    opacity:1;
+
+    transform:translateY(0);
+
   }
-  
-  
-  /* CLOSE BUTTON */
-  
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .notice-panel {
+
+    height:42px;
+
+    font-size:12px;
+
+    padding:0 40px;
+
+    text-align:center;
+
+  }
+
+
   .notice-close {
-  
-    position: absolute;
-    right: 22px;
-  
-    border: none;
-    background: transparent;
-  
-    color: white;
-  
-    font-size: 22px;
-  
-    cursor: pointer;
-  
-    opacity: 0.8;
-  
+
+    right:10px;
+
   }
-  
-  
-  .notice-close:hover {
-    opacity: 1;
-  }
-  
-  
-  /* ANIMATION */
-  
-  @keyframes fadeNotice {
-  
-    from {
-      opacity: 0;
-      transform: translateY(-5px);
-    }
-  
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  
-  }
-  
-  
-  /* MOBILE */
-  
-  @media(max-width:768px){
-  
-    .notice-panel {
-  
-      height: 42px;
-  
-      font-size: 12px;
-  
-      padding: 0 40px;
-  
-      text-align:center;
-  
-    }
-  
-  
-    .notice-close {
-  
-      right:10px;
-  
-    }
-  
-  }
+
+}

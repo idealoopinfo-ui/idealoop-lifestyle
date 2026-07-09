@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,40 +6,31 @@ import { FcGoogle } from "react-icons/fc";
 import "./Register.css";
 
 
-export default function Register() {
-
-
-const [firstName,setFirstName] = useState("");
-
-const [lastName,setLastName] = useState("");
-
-const [email,setEmail] = useState("");
-
-const [password,setPassword] = useState("");
-
-const [confirmPassword,setConfirmPassword] = useState("");
-
-const [country,setCountry] = useState("");
-
-const [countryCode,setCountryCode] = useState("");
-
-
-
-const [showPassword,setShowPassword] = useState(false);
-
-const [showConfirm,setShowConfirm] = useState(false);
-
-
-
-const [message,setMessage] = useState("");
-
-const [error,setError] = useState("");
-
-const [loading,setLoading] = useState(false);
-
+export default function Register(){
 
 
 const navigate = useNavigate();
+
+
+
+const [firstName,setFirstName] = useState("");
+const [lastName,setLastName] = useState("");
+const [email,setEmail] = useState("");
+const [password,setPassword] = useState("");
+const [confirmPassword,setConfirmPassword] = useState("");
+
+const [country,setCountry] = useState("");
+const [countryCode,setCountryCode] = useState("");
+
+
+const [showPassword,setShowPassword] = useState(false);
+const [showConfirm,setShowConfirm] = useState(false);
+
+
+const [error,setError] = useState("");
+const [message,setMessage] = useState("");
+
+const [loading,setLoading] = useState(false);
 
 
 
@@ -55,21 +45,17 @@ e.preventDefault();
 
 
 setError("");
-
 setMessage("");
 
 
 
 if(password !== confirmPassword){
 
-
 setError(
 "Passwords do not match"
 );
 
-
 return;
-
 
 }
 
@@ -84,7 +70,9 @@ setLoading(true);
 const {
 data,
 error
+
 }=await supabase.auth.signUp({
+
 
 email,
 
@@ -99,7 +87,11 @@ data:{
 
 first_name:firstName,
 
-last_name:lastName
+last_name:lastName,
+
+country,
+
+country_code:countryCode
 
 
 }
@@ -130,38 +122,50 @@ return;
 
 
 
-const user = data.user;
+/*
+ CREATE PROFILE
+*/
 
 
+if(data.user){
 
-
-
-if(user){
 
 
 const {
+
 error:profileError
 
 }=await supabase
 
+
 .from("profiles")
+
 
 .insert({
 
 
-id:user.id,
+id:data.user.id,
+
 
 email:email,
 
+
 first_name:firstName,
+
 
 last_name:lastName,
 
+
 country:country,
+
 
 country_code:countryCode,
 
-avatar_url:null
+
+avatar_url:null,
+
+
+is_admin:false
 
 
 });
@@ -173,17 +177,14 @@ if(profileError){
 
 
 console.log(
-"profile error:",
+"profile creation error:",
 profileError.message
 );
 
 
 }
 
-
-
 }
-
 
 
 
@@ -192,10 +193,10 @@ profileError.message
 setLoading(false);
 
 
-setMessage(
-"Account created successfully!"
-);
 
+setMessage(
+"Account created successfully. Please login."
+);
 
 
 
@@ -206,13 +207,11 @@ setTimeout(()=>{
 navigate("/login");
 
 
-},1200);
-
+},1500);
 
 
 
 };
-
 
 
 
@@ -236,35 +235,53 @@ provider:"google"
 
 if(error){
 
-setError(
-"Google signup failed"
-);
+
+setError(error.message);
+
 
 }
 
 
+
 };
+
+
+
+
+
+
 
 return (
 
 <div className="auth-container">
 
 
-<div className="auth-box">
+<div className="auth-card">
+
+
+
+<h1>
+
+Idealoop
+
+</h1>
 
 
 
 <h2>
+
 Create Account
+
 </h2>
 
-<form
 
-className="auth-form"
 
-onSubmit={handleRegister}
 
->
+<form onSubmit={handleRegister}>
+
+
+<div className="name-row">
+
 
 <input
 
@@ -280,6 +297,8 @@ required
 
 />
 
+
+
 <input
 
 placeholder="Last Name"
@@ -294,11 +313,18 @@ required
 
 />
 
+
+</div>
+
+
+
+
+
 <input
 
 type="email"
 
-placeholder="Email"
+placeholder="Email Address"
 
 value={email}
 
@@ -309,6 +335,12 @@ setEmail(e.target.value)
 required
 
 />
+
+
+
+
+
+
 <input
 
 placeholder="Country"
@@ -322,9 +354,14 @@ setCountry(e.target.value)
 required
 
 />
+
+
+
+
+
 <input
 
-placeholder="Country Code (example +94)"
+placeholder="Country Code (+94)"
 
 value={countryCode}
 
@@ -335,6 +372,7 @@ setCountryCode(e.target.value)
 required
 
 />
+
 <div className="password-box">
 
 
@@ -374,12 +412,12 @@ showPassword
 :
 <FaEye/>
 }
-
 </span>
 
 
 </div>
 <div className="password-box">
+
 
 <input
 
@@ -402,7 +440,6 @@ setConfirmPassword(e.target.value)
 required
 
 />
-
 <span
 
 onClick={()=>
@@ -420,68 +457,76 @@ showConfirm
 }
 
 </span>
+
+
 </div>
 <button
 
 type="submit"
 
-className="register-submit-btn"
-
 disabled={loading}
 
 >
 
+
 {
+
 loading
 ?
 "Creating..."
 :
 "Create Account"
+
 }
-
-
 </button>
+
 </form>
+<div className="divider">
+
+OR
+
+</div>
 <button
+
 className="google-btn"
 
 onClick={handleGoogle}
 
 >
-
-<FcGoogle size={22}/>
+<FcGoogle/>
 
 Continue with Google
 
 
 </button>
+
 {
 error &&
 
-<div className="error-popup">
+<p className="error">
 
 {error}
 
-</div>
+</p>
 
 }
 
 {
 message &&
 
-<div className="success-popup">
+<p className="success">
 
 {message}
 
-</div>
+</p>
 
 }
 
 <p>
 
+
 Already have an account?
 
-{" "}
 
 <Link to="/login">
 
@@ -489,9 +534,9 @@ Login
 
 </Link>
 
+
 </p>
 </div>
-
 
 </div>
 
@@ -499,4 +544,3 @@ Login
 
 
 }
-
