@@ -1,52 +1,59 @@
 import Hero from "../../components/Hero/Hero";
-import Categories from "../../components/Categories/Categories";
 import Collections from "../../components/Collections/Collections";
 import ProductPreview from "../../components/ProductPreview/ProductPreview";
+
+import FeaturedProducts from "../../components/Home/FeaturedProducts";
+import CategoryShowcase from "../../components/CategoryShowcase/CategoryShowcase";
 import TrendingProducts from "../../components/TrendingProducts/TrendingProducts";
 import WhyChoose from "../../components/WhyChoose/WhyChoose";
 import About from "../../components/About/About";
 
 import "./Home.css";
 
-export default function Home() {
-  return (
-    <div className="home-page">
+export default function Home(){
 
-      {/* HERO */}
-      <section>
-        <Hero />
-      </section>
+return(
 
-      {/* TRENDING */}
-      <section>
-        <TrendingProducts />
-      </section>
+<div className="home-page">
 
-      {/* CATEGORIES */}
-      <section>
-        <Categories />
-      </section>
 
-      {/* COLLECTIONS */}
-      <section>
-        <Collections />
-      </section>
+<section className="home-section">
+<Hero/>
+</section>
 
-      {/* PRODUCT PREVIEW */}
-      <section>
-        <ProductPreview />
-      </section>
 
-      {/* WHY CHOOSE */}
-      <section>
-        <WhyChoose />
-      </section>
+<section className="home-section">
+<FeaturedProducts/>
+</section>
 
-      {/* ABOUT */}
-      <section>
-        <About />
-      </section>
 
-    </div>
-  );
+<section className="home-section">
+<CategoryShowcase/>
+</section>
+
+
+<section className="home-section">
+<TrendingProducts/>
+</section>
+
+
+<section className="home-section">
+<About/>
+</section>
+
+
+<section className="home-section">
+<WhyChoose/>
+</section>
+
+
+<section className="home-section">
+<ProductPreview/>
+</section>
+
+
+</div>
+
+);
+
 }

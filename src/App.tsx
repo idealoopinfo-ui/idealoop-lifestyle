@@ -1,6 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
-import { ThemeProvider } from "./context/ThemeContext";
 import { CountryProvider } from "./context/CountryContext";
 import AdminRoute from "./components/Auth/AdminRoute";
 
@@ -8,6 +7,9 @@ import TopNavbar from "./components/Navbar/TopNavbar";
 import NoticePanel from "./components/NoticePanel/NoticePanel";
 import CategoryNavbar from "./components/Navbar/CategoryNavbar";
 import Footer from "./components/Footer/Footer";
+
+import {AnimatePresence} from "framer-motion";
+import PageTransition from "./components/PageTransition/PageTransition";
 
 import Home from "./pages/Home/Home";
 import Admin from "./pages/Admin/Admin";
@@ -26,90 +28,218 @@ import AffiliateDisclosure from "./pages/Legal/AffiliateDisclosure";
 
 import "./styles/theme.css";
 
-export default function App() {
 
-  const location = useLocation();
+export default function App(){
 
-  const isDiscover = location.pathname.startsWith("/discover");
+const location=useLocation();
 
-
-  return (
-
-    <CountryProvider>
-
-      <div className="app-layout">
+const isDiscover=location.pathname.startsWith("/discover");
 
 
-        {/* 🔝 TOP NAVBAR */}
-        <TopNavbar />
+return(
+
+<CountryProvider>
+
+<div className="app-layout">
 
 
-        {/* 🔔 NOTICE PANEL */}
-        {!isDiscover && <NoticePanel />}
+<TopNavbar />
 
 
-        {/* 📂 CATEGORY NAVBAR */}
-        {!isDiscover && <CategoryNavbar />}
+{!isDiscover && <NoticePanel />}
 
 
-        {/* 📄 MAIN CONTENT */}
-        <main className="app-content">
-
-          <Routes>
-
-            <Route path="/" element={<Home />} />
-
-            <Route 
-              path="/admin" 
-              element={
-                <AdminRoute>
-                  <Admin />
-                </AdminRoute>
-              } 
-            />
-
-            <Route path="/login" element={<Login />} />
-
-            <Route path="/register" element={<Register />} />
-
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-
-            <Route path="/profile" element={<Profile />} />
-
-            <Route path="/product/:slug" element={<ProductDetails />} />
-
-            <Route path="/category/:category/:subcategory" element={<CategoryPage />} />
-
-            <Route path="/category/:category" element={<CategoryPage />} />
-
-            <Route path="/discover" element={<DiscoverPage />} />
-
-            <Route path="/clothing" element={<ClothingCategory />} />
-
-            <Route path="/contact" element={<Contact />} />
-
-            <Route path="/privacy" element={<Privacy />} />
-
-            <Route path="/terms" element={<Terms />} />
-
-            <Route 
-              path="/affiliate-disclosure" 
-              element={<AffiliateDisclosure />} 
-            />
-
-          </Routes>
-
-        </main>
+{!isDiscover && <CategoryNavbar />}
 
 
-        {/* 🔻 FOOTER */}
-        {!isDiscover && <Footer />}
+
+<main className="app-content">
 
 
-      </div>
+<AnimatePresence mode="wait">
 
-    </CountryProvider>
 
-  );
+<Routes location={location} key={location.pathname}>
+
+
+<Route
+path="/"
+element={
+<PageTransition>
+<Home/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/admin"
+element={
+<PageTransition>
+<AdminRoute>
+<Admin/>
+</AdminRoute>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/login"
+element={
+<PageTransition>
+<Login/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/register"
+element={
+<PageTransition>
+<Register/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/forgot-password"
+element={
+<PageTransition>
+<ForgotPassword/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/profile"
+element={
+<PageTransition>
+<Profile/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/product/:slug"
+element={
+<PageTransition>
+<ProductDetails/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/category/:category/:subcategory"
+element={
+<PageTransition>
+<CategoryPage/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/category/:category"
+element={
+<PageTransition>
+<CategoryPage/>
+</PageTransition>
+}
+/>
+
+<Route
+path="/product/:productid"
+element={
+<PageTransition>
+<ProductDetails/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/discover"
+element={
+<PageTransition>
+<DiscoverPage/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/clothing"
+element={
+<PageTransition>
+<ClothingCategory/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/contact"
+element={
+<PageTransition>
+<Contact/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/privacy"
+element={
+<PageTransition>
+<Privacy/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/terms"
+element={
+<PageTransition>
+<Terms/>
+</PageTransition>
+}
+/>
+
+
+<Route
+path="/affiliate-disclosure"
+element={
+<PageTransition>
+<AffiliateDisclosure/>
+</PageTransition>
+}
+/>
+
+
+</Routes>
+
+
+</AnimatePresence>
+
+
+</main>
+
+
+
+{!isDiscover && <Footer />}
+
+
+</div>
+
+</CountryProvider>
+
+);
 
 }

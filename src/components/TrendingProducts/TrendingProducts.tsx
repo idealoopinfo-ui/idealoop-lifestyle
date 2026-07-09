@@ -1,39 +1,118 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
-import ProductCard from "../ProductCard/ProductCard";
+
+import "./TrendingProducts.css";
+
 
 export default function TrendingProducts() {
-  const [products, setProducts] = useState<any[]>([]);
 
-  useEffect(() => {
-    fetchTrending();
-  }, []);
 
-  const fetchTrending = async () => {
-    const { data } = await supabase
-      .from("products")
-      .select("*")
-      .order("likes", { ascending: false })
-      .limit(8);
+const [products,setProducts] = useState<any[]>([]);
 
-    setProducts(data || []);
-  };
 
-  return (
-    <div style={{ padding: "20px" }}>
-      <h2>🔥 Trending Products</h2>
 
-      <div className="product-grid">
-        {products.map((p) => (
-          <ProductCard
-            key={p.id}
-            id={p.id}
-            title={p.title}
-            image={p.main_image_url}
-            likes={p.likes}
-          />
-        ))}
-      </div>
-    </div>
-  );
+useEffect(()=>{
+
+fetchTrending();
+
+},[]);
+
+
+
+const fetchTrending = async()=>{
+
+
+const {data,error}=await supabase
+.from("products")
+.select("*")
+.eq("trending",true)
+.limit(8);
+
+
+
+if(error){
+
+console.log(error);
+return;
+
+}
+
+
+setProducts(data || []);
+
+};
+
+
+
+return (
+
+<section className="trending-section">
+
+
+<h2>
+🔥 Trending Now
+</h2>
+
+
+
+<div className="trending-wrapper">
+
+
+{
+
+products.map((product,index)=>(
+
+
+<div 
+className="trending-card"
+key={product.id}
+>
+
+
+<div className="trending-image">
+
+
+<img
+src={product.image_1}
+alt={product.title}
+/>
+
+
+<span>
+#{index + 1}
+</span>
+
+
+</div>
+
+
+
+<h3>
+{product.title}
+</h3>
+
+
+
+<button className="view-more-btn">
+View More →
+</button>
+
+
+
+</div>
+
+
+))
+
+}
+
+
+</div>
+
+
+</section>
+
+);
+
+
 }

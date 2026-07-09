@@ -1,71 +1,89 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { supabase } from "../../lib/supabase";
 import "./ProductCard.css";
 
-interface Props {
-  id: string;
-  title: string;
-  image: string;
-  likes?: number;
+
+interface ProductCardProps {
+  product: {
+    id: number;
+    product_id?: string;
+    title: string;
+    image_1: string;
+    affiliate_url: string;
+  };
 }
 
-export default function ProductCard({ id, title, image, likes = 0 }: Props) {
+
+export default function ProductCard({ product }: ProductCardProps) {
+
   const navigate = useNavigate();
 
-  const [likeCount, setLikeCount] = useState(likes);
-  const [loading, setLoading] = useState(false);
 
-  const handleLike = async (e: any) => {
-    e.stopPropagation();
+  const handleShopNow = () => {
 
-    if (loading) return;
-    setLoading(true);
+    window.open(
+      product.affiliate_url,
+      "_blank"
+    );
 
-    const newLikes = likeCount + 1;
-
-    const { error } = await supabase
-      .from("products")
-      .update({ likes: newLikes })
-      .eq("id", id);
-
-    if (!error) {
-      setLikeCount(newLikes);
-    }
-
-    setLoading(false);
   };
 
+
+  const handleViewMore = () => {
+
+    navigate(`/product/${product.id}`);
+
+  };
+
+
   return (
-    <div
-      className="product-card"
-      onClick={() => navigate(`/product/${id}`)}
-    >
-      {/* LIKE BUTTON */}
-      <button className="like-btn" onClick={handleLike}>
-        ❤️ {likeCount}
+
+    <div className="product-card">
+
+
+      <div className="product-image-wrapper">
+
+        <img
+          src={product.image_1}
+          alt={product.title}
+          className="product-image"
+        />
+
+      </div>
+
+
+
+      <h3 className="product-title">
+
+        {product.title}
+
+      </h3>
+
+
+
+      <button
+        className="view-more-btn"
+        onClick={handleViewMore}
+      >
+
+        View More →
+
       </button>
 
-      {/* IMAGE */}
-      <div className="img-wrapper">
-        <img src={image} alt={title} />
-      </div>
 
-      {/* TITLE */}
-      <h3 className="title">{title}</h3>
 
-      {/* HOVER OVERLAY */}
-      <div className="overlay">
-        <p>View Details</p>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            navigate(`/product/${id}`);
-          }}
-        >
-          Shop Now
-        </button>
-      </div>
+      <button
+        className="shop-now-btn"
+        onClick={handleShopNow}
+      >
+
+        Shop Now
+
+      </button>
+
+
+
     </div>
+
   );
+
 }

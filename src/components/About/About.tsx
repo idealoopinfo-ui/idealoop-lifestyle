@@ -1,33 +1,40 @@
 import "./About.css";
 
-export default function About() {
-  return (
-    <section className="about">
-      <div className="about-content">
+export default function About(){
 
-        <div className="about-text">
-          <span>ABOUT US</span>
+return(
 
-          <h2>About Idealoop Lifestyle</h2>
+<section className="about">
 
-          <p>
-            Idealoop Lifestyle is your destination for discovering carefully
-            selected products across home, fashion, beauty, and everyday
-            living. We believe shopping should be inspiring, simple, and help
-            you create a lifestyle you'll love.
-          </p>
+<div className="about-container">
 
-          <button>Learn More</button>
-        </div>
+<div className="about-text">
 
-        <div className="about-image">
-          <img
-            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1000"
-            alt="Lifestyle"
-          />
-        </div>
+<h2>
+About Idealoop Lifestyle
+</h2>
 
-      </div>
-    </section>
-  );
+<p>
+Idealoop Lifestyle is your destination for discovering carefully selected products across home, fashion, beauty, and everyday living. We believe shopping should be inspiring, simple, and help you create a lifestyle you'll love.
+</p>
+
+
+</div>
+
+
+<div className="about-image">
+
+<img
+src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1000"
+alt="Lifestyle"
+/>
+
+</div>
+
+</div>
+
+</section>
+
+);
+
 }

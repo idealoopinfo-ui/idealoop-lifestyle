@@ -31,3 +31,6 @@ section:not(:last-child) {
     padding: 40px 15px;
   }
 }
+.home-section{
+  padding:20px 0;
+  }
