@@ -1,35 +1,164 @@
-/* =========================
-PRODUCT MANAGER CONTAINER
-========================= */
-
 .product-manager {
 
-    width:100%;
-    
     max-width:1200px;
+    
+    margin:40px auto;
+    
+    padding:20px;
+    
+    }
+    
+    
+    .product-form {
+    
+    background:white;
     
     padding:30px;
     
-    background:#ffffff;
-    
     border-radius:16px;
     
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.08);
+    box-shadow:0 5px 25px rgba(0,0,0,0.08);
     
     }
-    .product-manager h1 {
+    
+    
+    .form-section {
+    
+    margin-bottom:35px;
+    
+    }
+    
+    
+    .form-section h3 {
+    
+    font-size:20px;
+    
+    margin-bottom:20px;
+    
+    border-bottom:1px solid #eee;
+    
+    padding-bottom:10px;
+    
+    }
+    
+    
+    .input-grid {
+    
+    display:grid;
+    
+    grid-template-columns:repeat(2,1fr);
+    
+    gap:20px;
+    
+    }
+    
+    
+    .product-form input,
+    .product-form textarea,
+    .product-form select {
+    
+    width:100%;
+    
+    padding:12px 14px;
+    
+    border:1px solid #ddd;
+    
+    border-radius:8px;
+    
+    font-size:15px;
+    
+    box-sizing:border-box;
+    
+    }
+    
+    
+    .product-form textarea {
+    
+    min-height:120px;
+    
+    resize:vertical;
+    
+    }
+    
+    
+    .checkbox-group {
+    
+    display:flex;
+    
+    gap:25px;
+    
+    align-items:center;
+    
+    }
+    
+    
+    .checkbox-group label {
+    
+    display:flex;
+    
+    gap:8px;
+    
+    align-items:center;
+    
+    font-weight:500;
+    
+    }
 
-        font-size:28px;
-        
-        font-weight:700;
-        
-        margin-bottom:25px;
-        
-        color:#111827;
-        
-        }
-        .admin-content {
-            flex:1;
-            padding:40px;
-          }
+    .add-product-btn {
+
+        width:100%;
+      
+        margin-top:30px;
+      
+        padding:14px 25px;
+      
+        background:#ff9900;
+      
+        color:white;
+      
+        border:none;
+      
+        border-radius:10px;
+      
+        font-size:16px;
+      
+        font-weight:600;
+      
+        cursor:pointer;
+      
+        transition:all 0.3s ease;
+      
+      }
+      
+      
+      .add-product-btn:hover {
+      
+        background:#e68900;
+      
+        transform:translateY(-2px);
+      
+      }
+      
+      
+      .add-product-btn:active {
+      
+        transform:translateY(0);
+      
+      }
+    
+    
+    @media(max-width:768px){
+    
+    .input-grid{
+    
+    grid-template-columns:1fr;
+    
+    }
+    
+    .product-form{
+    
+    padding:20px;
+    
+    }
+    
+    }

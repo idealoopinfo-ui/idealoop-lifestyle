@@ -34,10 +34,11 @@ const [occasion,setOccasion] = useState("");
 const [department,setDepartment] = useState("");
 const [category,setCategory] = useState("");
 const [subcategory,setSubcategory] = useState("");
-
-
+const [material,setMaterial] = useState("");
+const [fit,setFit] = useState("");
 
 const [products,setProducts] = useState<any[]>([]);
+const [spotlight, setSpotlight] = useState(false);
 
 
 
@@ -48,10 +49,6 @@ useEffect(()=>{
 fetchProducts();
 
 },[]);
-
-
-
-
 
 const fetchProducts = async()=>{
 
@@ -76,10 +73,6 @@ setProducts(data || []);
 
 };
 
-
-
-
-
 /* =========================
 CATEGORY DROPDOWN DATA
 ========================= */
@@ -89,22 +82,12 @@ const selectedMainCategory = categories.find(
 (item:any)=>item.slug === department
 );
 
-
-
 const selectedCategory = selectedMainCategory?.children?.find(
 (item:any)=>item.slug === category
 );
 
-
-
 const departmentList = categories;
-
-
-
 const categoryList = selectedMainCategory?.children || [];
-
-
-
 const subcategoryList = selectedCategory?.children || [];
 
 /* RESET CHILDREN */
@@ -146,6 +129,8 @@ affiliate_url:affiliateUrl,
 marketplace,
 featured,
 trending,
+spotlight,
+
 department,
 category,
 subcategory,
@@ -153,6 +138,8 @@ subcategory,
 season,
 style,
 occasion,
+material,
+fit,
 
 
 }
@@ -189,6 +176,8 @@ setStyle("");
 setOccasion("");
 setFeatured(false);
 setTrending(false);
+setSpotlight(false);
+
 fetchProducts();
 
 };
@@ -225,366 +214,478 @@ const seasons = [
     ];
 
 
-return (
-
-<div className="product-manager">
-
-
-<h1>
-Product Management
-</h1>
-
-
-
-<div className="admin-form">
-
-
-
-<input
-placeholder="Product ID"
-value={productId}
-onChange={(e)=>setProductId(e.target.value)}
-/>
-
-
-
-<input
-placeholder="Product Title"
-value={title}
-onChange={(e)=>setTitle(e.target.value)}
-/>
-
-
-
-<textarea
-placeholder="Full Description"
-value={description}
-onChange={(e)=>setDescription(e.target.value)}
-/>
-
-
-
-<input
-placeholder="Short Description"
-value={shortDescription}
-onChange={(e)=>setShortDescription(e.target.value)}
-/>
-
-
-
-<input
-placeholder="Main Image URL"
-value={image1}
-onChange={(e)=>setImage1(e.target.value)}
-/>
-
-
-
-<input
-placeholder="Image 2 URL"
-value={image2}
-onChange={(e)=>setImage2(e.target.value)}
-/>
-
-
-
-<input
-placeholder="Image 3 URL"
-value={image3}
-onChange={(e)=>setImage3(e.target.value)}
-/>
-
-
-
-<input
-placeholder="Image 4 URL"
-value={image4}
-onChange={(e)=>setImage4(e.target.value)}
-/>
-
-
-
-<input
-placeholder="Affiliate URL"
-value={affiliateUrl}
-onChange={(e)=>setAffiliateUrl(e.target.value)}
-/>
-
-
-
-<input
-placeholder="Marketplace"
-value={marketplace}
-onChange={(e)=>setMarketplace(e.target.value)}
-/>
-
-
-
-
-
-<select
-
-value={department}
-
-onChange={(e)=>{
-
-setDepartment(e.target.value);
-
-}}
-
->
-
-<option value="">
-Select Department
-</option>
-
-
-{
-
-departmentList.map((item:any)=>(
-
-<option
-
-key={item.slug}
-
-value={item.slug}
-
->
-
-{item.name}
-
-</option>
-
-))
-
-}
-
-
-</select>
-
-<select
-value={category}
-disabled={!department}
-onChange={(e)=>{
-
-setCategory(e.target.value);
-
-}}
-
->
-
-<option value="">
-Select Category
-</option>
-
-
-{
-
-categoryList.map((item:any)=>(
-
-<option
-
-key={item.slug}
-
-value={item.slug}
-
->
-
-{item.name}
-
-</option>
-
-))
-
-}
-
-
-</select>
-
-<select
-
-value={subcategory}
-
-disabled={!category}
-
-onChange={(e)=>setSubcategory(e.target.value)}
-
->
-
-<option value="">
-Select Subcategory
-</option>
-
-
-{
-
-subcategoryList.map((item:any)=>(
-
-<option
-
-key={item.slug}
-
-value={item.slug}
-
->
-
-{item.name}
-
-</option>
-
-))
-
-}
-
-
-</select>
-
-<select
-
-value={season}
-
-onChange={(e)=>setSeason(e.target.value)}
-
->
-
-<option value="">
-Select Season
-</option>
-
-
-{
-
-seasons.map((item)=>(
-
-<option
-key={item}
-value={item}
->
-
-{item}
-
-</option>
-
-))
-
-}
-
-</select>
-
-
-
-
-<select
-
-value={style}
-
-onChange={(e)=>setStyle(e.target.value)}
-
->
-
-<option value="">
-Select Style
-</option>
-
-
-{
-
-styles.map((item)=>(
-
-<option
-key={item}
-value={item}
->
-
-{item}
-
-</option>
-
-))
-
-}
-
-</select>
-
-
-
-
-
-<select
-
-value={occasion}
-
-onChange={(e)=>setOccasion(e.target.value)}
->
-<option value="">
-Select Occasion
-</option>
-
-{
-
-occasions.map((item)=>(
-
-<option
-key={item}
-value={item}
->
-
-{item}
-
-</option>
-
-))
-
-}
-
-</select>
-<label>
-
-<input
-
-type="checkbox"
-
-checked={featured}
-
-onChange={(e)=>setFeatured(e.target.checked)}
-
- />
-
-Featured Product
-
-</label>
-<label>
-
-<input
-
-type="checkbox"
-
-checked={trending}
-
-onChange={(e)=>setTrending(e.target.checked)}
-
- />
-
-Trending Product
-
-</label>
-<button
-
-className="add-btn"
-
-onClick={addProduct}
-
->
-
-Add Product
-
-</button>
-</div>
-
-
-</div>
-
-);
-
-
-}
+    return (
+
+        <div className="product-manager">
+        
+        
+        <form className="product-form" onSubmit={(e)=>e.preventDefault()}>
+        
+        
+        {/* PRODUCT INFORMATION */}
+        
+        <div className="form-section">
+        
+        <h3>
+        Product Information
+        </h3>
+        
+        
+        <div className="input-grid">
+        
+        
+        <input
+        placeholder="Product ID"
+        value={productId}
+        onChange={(e)=>setProductId(e.target.value)}
+        />
+        
+        
+        
+        <input
+        placeholder="Product Title"
+        value={title}
+        onChange={(e)=>setTitle(e.target.value)}
+        />
+        
+        
+        </div>
+        
+        
+        
+        <textarea
+        
+        placeholder="Short Description"
+        
+        value={shortDescription}
+        
+        onChange={(e)=>setShortDescription(e.target.value)}
+        
+         />
+        
+        
+        
+        <textarea
+        
+        placeholder="Product Highlights / Description"
+        
+        value={description}
+        
+        onChange={(e)=>setDescription(e.target.value)}
+        
+         />
+        
+        </div>
+        
+        
+        
+        
+        
+        {/* IMAGES */}
+        
+        <div className="form-section">
+        
+        <h3>
+        Product Images
+        </h3>
+        
+        
+        <div className="input-grid">
+        
+        
+        <input
+        placeholder="Image 1 URL"
+        value={image1}
+        onChange={(e)=>setImage1(e.target.value)}
+        />
+        
+        
+        <input
+        placeholder="Image 2 URL"
+        value={image2}
+        onChange={(e)=>setImage2(e.target.value)}
+        />
+        
+        
+        <input
+        placeholder="Image 3 URL"
+        value={image3}
+        onChange={(e)=>setImage3(e.target.value)}
+        />
+        
+        
+        <input
+        placeholder="Image 4 URL"
+        value={image4}
+        onChange={(e)=>setImage4(e.target.value)}
+        />
+        
+        
+        </div>
+        
+        </div>
+        
+        
+        
+        
+        
+        
+        {/* AFFILIATE */}
+        
+        <div className="form-section">
+        
+        <h3>
+        Affiliate Information
+        </h3>
+        
+        
+        <div className="input-grid">
+        
+        
+        <input
+        placeholder="Affiliate URL"
+        value={affiliateUrl}
+        onChange={(e)=>setAffiliateUrl(e.target.value)}
+        />
+        
+        
+        <input
+        placeholder="Marketplace"
+        value={marketplace}
+        onChange={(e)=>setMarketplace(e.target.value)}
+        />
+        
+        
+        </div>
+        
+        
+        </div>
+        
+        
+        
+        
+        
+        
+        {/* CATEGORY */}
+        
+        <div className="form-section">
+        
+        <h3>
+        Category
+        </h3>
+        
+        
+        <div className="input-grid">
+        
+        
+        
+        <select
+        
+        value={department}
+        
+        onChange={(e)=>setDepartment(e.target.value)}
+        
+        >
+        
+        <option value="">
+        Select Department
+        </option>
+        
+        
+        {
+        departmentList.map((item:any)=>(
+        
+        <option
+        
+        key={item.slug}
+        
+        value={item.slug}
+        
+        >
+        
+        {item.name}
+        
+        </option>
+        
+        ))
+        
+        }
+        
+        
+        </select>
+        
+        
+        
+        
+        
+        <select
+        
+        value={category}
+        
+        disabled={!department}
+        
+        onChange={(e)=>setCategory(e.target.value)}
+        
+        >
+        
+        <option value="">
+        Select Category
+        </option>
+        
+        
+        {
+        categoryList.map((item:any)=>(
+        
+        <option
+        
+        key={item.slug}
+        
+        value={item.slug}
+        
+        >
+        
+        {item.name}
+        
+        </option>
+        
+        ))
+        
+        }
+        
+        
+        </select>
+        
+        
+        
+        
+        
+        
+        <select
+        
+        value={subcategory}
+        
+        disabled={!category}
+        
+        onChange={(e)=>setSubcategory(e.target.value)}
+        
+        >
+        
+        <option value="">
+        Select Subcategory
+        </option>
+        
+        
+        {
+        subcategoryList.map((item:any)=>(
+        
+        <option
+        
+        key={item.slug}
+        
+        value={item.slug}
+        
+        >
+        
+        {item.name}
+        
+        </option>
+        
+        ))
+        
+        }
+        
+        
+        </select>
+        
+        
+        
+        </div>
+        
+        
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        {/* PRODUCT DETAILS */}
+        
+        <div className="form-section">
+        
+        <h3>
+        Product Details
+        </h3>
+        
+        
+        <div className="input-grid">
+        
+        
+        <input
+        
+        placeholder="Material"
+        
+        value={material}
+        
+        onChange={(e)=>setMaterial(e.target.value)}
+        
+         />
+        
+        
+        <input
+        
+        placeholder="Fit"
+        
+        value={fit}
+        
+        onChange={(e)=>setFit(e.target.value)}
+        
+         />
+        
+        
+        <input
+        
+        placeholder="Style"
+        
+        value={style}
+        
+        onChange={(e)=>setStyle(e.target.value)}
+        
+         />
+        
+        
+        
+        <input
+        
+        placeholder="Season"
+        
+        value={season}
+        
+        onChange={(e)=>setSeason(e.target.value)}
+        
+         />
+        
+        
+        <input
+        
+        placeholder="Occasion"
+        
+        value={occasion}
+        
+        onChange={(e)=>setOccasion(e.target.value)}
+        
+         />
+        
+        
+        </div>
+        
+        
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        {/* SETTINGS */}
+        
+        <div className="form-section">
+        
+        <h3>
+        Visibility
+        </h3>
+        
+        
+        <div className="checkbox-group">
+        
+        
+        <label>
+        
+        <input
+        
+        type="checkbox"
+        
+        checked={featured}
+        
+        onChange={(e)=>setFeatured(e.target.checked)}
+        
+         />
+        
+        Featured
+        
+        </label>
+        
+        
+        
+        <label>
+        
+        <input
+        
+        type="checkbox"
+        
+        checked={trending}
+        
+        onChange={(e)=>setTrending(e.target.checked)}
+        
+         />
+        
+        Trending
+        
+        </label>
+        
+        
+        
+        <label>
+        
+        <input
+        
+        type="checkbox"
+        
+        checked={spotlight}
+        
+        onChange={(e)=>setSpotlight(e.target.checked)}
+        
+         />
+        
+        Spotlight
+        
+        </label>
+        
+        
+        
+        </div>
+        
+        
+        </div>
+        
+        
+        
+        
+        
+        <button
+        
+        type="button"
+        
+        className="add-product-btn"
+        
+        onClick={addProduct}
+        
+        >
+        
+        Add Product
+        
+        </button>
+        
+        
+        
+        </form>
+        
+        
+        </div>
+        
+        );
+    }

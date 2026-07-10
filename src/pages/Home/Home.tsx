@@ -1,6 +1,6 @@
 import Hero from "../../components/Hero/Hero";
 import Collections from "../../components/Collections/Collections";
-import ProductPreview from "../../components/ProductPreview/ProductPreview";
+import SpotlightSection from "../../components/SpotlightSection/SpotlightSection";
 
 import FeaturedProducts from "../../components/Home/FeaturedProducts";
 import CategoryShowcase from "../../components/CategoryShowcase/CategoryShowcase";
@@ -48,7 +48,7 @@ return(
 
 
 <section className="home-section">
-<ProductPreview/>
+<SpotlightSection/>
 </section>
 
 

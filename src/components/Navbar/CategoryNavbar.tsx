@@ -30,25 +30,29 @@ export default function CategoryNavbar() {
 
         {categories.map((category) => (
 
-          <div
+<div
 
-            key={category.slug}
+key={category.slug}
 
-            className="nav-item"
+className="nav-item"
 
-            onMouseEnter={() => {
+onMouseEnter={() => {
 
-              setActiveCategory(category);
+setActiveCategory(category);
 
-              setActiveChild(category.children[0]);
+setActiveChild(category.children[0]);
 
-            }}
+}}
 
-          >
+onClick={() =>
+navigate(`/category/${category.slug}`)
+}
 
-            {category.name}
+>
 
-          </div>
+{category.name}
+
+</div>
 
         ))}
 
@@ -99,23 +103,29 @@ export default function CategoryNavbar() {
 
             {activeCategory.children.map((child:any)=>(
 
-              <div
+<div
 
-                key={child.slug}
+key={child.slug}
 
-                className={`dropdown-item ${
-                  activeChild?.slug === child.slug
-                  ? "active"
-                  : ""
-                }`}
+className={`dropdown-item ${
+activeChild?.slug === child.slug
+? "active"
+: ""
+}`}
 
-                onMouseEnter={() => setActiveChild(child)}
+onMouseEnter={() => setActiveChild(child)}
 
-              >
+onClick={() =>
+navigate(
+`/category/${activeCategory.slug}/${child.slug}`
+)
+}
 
-                {child.name}
+>
 
-              </div>
+{child.name}
+
+</div>
 
 
             ))}

@@ -2,63 +2,191 @@ import { Link } from "react-router-dom";
 import "./Footer.css";
 
 export default function Footer() {
+
   return (
+
     <footer className="footer">
 
+
       {/* TOP GRID */}
+
       <div className="footer-container">
 
+
         {/* BRAND */}
+
         <div className="footer-col">
-          <h2 className="footer-logo">🛍 Idealoop</h2>
+
+          <h2 className="footer-logo">
+            🛍 Idealoop Lifestyle
+          </h2>
+
+
           <p className="footer-text">
-            A modern lifestyle marketplace offering curated furniture,
-            fashion, beauty, and home essentials.
+
+            A modern lifestyle marketplace offering curated
+            fashion, beauty, home essentials, and trending products.
+
           </p>
+
+
         </div>
 
-        {/* QUICK LINKS */}
+
+
+
+
+        {/* SHOP */}
+
         <div className="footer-col">
-          <h3>Shop</h3>
-          <Link to="/products?category=furniture">Furniture</Link>
-          <Link to="/products?category=home-decor">Home Decor</Link>
-          <Link to="/products?category=fashion">Fashion</Link>
-          <Link to="/products?category=beauty">Beauty</Link>
+
+          <h3>
+            Shop
+          </h3>
+
+
+          <Link to="/">
+            Home
+          </Link>
+
+
+          <Link to="/category/fashion">
+            Fashion
+          </Link>
+
+
+          <Link to="/category/beauty">
+            Beauty
+          </Link>
+
+
+          <Link to="/category/home-living">
+            Home & Living
+          </Link>
+
+
+          <Link to="/category/toys-gifts">
+            Toys & Gifts
+          </Link>
+
+
         </div>
+
+
+
+
 
         {/* SUPPORT */}
+
         <div className="footer-col">
-          <h3>Support</h3>
-          <Link to="/contact">Contact Us</Link>
-          <Link to="/help">Help Center</Link>
-          <Link to="/shipping">Shipping Info</Link>
-          <Link to="/returns">Returns</Link>
+
+
+          <h3>
+            Support
+          </h3>
+
+
+          <Link to="/contact">
+            Contact Us
+          </Link>
+
         </div>
 
         {/* LEGAL */}
+
         <div className="footer-col">
-          <h3>Legal</h3>
-          <Link to="/privacy">Privacy Policy</Link>
-          <Link to="/terms">Terms & Conditions</Link>
-          <Link to="/affiliate-disclosure">Affiliate Disclosure</Link>
+
+
+          <h3>
+            Legal
+          </h3>
+
+
+          <Link to="/privacy">
+            Privacy Policy
+          </Link>
+
+
+          <Link to="/terms">
+            Terms & Conditions
+          </Link>
+
+
+          <Link to="/affiliate-disclosure">
+            Affiliate Disclosure
+          </Link>
+
+
         </div>
+
+
+
+      </div>
+
+      {/* SOCIAL SECTION */}
+
+      <div className="footer-social">
+
+
+        <h3>
+          Follow Us
+        </h3>
+
+
+        <div className="social-links">
+
+          <a href="#" target="_blank">
+            Facebook
+          </a>
+
+
+          <a href="#" target="_blank">
+            Instagram
+          </a>
+
+
+          <a href="#" target="_blank">
+            Pinterest
+          </a>
+
+
+          <a href="#" target="_blank">
+            X
+          </a>
+
+
+        </div>
+
 
       </div>
 
       {/* DIVIDER */}
+
       <div className="footer-divider"></div>
 
       {/* BOTTOM */}
+
       <div className="footer-bottom">
+
         <p>
-          © {new Date().getFullYear()} Idealoop Lifestyle. All rights reserved.
+
+          © {new Date().getFullYear()} Idealoop Lifestyle.
+          All rights reserved.
+
         </p>
 
         <p className="footer-note">
-          Some links may be affiliate links. We may earn a commission at no extra cost to you.
+
+          Some links may be affiliate links.
+          We may earn a commission at no extra cost to you.
+
         </p>
+
       </div>
 
+
     </footer>
+
   );
+
 }

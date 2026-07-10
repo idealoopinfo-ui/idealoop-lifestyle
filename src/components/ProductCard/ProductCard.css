@@ -70,17 +70,17 @@
   
   
   .product-title {
+    font-size:16px;
+    font-weight:600;
   
-  font-size:16px;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
   
-  font-weight:600;
+    overflow:hidden;
   
-  line-height:1.4;
-  
-  height:45px;
-  
-  overflow:hidden;
-  
+    min-height:72px;
+    line-height:24px;
   }
   
   

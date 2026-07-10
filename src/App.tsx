@@ -125,12 +125,17 @@ element={
 
 
 <Route
-path="/product/:slug"
-element={
-<PageTransition>
-<ProductDetails/>
-</PageTransition>
-}
+  path="/product/:productId"
+  element={
+    <PageTransition>
+      <ProductDetails />
+    </PageTransition>
+  }
+/>
+
+<Route
+path="/category/:department/:category?/:subcategory?"
+element={<CategoryPage />}
 />
 
 
@@ -154,7 +159,7 @@ element={
 />
 
 <Route
-path="/product/:productid"
+path="/product/:productId"
 element={
 <PageTransition>
 <ProductDetails/>

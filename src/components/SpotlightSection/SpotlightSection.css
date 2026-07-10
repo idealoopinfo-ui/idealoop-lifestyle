@@ -1,0 +1,70 @@
+.spotlight-grid {
+
+  display:grid;
+
+  grid-template-columns: 2fr 1fr;
+
+  gap:20px;
+
+}
+
+
+.spotlight-large,
+.spotlight-small {
+
+  overflow:hidden;
+
+  cursor:pointer;
+
+  border-radius:16px;
+
+}
+
+
+.spotlight-large img,
+.spotlight-small img {
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+
+  transition:transform .4s ease;
+
+}
+
+
+.spotlight-large {
+
+  height:500px;
+
+}
+
+
+.spotlight-small-container {
+
+  display:grid;
+
+  grid-template-rows:1fr 1fr;
+
+  gap:20px;
+
+}
+
+
+.spotlight-small {
+
+  height:240px;
+
+}
+
+
+.spotlight-large:hover img,
+.spotlight-small:hover img {
+
+  transform:scale(1.05);
+
+}
