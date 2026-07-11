@@ -3,120 +3,197 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 
 
+interface AdminRouteProps {
+  children: React.ReactNode;
+}
+
+
 export default function AdminRoute({
-children
-}:{
-children:React.ReactNode
-}){
+  children
+}: AdminRouteProps) {
 
 
-const [loading,setLoading]=useState(true);
+  const [loading,setLoading] = useState(true);
 
-const [isAdmin,setIsAdmin]=useState(false);
+  const [isAdmin,setIsAdmin] = useState(false);
 
 
 
-useEffect(()=>{
+  useEffect(()=>{
 
 
-const checkAdmin = async()=>{
+    const checkAdmin = async()=>{
 
 
-const {
-data:{
-user
-}
+      try {
 
-}=await supabase.auth.getUser();
 
+        const {
+          data:{
+            user
+          }
 
+        } = await supabase.auth.getUser();
 
-if(!user){
 
-setIsAdmin(false);
 
-setLoading(false);
+        if(!user){
 
-return;
+          setIsAdmin(false);
 
-}
+          setLoading(false);
 
+          return;
 
+        }
 
 
-const {
-data:profile
-}=await supabase
 
-.from("profiles")
 
-.select("is_admin")
+        const {
+          data:profile,
+          error
 
-.eq("id",user.id)
+        } = await supabase
 
-.single();
 
+        .from("profiles")
 
 
-console.log("ADMIN CHECK:", profile);
+        .select("is_admin")
 
 
-if(profile?.is_admin){
+        .eq("id",user.id)
 
-setIsAdmin(true);
 
-}
+        .single();
 
 
 
-setLoading(false);
 
+        if(error){
 
+          console.log(
+            "ADMIN PROFILE ERROR:",
+            error
+          );
 
-};
+        }
 
 
 
-checkAdmin();
+        console.log(
+            "ADMIN CHECK:",
+            profile?.is_admin,
+            profile
+          );
 
 
 
-},[]);
+        if(profile?.is_admin === true){
 
+          setIsAdmin(true);
 
+        }
+        else{
 
+          setIsAdmin(false);
 
+        }
 
-if(loading){
 
-return (
 
-<div>
+      }
 
-Checking access...
+      catch(error){
 
-</div>
 
-);
+        console.log(
+          "ADMIN CHECK ERROR:",
+          error
+        );
 
-}
 
+        setIsAdmin(false);
 
 
+      }
 
-if(!isAdmin){
 
-return (
+      finally{
 
-<Navigate to="/" replace />
 
-);
+        setLoading(false);
 
-}
 
+      }
 
 
-return children;
+    };
+
+
+
+    checkAdmin();
+
+
+
+  },[]);
+
+
+
+
+
+
+  if(loading){
+
+
+    return (
+
+      <div className="admin-loading">
+
+        Checking access...
+
+      </div>
+
+    );
+
+
+  }
+
+
+
+
+
+
+  if(!isAdmin){
+
+
+    return (
+
+      <Navigate 
+        to="/" 
+        replace 
+      />
+
+    );
+
+
+  }
+
+
+
+
+
+
+  return (
+
+    <>
+
+      {children}
+
+    </>
+
+  );
 
 
 }

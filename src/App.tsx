@@ -73,16 +73,15 @@ element={
 
 
 <Route
-path="/admin"
-element={
-<PageTransition>
-<AdminRoute>
-<Admin/>
-</AdminRoute>
-</PageTransition>
-}
+  path="/admin"
+  element={
+    <AdminRoute>
+      <PageTransition>
+        <Admin />
+      </PageTransition>
+    </AdminRoute>
+  }
 />
-
 
 <Route
 path="/login"

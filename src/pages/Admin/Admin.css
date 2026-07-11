@@ -1,5 +1,162 @@
 /* =========================
-ADMIN LAYOUT
+NOTICE PANEL
+========================= */
+/* =========================
+ADMIN SECTION
+========================= */
+
+.admin-section {
+
+  background:white;
+
+  padding:30px;
+
+  border-radius:16px;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.notice-label {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  margin:18px 0;
+
+  font-size:15px;
+
+  font-weight:600;
+
+  color:#111827;
+
+}
+
+
+
+.notice-label input[type="checkbox"] {
+
+  width:18px;
+
+  height:18px;
+
+  cursor:pointer;
+
+}
+
+
+
+.notice-label input[type="number"] {
+
+  width:100px;
+
+  margin-left:10px;
+
+  padding:10px;
+
+  border:1px solid #d1d5db;
+
+  border-radius:8px;
+
+  outline:none;
+
+}
+
+
+
+.notice-label input[type="number"]:focus {
+
+  border-color:#ff9900;
+
+}
+
+
+
+
+
+.notice-textarea {
+
+  width:100%;
+
+  min-height:140px;
+
+  padding:14px;
+
+  margin:15px 0;
+
+  border:1px solid #d1d5db;
+
+  border-radius:12px;
+
+  resize:vertical;
+
+  font-size:15px;
+
+  outline:none;
+
+  font-family:inherit;
+
+}
+
+
+
+.notice-textarea:focus {
+
+  border-color:#ff9900;
+
+}
+
+
+
+
+
+.save-btn {
+
+  margin-top:15px;
+
+  padding:13px 28px;
+
+  background:#111827;
+
+  color:white;
+
+  border:none;
+
+  border-radius:10px;
+
+  font-size:15px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+
+}
+
+
+
+.save-btn:hover {
+
+  background:#ff9900;
+
+}
+
+
+
+.save-btn:disabled {
+
+  opacity:.6;
+
+  cursor:not-allowed;
+
+}
+/* =========================
+ADMIN MAIN LAYOUT
 ========================= */
 
 .admin-layout {
@@ -12,11 +169,11 @@ ADMIN LAYOUT
 
   gap:30px;
 
-  padding:40px;
+  padding:30px;
+
+  align-items:flex-start;
 
 }
-
-
 
 /* =========================
 SIDEBAR
@@ -25,8 +182,6 @@ SIDEBAR
 .admin-sidebar {
 
   width:240px;
-
-  min-height:calc(100vh - 80px);
 
   background:#111827;
 
@@ -38,19 +193,127 @@ SIDEBAR
 
   flex-shrink:0;
 
+  position:sticky;
+
+  top:30px;
+
+}
+
+.admin-content {
+
+  flex:1;
+
+  max-width:1200px;
+
+  background:#f5f5f5;
+
+  padding:20px;
+
+}
+.admin-sidebar button.active {
+
+  background:#ff9900;
+
+  color:white;
+
+  font-weight:700;
+
+  transform:translateX(5px);
+
+  box-shadow:
+  0 5px 15px rgba(255,153,0,.35);
+
+}
+
+
+.admin-sidebar button {
+
+  transition:all .25s ease;
+
+}
+
+/* =========================
+DASHBOARD
+========================= */
+
+.admin-section {
+
+  background:white;
+
+  padding:30px;
+
+  border-radius:16px;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.08);
+
+}
+
+/* =========================
+STATISTICS CARDS
+========================= */
+
+.stats-grid {
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:20px;
+
 }
 
 
 
-.admin-sidebar h2 {
+.stat-card {
 
-  font-size:22px;
+  background:#ffffff;
 
-  margin-bottom:30px;
+  padding:25px;
+
+  border-radius:16px;
+
+  border:1px solid #e5e7eb;
+
+  box-shadow:
+  0 8px 20px rgba(0,0,0,.06);
 
 }
 
 
+
+.stat-card h3 {
+
+  color:#6b7280;
+
+  font-size:15px;
+
+  margin-bottom:12px;
+
+}
+
+
+
+.stat-card p {
+
+  font-size:34px;
+
+  font-weight:700;
+
+  margin:0;
+
+  color:#111827;
+
+}
+
+
+.admin-section h1 {
+
+  margin-top:0;
+
+  margin-bottom:25px;
+
+}
 
 .admin-sidebar button {
 
@@ -74,344 +337,265 @@ SIDEBAR
 
   font-size:15px;
 
-  transition:.2s;
+  transition:all .25s ease;
 
 }
-
-
-
-.admin-sidebar button:hover {
-
-  background:#ff9900;
-
-}
-
-
-
-
-
-/* =========================
-MAIN CONTENT
-========================= */
-
-.admin-content {
-
-  flex:1;
-
-  padding:20px;
-
-  background:#f5f5f5;
-
-}
-
-
-
-
-
-.admin-content h1 {
-
-  font-size:28px;
-
-  font-weight:700;
-
-  margin-bottom:25px;
-
-  color:#111827;
-
-}
-
-
-
-
-
-/* =========================
-STATISTICS CARDS
-========================= */
-
-
-.stats-grid {
-
-  display:grid;
-
-  grid-template-columns:repeat(4,1fr);
-
-  gap:20px;
-
-}
-
-
-
-.stat-card {
-
-  background:white;
-
-  padding:25px;
-
-  border-radius:16px;
-
-  box-shadow:
-
-  0 10px 25px rgba(0,0,0,.08);
-
-}
-
-
-
-.stat-card h3 {
-
-  font-size:15px;
-
-  color:#6b7280;
-
-  margin-bottom:10px;
-
-}
-
-
-
-.stat-card p {
-
-  font-size:32px;
-
-  font-weight:700;
-
-  color:#111827;
-
-}
-
-
-
-
-
-/* =========================
-PRODUCT MANAGER AREA
-========================= */
-
-
-.product-manager {
-
-  width:100%;
-
-}
-
-
-
-
-
-.admin-form {
-
-  display:grid;
-
-  grid-template-columns:repeat(2,1fr);
-
-  gap:16px;
-
-  width:100%;
-
-  background:white;
-
-  padding:30px;
-
-  border-radius:16px;
-
-  box-shadow:
-
-  0 10px 30px rgba(0,0,0,.08);
-
-}
-
-
-
-.admin-form input,
-.admin-form textarea,
-.admin-form select {
-
-  width:100%;
-
-  padding:12px 14px;
-
-  border:1px solid #d1d5db;
-
-  border-radius:10px;
-
-  font-size:14px;
-
-  outline:none;
-
-}
-
-
-
-.admin-form input:focus,
-.admin-form textarea:focus,
-.admin-form select:focus {
-
-  border-color:#ff9900;
-
-}
-
-
-
-.admin-form textarea {
-
-  min-height:100px;
-
-  resize:vertical;
-
-}
-
-
-
-
-
-.add-btn {
-
-  grid-column:span 2;
-
-  background:#111827;
-
-  color:white;
-
-  padding:14px;
-
-  border:none;
-
-  border-radius:10px;
-
-  cursor:pointer;
-
-  font-weight:600;
-
-}
-
-
-
-.add-btn:hover {
-
-  background:#ff9900;
-
-}
-
-
-
-
-
-/* =========================
-PRODUCT GRID
-========================= */
-
-
-.product-list {
-
-  margin-top:40px;
-
-  display:grid;
-
-  grid-template-columns:repeat(4,1fr);
-
-  gap:20px;
-
-}
-
-
-
-.product-item {
-
-  background:white;
-
-  padding:20px;
-
-  border-radius:14px;
-
-  border:1px solid #e5e7eb;
-
-}
-
-
-
-
-
-/* =========================
-RESPONSIVE
-========================= */
-
-
-@media(max-width:1100px){
-
-
-.stats-grid {
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-
-.product-list {
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-
-}
-
-
-
-
 @media(max-width:800px){
 
+  .admin-layout{
+  
+    flex-direction:column;
+  
+    padding:20px;
+  
+  }
+  
+  
+  .admin-sidebar{
+  
+    width:100%;
+  
+    position:relative;
+  
+  }
+  
+  
+  .admin-content{
+  
+    width:100%;
+  
+  }
+  
+  }
 
-.admin-layout {
-
-flex-direction:column;
-
-padding:20px;
-
-}
-
-
-
-.admin-sidebar {
-
-width:100%;
-
-min-height:auto;
-
-}
-
-
-
-.admin-form {
-
-grid-template-columns:1fr;
-
-}
-
-
-
-.add-btn {
-
-grid-column:span 1;
-
-}
+  /* =========================
+NOTICE PANEL
+========================= */
 
 
+.admin-section{
 
-}
-
-
-
-
-
-@media(max-width:500px){
-
-
-.stats-grid,
-.product-list {
-
-grid-template-columns:1fr;
-
-}
-
-
-}
+  background:white;
+  
+  padding:30px;
+  
+  border-radius:16px;
+  
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.08);
+  
+  }
+  
+  
+  
+  
+  .notice-label{
+  
+  display:flex;
+  
+  align-items:center;
+  
+  gap:12px;
+  
+  margin:18px 0;
+  
+  font-weight:600;
+  
+  color:#111827;
+  
+  }
+  
+  
+  
+  
+  .notice-label input[type="checkbox"]{
+  
+  width:18px;
+  
+  height:18px;
+  
+  }
+  
+  
+  
+  
+  .notice-label input[type="number"]{
+  
+  width:100px;
+  
+  padding:10px;
+  
+  border:1px solid #d1d5db;
+  
+  border-radius:8px;
+  
+  }
+  
+  
+  
+  
+  
+  .notice-textarea{
+  
+  width:100%;
+  
+  min-height:130px;
+  
+  padding:15px;
+  
+  border:1px solid #d1d5db;
+  
+  border-radius:12px;
+  
+  font-size:15px;
+  
+  resize:vertical;
+  
+  }
+  
+  
+  
+  
+  
+  .notice-textarea:focus{
+  
+  outline:none;
+  
+  border-color:#ff9900;
+  
+  }
+  
+  
+  
+  
+  
+  .save-btn{
+  
+  margin-top:20px;
+  
+  padding:12px 30px;
+  
+  background:#111827;
+  
+  color:white;
+  
+  border:none;
+  
+  border-radius:10px;
+  
+  font-weight:600;
+  
+  cursor:pointer;
+  
+  }
+  
+  
+  
+  
+  
+  .save-btn:hover{
+  
+  background:#ff9900;
+  
+  }
+  
+  
+  
+  
+  
+  /* =========================
+  ALL NOTICES
+  ========================= */
+  
+  
+  .all-notices{
+  
+  margin-top:50px;
+  
+  padding-top:30px;
+  
+  border-top:2px solid #eee;
+  
+  }
+  
+  
+  
+  
+  
+  .notice-card{
+  
+  background:#f9fafb;
+  
+  padding:20px;
+  
+  margin-bottom:15px;
+  
+  border-radius:14px;
+  
+  border:1px solid #e5e7eb;
+  
+  }
+  
+  
+  
+  
+  
+  .notice-message{
+  
+  font-size:16px;
+  
+  font-weight:600;
+  
+  color:#111827;
+  
+  margin-bottom:15px;
+  
+  }
+  
+  
+  
+  
+  
+  .notice-info{
+  
+  display:flex;
+  
+  gap:20px;
+  
+  font-size:14px;
+  
+  color:#6b7280;
+  
+  margin-bottom:15px;
+  
+  }
+  
+  
+  
+  
+  
+  .edit-notice-btn{
+  
+  padding:8px 20px;
+  
+  background:#111827;
+  
+  color:white;
+  
+  border:none;
+  
+  border-radius:8px;
+  
+  cursor:pointer;
+  
+  }
+  
+  
+  
+  
+  
+  .edit-notice-btn:hover{
+  
+  background:#ff9900;
+  
+  }
