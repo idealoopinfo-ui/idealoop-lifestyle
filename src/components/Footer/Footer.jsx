@@ -3,24 +3,30 @@ import "./Footer.css";
 
 export default function Footer() {
 
-  return (
+  const logoUrl =
+    "YOUR_SUPABASE_IMAGE_URL";
 
+  return (
     <footer className="footer">
 
-
       {/* TOP GRID */}
-
       <div className="footer-container">
 
 
         {/* BRAND */}
+        <div className="footer-brand">
 
-        <div className="footer-col">
+        <h2 className="footer-logo">
 
-          <h2 className="footer-logo">
-            🛍 Idealoop Lifestyle
-          </h2>
+  <img
+    src="https://lxvoytlpnbzwxplxfnxj.supabase.co/storage/v1/object/public/my/Untitled_design-removebg-preview.png"
+    alt="Idealoop Lifestyle"
+    className="footer-logo-icon"
+  />
 
+  Idealoop Lifestyle
+
+</h2>
 
           <p className="footer-text">
 
@@ -29,15 +35,11 @@ export default function Footer() {
 
           </p>
 
-
         </div>
 
 
 
-
-
         {/* SHOP */}
-
         <div className="footer-col">
 
           <h3>
@@ -69,17 +71,13 @@ export default function Footer() {
             Toys & Gifts
           </Link>
 
-
         </div>
 
 
 
 
-
         {/* SUPPORT */}
-
         <div className="footer-col">
-
 
           <h3>
             Support
@@ -92,10 +90,11 @@ export default function Footer() {
 
         </div>
 
+
+
+
         {/* LEGAL */}
-
         <div className="footer-col">
-
 
           <h3>
             Legal
@@ -116,17 +115,15 @@ export default function Footer() {
             Affiliate Disclosure
           </Link>
 
-
         </div>
-
 
 
       </div>
 
+
+
       {/* SOCIAL SECTION */}
-
       <div className="footer-social">
-
 
         <h3>
           Follow Us
@@ -135,58 +132,55 @@ export default function Footer() {
 
         <div className="social-links">
 
-          <a href="#" target="_blank">
+          <a href="#" target="_blank" rel="noreferrer">
             Facebook
           </a>
 
 
-          <a href="#" target="_blank">
+          <a href="#" target="_blank" rel="noreferrer">
             Instagram
           </a>
 
 
-          <a href="#" target="_blank">
+          <a href="#" target="_blank" rel="noreferrer">
             Pinterest
           </a>
 
 
-          <a href="#" target="_blank">
+          <a href="#" target="_blank" rel="noreferrer">
             X
           </a>
 
-
         </div>
-
 
       </div>
 
-      {/* DIVIDER */}
 
+
+
+      {/* DIVIDER */}
       <div className="footer-divider"></div>
 
-      {/* BOTTOM */}
 
+
+      {/* BOTTOM */}
       <div className="footer-bottom">
 
         <p>
-
           © {new Date().getFullYear()} Idealoop Lifestyle.
           All rights reserved.
-
         </p>
+
 
         <p className="footer-note">
-
           Some links may be affiliate links.
           We may earn a commission at no extra cost to you.
-
         </p>
+
 
       </div>
 
 
     </footer>
-
   );
-
 }

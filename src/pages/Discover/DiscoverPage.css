@@ -1,105 +1,292 @@
-.discover-page {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
-  background: #fafafa;
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
+/* ===========================
+   DISCOVER PAGE
+=========================== */
+
+.discover-page{
+  background:
+    linear-gradient(
+      135deg,
+      #fff7ed,
+      #ffffff,
+      #fdf2f8
+    );
+
+  min-height:100vh;
+
+  padding:12px;
 }
 
-/* HEADER */
-.discover-header {
-  margin-bottom: 20px;
+/* ===========================
+   HEADER
+=========================== */
+
+.discover-header{
+  text-align:center;
+  margin-bottom:12px;
 }
 
-.discover-header h1 {
-  font-size: 34px;
-  font-weight: 700;
-  margin-bottom: 6px;
+.discover-header h1{
+  margin:0;
+  font-size:42px;
+  font-weight:700;
+  color:var(--text);
 }
 
-.discover-header p {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 50px;
+.discover-header p{
+  margin-top:10px;
+  font-size:17px;
+  color:#666;
 }
 
-/* GRID */
-.pinterest-grid {
-  column-count: 5;
-  column-gap: 16px;
-  position: relative;
-  z-index: 1;
+/* ===========================
+   CATEGORY NAVIGATION
+=========================== */
+
+.discover-nav{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+
+  margin-bottom:16px;
+
+  position:sticky;
+  top:60px;
+
+  background:var(--bg);
+
+  padding:8px 0;
+
+  z-index:20;
 }
 
-/* CARD */
-/* CARD */
-.pin-card {
-  position: relative;   /* IMPORTANT */
-  break-inside: avoid;
-  margin-bottom: 16px;
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+.discover-nav button{
+
+  border:1px solid #e5e5e5;
+
+  background:#ffffff;
+
+  color:#333;
+
+  padding:12px 24px;
+
+  border-radius:999px;
+
+  font-size:15px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:
+    all .25s ease;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.06);
+
 }
 
-/* IMAGE */
-.pin-card img {
-  width: 100%;
-  display: block;
-  border-radius: 16px;
+
+.discover-nav button:hover{
+
+  border-color:#ff9900;
+
+  color:#ff9900;
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.10);
+
 }
 
-/* LIKE BUTTON (HIDDEN BY DEFAULT) */
-.like-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
 
-  background: rgba(255, 255, 255, 0.9);
-  padding: 6px 10px;
-  border-radius: 20px;
+.discover-nav button.active{
 
-  font-size: 13px;
-  font-weight: 600;
+  background:#ff9900;
 
-  cursor: pointer;
+  color:#ffffff;
 
-  opacity: 0;              /* HIDE */
-  transform: translateY(-5px);
-  transition: all 0.2s ease;
+  border-color:#ff9900;
+
+  box-shadow:
+    0 8px 22px rgba(255,153,0,0.3);
+
 }
 
-/* SHOW ON HOVER */
-.pin-card:hover .like-btn {
-  opacity: 1;
-  transform: translateY(0);
+.discover-nav button.active{
+
+  background:#111;
+
+  color:#fff;
+
 }
 
-/* OPTIONAL HOVER SCALE */
-.pin-card:hover {
-  transform: scale(1.02);
+/* ===========================
+   PINTEREST GRID
+=========================== */
+
+.pinterest-grid{
+
+  column-count:5;
+
+  column-gap:12px;
+
 }
 
-/* FOOTER */
-.mini-footer {
-  text-align: center;
-  padding: 30px 0;
-  color: #888;
-  font-size: 12px;
+/* ===========================
+   CARD
+=========================== */
+
+.pin-card{
+
+  break-inside:avoid;
+
+  margin-bottom:12px;
+
 }
 
-/* RESPONSIVE */
-@media (max-width: 1200px) {
-  .pinterest-grid { column-count: 4; }
+.pin-card img{
+
+  width:100%;
+
+  display:block;
+
+  border-radius:20px;
+
+  transition:.3s;
+
+  box-shadow:
+  0 4px 15px rgba(0,0,0,.08);
+
 }
 
-@media (max-width: 900px) {
-  .pinterest-grid { column-count: 3; }
+.pin-card:hover img{
+
+  transform:scale(1.03);
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.18);
+
 }
 
-@media (max-width: 600px) {
-  .pinterest-grid { column-count: 2; }
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width:1400px){
+
+  .pinterest-grid{
+
+    column-count:4;
+
+  }
+
+}
+
+@media (max-width:1100px){
+
+  .pinterest-grid{
+
+    column-count:3;
+
+  }
+
+}
+
+@media (max-width:768px){
+
+  .discover-header h1{
+
+    font-size:34px;
+
+  }
+
+  .discover-nav{
+
+    justify-content:flex-start;
+
+    overflow-x:auto;
+
+    flex-wrap:nowrap;
+
+    padding-bottom:8px;
+
+  }
+
+  .discover-nav::-webkit-scrollbar{
+
+    display:none;
+
+  }
+
+  .pinterest-grid{
+
+    column-count:2;
+
+  }
+
+}
+
+@media (max-width:480px){
+
+  .discover-page{
+
+    padding:20px 12px 40px;
+
+  }
+
+  .discover-header h1{
+
+    font-size:28px;
+
+  }
+
+  .discover-header p{
+
+    font-size:15px;
+
+  }
+
+  .discover-nav button{
+
+    padding:10px 18px;
+
+    font-size:14px;
+
+  }
+
+  .pinterest-grid{
+
+    column-count:2;
+
+    column-gap:12px;
+
+  }
+
+  .pin-card{
+
+    margin-bottom:12px;
+
+  }
+
+}
+.pin-card img{
+  opacity:0;
+  animation: imageFade .5s ease forwards;
+}
+
+
+@keyframes imageFade{
+
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
 }

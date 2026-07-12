@@ -14,24 +14,17 @@ export default function NoticePanel() {
     fetchNotices();
 
   }, []);
-  async function fetchNotices(){
-
+  async function fetchNotices() {
     const { data, error } = await supabase
       .from("notice_panels")
-      .select("message")
-      .eq("is_active", true)
-      .order("priority", { ascending:true });
-
-
-    if(error){
-      console.log(error);
-      return;
-    }
-
-    setNotices(
-      data?.map(item => item.message) || []
-    );
-
+      .select("*");
+  
+    console.log("Notice rows:", data);
+    console.log("Notice error:", error);
+  
+    if (error) return;
+  
+    setNotices(data?.map(item => item.message) ?? []);
   }
   useEffect(()=>{
 

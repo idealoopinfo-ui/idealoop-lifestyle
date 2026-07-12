@@ -6,6 +6,7 @@ import AdminRoute from "./components/Auth/AdminRoute";
 import TopNavbar from "./components/Navbar/TopNavbar";
 import NoticePanel from "./components/NoticePanel/NoticePanel";
 import CategoryNavbar from "./components/Navbar/CategoryNavbar";
+import Wishlist from "./pages/Wishlist/Wishlist";
 import Footer from "./components/Footer/Footer";
 
 import {AnimatePresence} from "framer-motion";
@@ -25,6 +26,7 @@ import DiscoverPage from "./pages/Discover/DiscoverPage";
 import Privacy from "./pages/Legal/PrivacyPolicy";
 import Terms from "./pages/Legal/TermsConditions";
 import AffiliateDisclosure from "./pages/Legal/AffiliateDisclosure";
+import Help from "./pages/Help/Help";
 
 import "./styles/theme.css";
 
@@ -71,6 +73,14 @@ element={
 }
 />
 
+<Route
+  path="/help"
+  element={
+    <PageTransition>
+      <Help />
+    </PageTransition>
+  }
+/>
 
 <Route
   path="/admin"
@@ -80,6 +90,15 @@ element={
         <Admin />
       </PageTransition>
     </AdminRoute>
+  }
+/>
+
+<Route
+  path="/wishlist"
+  element={
+    <PageTransition>
+      <Wishlist />
+    </PageTransition>
   }
 />
 

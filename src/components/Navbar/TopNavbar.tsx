@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
+import { useAuth } from "../../context/AuthContext";
 
 import CountryButton from "../Country/CountryButton";
 
@@ -10,71 +11,64 @@ import "./TopNavbar.css";
 export default function TopNavbar() {
 
 
-const [user,setUser] = useState<any>(null);
-const [isAdmin,setIsAdmin] = useState(false);
-const [profileOpen,setProfileOpen] = useState(false);
+  const [isAdmin,setIsAdmin] = useState(false);
+  const [profileOpen,setProfileOpen] = useState(false);
+  
+  const { user } = useAuth();
 
 const profileRef = useRef<HTMLDivElement>(null);
 
 const location = useLocation();
 const navigate = useNavigate();
 
-
-
 useEffect(() => {
-  const getUser = async () => {
-    const { data } = await supabase.auth.getUser();
 
-    const currentUser = data.user;
+  const checkAdmin = async () => {
 
-    setUser(currentUser);
-
-    if (currentUser) {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("is_admin")
-        .eq("id", currentUser.id)
-        .single();
-
-      if (profile?.is_admin) {
-        setIsAdmin(true);
-      } else {
-        setIsAdmin(false);
-      }
-    }
-  };
-
-  getUser();
-
-  const { data: listener } = supabase.auth.onAuthStateChange(
-    async (_event, session) => {
-      setUser(session?.user ?? null);
+    if (!user) {
 
       setIsAdmin(false);
+      return;
 
-      if (session?.user) {
-        const { data: profile, error: profileError } = await supabase
-          .from("profiles")
-          .select("is_admin")
-          .eq("id", session.user.id)
-          .single();
-
-        if (profileError) {
-          console.log("Admin check error:", profileError.message);
-          return;
-        }
-
-        if (profile?.is_admin) {
-          setIsAdmin(true);
-        }
-      }
     }
-  );
 
-  return () => {
-    listener.subscription.unsubscribe();
+
+    const { data: profile, error } =
+      await supabase
+        .from("profiles")
+        .select("is_admin")
+        .eq("id", user.id)
+        .single();
+
+
+
+    if (error) {
+
+      console.log(
+        "Admin check error:",
+        error.message
+      );
+
+      setIsAdmin(false);
+      return;
+
+    }
+
+
+    setIsAdmin(
+      profile?.is_admin === true
+    );
+
   };
-}, []);
+
+
+  checkAdmin();
+
+
+}, [user]);
+
+
+
 
 useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
@@ -110,19 +104,16 @@ isDiscover
 
 };
 
-const handleLogout=async()=>{
+const handleLogout = async () => {
 
+  await supabase.auth.signOut();
 
-await supabase.auth.signOut();
+  setProfileOpen(false);
 
-setUser(null);
-
-setProfileOpen(false);
-
-navigate("/");
-
+  navigate("/");
 
 };
+
 return(
 
 <div className="top-navbar">

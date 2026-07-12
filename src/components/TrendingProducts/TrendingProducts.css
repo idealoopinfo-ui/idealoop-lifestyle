@@ -1,206 +1,244 @@
 .trending-section {
 
-  padding:50px 40px;
-  
-  }
-  
-  
-  
-  .trending-section h2 {
-  
-  font-size:32px;
-  
-  margin-bottom:25px;
-  
-  }
-  
-  
-  
-  .trending-wrapper{
+  padding: 50px 40px;
 
-    display:grid;
-    
-    grid-template-columns:repeat(3,1fr);
-    
-    gap:25px;
-    
-    }
-  
-  
-  
-  .trending-wrapper::-webkit-scrollbar {
-  
-  height:8px;
-  
-  }
-  
-  
-  
-  .trending-card{
+}
 
-    background:white;
-    
-    border-radius:16px;
-    
-    padding:18px;
-    
-    border:1px solid #e5e7eb;
-    
-    overflow:hidden;
-    
-    }
-    
-  
-  
-  
-    .trending-image{
 
-      width:100%;
-      
-      height:300px;
-      
-      border-radius:12px;
-      
-      overflow:hidden;
-      
-      }
-  
-  
-  
-      .trending-image img{
+.trending-section h2 {
 
-        width:100%;
-        
-        height:100%;
-        
-        object-fit:cover;
-        
-        display:block;
-        
-        }
-  
-  
-  
-  .trending-image span {
-  
-  position:absolute;
-  
-  top:10px;
-  
-  left:10px;
-  
-  background:#ff9900;
-  
-  color:white;
-  
-  padding:6px 10px;
-  
-  border-radius:20px;
-  
-  font-size:13px;
-  
-  font-weight:600;
-  
-  }
-  
-  
-  
-  .trending-card h3 {
-  
-  font-size:15px;
-  
-  margin:15px 0;
-  
-  height:45px;
-  
-  overflow:hidden;
-  
-  }
-  
-  
-  
-  .trending-card button{
+  font-size: 32px;
+  margin-bottom: 25px;
 
-    border:none;
-    
-    background:none;
-    
-    color:#111827;
-    
-    font-size:14px;
-    
-    font-weight:600;
-    
-    cursor:pointer;
-    
-    padding:8px 0;
-    
-    transition:.3s;
-    
-    }
-    
-    
-    .trending-card button:hover{
-    
-    color:#ff9900;
-    
-    }
+}
 
-    .view-more-btn{
 
-      color:#111827;
-      
-      }
-      
-      
-      .view-more-btn:hover{
-      
-      color:#ff9900;
-      
-      }
+/* PRODUCT GRID */
 
-      .trending-shop-btn{
+.trending-wrapper {
 
-        background:#111827 !important;
-        
-        color:white !important;
-        
-        width:100%;
-        
-        padding:12px !important;
-        
-        border-radius:8px;
-        
-        margin-top:10px;
-        
-        }
-        
-        
-        .trending-shop-btn:hover{
-        
-        background:#ff9900 !important;
-        
-        color:white !important;
-        
-        }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
 
-  @media(max-width:1000px){
+}
 
-    .trending-wrapper{
-    
-    grid-template-columns:repeat(2,1fr);
-    
-    }
-    
-    }
-    
-    
-    @media(max-width:600px){
-    
-    .trending-wrapper{
-    
-    grid-template-columns:1fr;
-    
-    }
-    
-    }
+
+/* CARD */
+
+.trending-card {
+
+  background: white;
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+
+  transition: transform .25s ease, box-shadow .25s ease;
+
+}
+
+
+.trending-card:hover {
+
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,.15);
+
+}
+
+
+
+/* IMAGE */
+
+.trending-image {
+
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+
+}
+
+
+.trending-image img {
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  transition: transform .35s ease;
+
+}
+
+
+
+.trending-card:hover .trending-image img {
+
+  transform: scale(1.08);
+
+}
+
+
+
+/* NUMBER BADGE */
+
+.trending-image span {
+
+  position: absolute;
+
+  top: 10px;
+  left: 10px;
+
+  background: #ff9900;
+  color: white;
+
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+}
+
+
+
+/* TITLE */
+
+.trending-card h3 {
+
+  font-size: 15px;
+
+  margin: 15px 0;
+
+  height: 45px;
+
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+}
+
+
+
+/* VIEW MORE BUTTON */
+
+.trending-card button {
+
+  border: none;
+
+  background: none;
+
+  color: #111827;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 8px 0;
+
+  transition: .3s;
+
+}
+
+
+
+.trending-card button:hover {
+
+  color: #ff9900;
+
+}
+
+
+.view-more-btn {
+
+  color: #111827;
+
+}
+
+
+.view-more-btn:hover {
+
+  color: #ff9900;
+
+}
+
+
+
+/* SHOP BUTTON (future use) */
+
+.trending-shop-btn {
+
+  background: #111827 !important;
+
+  color: white !important;
+
+  width: 100%;
+
+  padding: 12px !important;
+
+  border-radius: 8px;
+
+  margin-top: 10px;
+
+}
+
+
+
+.trending-shop-btn:hover {
+
+  background: #ff9900 !important;
+
+  color: white !important;
+
+}
+
+
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+
+.trending-wrapper {
+
+  grid-template-columns: repeat(2,1fr);
+
+}
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+.trending-section {
+
+  padding: 40px 20px;
+
+}
+
+
+.trending-wrapper {
+
+  grid-template-columns: 1fr;
+
+}
+
+
+.trending-section h2 {
+
+  font-size: 26px;
+
+}
+
+
+}

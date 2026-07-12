@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 
 import "./TrendingProducts.css";
 
-
 export default function TrendingProducts() {
 
-
 const [products,setProducts] = useState<any[]>([]);
-
+const navigate = useNavigate();
 
 
 useEffect(()=>{
@@ -20,7 +19,6 @@ fetchTrending();
 
 
 const fetchTrending = async()=>{
-
 
 const {data,error}=await supabase
 .from("products")
@@ -59,7 +57,6 @@ return (
 
 
 {
-
 products.map((product,index)=>(
 
 
@@ -67,6 +64,7 @@ products.map((product,index)=>(
 className="trending-card"
 key={product.id}
 >
+
 
 
 <div className="trending-image">
@@ -93,7 +91,11 @@ alt={product.title}
 
 
 
-<button className="view-more-btn">
+
+<button 
+className="view-more-btn"
+onClick={()=>navigate(`/product/${product.product_id}`)}
+>
 View More →
 </button>
 
@@ -103,7 +105,6 @@ View More →
 
 
 ))
-
 }
 
 
@@ -112,7 +113,7 @@ View More →
 
 </section>
 
-);
 
+);
 
 }

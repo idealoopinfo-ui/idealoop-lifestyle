@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 
 import ProductManager from "../../components/Admin/ProductManager";
+import HelpManager from "../../components/Admin/HelpManager";
 
 import "./Admin.css";
 
@@ -485,6 +486,24 @@ Users
 
 </button>
 
+<button
+
+className={
+activeTab==="help"
+?
+"active"
+:
+""
+}
+
+onClick={()=>setActiveTab("help")}
+
+>
+
+Help Page
+
+</button>
+
 
 
 </aside>
@@ -882,7 +901,13 @@ Users
 
 }
 
+{
+activeTab==="help" && (
 
+<HelpManager />
+
+)
+}
 
 
 </main>
