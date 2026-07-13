@@ -2,291 +2,528 @@
    DISCOVER PAGE
 =========================== */
 
-.discover-page{
+.discover-page {
+
   background:
-    linear-gradient(
+  linear-gradient(
       135deg,
       #fff7ed,
       #ffffff,
       #fdf2f8
-    );
+  );
 
   min-height:100vh;
 
-  padding:12px;
+  padding:20px;
+
 }
 
+
+
 /* ===========================
-   HEADER
+ HEADER
 =========================== */
 
-.discover-header{
+.discover-header {
+
   text-align:center;
-  margin-bottom:12px;
+
+  margin-bottom:20px;
+
 }
 
-.discover-header h1{
+
+
+.discover-header h1 {
+
   margin:0;
+
   font-size:42px;
-  font-weight:700;
+
+  font-weight:800;
+
+  letter-spacing:-1px;
+
   color:var(--text);
+
 }
 
-.discover-header p{
-  margin-top:10px;
-  font-size:17px;
+
+
+.discover-header p {
+
+  max-width:600px;
+
+  margin:10px auto;
+
+  font-size:16px;
+
+  line-height:1.6;
+
   color:#666;
+
 }
+
+
 
 /* ===========================
-   CATEGORY NAVIGATION
+ CATEGORY NAVIGATION
 =========================== */
 
-.discover-nav{
+
+.discover-nav {
+
   display:flex;
+
   justify-content:center;
+
   gap:10px;
+
   flex-wrap:wrap;
 
-  margin-bottom:16px;
+
+  margin-bottom:20px;
+
 
   position:sticky;
+
   top:60px;
 
-  background:var(--bg);
 
-  padding:8px 0;
+  background:
+  rgba(255,255,255,.85);
+
+
+  backdrop-filter:blur(10px);
+
+
+  padding:10px 0;
+
 
   z-index:20;
+
 }
 
-.discover-nav button{
 
-  border:1px solid #e5e5e5;
+
+.discover-nav button {
 
   background:#ffffff;
 
+  border:1px solid #eeeeee;
+
   color:#333;
 
-  padding:12px 24px;
 
-  border-radius:999px;
+  padding:10px 22px;
 
-  font-size:15px;
+
+  border-radius:50px;
+
+
+  font-size:14px;
 
   font-weight:600;
 
+
   cursor:pointer;
 
-  transition:
-    all .25s ease;
 
-  box-shadow:
-    0 4px 12px rgba(0,0,0,0.06);
+  transition:.25s ease;
 
 }
 
 
-.discover-nav button:hover{
+
+.discover-nav button:hover {
 
   border-color:#ff9900;
 
   color:#ff9900;
 
+
   transform:translateY(-2px);
 
+
   box-shadow:
-    0 8px 20px rgba(0,0,0,0.10);
+
+  0 8px 20px rgba(0,0,0,.10);
 
 }
 
 
-.discover-nav button.active{
+
+.discover-nav button.active {
 
   background:#ff9900;
 
-  color:#ffffff;
+  color:white;
 
   border-color:#ff9900;
 
+
   box-shadow:
-    0 8px 22px rgba(255,153,0,0.3);
+
+  0 8px 20px rgba(255,153,0,.35);
 
 }
 
-.discover-nav button.active{
 
-  background:#111;
-
-  color:#fff;
-
-}
 
 /* ===========================
-   PINTEREST GRID
+ PINTEREST MASONRY GRID
 =========================== */
 
-.pinterest-grid{
+
+.pinterest-grid {
+
 
   column-count:5;
 
+
   column-gap:12px;
+
+
+  max-width:1400px;
+
+
+  margin:auto;
 
 }
 
+
+
 /* ===========================
-   CARD
+ PIN CARD
 =========================== */
 
-.pin-card{
+
+.pin-card {
+
 
   break-inside:avoid;
 
+
   margin-bottom:12px;
+
+
+  position:relative;
+
+
+  overflow:hidden;
+
+
+  border-radius:18px;
+
+
+  background:#fff;
+
+
+  cursor:pointer;
+
+
+  box-shadow:
+
+  0 5px 18px rgba(0,0,0,.08);
+
+
+  transition:
+
+  transform .3s ease,
+
+  box-shadow .3s ease;
 
 }
 
-.pin-card img{
+
+
+.pin-card:hover {
+
+
+  transform:translateY(-5px);
+
+
+  box-shadow:
+
+  0 15px 35px rgba(0,0,0,.16);
+
+}
+
+
+
+/* ===========================
+ PINTEREST IMAGE
+=========================== */
+
+
+.pin-image-wrapper {
+
 
   width:100%;
 
-  display:block;
 
-  border-radius:20px;
+  overflow:hidden;
 
-  transition:.3s;
 
-  box-shadow:
-  0 4px 15px rgba(0,0,0,.08);
+  border-radius:18px;
 
 }
 
-.pin-card:hover img{
 
-  transform:scale(1.03);
 
-  box-shadow:
-  0 10px 30px rgba(0,0,0,.18);
+.pin-image {
+
+
+  width:100%;
+
+
+  height:auto;
+
+
+  display:block;
+
+
+  border-radius:18px;
+
+
+  transition:
+
+  transform .35s ease;
+
+}
+
+
+
+.pin-card:hover .pin-image {
+
+
+  transform:scale(1.05);
 
 }
 
 /* ===========================
-   RESPONSIVE
+   THREE PIN IMAGE SIZES
 =========================== */
 
-@media (max-width:1400px){
 
-  .pinterest-grid{
+.large-pin .pin-image {
 
-    column-count:4;
+  aspect-ratio:3 / 4;
 
-  }
-
-}
-
-@media (max-width:1100px){
-
-  .pinterest-grid{
-
-    column-count:3;
-
-  }
+  object-fit:cover;
 
 }
 
-@media (max-width:768px){
 
-  .discover-header h1{
 
-    font-size:34px;
+.medium-pin .pin-image {
 
-  }
+  aspect-ratio:1 / 1;
 
-  .discover-nav{
-
-    justify-content:flex-start;
-
-    overflow-x:auto;
-
-    flex-wrap:nowrap;
-
-    padding-bottom:8px;
-
-  }
-
-  .discover-nav::-webkit-scrollbar{
-
-    display:none;
-
-  }
-
-  .pinterest-grid{
-
-    column-count:2;
-
-  }
+  object-fit:cover;
 
 }
 
-@media (max-width:480px){
 
-  .discover-page{
 
-    padding:20px 12px 40px;
+.small-pin .pin-image {
 
-  }
+  aspect-ratio:4 / 3;
 
-  .discover-header h1{
-
-    font-size:28px;
-
-  }
-
-  .discover-header p{
-
-    font-size:15px;
-
-  }
-
-  .discover-nav button{
-
-    padding:10px 18px;
-
-    font-size:14px;
-
-  }
-
-  .pinterest-grid{
-
-    column-count:2;
-
-    column-gap:12px;
-
-  }
-
-  .pin-card{
-
-    margin-bottom:12px;
-
-  }
+  object-fit:cover;
 
 }
-.pin-card img{
+
+
+
+/* ===========================
+ HOVER OVERLAY
+=========================== */
+
+
+.pin-card::after {
+
+
+  content:"";
+
+
+  position:absolute;
+
+
+  inset:0;
+
+
+  background:
+
+  linear-gradient(
+
+      to top,
+
+      rgba(0,0,0,.25),
+
+      transparent 55%
+
+  );
+
+
   opacity:0;
-  animation: imageFade .5s ease forwards;
+
+
+  transition:.3s;
+
 }
 
 
-@keyframes imageFade{
 
-  from{
-    opacity:0;
-    transform:translateY(10px);
+.pin-card:hover::after {
+
+
+  opacity:1;
+
+}
+
+
+
+/* ===========================
+ RESPONSIVE
+=========================== */
+
+
+@media(max-width:1400px){
+
+
+  .pinterest-grid {
+
+      column-count:5;
+
   }
 
-  to{
-    opacity:1;
-    transform:translateY(0);
+}
+
+
+
+@media(max-width:1200px){
+
+
+  .pinterest-grid {
+
+      column-count:4;
+
+  }
+
+}
+
+
+
+@media(max-width:900px){
+
+
+  .pinterest-grid {
+
+      column-count:3;
+
+  }
+
+}
+
+
+
+@media(max-width:650px){
+
+
+  .discover-page {
+
+      padding:15px;
+
+  }
+
+
+
+  .discover-header h1 {
+
+      font-size:32px;
+
+  }
+
+
+
+  .discover-nav {
+
+
+      justify-content:flex-start;
+
+
+      overflow-x:auto;
+
+
+      flex-wrap:nowrap;
+
+
+  }
+
+
+
+  .discover-nav::-webkit-scrollbar {
+
+
+      display:none;
+
+  }
+
+
+
+  .discover-nav button {
+
+
+      flex-shrink:0;
+
+  }
+
+
+
+  .pinterest-grid {
+
+
+      column-count:2;
+
+
+      column-gap:10px;
+
+  }
+
+}
+
+
+
+@media(max-width:420px){
+
+
+  .discover-header h1 {
+
+
+      font-size:28px;
+
+  }
+
+
+
+  .discover-header p {
+
+
+      font-size:14px;
+
+  }
+
+
+
+  .pinterest-grid {
+
+
+      column-count:2;
+
+
+      column-gap:8px;
+
   }
 
 }

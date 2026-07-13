@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { supabase } from "../../lib/supabase";
 
+import CategoryManager from "../../components/Admin/CategoryManager";
 import ProductManager from "../../components/Admin/ProductManager";
 import HelpManager from "../../components/Admin/HelpManager";
 
@@ -399,7 +400,11 @@ Products
 </button>
 
 
-
+<button 
+onClick={()=>setActiveTab("categories")}
+>
+ Categories
+</button>
 
 
 <button
@@ -630,7 +635,10 @@ activeTab==="products" && (
 
 
 
-
+{
+activeTab==="categories" &&
+<CategoryManager/>
+}
 
 
 

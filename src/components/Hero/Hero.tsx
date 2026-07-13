@@ -1,70 +1,134 @@
 import { Link } from "react-router-dom";
 import "./Hero.css";
 
-
 export default function Hero() {
 
-return (
+  return (
 
-<div className="hero">
+    <section className="hero-banner">
 
+      <div className="hero">
 
-  {/* LEFT TEXT */}
-  <div className="hero-content">
+        {/* LEFT CONTENT */}
+        <div className="hero-content">
 
-    <h1>
-      Discover a Better Lifestyle
-    </h1>
-    <p>
-      Curated Home, Clothing & Beauty essentials made simple.
-    </p>
+          <span className="hero-badge">
+            ✨ Lifestyle Marketplace
+          </span>
 
 
-    <Link
-      to="/discover"
-      className="hero-btn"
-    >
-      Explore Now
-    </Link>
+          <h1>
+            Discover Amazing
+            <br />
+            Lifestyle Products
+          </h1>
 
 
-  </div>
-  {/* RIGHT IMAGE AREA */}
-  <div className="hero-images">
+          <p>
+            Explore trending Fashion, Beauty,
+            Home & Living and Gifts curated
+            for your everyday lifestyle.
+          </p>
 
 
-    <Link
-      to="/category/home-living"
-      className="hero-main"
-    >
+          <div className="hero-buttons">
 
-      <img
-        src="https://images.unsplash.com/photo-1505691938895-1758d7feb511"
-        alt="Home & Living"
-      />
 
-    </Link>
-    <div className="hero-side">
-      <Link to="/category/beauty">
+            <Link
+              to="/discover"
+              className="hero-btn"
+            >
+              Discover Now
+            </Link>
 
-        <img
-          src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9"
-          alt="Beauty"
-        />
 
-      </Link>
-      <Link to="/category/fashion">
 
-        <img
-          src="https://images.unsplash.com/photo-1612810436541-336d12d8e3a2"
-          alt="Fashion"
-        />
+            <Link
+              to="/"
+              className="hero-btn-outline"
+            >
+              Shop Collection
+            </Link>
 
-      </Link>
-    </div>
-  </div>
-</div>
 
-);
+          </div>
+
+        </div>
+
+
+
+
+        {/* RIGHT IMAGE COLLAGE */}
+
+        <div className="hero-gallery">
+
+
+          <Link
+            to="/category/fashion"
+            className="hero-card hero-card-1"
+          >
+
+            <img
+              src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600"
+              alt="Fashion"
+            />
+
+          </Link>
+
+
+
+
+          <Link
+            to="/category/home-living"
+            className="hero-card hero-card-2"
+          >
+
+            <img
+              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=700"
+              alt="Home Living"
+            />
+
+          </Link>
+
+
+
+
+          <Link
+            to="/category/beauty"
+            className="hero-card hero-card-3"
+          >
+
+            <img
+              src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600"
+              alt="Beauty"
+            />
+
+          </Link>
+
+
+
+
+          <Link
+            to="/category/toys-gifts"
+            className="hero-card hero-card-4"
+          >
+
+            <img
+              src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600"
+              alt="Toys"
+            />
+
+          </Link>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+  );
 
 }

@@ -6,356 +6,608 @@ import { FcGoogle } from "react-icons/fc";
 import "./Login.css";
 
 
-export default function Login(){
+export default function Login() {
 
-const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
-const [email,setEmail] = useState("");
-const [password,setPassword] = useState("");
 
-const [showPassword,setShowPassword] = useState(false);
+  const [email,setEmail] = useState("");
 
-const [error,setError] = useState("");
-const [message,setMessage] = useState("");
+  const [password,setPassword] = useState("");
 
-const [loading,setLoading] = useState(false);
 
+  const [showPassword,setShowPassword] = useState(false);
 
 
-const handleLogin = async(
-e:React.FormEvent
-)=>{
+  const [error,setError] = useState("");
 
-e.preventDefault();
+  const [message,setMessage] = useState("");
 
 
-setError("");
-setMessage("");
+  const [loading,setLoading] = useState(false);
 
-setLoading(true);
 
 
 
-const {
-data,
-error
-}=await supabase.auth.signInWithPassword({
 
-email,
-password
+  const handleLogin = async (
+    e: React.FormEvent
+  ) => {
 
-});
 
+    e.preventDefault();
 
 
-if(error){
+    setError("");
 
-setError(error.message);
-setLoading(false);
-return;
+    setMessage("");
 
-}
+    setLoading(true);
 
 
 
-const user = data.user;
 
 
+    const {
+      data,
+      error
+    } = await supabase.auth.signInWithPassword({
 
-if(user){
+      email,
 
+      password
 
-const {
-data:profile
-}=await supabase
+    });
 
-.from("profiles")
 
-.select("*")
 
-.eq("id",user.id)
 
-.single();
 
+    if(error){
 
 
-if(!profile){
+      setError(error.message);
 
 
-await supabase
+      setLoading(false);
 
-.from("profiles")
 
-.insert({
+      return;
 
-id:user.id,
 
-email:user.email,
+    }
 
-first_name:
-user.user_metadata.first_name || "",
 
-last_name:
-user.user_metadata.last_name || "",
 
-country:
-user.user_metadata.country || "",
 
-country_code:
-user.user_metadata.country_code || "",
 
-avatar_url:null
+    const user = data.user;
 
-});
 
 
-}
 
 
+    if(user){
 
-}
 
 
+      const {
+        data: profile
+      } = await supabase
 
-setMessage("Login successful");
 
+        .from("profiles")
 
-setTimeout(()=>{
 
-navigate("/");
+        .select("*")
 
-},1000);
 
+        .eq("id",user.id)
 
 
-setLoading(false);
+        .single();
 
 
 
-};
 
 
+      if(!profile){
 
 
 
-const handleGoogle = async()=>{
+        const metadata = user.user_metadata;
 
 
-const {
-error
-}=await supabase.auth.signInWithOAuth({
 
-provider:"google"
+        await supabase
 
-});
+        .from("profiles")
 
+        .insert({
 
-if(error){
 
-setError(error.message);
+          id:user.id,
 
-}
 
+          email:user.email,
 
-};
 
 
+          first_name:
 
+          metadata.first_name ||
 
+          metadata.full_name?.split(" ")[0] ||
 
-return (
+          "",
 
-<div className="auth-container">
 
 
-<div className="auth-card">
+          last_name:
 
+          metadata.last_name ||
 
-<h1>Idealoop</h1>
+          metadata.full_name?.split(" ").slice(1).join(" ") ||
 
+          "",
 
-<h2>Welcome Back</h2>
 
 
+          country:"",
 
-<form onSubmit={handleLogin}>
 
+          country_code:"",
 
-<input
 
-type="email"
 
-placeholder="Email Address"
+          avatar_url:
 
-value={email}
+          metadata.avatar_url ||
 
-onChange={(e)=>setEmail(e.target.value)}
+          metadata.picture ||
 
-required
+          null
 
-/>
 
 
+        });
 
 
-<div className="password-box">
 
+      }
 
-<input
 
-type={
-showPassword?
-"text":
-"password"
-}
 
-placeholder="Password"
+    }
 
-value={password}
 
-onChange={(e)=>setPassword(e.target.value)}
 
-required
 
-/>
 
+    setMessage("Login successful");
 
 
-<span
 
-onClick={()=>
-setShowPassword(!showPassword)
-}
+    setTimeout(()=>{
 
->
 
-{
-showPassword?
-<FaEyeSlash/>
-:
-<FaEye/>
-}
+      navigate("/");
 
-</span>
 
+    },1000);
 
-</div>
 
 
 
+    setLoading(false);
 
-<div className="forgot-link">
 
-<Link to="/forgot-password">
 
-Forgot Password?
+  };
 
-</Link>
 
-</div>
 
 
 
 
-<button disabled={loading}>
 
 
-{
-loading?
-"Signing in..."
-:
-"Sign In"
-}
+  const handleGoogle = async () => {
 
 
-</button>
+    setError("");
 
 
 
-</form>
+    const {
 
+      error
 
+    } = await supabase.auth.signInWithOAuth({
 
 
-<div className="divider">
+      provider:"google",
 
-OR
 
-</div>
+      options:{
 
 
+        redirectTo:window.location.origin
 
 
-<button
+      }
 
-className="google-btn"
 
-onClick={handleGoogle}
+    });
 
->
 
 
-<FcGoogle/>
 
-Continue with Google
 
+    if(error){
 
-</button>
 
+      setError(error.message);
 
 
+    }
 
 
-{
-error &&
+  };
 
-<p className="error">
 
-{error}
 
-</p>
 
-}
 
 
 
-{
-message &&
+  return (
 
-<p className="success">
 
-{message}
+    <div className="auth-container">
 
-</p>
 
-}
+      <div className="auth-card">
 
 
 
+        <h1>
 
+          Idealoop
 
-<p>
+        </h1>
 
-Don't have an account?
 
-<Link to="/register">
 
-Create Account
+        <h2>
 
-</Link>
+          Welcome Back
 
-</p>
+        </h2>
 
 
 
 
-</div>
 
+        <form onSubmit={handleLogin}>
 
-</div>
 
-);
+
+
+
+          <input
+
+
+            type="email"
+
+
+            placeholder="Email Address"
+
+
+            value={email}
+
+
+            onChange={(e)=>
+
+              setEmail(e.target.value)
+
+            }
+
+
+            required
+
+
+          />
+
+
+
+
+
+
+          <div className="password-wrapper">
+
+
+
+            <input
+
+
+              type={
+
+                showPassword
+
+                ?
+
+                "text"
+
+                :
+
+                "password"
+
+              }
+
+
+              placeholder="Password"
+
+
+              value={password}
+
+
+              onChange={(e)=>
+
+                setPassword(e.target.value)
+
+              }
+
+
+              required
+
+
+            />
+
+
+
+
+
+            <span
+
+
+              className="password-icon"
+
+
+              onClick={()=>
+
+
+                setShowPassword(!showPassword)
+
+
+              }
+
+
+            >
+
+
+
+              {
+
+
+                showPassword
+
+                ?
+
+                <FaEyeSlash />
+
+                :
+
+                <FaEye />
+
+
+              }
+
+
+
+            </span>
+
+
+
+          </div>
+
+
+
+
+
+
+          <Link to="/forgot-password">
+
+
+            Forgot Password?
+
+
+          </Link>
+
+
+
+
+
+
+
+          <button
+
+
+            type="submit"
+
+
+            disabled={loading}
+
+
+          >
+
+
+
+            {
+
+
+              loading
+
+              ?
+
+              "Signing in..."
+
+              :
+
+              "Sign In"
+
+
+            }
+
+
+
+          </button>
+
+
+
+
+
+
+
+          <div className="divider">
+
+
+            OR
+
+
+          </div>
+
+
+
+
+
+
+
+          <button
+
+
+            type="button"
+
+
+            className="google-btn"
+
+
+            onClick={handleGoogle}
+
+
+          >
+
+
+
+            <FcGoogle size={22}/>
+
+
+
+            Continue with Google
+
+
+
+          </button>
+
+
+
+
+
+
+
+          {
+
+
+            error && (
+
+
+              <p className="error-message">
+
+
+                {error}
+
+
+              </p>
+
+
+            )
+
+
+          }
+
+
+
+
+
+
+
+
+          {
+
+
+            message && (
+
+
+              <p className="success-message">
+
+
+                {message}
+
+
+              </p>
+
+
+            )
+
+
+          }
+
+
+
+
+
+
+
+
+          <p>
+
+
+            Don't have an account?
+
+
+            {" "}
+
+
+            <Link to="/register">
+
+
+              Create Account
+
+
+            </Link>
+
+
+          </p>
+
+
+
+
+
+
+
+        </form>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+  );
 
 
 }

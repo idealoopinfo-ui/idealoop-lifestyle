@@ -5,19 +5,25 @@ import "./DiscoverPage.css";
 
 
 interface Product {
-  id: number;
+
+  id: string;
+
   product_id: string;
+
   image_1: string;
-  departments: string;
+
+  department: string;
+
 }
+
+
 
 export default function DiscoverPage() {
 
 
   const [products, setProducts] = useState<Product[]>([]);
 
-  const [selectedCategory, setSelectedCategory] =
-    useState("Fashion");
+  const [selectedCategory, setSelectedCategory] = useState("fashion");
 
 
   const navigate = useNavigate();
@@ -29,26 +35,37 @@ export default function DiscoverPage() {
 
     const fetchProducts = async () => {
 
+
       const { data, error } = await supabase
+
         .from("products")
+
         .select(`
           id,
           product_id,
           image_1,
-          departments
+          department
         `)
-        .eq("departments", selectedCategory);
-    
-    
+
+        .eq("department", selectedCategory);
+
+
+
       if (error) {
+
         console.error("Discover error:", error.message);
+
         return;
+
       }
-    
-    
+
+
+
       setProducts(data || []);
-    
+
+
     };
+
 
 
     fetchProducts();
@@ -63,166 +80,143 @@ export default function DiscoverPage() {
   return (
 
     <div className="discover-page">
-
-
-      {/* HEADER */}
-
+  
+  
       <div className="discover-header">
-
-        <h1>
-          Discover
-        </h1>
-
-
+  
+        <h1>Discover</h1>
+  
         <p>
           Find inspiration for your lifestyle.
         </p>
-
-
+  
       </div>
-
-
-
-
-
-      {/* CATEGORY NAVIGATION */}
-
+  
+  
+  
+  
       <div className="discover-nav">
-
-
+  
+  
         <button
-
           className={
-            selectedCategory === "Fashion"
+            selectedCategory === "fashion"
               ? "active"
               : ""
           }
-
           onClick={() =>
-            setSelectedCategory("Fashion")
+            setSelectedCategory("fashion")
           }
-
         >
-
           Fashion
-
         </button>
-
-
-
-
-
+  
+  
+  
         <button
-
           className={
-            selectedCategory === "Beauty"
+            selectedCategory === "beauty"
               ? "active"
               : ""
           }
-
           onClick={() =>
-            setSelectedCategory("Beauty")
+            setSelectedCategory("beauty")
           }
-
         >
-
           Beauty
-
         </button>
-
-
-
-
-
+  
+  
+  
         <button
-
           className={
-            selectedCategory === "Home & Living"
+            selectedCategory === "home-living"
               ? "active"
               : ""
           }
-
           onClick={() =>
-            setSelectedCategory("Home & Living")
+            setSelectedCategory("home-living")
           }
-
         >
-
           Home & Living
-
         </button>
-
-
-
-
-
+  
+  
+  
         <button
-
           className={
-            selectedCategory === "Toys & Gifts"
+            selectedCategory === "toys-gifts"
               ? "active"
               : ""
           }
-
           onClick={() =>
-            setSelectedCategory("Toys & Gifts")
+            setSelectedCategory("toys-gifts")
           }
-
         >
-
           Toys & Gifts
-
         </button>
-
-
+  
+  
       </div>
-
-
-
-
-
-      {/* PINTEREST IMAGE GRID */}
-
-
+  
+  
+  
+  
+  
       <div className="pinterest-grid">
-
-
-        {products.map((product) => (
-
-
+  
+  
+        {products.map((product,index)=>(
+  
+  
           <div
-
+  
             key={product.id}
-
-            className="pin-card"
-
+  
+            className={`pin-card ${
+              index % 5 === 0
+                ? "large-pin"
+                : index % 3 === 0
+                ? "small-pin"
+                : "medium-pin"
+            }`}
+  
             onClick={() =>
-              navigate(
-                `/product/${product.product_id}`
-              )
+              navigate(`/product/${product.product_id}`)
             }
-
+  
           >
-
-
-<img
-  src={product.image_1}
-  alt="Lifestyle product"
-  loading="lazy"
-/>
-
+  
+  
+            <div className="pin-image-wrapper">
+  
+  
+              <img
+  
+                src={product.image_1}
+  
+                alt={product.product_id}
+  
+                className="pin-image"
+  
+                loading="lazy"
+  
+              />
+  
+  
+            </div>
+  
+  
           </div>
-
-
+  
+  
         ))}
-
-
+  
+  
       </div>
-
-
-
+  
+  
     </div>
-
+  
   );
-
-}
+          }

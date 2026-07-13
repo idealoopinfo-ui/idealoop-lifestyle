@@ -1,4 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { supabase } from "./lib/supabase";
 
 import { CountryProvider } from "./context/CountryContext";
 import AdminRoute from "./components/Auth/AdminRoute";
@@ -37,7 +39,82 @@ const location=useLocation();
 
 const isDiscover=location.pathname.startsWith("/discover");
 
+useEffect(()=>{
 
+  const createProfile = async()=>{
+  
+  
+  const {
+  data:{
+  session
+  }
+  }=await supabase.auth.getSession();
+  
+  
+  
+  const user=session?.user;
+  
+  
+  if(!user) return;
+  
+  
+  
+  const {data:profile}=await supabase
+  
+  .from("profiles")
+  
+  .select("id")
+  
+  .eq("id",user.id)
+  
+  .single();
+  
+  
+  
+  if(!profile){
+  
+  
+  const metadata=user.user_metadata;
+  
+  
+  await supabase
+  
+  .from("profiles")
+  
+  .insert({
+  
+  id:user.id,
+  
+  email:user.email,
+  
+  first_name:
+  metadata.full_name?.split(" ")[0] || "",
+  
+  
+  last_name:
+  metadata.full_name?.split(" ").slice(1).join(" ") || "",
+  
+  
+  avatar_url:
+  metadata.avatar_url ||
+  metadata.picture ||
+  null
+  
+  });
+  
+  
+  }
+  
+  
+  };
+  
+  
+  createProfile();
+  
+  
+  },[]);
+
+  
 return(
 
 <CountryProvider>

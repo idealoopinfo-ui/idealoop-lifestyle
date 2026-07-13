@@ -213,7 +213,29 @@ navigate("/login");
 
 };
 
+const handleGoogleRegister = async () => {
 
+    setError("");
+  
+    const { error } = await supabase.auth.signInWithOAuth({
+  
+      provider: "google",
+  
+      options: {
+  
+        redirectTo: window.location.origin
+  
+      }
+  
+    });
+  
+    if (error) {
+  
+      setError(error.message);
+  
+    }
+  
+  };
 
 
 
@@ -222,31 +244,28 @@ navigate("/login");
 const handleGoogle = async()=>{
 
 
-const {
-error
-
-}=await supabase.auth.signInWithOAuth({
-
-provider:"google"
-
-});
-
-
-
-if(error){
-
-
-setError(error.message);
-
-
-}
-
-
-
-};
-
-
-
+    const {
+    error
+    
+    }=await supabase.auth.signInWithOAuth({
+    
+    provider:"google"
+    
+    });
+    
+    
+    
+    if(error){
+    
+    
+    setError(error.message);
+    
+    
+    }
+    
+    
+    
+    };
 
 
 
@@ -488,15 +507,17 @@ OR
 </div>
 <button
 
+type="button"
+
 className="google-btn"
 
-onClick={handleGoogle}
+onClick={handleGoogleRegister}
 
 >
-<FcGoogle/>
+
+<FcGoogle size={22}/>
 
 Continue with Google
-
 
 </button>
 
