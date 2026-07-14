@@ -1,194 +1,75 @@
-/* =========================
-   CATEGORY MANAGER
-========================= */
-
-.category-manager {
-
+.category-manager{
+    max-width:1200px;
+    margin:auto;
     padding:30px;
-
 }
 
-
-.category-manager h1 {
-
-    font-size:32px;
-
-    font-weight:800;
-
-    margin-bottom:25px;
-
-    color:var(--text);
-
+.category-manager h1{
+    text-align:center;
+    margin-bottom:30px;
+    color:#222;
 }
 
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+    gap:24px;
+}
 
+.category-card{
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
 
-/* =========================
-   CATEGORY CARDS
-========================= */
-
-.category-card {
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:25px;
-
+.category-card h3{
     margin-bottom:20px;
-
-    box-shadow:
-    0 8px 25px rgba(0,0,0,.08);
-
-    border:1px solid #eee;
-
+    color:#ff9900;
 }
 
-
-
-.category-card h3 {
-
-    margin-bottom:15px;
-
-    font-size:20px;
-
-    font-weight:700;
-
-}
-
-
-
-/* =========================
-   INPUT
-========================= */
-
-.category-card input {
-
+.category-card input,
+.category-card select{
     width:100%;
-
-    max-width:500px;
-
-    padding:14px 16px;
-
-    border-radius:12px;
-
+    padding:12px 14px;
+    margin-bottom:15px;
     border:1px solid #ddd;
-
+    border-radius:8px;
     font-size:15px;
-
     outline:none;
-
-    margin-right:10px;
-
-    transition:.25s;
-
 }
 
-
-
-.category-card input:focus {
-
+.category-card input:focus,
+.category-card select:focus{
     border-color:#ff9900;
-
-    box-shadow:
-    0 0 0 3px rgba(255,153,0,.15);
-
 }
 
-
-
-/* =========================
-   BUTTON
-========================= */
-
-.category-card button {
-
-    margin-top:15px;
-
-    padding:12px 24px;
-
-    border:none;
-
-    border-radius:50px;
-
+.category-card button{
+    width:100%;
+    padding:12px;
     background:#ff9900;
-
-    color:white;
-
-    font-weight:700;
-
+    color:#fff;
+    border:none;
+    border-radius:8px;
     cursor:pointer;
-
-    transition:.25s;
-
-}
-
-
-
-.category-card button:hover {
-
-    transform:translateY(-2px);
-
-    box-shadow:
-    0 8px 20px rgba(255,153,0,.35);
-
-}
-
-
-
-/* =========================
-   MESSAGES
-========================= */
-
-.success {
-
-    color:green;
-
     font-weight:600;
-
-    margin-top:15px;
-
+    transition:.2s;
 }
 
+.category-card button:hover{
+    background:#e68a00;
+}
 
-.error {
-
-    color:red;
-
+.success{
+    margin-top:20px;
+    color:#16a34a;
+    text-align:center;
     font-weight:600;
-
-    margin-top:15px;
-
 }
 
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:768px){
-
-
-.category-manager {
-
-    padding:15px;
-
-}
-
-
-.category-card {
-
-    padding:18px;
-
-}
-
-
-.category-card input {
-
-    max-width:100%;
-
-}
-
-
+.error{
+    margin-top:20px;
+    color:#dc2626;
+    text-align:center;
+    font-weight:600;
 }

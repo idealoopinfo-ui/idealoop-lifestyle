@@ -115,231 +115,216 @@ useEffect(()=>{
   },[]);
 
   
-return(
+  return(
 
-<CountryProvider>
-
-<div className="app-layout">
-
-
-<TopNavbar />
-
-
-{!isDiscover && <NoticePanel />}
-
-
-{!isDiscover && <CategoryNavbar />}
-
-
-
-<main className="app-content">
-
-
-<AnimatePresence mode="wait">
-
-
-<Routes location={location} key={location.pathname}>
-
-
-<Route
-path="/"
-element={
-<PageTransition>
-<Home/>
-</PageTransition>
-}
-/>
-
-<Route
-  path="/help"
-  element={
+    <CountryProvider>
+    
+    <div className="app-layout">
+    
+    
+    <TopNavbar />
+    
+    
+    {!isDiscover && <NoticePanel />}
+    
+    
+    {!isDiscover && <CategoryNavbar />}
+    
+    
+    
+    <main className="app-content">
+    
+    
+    <AnimatePresence 
+    mode="wait"
+    >
+    
+    
+    <Routes 
+    location={location}
+    key={location.pathname}
+    >
+    
+    
+    <Route
+    path="/"
+    element={
     <PageTransition>
-      <Help />
+    <Home/>
     </PageTransition>
-  }
-/>
-
-<Route
-  path="/admin"
-  element={
+    }
+    />
+    
+    
+    <Route
+    path="/help"
+    element={
+    <PageTransition>
+    <Help/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/admin"
+    element={
     <AdminRoute>
-      <PageTransition>
-        <Admin />
-      </PageTransition>
+    <PageTransition>
+    <Admin/>
+    </PageTransition>
     </AdminRoute>
-  }
-/>
-
-<Route
-  path="/wishlist"
-  element={
+    }
+    />
+    
+    
+    <Route
+    path="/wishlist"
+    element={
     <PageTransition>
-      <Wishlist />
+    <Wishlist/>
     </PageTransition>
-  }
-/>
-
-<Route
-path="/login"
-element={
-<PageTransition>
-<Login/>
-</PageTransition>
-}
-/>
-
-
-<Route
-path="/register"
-element={
-<PageTransition>
-<Register/>
-</PageTransition>
-}
-/>
-
-
-<Route
-path="/forgot-password"
-element={
-<PageTransition>
-<ForgotPassword/>
-</PageTransition>
-}
-/>
-
-
-<Route
-path="/profile"
-element={
-<PageTransition>
-<Profile/>
-</PageTransition>
-}
-/>
-
-
-<Route
-  path="/product/:productId"
-  element={
+    }
+    />
+    
+    
+    <Route
+    path="/login"
+    element={
     <PageTransition>
-      <ProductDetails />
+    <Login/>
     </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/register"
+    element={
+    <PageTransition>
+    <Register/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/forgot-password"
+    element={
+    <PageTransition>
+    <ForgotPassword/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/profile"
+    element={
+    <PageTransition>
+    <Profile/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/product/:productId"
+    element={
+    <PageTransition>
+    <ProductDetails/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/category/:department/:category?/:subcategory?"
+    element={
+    <PageTransition>
+    <CategoryPage/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/discover"
+    element={
+    <PageTransition>
+    <DiscoverPage/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/clothing"
+    element={
+    <PageTransition>
+    <ClothingCategory/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/contact"
+    element={
+    <PageTransition>
+    <Contact/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/privacy"
+    element={
+    <PageTransition>
+    <Privacy/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/terms"
+    element={
+    <PageTransition>
+    <Terms/>
+    </PageTransition>
+    }
+    />
+    
+    
+    <Route
+    path="/affiliate-disclosure"
+    element={
+    <PageTransition>
+    <AffiliateDisclosure/>
+    </PageTransition>
+    }
+    />
+    
+    
+    </Routes>
+    
+    
+    </AnimatePresence>
+    
+    
+    </main>
+    
+    
+    
+    <Footer />
+    
+    
+    </div>
+    
+    
+    </CountryProvider>
+    
+    );
   }
-/>
-
-<Route
-path="/category/:department/:category?/:subcategory?"
-element={<CategoryPage />}
-/>
-
-
-<Route
-path="/category/:category/:subcategory"
-element={
-<PageTransition>
-<CategoryPage/>
-</PageTransition>
-}
-/>
-
-
-<Route
-path="/category/:category"
-element={
-<PageTransition>
-<CategoryPage/>
-</PageTransition>
-}
-/>
-
-<Route
-path="/product/:productId"
-element={
-<PageTransition>
-<ProductDetails/>
-</PageTransition>
-}
-/>
-
-
-<Route
-path="/discover"
-element={
-<PageTransition>
-<DiscoverPage/>
-</PageTransition>
-}
-/>
-
-
-<Route
-path="/clothing"
-element={
-<PageTransition>
-<ClothingCategory/>
-</PageTransition>
-}
-/>
-
-
-<Route
-path="/contact"
-element={
-<PageTransition>
-<Contact/>
-</PageTransition>
-}
-/>
-
-
-<Route
-path="/privacy"
-element={
-<PageTransition>
-<Privacy/>
-</PageTransition>
-}
-/>
-
-
-<Route
-path="/terms"
-element={
-<PageTransition>
-<Terms/>
-</PageTransition>
-}
-/>
-
-
-<Route
-path="/affiliate-disclosure"
-element={
-<PageTransition>
-<AffiliateDisclosure/>
-</PageTransition>
-}
-/>
-
-
-</Routes>
-
-
-</AnimatePresence>
-
-
-</main>
-
-
-
-{!isDiscover && <Footer />}
-
-
-</div>
-
-</CountryProvider>
-
-);
-
-}

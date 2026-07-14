@@ -11,7 +11,8 @@ export default function ProductManager() {
 const [title,setTitle] = useState("");
 const [description,setDescription] = useState("");
 const [shortDescription,setShortDescription] = useState("");
-
+const [shopName,setShopName] = useState("");
+const [brand,setBrand] = useState("");
 
 const [image1,setImage1] = useState("");
 const [image2,setImage2] = useState("");
@@ -118,6 +119,7 @@ const {error}=await supabase
 
 product_id:productId,
 title,
+brand: brand,
 description,
 short_description:shortDescription,
 image_1:image1,
@@ -125,6 +127,7 @@ image_2:image2,
 image_3:image3,
 image_4:image4,
 affiliate_url:affiliateUrl,
+shop_name: shopName,
 
 marketplace,
 featured,
@@ -247,11 +250,18 @@ const seasons = [
         value={title}
         onChange={(e)=>setTitle(e.target.value)}
         />
-        
+
+<input
+
+placeholder="Brand"
+
+value={brand}
+
+onChange={(e)=>setBrand(e.target.value)}
+
+/>
         
         </div>
-        
-        
         
         <textarea
         
@@ -326,10 +336,6 @@ const seasons = [
         </div>
         
         
-        
-        
-        
-        
         {/* AFFILIATE */}
         
         <div className="form-section">
@@ -347,6 +353,36 @@ const seasons = [
         value={affiliateUrl}
         onChange={(e)=>setAffiliateUrl(e.target.value)}
         />
+
+<select
+
+value={shopName}
+
+onChange={(e)=>setShopName(e.target.value)}
+
+>
+
+<option value="">
+Select Marketplace
+</option>
+
+<option value="Amazon">
+Amazon
+</option>
+
+<option value="Temu">
+Temu
+</option>
+
+<option value="AliExpress">
+AliExpress
+</option>
+
+<option value="Other">
+Other
+</option>
+
+</select>
         
         
         <input

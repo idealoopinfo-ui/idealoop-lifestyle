@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../context/AuthContext";
 
-import CountryButton from "../Country/CountryButton";
 
 import "./TopNavbar.css";
 
@@ -195,31 +194,9 @@ className="nav-btn"
 
 </Link>
 
-
-
-<Link
-to="/deals"
-className="nav-btn highlight"
->
-
-🔥 Deals
-
-</Link>
-
-
 </>
 
 }
-
-
-
-
-
-<CountryButton />
-
-
-
-
 
 {
 !user ?

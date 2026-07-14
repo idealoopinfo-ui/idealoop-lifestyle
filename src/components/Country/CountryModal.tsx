@@ -27,7 +27,7 @@ export default function CountryModal({ onClose, onSelect }: Props) {
         {/* HEADER */}
         <div className="country-header">
           <h2>🌍 Select Country</h2>
-          <button className="close-btn" onClick={onClose}>✕</button>
+         
         </div>
 
         {/* INFO */}
