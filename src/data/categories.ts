@@ -148,6 +148,63 @@ export const categories: CategoryNode[] = [
       }
     ]
   },
+
+  {
+    name: "Fitness & Wellness",
+    slug: "fitness-wellness",
+    children: [
+    
+    {
+    name: "Strength Training",
+    slug: "strength-training",
+    children: [
+    { name: "Dumbbells", slug: "dumbbells", children: [] },
+    { name: "Resistance Bands", slug: "resistance-bands", children: [] },
+    { name: "Barbells", slug: "barbells", children: [] },
+    { name: "Weight Benches", slug: "weight-benches", children: [] },
+    { name: "Accessories", slug: "strength-accessories", children: [] }
+    ]
+    },
+    
+    {
+    name: "Yoga",
+    slug: "yoga",
+    children: [
+    { name: "Yoga Mats", slug: "yoga-mats", children: [] },
+    { name: "Yoga Blocks", slug: "yoga-blocks", children: [] },
+    { name: "Yoga Clothing", slug: "yoga-clothing", children: [] },
+    { name: "Meditation", slug: "meditation", children: [] },
+    { name: "Accessories", slug: "yoga-accessories", children: [] }
+    ]
+    },
+    
+    {
+    name: "Home Gym",
+    slug: "home-gym",
+    children: [
+    { name: "Cardio Equipment", slug: "cardio-equipment", children: [] },
+    { name: "Gym Machines", slug: "gym-machines", children: [] },
+    { name: "Foam Rollers", slug: "foam-rollers", children: [] },
+    { name: "Exercise Balls", slug: "exercise-balls", children: [] },
+    { name: "Storage", slug: "gym-storage", children: [] }
+    ]
+    },
+    
+    {
+    name: "Fitness Ebooks",
+    slug: "fitness-ebooks",
+    children: [
+    { name: "Workout Guides", slug: "workout-guides", children: [] },
+    { name: "Weight Loss", slug: "weight-loss", children: [] },
+    { name: "Muscle Building", slug: "muscle-building", children: [] },
+    { name: "Nutrition", slug: "nutrition", children: [] },
+    { name: "Yoga Programs", slug: "yoga-programs", children: [] }
+    ]
+    }
+    
+    ]
+    },
+
   {
     name: "Home & Living",
     slug: "home-living",

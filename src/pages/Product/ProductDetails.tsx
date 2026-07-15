@@ -14,6 +14,7 @@ image_1:string;
 image_2?:string;
 image_3?:string;
 image_4?:string;
+image_5?:string;
 affiliate_url:string;
 subcategory?:string;
 brand?:string;
@@ -99,7 +100,8 @@ const images=[
 product.image_1,
 product.image_2,
 product.image_3,
-product.image_4
+product.image_4,
+product.image_5
 ].filter(Boolean) as string[];
 
 
@@ -223,7 +225,7 @@ Shop Now
 {product.description?.split("\n").filter(Boolean).map((line,index)=>(
 
 <li key={index}>
-✓ {line.replace("- ","")}
+{line.replace("- ","")}
 </li>
 
 ))}

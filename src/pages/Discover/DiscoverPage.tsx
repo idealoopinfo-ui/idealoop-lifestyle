@@ -126,7 +126,18 @@ export default function DiscoverPage() {
           Beauty
         </button>
   
-  
+        <button
+  className={
+    selectedCategory === "fitness-wellness"
+      ? "active"
+      : ""
+  }
+  onClick={() =>
+    setSelectedCategory("fitness-wellness")
+  }
+>
+  Fitness & Wellness
+</button>
   
         <button
           className={

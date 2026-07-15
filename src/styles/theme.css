@@ -1,38 +1,7 @@
-:root {
-  /* =========================
-     LIGHT THEME
-  ========================= */
-  --bg: #ffffff;
-  --bg-soft: #f9fafb;
-
-  --text: #111111;
-  --text-muted: #6b7280;
-
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-
-  --border: #e5e7eb;
-}
-
 /* =========================
-   DARK THEME
+GLOBAL RESET
 ========================= */
-[data-theme="dark"] {
-  --bg: #0f172a;
-  --bg-soft: #1e293b;
 
-  --text: #f1f5f9;
-  --text-muted: #94a3b8;
-
-  --primary: #3b82f6;
-  --primary-dark: #2563eb;
-
-  --border: #334155;
-}
-
-/* =========================
-   GLOBAL RESET
-========================= */
 * {
   margin: 0;
   padding: 0;
@@ -40,15 +9,19 @@
   font-family: Inter, system-ui, Arial, sans-serif;
 }
 
+
 /* =========================
-   BASE LAYOUT
+BASE LAYOUT
 ========================= */
-html, body {
+
+html,
+body {
   min-height: 100%;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
 }
+
 
 #root {
   min-height: 100vh;
@@ -56,200 +29,54 @@ html, body {
   color: var(--text);
 }
 
+
 /* =========================
-   APP LAYOUT
+APP LAYOUT
 ========================= */
+
 .app-layout {
+
   min-height: 100vh;
+
   display: flex;
+
   flex-direction: column;
+
 }
 
-.app-content,
-.app-main {
+
+/*
+Main content expands and pushes footer
+to the bottom
+*/
+
+.app-content {
+
   flex: 1;
-  display: flex;
-  flex-direction: column;
-}
 
-/* =========================
-   SECTIONS
-========================= */
-section {
-  padding: 80px 20px;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* =========================
-   AUTH PAGES
-========================= */
-.auth-container {
-  min-height: 100vh;
   width: 100%;
 
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-
-  background: linear-gradient(
-    135deg,
-    var(--bg),
-    var(--bg-soft)
-  );
-
-  padding: 60px 20px 20px;
 }
-
-.auth-box {
-  width: 420px;
-  padding: 35px;
-  border-radius: 18px;
-
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(18px);
-
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-
-  color: var(--text);
-  text-align: center;
-
-  animation: fadeIn 0.4s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 /* =========================
-   INPUTS
+ADMIN LOADING
 ========================= */
-.auth-box input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
 
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  outline: none;
+.admin-loading {
 
-  background: transparent;
-  color: var(--text);
-}
+  min-height: 70vh;
 
-/* =========================
-   BUTTONS
-========================= */
-.auth-box button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  display:flex;
 
-  border: none;
-  border-radius: 8px;
+  align-items:center;
 
-  background: var(--primary);
-  color: white;
+  justify-content:center;
 
-  cursor: pointer;
-  transition: 0.2s;
-}
+  width:100%;
 
-.auth-box button:hover {
-  background: var(--primary-dark);
-}
+  font-size:20px;
 
-/* =========================
-   GOOGLE BUTTON
-========================= */
-.google-btn {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  margin-bottom: 30px;
+  font-weight:600;
 
-  border-radius: 8px;
-  border: 1px solid var(--border);
+  color:var(--text-muted);
 
-  background: white;
-  color: black;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  cursor: pointer;
-}
-
-/* =========================
-   TEXT UTILITIES
-========================= */
-p {
-  color: var(--text);
-}
-
-.text-muted {
-  color: var(--text-muted);
-}
-
-/* =========================
-   PAGES
-========================= */
-.page-wrapper {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.category-page {
-  width: 100%;
-}
-
-/* =========================
-   NOT FOUND
-========================= */
-.not-found {
-  width: 100%;
-  text-align: center;
-  margin-top: 80px;
-
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-/* =========================
-   FLAGS / EMOJI FIX
-========================= */
-.flag {
-  font-size: 20px;
-  line-height: 1;
-
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
-}
-
-/* =========================
-   ABOUT SECTION
-========================= */
-.about-section {
-  color: var(--text);
-}
-
-.about-section p,
-.about-section h1,
-.about-section h2,
-.about-section h3 {
-  color: inherit;
 }

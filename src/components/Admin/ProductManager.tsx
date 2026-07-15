@@ -18,6 +18,7 @@ const [image1,setImage1] = useState("");
 const [image2,setImage2] = useState("");
 const [image3,setImage3] = useState("");
 const [image4,setImage4] = useState("");
+const [image5,setImage5] = useState("");
 
 const [affiliateUrl,setAffiliateUrl] = useState("");
 const [marketplace,setMarketplace] = useState("");
@@ -146,6 +147,7 @@ image_1:image1,
 image_2:image2,
 image_3:image3,
 image_4:image4,
+image_5:image5,
 affiliate_url:affiliateUrl,
 shop_name: shopName,
 
@@ -203,6 +205,7 @@ setImage1("");
 setImage2("");
 setImage3("");
 setImage4("");
+setImage5("");
 
 setAffiliateUrl("");
 
@@ -532,6 +535,13 @@ onChange={(e)=>setEducationalFeatures(e.target.value)}
         value={image4}
         onChange={(e)=>setImage4(e.target.value)}
         />
+
+        <input
+        placeholder="Image 5 URL"
+        value={image5}
+        onChange={(e)=>setImage4(e.target.value)}
+        />
+        
         
         
         </div>
