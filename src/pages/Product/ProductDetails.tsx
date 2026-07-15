@@ -1,517 +1,212 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import{useEffect,useState}from"react";
+import{useParams}from"react-router-dom";
+import{supabase}from"../../lib/supabase";
+import ProductCard from"../../components/ProductCard/ProductCard";
+import"./ProductDetails.css";
 
-import { supabase } from "../../lib/supabase";
-import ProductCard from "../../components/ProductCard/ProductCard";
-
-import "./ProductDetails.css";
-
-
-interface Product {
-
+type Product={
 id:string;
 product_id:string;
-
 title:string;
-
-description:string;
-short_description:string;
-
+description?:string;
+short_description?:string;
 image_1:string;
-image_2:string;
-image_3:string;
-image_4:string;
-
+image_2?:string;
+image_3?:string;
+image_4?:string;
 affiliate_url:string;
-
-department?:string;
-category?:string;
 subcategory?:string;
-
-marketplace?:string;
-
+brand?:string;
 material?:string;
 fit?:string;
-
 style?:string;
-season?:string;
 occasion?:string;
-
-}
-
-
+season?:string;
+gender?:string;
+hair_type?:string;
+skin_type?:string;
+ingredients?:string;
+volume_size?:string;
+scent?:string;
+benefits?:string;
+suitable_for?:string;
+dimensions?:string;
+color?:string;
+room_type?:string;
+weight?:string;
+age_range?:string;
+educational_features?:string;
+};
 
 export default function ProductDetails(){
 
+const{productId}=useParams();
 
-const { productId } = useParams();
-
-
-const [product,setProduct] = useState<Product | null>(null);
-
-const [selectedImage,setSelectedImage] = useState("");
-
-const [related,setRelated] = useState<Product[]>([]);
-
-
+const[product,setProduct]=useState<Product|null>(null);
+const[selectedImage,setSelectedImage]=useState("");
+const[related,setRelated]=useState<Product[]>([]);
 
 useEffect(()=>{
 
-if(productId){
+if(!productId)return;
 
-fetchProduct();
+const loadProduct=async()=>{
 
+const{data,error}=await supabase
+.from("products")
+.select("*")
+.eq("product_id",productId)
+.maybeSingle();
+
+if(error||!data){
+console.log(error);
+return;
 }
+
+setProduct(data);
+setSelectedImage(data.image_1);
+
+
+const{data:relatedData}=await supabase
+.from("products")
+.select("*")
+.eq("subcategory",data.subcategory)
+.neq("product_id",data.product_id)
+.limit(4);
+
+
+setRelated(relatedData||[]);
+
+};
+
+loadProduct();
 
 },[productId]);
 
 
-
-const fetchProduct = async()=>{
-
-
-const {data,error}=await supabase
-
-.from("products")
-
-.select("*")
-
-.eq("product_id",productId)
-
-.maybeSingle();
-
-
-
-if(error){
-
-console.log(
-"PRODUCT ERROR:",
-error
-);
-
-return;
-
-}
-
-
-
-if(!data) return;
-
-
-
-setProduct(data);
-
-setSelectedImage(data.image_1);
-
-
-
-fetchRelated(
-data.subcategory,
-data.product_id
-);
-
-
-};
-
-
-
-
-
-const fetchRelated = async(
-subcategory:string,
-currentProductId:string
-)=>{
-
-
-const {data,error}=await supabase
-
-.from("products")
-
-.select("*")
-
-.eq("subcategory",subcategory)
-
-.neq("product_id",currentProductId)
-
-.limit(5);
-
-
-
-if(!error){
-
-setRelated(data || []);
-
-}
-
-
-};
-
-
-
-
 if(!product){
 
-return (
-
-<p>
+return(
+<div className="product-details-page">
 Loading product...
-</p>
-
+</div>
 );
 
 }
 
 
-
-return (
-
-
-<div className="product-details-page">
-
-
-
-{/* TOP SECTION */}
-
-
-<div className="product-top-section">
-
-
-
-{/* IMAGE GALLERY */}
-
-
-<div className="product-gallery">
-
-
-<img
-
-src={
-selectedImage || product.image_1
-}
-
-alt={product.title}
-
-className="main-product-image"
-
-/>
-
-
-
-<div className="thumbnail-list">
-
-
-{
-
-[
+const images=[
 product.image_1,
 product.image_2,
 product.image_3,
 product.image_4
+].filter(Boolean) as string[];
 
-]
 
-.filter(Boolean)
+const specifications=[
+["Brand",product.brand],
+["Material",product.material],
+["Fit",product.fit],
+["Style",product.style],
+["Occasion",product.occasion],
+["Season",product.season],
+["Gender",product.gender],
+["Hair Type",product.hair_type],
+["Skin Type",product.skin_type],
+["Ingredients",product.ingredients],
+["Volume",product.volume_size],
+["Scent",product.scent],
+["Benefits",product.benefits],
+["Suitable For",product.suitable_for],
+["Dimensions",product.dimensions],
+["Color",product.color],
+["Room Type",product.room_type],
+["Weight",product.weight],
+["Age Range",product.age_range],
+["Educational Features",product.educational_features]
+].filter(item=>item[1]);
 
-.map(
-(image:string,index:number)=>(
 
+return(
+
+<div className="product-details-page">
+
+<div className="product-top">
+
+
+<div className="thumbnail-list">
+
+{images.map(img=>(
 
 <img
-
-key={index}
-
-src={image}
-
+key={img}
+src={img}
 alt={product.title}
-
-className={
-selectedImage === image
-?
-"thumbnail active"
-:
-"thumbnail"
-}
-
-onClick={()=>setSelectedImage(image)}
-
+className={`thumbnail ${selectedImage===img?"active":""}`}
+onClick={()=>setSelectedImage(img)}
 />
 
-
-)
-
-)
-
-}
-
-
-
-</div>
-
+))}
 
 </div>
 
 
 
+<div className="image-area">
 
+<img
+src={selectedImage}
+alt={product.title}
+className="main-product-image"
+/>
 
-
-{/* PRODUCT INFORMATION */}
+</div>
 
 
 
 <div className="product-info">
 
 
-
-<h1>
-
-{product.title}
-
-</h1>
+<h1>{product.title}</h1>
 
 
-
-
-<p className="product-id">
-
-Product ID:
-{" "}
-{product.product_id}
-
+<p>
+<strong>Product ID:</strong> {product.product_id}
 </p>
-
-
 
 
 <p className="short-description">
-
 {product.short_description}
-
 </p>
 
 
 
+<div className="details-list">
+
+<h2>Product Specifications</h2>
 
 
-<div className="product-details-box">
+{specifications.map(item=>(
 
-
-<h3>
-
-Product Information
-
-</h3>
-
-
-
-
-{
-product.department &&
-
-<p>
-
-<strong>
-Department:
-</strong>
-{" "}
-{product.department}
-
-</p>
-}
-
-
-
-
-{
-product.category &&
-
-<p>
-
-<strong>
-Category:
-</strong>
-{" "}
-{product.category}
-
-</p>
-}
-
-
-
-
-{
-product.subcategory &&
-
-<p>
-
-<strong>
-Subcategory:
-</strong>
-{" "}
-{product.subcategory}
-
-</p>
-}
-
-
-
-
-{
-product.marketplace &&
-
-<p>
-
-<strong>
-Marketplace:
-</strong>
-{" "}
-{product.marketplace}
-
-</p>
-}
-
-
-
-
-
-{
-
-(
-product.material ||
-product.fit ||
-product.style ||
-product.season ||
-product.occasion
-
-)
-
-&&
-
-<hr />
-
-}
-
-
-
-
-
-{
-product.material &&
-
-<p>
-
-<strong>
-Material:
-</strong>
-{" "}
-{product.material}
-
+<p key={item[0]}>
+<strong>{item[0]}</strong>
+{item[1]}
 </p>
 
-}
-
-
-
-
-{
-product.fit &&
-
-<p>
-
-<strong>
-Fit:
-</strong>
-{" "}
-{product.fit}
-
-</p>
-
-}
-
-
-
-
-{
-product.style &&
-
-<p>
-
-<strong>
-Style:
-</strong>
-{" "}
-{product.style}
-
-</p>
-
-}
-
-
-
-
-{
-product.season &&
-
-<p>
-
-<strong>
-Season:
-</strong>
-{" "}
-{product.season}
-
-</p>
-
-}
-
-
-
-
-{
-product.occasion &&
-
-<p>
-
-<strong>
-Occasion:
-</strong>
-{" "}
-{product.occasion}
-
-</p>
-
-}
-
-
+))}
 
 </div>
-
-
 
 
 
 <button
-
 className="detail-shop-btn"
-
-onClick={()=>
-
-window.open(
-product.affiliate_url,
-"_blank"
-)
-
-}
-
+onClick={()=>window.open(product.affiliate_url,"_blank")}
 >
-
 Shop Now
-
 </button>
 
 
-
-
 </div>
 
 
@@ -519,79 +214,48 @@ Shop Now
 
 
 
+<section className="product-highlights">
 
+<h2>Product Highlights</h2>
 
+<ul>
 
-{/* PRODUCT HIGHLIGHTS */}
+{product.description?.split("\n").filter(Boolean).map((line,index)=>(
 
+<li key={index}>
+✓ {line.replace("- ","")}
+</li>
 
+))}
 
-{/* PRODUCT HIGHLIGHTS */}
-
-<section className="highlights-section">
-
-  <h2>
-    Product Highlights
-  </h2>
-
-
-  <ul className="feature-list">
-
-    {
-      product.description
-        ?.split("\n")
-        .map((item:string)=>item.trim())
-        .filter(Boolean)
-        .map((item:string,index:number)=>(
-
-          <li key={index}>
-            {item.replace("- ","")}
-          </li>
-
-        ))
-    }
-
-  </ul>
-
+</ul>
 
 </section>
 
-{/* RELATED PRODUCTS */}
-<section className="related-section">
 
 
-<h2>
+<section className="related-products">
 
-You May Also Like
+<h2>You May Also Like</h2>
 
-</h2>
-<div className="product-grid">
+<div className="related-grid">
 
-{
-
-related.map((item)=>(
-
+{related.map(item=>(
 
 <ProductCard
-
 key={item.id}
-
 product={item}
-
 />
 
-
-))
-
-}
+))}
 
 </div>
 
 </section>
+
+
 </div>
 
-
 );
-
 
 }

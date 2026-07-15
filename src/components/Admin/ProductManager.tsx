@@ -29,6 +29,7 @@ const [trending,setTrending] = useState(false);
 const [season,setSeason] = useState("");
 const [style,setStyle] = useState("");
 const [occasion,setOccasion] = useState("");
+const [gender, setGender] = useState("");
 
 /* CATEGORY */
 
@@ -40,6 +41,25 @@ const [fit,setFit] = useState("");
 
 const [products,setProducts] = useState<any[]>([]);
 const [spotlight, setSpotlight] = useState(false);
+
+// Beauty fields
+const [hairType, setHairType] = useState("");
+const [skinType, setSkinType] = useState("");
+const [ingredients, setIngredients] = useState("");
+const [volumeSize, setVolumeSize] = useState("");
+const [scent, setScent] = useState("");
+const [benefits, setBenefits] = useState("");
+const [suitableFor, setSuitableFor] = useState("");
+
+// Home & Living fields
+const [dimensions, setDimensions] = useState("");
+const [color, setColor] = useState("");
+const [roomType, setRoomType] = useState("");
+const [weight, setWeight] = useState("");
+
+// Toys & Gifts fields
+const [ageRange, setAgeRange] = useState("");
+const [educationalFeatures, setEducationalFeatures] = useState("");
 
 
 
@@ -143,6 +163,22 @@ style,
 occasion,
 material,
 fit,
+
+hair_type: hairType,
+skin_type: skinType,
+ingredients,
+volume_size: volumeSize,
+scent,
+benefits,
+suitable_for: suitableFor,
+
+dimensions,
+color,
+room_type: roomType,
+weight,
+
+age_range: ageRange,
+educational_features: educationalFeatures,
 
 
 }
@@ -251,15 +287,182 @@ const seasons = [
         onChange={(e)=>setTitle(e.target.value)}
         />
 
+<div className="brand-group">
+
 <input
-
 placeholder="Brand"
-
 value={brand}
-
 onChange={(e)=>setBrand(e.target.value)}
-
 />
+
+</div>
+
+{department === "fashion" && (
+        <div className="form-section category-details">
+
+<h3>Fashion Details</h3>
+
+<input
+placeholder="Material"
+value={material}
+onChange={(e)=>setMaterial(e.target.value)}
+/>
+
+<input
+placeholder="Fit"
+value={fit}
+onChange={(e)=>setFit(e.target.value)}
+/>
+
+<input
+placeholder="Style"
+value={style}
+onChange={(e)=>setStyle(e.target.value)}
+/>
+
+<input
+placeholder="Occasion"
+value={occasion}
+onChange={(e)=>setOccasion(e.target.value)}
+/>
+
+<input
+placeholder="Season"
+value={season}
+onChange={(e)=>setSeason(e.target.value)}
+/>
+
+<input
+placeholder="Gender"
+value={gender}
+onChange={(e)=>setGender(e.target.value)}
+/>
+
+</div>
+)}
+
+
+{department === "beauty" && (
+<div className="form-section">
+
+<h3>Beauty Details</h3>
+
+<input
+placeholder="Hair Type"
+value={hairType}
+onChange={(e)=>setHairType(e.target.value)}
+/>
+
+<input
+placeholder="Skin Type"
+value={skinType}
+onChange={(e)=>setSkinType(e.target.value)}
+/>
+
+<input
+placeholder="Ingredients"
+value={ingredients}
+onChange={(e)=>setIngredients(e.target.value)}
+/>
+
+<input
+placeholder="Volume / Size"
+value={volumeSize}
+onChange={(e)=>setVolumeSize(e.target.value)}
+/>
+
+<input
+placeholder="Scent"
+value={scent}
+onChange={(e)=>setScent(e.target.value)}
+/>
+
+<input
+placeholder="Benefits"
+value={benefits}
+onChange={(e)=>setBenefits(e.target.value)}
+/>
+
+<input
+placeholder="Suitable For"
+value={suitableFor}
+onChange={(e)=>setSuitableFor(e.target.value)}
+/>
+
+</div>
+)}
+
+
+{department === "home-living" && (
+<div className="form-section">
+
+<h3>Home & Living Details</h3>
+
+<input
+placeholder="Material"
+value={material}
+onChange={(e)=>setMaterial(e.target.value)}
+/>
+
+<input
+placeholder="Dimensions"
+value={dimensions}
+onChange={(e)=>setDimensions(e.target.value)}
+/>
+
+<input
+placeholder="Color"
+value={color}
+onChange={(e)=>setColor(e.target.value)}
+/>
+
+<input
+placeholder="Room Type"
+value={roomType}
+onChange={(e)=>setRoomType(e.target.value)}
+/>
+
+<input
+placeholder="Weight"
+value={weight}
+onChange={(e)=>setWeight(e.target.value)}
+/>
+
+</div>
+)}
+
+
+{department === "toys-gifts" && (
+<div className="form-section">
+
+<h3>Toys & Gifts Details</h3>
+
+<input
+placeholder="Age Range"
+value={ageRange}
+onChange={(e)=>setAgeRange(e.target.value)}
+/>
+
+<input
+placeholder="Material"
+value={material}
+onChange={(e)=>setMaterial(e.target.value)}
+/>
+
+<input
+placeholder="Dimensions"
+value={dimensions}
+onChange={(e)=>setDimensions(e.target.value)}
+/>
+
+<input
+placeholder="Educational Features"
+value={educationalFeatures}
+onChange={(e)=>setEducationalFeatures(e.target.value)}
+/>
+
+</div>
+)}
         
         </div>
         
