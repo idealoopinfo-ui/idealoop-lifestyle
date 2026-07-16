@@ -1,9 +1,11 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import { supabase } from "./lib/supabase";
 
 import { CountryProvider } from "./context/CountryContext";
 import AdminRoute from "./components/Auth/AdminRoute";
+import Maintenance from "./components/Maintenance/Maintenance";
 
 import TopNavbar from "./components/Navbar/TopNavbar";
 import NoticePanel from "./components/NoticePanel/NoticePanel";
@@ -11,7 +13,7 @@ import CategoryNavbar from "./components/Navbar/CategoryNavbar";
 import Wishlist from "./pages/Wishlist/Wishlist";
 import Footer from "./components/Footer/Footer";
 
-import {AnimatePresence} from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import PageTransition from "./components/PageTransition/PageTransition";
 
 import About from "./pages/About/About";
@@ -26,22 +28,70 @@ import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import Contact from "./pages/Contact/Contact";
 import ClothingCategory from "./pages/ClothingCategory/ClothingCategory";
 import DiscoverPage from "./pages/Discover/DiscoverPage";
+
 import Privacy from "./pages/Legal/PrivacyPolicy";
 import Terms from "./pages/Legal/TermsConditions";
 import AffiliateDisclosure from "./pages/Legal/AffiliateDisclosure";
+
 import Help from "./pages/Help/Help";
 
 import "./styles/theme.css";
 
-
 export default function App(){
 
-const location=useLocation();
-
-const isDiscover=location.pathname.startsWith("/discover");
-
-useEffect(()=>{
-
+  const location = useLocation();
+  
+  const isDiscover = location.pathname.startsWith("/discover");
+  const [maintenance,setMaintenance] = useState<boolean | null>(null);
+  
+  useEffect(()=>{
+  
+  
+  const checkMaintenance = async()=>{
+  
+  
+  const {data,error}=await supabase
+  
+  .from("site_settings")
+  
+  .select("maintenance_mode")
+  
+  .eq("id",1)
+  
+  .single();
+  
+  
+  
+  console.log(
+  "MAINTENANCE STATUS:",
+  data
+  );
+  
+  
+  
+  if(!error && data){
+  
+  setMaintenance(
+  data.maintenance_mode
+  );
+  
+  }
+  
+  
+  };
+  
+  
+  checkMaintenance();
+  
+  
+  },[]);
+  
+  
+  
+  
+  useEffect(()=>{
+  
+  
   const createProfile = async()=>{
   
   
@@ -76,6 +126,7 @@ useEffect(()=>{
   
   
   const metadata=user.user_metadata;
+  
   
   
   await supabase
@@ -115,10 +166,18 @@ useEffect(()=>{
   
   },[]);
 
-  
-  return(
+  if(maintenance){
 
+    return <Maintenance />;
+    
+    }
+    
+    
+    
+    return(
+    
     <CountryProvider>
+    
     
     <div className="app-layout">
     
@@ -136,12 +195,12 @@ useEffect(()=>{
     <main className="app-content">
     
     
-    <AnimatePresence 
+    <AnimatePresence
     mode="wait"
     >
     
     
-    <Routes 
+    <Routes
     location={location}
     key={location.pathname}
     >
@@ -268,6 +327,7 @@ useEffect(()=>{
     }
     />
     
+    
     <Route
     path="/about"
     element={
@@ -276,7 +336,8 @@ useEffect(()=>{
     </PageTransition>
     }
     />
-
+    
+    
     <Route
     path="/contact"
     element={
@@ -335,5 +396,7 @@ useEffect(()=>{
     
     </CountryProvider>
     
+    
     );
-  }
+    
+    }

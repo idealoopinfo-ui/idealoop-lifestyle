@@ -9,45 +9,30 @@ import HelpManager from "../../components/Admin/HelpManager";
 
 import "./Admin.css";
 
-
 export default function Admin() {
 
-
 const [activeTab,setActiveTab] = useState("dashboard");
-
 
 // DASHBOARD STATS
 
 const [stats,setStats] = useState({
-
 products:0,
-
 users:0,
-
 messages:0,
-
 blogs:0
-
 });
 
-
 // NOTICE STATES
-
 const [notices,setNotices] = useState<any[]>([]);
-
 const [noticeMessage,setNoticeMessage] = useState("");
-
 const [noticeActive,setNoticeActive] = useState(false);
-
 const [noticePriority,setNoticePriority] = useState(1);
-
 const [savingNotice,setSavingNotice] = useState(false);
-
 const [editingNoticeId,setEditingNoticeId] = useState<number|null>(null);
 
-
-
-
+// MAINTENANCE STATES
+const [maintenance,setMaintenance] = useState(false);
+const [loadingMaintenance,setLoadingMaintenance] = useState(false);
 
 // FETCH STATS
 
@@ -71,7 +56,6 @@ head:true
 });
 
 
-
 if(productError){
 
 console.log(
@@ -80,10 +64,6 @@ productError
 );
 
 }
-
-
-
-
 
 const {
 count:userCount,
@@ -112,27 +92,67 @@ userError
 
 }
 
-
-
-
 setStats({
 
 products:productCount || 0,
-
 users:userCount || 0,
-
 messages:0,
-
 blogs:0
-
 });
-
 
 };
 
+const toggleMaintenance = async()=>{
 
-
-
+    setLoadingMaintenance(true);
+    
+    
+    const newValue = !maintenance;
+    
+    
+    console.log(
+    "CHANGING MAINTENANCE TO:",
+    newValue
+    );
+    
+    
+    const {data,error}=await supabase
+    
+    .from("site_settings")
+    
+    .update({
+      maintenance_mode:newValue
+    })
+    
+    .eq("id",1)
+    
+    .select();
+    
+    
+    console.log(
+    "UPDATE RESULT:",
+    data,
+    error
+    );
+    
+    
+    
+    if(error){
+    
+    alert("Update failed");
+    
+    }else{
+    
+    setMaintenance(newValue);
+    
+    alert("Maintenance updated");
+    
+    }
+    
+    
+    setLoadingMaintenance(false);
+    
+    };
 // FETCH NOTICES
 
 const fetchNotices = async()=>{
@@ -325,18 +345,49 @@ notice.priority
 };
 
 
+const fetchMaintenance = async()=>{
+
+    const {data,error}=await supabase
+    
+    .from("site_settings")
+    
+    .select("maintenance_mode")
+    
+    .eq("id",1)
+    
+    .single();
+    
+    
+    
+    if(error){
+    
+    console.log(
+    "MAINTENANCE FETCH ERROR:",
+    error
+    );
+    
+    return;
+    
+    }
+    
+    
+    setMaintenance(
+    data.maintenance_mode
+    );
+    
+    
+    };
 
 
+    useEffect(()=>{
 
-useEffect(()=>{
-
-
-fetchStats();
-
-fetchNotices();
-
-
-},[]);
+        fetchStats();
+        
+        fetchNotices();
+        
+        fetchMaintenance();
+        
+        },[]);
 
 
 
@@ -880,7 +931,55 @@ Edit
 
 
 
+{
+activeTab==="maintenance" && (
 
+<div className="maintenance-panel">
+
+<h2>
+Maintenance Mode
+</h2>
+
+
+<p>
+Current Status:
+
+{" "}
+
+{
+maintenance
+?
+"ON"
+:
+"OFF"
+}
+
+</p>
+
+
+<button
+
+onClick={toggleMaintenance}
+
+disabled={loadingMaintenance}
+
+>
+
+{
+maintenance
+?
+"Disable Maintenance"
+:
+"Enable Maintenance"
+}
+
+</button>
+
+
+</div>
+
+)
+}
 
 
 
