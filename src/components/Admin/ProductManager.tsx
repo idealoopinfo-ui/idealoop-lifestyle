@@ -39,6 +39,7 @@ const [category,setCategory] = useState("");
 const [subcategory,setSubcategory] = useState("");
 const [material,setMaterial] = useState("");
 const [fit,setFit] = useState("");
+const [categoryId,setCategoryId] = useState<number | null>(null);
 
 const [products,setProducts] = useState<any[]>([]);
 const [spotlight, setSpotlight] = useState(false);
@@ -158,6 +159,7 @@ spotlight,
 
 department,
 category,
+category_id: categoryId,
 subcategory,
 
 season,
@@ -668,43 +670,36 @@ Other
         
         
         <select
-        
-        value={category}
-        
-        disabled={!department}
-        
-        onChange={(e)=>setCategory(e.target.value)}
-        
-        >
-        
-        <option value="">
-        Select Category
-        </option>
-        
-        
-        {
-        categoryList.map((item:any)=>(
-        
-        <option
-        
-        key={item.slug}
-        
-        value={item.slug}
-        
-        >
-        
-        {item.name}
-        
-        </option>
-        
-        ))
-        
-        }
-        
-        
-        </select>
-        
-        
+
+value={categoryId || ""}
+
+onChange={(e)=>
+setCategoryId(Number(e.target.value))
+}
+
+>
+
+<option value="">
+Select Category
+</option>
+
+
+{
+categories.map((cat:any)=>(
+
+<option
+key={cat.id}
+value={cat.id}
+>
+
+{cat.name}
+
+</option>
+
+))
+}
+
+</select>
         
         
         

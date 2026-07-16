@@ -1,0 +1,182 @@
+/* ===========================
+   HOMEPAGE CATEGORY MANAGER
+=========================== */
+
+.homepage-category-manager{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:16px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,0.08);
+
+    max-width:900px;
+
+}
+
+
+
+.homepage-category-manager h2{
+
+    font-size:28px;
+
+    margin-bottom:30px;
+
+    color:#111827;
+
+}
+
+
+
+.homepage-category-manager h3{
+
+    font-size:18px;
+
+    margin-bottom:10px;
+
+    color:#374151;
+
+}
+
+
+
+.homepage-category-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:18px;
+
+    margin-bottom:15px;
+
+    background:#f9fafb;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+}
+
+
+
+.homepage-category-row select{
+
+
+    width:300px;
+
+    padding:12px 15px;
+
+    border-radius:8px;
+
+    border:1px solid #d1d5db;
+
+    background:white;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+}
+
+
+
+.homepage-category-row select:focus{
+
+    outline:none;
+
+    border-color:#ff9900;
+
+}
+
+
+
+/* ACTIVE SWITCH AREA */
+
+.category-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:14px;
+
+}
+
+
+
+.category-status input{
+
+    width:18px;
+
+    height:18px;
+
+}
+
+
+
+/* SAVE BUTTON */
+
+.save-category-btn{
+
+    margin-top:25px;
+
+    background:#ff9900;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 35px;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+
+
+.save-category-btn:hover{
+
+    background:#e68a00;
+
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+
+.homepage-category-row{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+
+.homepage-category-row select{
+
+    width:100%;
+
+}
+
+
+}

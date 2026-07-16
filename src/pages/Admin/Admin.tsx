@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 
 import CategoryManager from "../../components/Admin/CategoryManager";
+import HomepageCategoryManager from "../../components/Admin/HomepageCategoryManager/HomepageCategoryManager";
 import ProductManager from "../../components/Admin/ProductManager";
 import HelpManager from "../../components/Admin/HelpManager";
 
@@ -406,6 +407,24 @@ onClick={()=>setActiveTab("categories")}
  Categories
 </button>
 
+<button
+
+className={
+activeTab==="homepage"
+?
+"active"
+:
+""
+}
+
+onClick={()=>setActiveTab("homepage")}
+
+>
+
+Homepage Categories
+
+</button>
+
 
 <button
 
@@ -640,7 +659,14 @@ activeTab==="categories" &&
 <CategoryManager/>
 }
 
+{
+activeTab==="homepage" && (
 
+<HomepageCategoryManager/>
+
+)
+
+}
 
 {
 activeTab==="notice" && (
