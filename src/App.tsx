@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import {AnimatePresence} from "framer-motion";
 import PageTransition from "./components/PageTransition/PageTransition";
 
+import About from "./pages/About/About";
 import Home from "./pages/Home/Home";
 import Admin from "./pages/Admin/Admin";
 import Login from "./pages/Login/Login";
@@ -267,7 +268,15 @@ useEffect(()=>{
     }
     />
     
-    
+    <Route
+    path="/about"
+    element={
+    <PageTransition>
+    <About/>
+    </PageTransition>
+    }
+    />
+
     <Route
     path="/contact"
     element={

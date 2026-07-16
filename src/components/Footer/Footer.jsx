@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+
+
 import "./Footer.css";
 
 export default function Footer() {
@@ -83,6 +85,9 @@ export default function Footer() {
             Support
           </h3>
 
+          <a href="/about">
+            About Us
+          </a>
 
           <Link to="/contact">
             Contact Us

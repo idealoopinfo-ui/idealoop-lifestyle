@@ -26,6 +26,10 @@ const categories=[
     {
     title:"Beauty",
     category:"beauty"
+    },
+    {
+    title:"Fitness",
+    category:"fitness"
     }
 ];
 

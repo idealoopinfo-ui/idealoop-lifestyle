@@ -6,7 +6,7 @@ import FeaturedProducts from "../../components/Home/FeaturedProducts";
 import CategoryShowcase from "../../components/CategoryShowcase/CategoryShowcase";
 import TrendingProducts from "../../components/TrendingProducts/TrendingProducts";
 import WhyChoose from "../../components/WhyChoose/WhyChoose";
-import About from "../../components/About/About";
+
 
 import "./Home.css";
 
@@ -18,39 +18,33 @@ return(
 
 
 <section className="home-section">
-<Hero/>
+  <Hero/>
 </section>
 
 
 <section className="home-section">
-<FeaturedProducts/>
+  <CategoryShowcase/>
 </section>
 
 
 <section className="home-section">
-<CategoryShowcase/>
+  <FeaturedProducts/>
 </section>
 
 
 <section className="home-section">
-<TrendingProducts/>
+  <TrendingProducts/>
 </section>
 
 
 <section className="home-section">
-<About/>
+  <SpotlightSection/>
 </section>
 
 
 <section className="home-section">
-<WhyChoose/>
+  <WhyChoose/>
 </section>
-
-
-<section className="home-section">
-<SpotlightSection/>
-</section>
-
 
 </div>
 
