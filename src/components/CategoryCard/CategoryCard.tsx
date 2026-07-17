@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import "./CategoryCard.css";
 
-export default function CategoryCard({ category }) {
+type Props = {
+  category:any;
+};
+
+export default function CategoryCard({ category }:Props) {
   return (
     <Link to={`/category/${category.slug}`} className="category-card">
       <img src={category.image} alt={category.name} />

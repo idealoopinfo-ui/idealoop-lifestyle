@@ -3,12 +3,6 @@ import { countries } from "../../data/countries";
 import { useCountry } from "../../context/CountryContext";
 import "./CountryButton.css";
 
-interface Country {
-  name: string;
-  code: string;
-  flag: string;
-}
-
 const CountryButton = () => {
   const [open, setOpen] = useState(false);
   const { country, setCountry } = useCountry();

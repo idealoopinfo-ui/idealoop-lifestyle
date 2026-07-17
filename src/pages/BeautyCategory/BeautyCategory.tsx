@@ -1,11 +1,14 @@
-import Navbar from '../../components/Navbar/Navbar';
+import CategoryNavbar from "../../components/Navbar/CategoryNavbar";
 import ProductGrid from '../../components/ProductGrid/ProductGrid';
 
 export default function BeautyCategory() {
   return (
     <>
-      <Navbar />
-      <ProductGrid category="beauty" />
+     <CategoryNavbar />
+     <ProductGrid 
+  category="beauty"
+  search=""
+/>
     </>
   );
 }

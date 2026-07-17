@@ -5,8 +5,6 @@ import "./Footer.css";
 
 export default function Footer() {
 
-  const logoUrl =
-    "YOUR_SUPABASE_IMAGE_URL";
 
   return (
     <footer className="footer">

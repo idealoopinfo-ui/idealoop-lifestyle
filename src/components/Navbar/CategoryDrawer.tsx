@@ -27,7 +27,7 @@ export default function CategoryDrawer() {
         <div className="drawer-list">
           {categories.map((cat) => (
             <div
-              key={cat.id}
+            key={cat.name}
               className="drawer-item"
               onClick={() => {
                 navigate(`/category/${cat.slug}`);

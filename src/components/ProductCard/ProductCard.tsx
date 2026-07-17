@@ -8,23 +8,19 @@ import "./ProductCard.css";
 
 
 interface ProductCardProps {
-
-product: {
-
-id: string;
-
-product_id: string;
-
-title: string;
-
-image_1: string;
-
-affiliate_url: string;
-
-};
-
+  product: {
+    product_id: string;
+    title: string;
+    main_image_url?: string;
+    image?: string;
+    image_1?: string;
+    image_2?: string;
+    image_3?: string;
+    image_4?: string;
+    affiliate_url?: string;
+    product_url?: string;
+  }
 }
-
 
 
 export default function ProductCard({ product }: ProductCardProps) {

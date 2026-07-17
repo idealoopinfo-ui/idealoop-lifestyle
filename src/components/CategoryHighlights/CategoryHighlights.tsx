@@ -3,11 +3,6 @@ import { supabase } from "../../lib/supabase";
 import { Link } from "react-router-dom";
 import "./CategoryHighlights.css";
 
-type Product = {
-  id: string;
-  category: string;
-};
-
 export default function CategoryHighlights() {
   const [categories, setCategories] = useState<any[]>([]);
 

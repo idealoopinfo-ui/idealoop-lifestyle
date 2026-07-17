@@ -41,7 +41,6 @@ const [material,setMaterial] = useState("");
 const [fit,setFit] = useState("");
 const [categoryId,setCategoryId] = useState<number | null>(null);
 
-const [products,setProducts] = useState<any[]>([]);
 const [spotlight, setSpotlight] = useState(false);
 
 // Beauty fields
@@ -75,8 +74,7 @@ fetchProducts();
 
 const fetchProducts = async()=>{
 
-
-const {data,error}=await supabase
+const {error}=await supabase
 .from("products")
 .select("*")
 .order("created_at",{ascending:false});
@@ -89,11 +87,6 @@ console.log(error);
 return;
 
 }
-
-
-setProducts(data || []);
-
-
 };
 
 /* =========================
@@ -110,7 +103,6 @@ const selectedCategory = selectedMainCategory?.children?.find(
 );
 
 const departmentList = categories;
-const categoryList = selectedMainCategory?.children || [];
 const subcategoryList = selectedCategory?.children || [];
 
 /* RESET CHILDREN */
@@ -225,38 +217,6 @@ setSpotlight(false);
 fetchProducts();
 
 };
-
-const seasons = [
-    "Spring",
-    "Summer",
-    "Fall",
-    "Winter",
-    "All Season"
-    ];
-    
-    
-    const styles = [
-    "Casual",
-    "Formal",
-    "Streetwear",
-    "Luxury",
-    "Minimalist",
-    "Sporty",
-    "Vintage",
-    "Boho"
-    ];
-    
-    
-    const occasions = [
-    "Everyday",
-    "Work",
-    "Party",
-    "Wedding",
-    "Vacation",
-    "Gym",
-    "Outdoor"
-    ];
-
 
     return (
 

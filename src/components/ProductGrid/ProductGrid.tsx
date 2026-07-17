@@ -4,10 +4,12 @@ import ProductCard from "../ProductCard/ProductCard";
 import "./ProductGrid.css";
 
 type Product = {
-  id: string;
+  product_id: string;
   title: string;
-  main_image_url: string;
-  category: string;
+  main_image_url?: string;
+  image?: string;
+  image_1?: string;
+  affiliate_url?: string;
 };
 
 type Props = {
@@ -45,16 +47,6 @@ export default function ProductGrid({ search, category }: Props) {
     setLoading(false);
   };
 
-  const getImage = (p: any) => {
-    return (
-      p.main_image_url ||
-      p.image_1 ||
-      p.image_2 ||
-      p.image_3 ||
-      p.image_4 ||
-      ""
-    );
-  };
 
   if (loading) return <p>Loading products...</p>;
 
@@ -65,11 +57,9 @@ export default function ProductGrid({ search, category }: Props) {
       ) : (
         products.map((p) => (
           <ProductCard
-            key={p.id}
-            id={p.id}
-            title={p.title}
-            image={getImage(p)}
-          />
+  key={p.product_id}
+  product={p}
+/>
         ))
       )}
     </div>

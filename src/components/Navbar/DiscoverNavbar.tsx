@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import "./DiscoverNavbar.css";
 
 export default function DiscoverNavbar() {
-  const [open, setOpen] = useState(false);
-
+  const [open] = useState(false);
   return (
     <nav className="discover-navbar">
 

@@ -506,19 +506,12 @@ OR
 
 </div>
 <button
-
-type="button"
-
-className="google-btn"
-
-onClick={handleGoogleRegister}
-
+  type="button"
+  className="google-btn"
+  onClick={handleGoogleRegister}
 >
-
-<FcGoogle size={22}/>
-
-Continue with Google
-
+  <FcGoogle />
+  Continue with Google
 </button>
 
 {

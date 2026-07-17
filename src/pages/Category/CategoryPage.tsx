@@ -57,11 +57,9 @@ export default function CategoryPage() {
         ) : (
           products.map((p) => (
             <ProductCard
-              key={p.id}
-              id={p.id}
-              title={p.title}
-              image={p.main_image_url}
-            />
+  key={p.product_id}
+  product={p}
+/>
           ))
         )}
       </div>

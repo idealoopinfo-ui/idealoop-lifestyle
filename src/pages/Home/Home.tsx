@@ -1,5 +1,5 @@
 import Hero from "../../components/Hero/Hero";
-import Collections from "../../components/Collections/Collections";
+
 import SpotlightSection from "../../components/SpotlightSection/SpotlightSection";
 
 import FeaturedProducts from "../../components/Home/FeaturedProducts";
