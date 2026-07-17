@@ -237,39 +237,6 @@ const handleGoogleRegister = async () => {
   
   };
 
-
-
-
-
-const handleGoogle = async()=>{
-
-
-    const {
-    error
-    
-    }=await supabase.auth.signInWithOAuth({
-    
-    provider:"google"
-    
-    });
-    
-    
-    
-    if(error){
-    
-    
-    setError(error.message);
-    
-    
-    }
-    
-    
-    
-    };
-
-
-
-
 return (
 
 <div className="auth-container">
@@ -511,7 +478,7 @@ OR
   onClick={handleGoogleRegister}
 >
   <FcGoogle />
-  Continue with Google
+  Continue With Google
 </button>
 
 {
