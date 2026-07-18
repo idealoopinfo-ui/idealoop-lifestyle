@@ -354,200 +354,311 @@
   
   
   .preview-btn{
+  
+  background:#111;
+  color:white;
+  padding:12px 25px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  
+  }
+  /* =========================
+PRODUCT PREVIEW
+========================= */
 
-    background:#111;
-    color:white;
-    padding:12px 25px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
+.product-preview{
+
+  margin-top:40px;
+  padding:30px;
+  background:#f8fafc;
+  border-radius:20px;
+  
+  }
+  
+  
+  .preview-card{
+  
+  max-width:350px;
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+  
+  }
+  
+  
+  .preview-card img{
+  
+  width:100%;
+  height:300px;
+  object-fit:contain;
+  border-radius:12px;
+  
+  }
+  
+  
+  .preview-card h3{
+  
+  font-size:18px;
+  margin:15px 0;
+  line-height:1.4;
+  
+  }
+  
+  
+  /* =========================
+  BADGES
+  ========================= */
+  
+  .preview-badges{
+  
+  display:flex;
+  gap:10px;
+  margin:15px 0;
+  
+  }
+  
+  
+  .preview-badges span{
+  
+  background:#ff9900;
+  color:white;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+  
+  }
+  
+  
+  /* =========================
+  PREVIEW CONTENT
+  ========================= */
+  
+  .preview-content h2{
+  
+  font-size:20px;
+  margin:10px 0;
+  
+  }
+  
+  
+  .preview-brand{
+  
+  font-weight:600;
+  
+  }
+  
+  
+  .preview-description{
+  
+  font-size:14px;
+  color:#666;
+  
+  }
+  
+  
+  .preview-category{
+  
+  font-size:13px;
+  margin:10px 0;
+  
+  }
+  
+  
+  .preview-marketplace{
+  
+  font-size:13px;
+  font-weight:600;
+  margin-top:10px;
+  
+  }
+  
+  
+  /* =========================
+  BUTTONS
+  ========================= */
+  
+  .preview-actions{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+
+.view-more-btn,
+.shop-now-btn{
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+flex:1;
+
+height:42px;
+
+border-radius:8px;
+
+text-decoration:none;
+
+font-size:14px;
+font-weight:600;
+
+transition:all .3s ease;
+
+cursor:pointer;
+
+}
+
+
+/* VIEW MORE BUTTON */
+
+.view-more-btn{
+
+background:#111;
+color:white;
+
+}
+
+
+.view-more-btn:hover{
+
+background:#333;
+color:white;
+transform:translateY(-2px);
+
+}
+
+
+/* SHOP NOW BUTTON */
+
+.shop-now-btn{
+
+background:#ff9900;
+color:white;
+
+}
+
+
+.shop-now-btn:hover{
+
+background:#e68a00;
+color:white;
+transform:translateY(-2px);
+
+}
+  
+  
+  /* SHOP NOW */
+  
+  .shop-now-btn{
+  
+  background:#ff9900;
+  color:white;
+  
+  }
+  
+  
+  .shop-now-btn:hover{
+  
+  background:#e68a00;
+  transform:translateY(-2px);
+  
+  }
+  .image-selector{
+
+    margin-top:25px;
     
     }
     
     
-    /* =========================
-    PRODUCT PREVIEW
-    ========================= */
-    
-    .product-preview{
-    
-    margin-top:40px;
-    padding:30px;
-    background:#f8fafc;
-    border-radius:20px;
-    
-    }
-    
-    
-    .preview-card{
-    
-    max-width:350px;
-    background:white;
-    padding:20px;
-    border-radius:18px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-    
-    }
-    
-    
-    .preview-card img{
-    
-    width:100%;
-    height:300px;
-    object-fit:contain;
-    border-radius:12px;
-    
-    }
-    
-    
-    .preview-card h3{
-    
-    font-size:18px;
-    margin:15px 0;
-    line-height:1.4;
-    
-    }
-    
-    
-    /* =========================
-    BADGES
-    ========================= */
-    
-    .preview-badges{
+    .image-selector-actions{
     
     display:flex;
     gap:10px;
-    margin:15px 0;
+    margin-bottom:20px;
     
     }
     
     
-    .preview-badges span{
+    .image-selector-actions button{
+    
+    padding:8px 15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#111;
+    color:white;
+    
+    }
+    
+    
+    .image-grid{
+    
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+    
+    }
+    
+    
+    .image-option{
+    
+    position:relative;
+    border:2px solid transparent;
+    border-radius:12px;
+    padding:5px;
+    cursor:pointer;
+    background:white;
+    
+    }
+    
+    
+    .image-option img{
+    
+    width:100%;
+    height:150px;
+    object-fit:contain;
+    border-radius:10px;
+    
+    }
+    
+    
+    .image-option.selected{
+    
+    border:3px solid #ff9900;
+    
+    }
+    
+    
+    .selected-mark{
+    
+    position:absolute;
+    top:10px;
+    right:10px;
     
     background:#ff9900;
     color:white;
-    padding:5px 10px;
+    
+    padding:5px 8px;
+    
     border-radius:20px;
+    
     font-size:12px;
     
     }
-    
-    
-    /* =========================
-    PREVIEW CONTENT
-    ========================= */
-    
-    .preview-content h2{
-    
-    font-size:20px;
-    margin:10px 0;
-    
-    }
-    
-    
-    .preview-brand{
-    
-    font-weight:600;
-    
-    }
-    
-    
-    .preview-description{
-    
-    font-size:14px;
-    color:#666;
-    
-    }
-    
-    
-    .preview-category{
-    
-    font-size:13px;
-    margin:10px 0;
-    
-    }
-    
-    
-    .preview-marketplace{
-    
-    font-size:13px;
-    font-weight:600;
-    margin-top:10px;
-    
-    }
-    
-    
-    /* =========================
-    BUTTONS
-    ========================= */
-    
-    .preview-actions{
-    
-    display:flex;
-    gap:10px;
-    margin-top:15px;
-    
-    }
-    
-    
-    .view-more-btn,
-    .shop-now-btn{
-    
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    
-    flex:1;
-    
-    height:42px;
-    
-    border-radius:8px;
-    
-    text-decoration:none;
-    
-    font-size:14px;
-    font-weight:600;
-    
-    transition:all .3s ease;
-    
-    cursor:pointer;
-    
-    }
-    
-    
-    /* VIEW MORE */
-    
-    .view-more-btn{
-    
-    background:#111;
-    color:white;
-    
-    }
-    
-    
-    .view-more-btn:hover{
-    
-    background:#333;
-    color:white;
-    transform:translateY(-2px);
-    
-    }
-    
-    
-    /* SHOP NOW */
-    
-    .shop-now-btn{
-    
-    background:#ff9900;
-    color:white;
-    
-    }
-    
-    
-    .shop-now-btn:hover{
-    
-    background:#e68a00;
-    color:white;
-    transform:translateY(-2px);
-    
-    }
+    .use-import-btn{
+      margin-top:20px;
+      margin-bottom:30px;
+      padding:12px 20px;
+      background:#16a34a;
+      color:#fff;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+  }
+  
+  .use-import-btn:hover{
+      background:#15803d;
+  }

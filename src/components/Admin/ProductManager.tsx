@@ -14,6 +14,12 @@ const [shortDescription,setShortDescription] = useState("");
 const [shopName,setShopName] = useState("");
 const [brand,setBrand] = useState("");
 const [showPreview, setShowPreview] = useState(false);
+const [spotlight, setSpotlight] = useState(false);
+
+const [targetType, setTargetType] = useState("global");
+const [targetCountries, setTargetCountries] = useState<string[]>([]);
+const [primaryMarket, setPrimaryMarket] = useState("");
+const [currency, setCurrency] = useState("");
 
 const [image1,setImage1] = useState("");
 const [image2,setImage2] = useState("");
@@ -25,6 +31,13 @@ const [affiliateUrl,setAffiliateUrl] = useState("");
 const [marketplace,setMarketplace] = useState("");
 
 const [productId,setProductId] = useState("");
+const [productUrl,setProductUrl] = useState("");
+const [detectedMarketplace,setDetectedMarketplace] = useState("");
+const [importedImages,setImportedImages] = useState<string[]>([]);
+const [importedTitle,setImportedTitle] = useState("");
+const [importedDescription,setImportedDescription] = useState("");
+const [importedBrand,setImportedBrand] = useState("");
+const [selectedImages,setSelectedImages] = useState<string[]>([]);
 
 const [featured,setFeatured] = useState(false);
 const [trending,setTrending] = useState(false);
@@ -41,8 +54,6 @@ const [subcategory,setSubcategory] = useState("");
 const [material,setMaterial] = useState("");
 const [fit,setFit] = useState("");
 const [categoryId,setCategoryId] = useState<number | null>(null);
-
-const [spotlight, setSpotlight] = useState(false);
 
 // Beauty fields
 const [hairType, setHairType] = useState("");
@@ -93,8 +104,6 @@ return;
 /* =========================
 CATEGORY DROPDOWN DATA
 ========================= */
-
-
 const selectedMainCategory = categories.find(
 (item:any)=>item.slug === department
 );
@@ -105,6 +114,16 @@ const selectedCategory = selectedMainCategory?.children?.find(
 
 const departmentList = categories;
 const subcategoryList = selectedCategory?.children || [];
+
+const countryList = [
+        "USA",
+        "Canada",
+        "UK",
+        "Australia",
+        "Germany",
+        "France",
+        "Global"
+        ];
 
 /* RESET CHILDREN */
 
@@ -119,6 +138,133 @@ useEffect(()=>{
 setSubcategory("");
 
 },[category]);
+
+const loadProduct = async()=>{
+
+        if(!productUrl){
+        
+        alert("Please enter product URL");
+        return;
+        
+        }
+        
+        try{
+        
+                const response = await fetch(
+                "http://localhost:5000/api/import-product",
+        {
+        method:"POST",
+        headers:{
+        "Content-Type":"application/json"
+        
+        },
+        body:JSON.stringify({
+        url:productUrl
+        })
+        }
+        );
+        
+        
+        const data = await response.json();
+
+        console.log("IMPORT DATA FULL:", JSON.stringify(data, null, 2));
+        
+        const product = data.product;
+        
+        
+        setTitle(product.title || "");
+        
+        setBrand(product.brand || "");
+        
+        setDescription(product.description || "");
+        
+        setShortDescription(
+            product.shortDescription || ""
+        );
+        
+        setMarketplace(
+            product.marketplace || ""
+        );
+        
+        setAffiliateUrl(
+            product.affiliateUrl || ""
+        );
+        
+        setDetectedMarketplace(
+            product.marketplace || "Unknown"
+        );
+        
+        setImportedImages(
+            product.images || []
+        );
+        setImage1(product.images?.[0] || "");
+        setImage2(product.images?.[1] || "");
+        setImage3(product.images?.[2] || "");
+        setImage4(product.images?.[3] || "");
+        setImage5(product.images?.[4] || "");
+        
+        setSelectedImages([]);
+        
+        
+        if(data.title)
+        setTitle(data.title);
+        
+        
+        if(data.brand)
+        setBrand(data.brand);
+        
+        
+        if(data.description)
+        setDescription(data.description);
+        
+        
+        }catch(error){
+        
+        console.log("IMPORT ERROR:",error);
+        
+        }
+        
+        };
+
+        const toggleImageSelection = (img:string)=>{
+
+                if(selectedImages.includes(img)){
+                
+                setSelectedImages(
+                selectedImages.filter(
+                (item)=>item !== img
+                )
+                );
+                
+                return;
+                
+                }
+                
+                
+                if(selectedImages.length >= 5){
+                
+                alert("You can select maximum 5 images");
+                
+                return;
+                
+                }
+                
+                
+                setSelectedImages([
+                        ...selectedImages,
+                        img
+                        ]);
+                        
+                        
+                        // automatically fill image fields
+                        
+                        if(!image1) setImage1(img);
+                        else if(!image2) setImage2(img);
+                        else if(!image3) setImage3(img);
+                        else if(!image4) setImage4(img);
+                        else if(!image5) setImage5(img);
+                
+                };
 
 /* ADD PRODUCT */
 
@@ -149,6 +295,11 @@ marketplace,
 featured,
 trending,
 spotlight,
+
+target_type: targetType,
+target_countries: targetCountries,
+primary_market: primaryMarket,
+currency,
 
 department,
 category,
@@ -215,6 +366,11 @@ setFeatured(false);
 setTrending(false);
 setSpotlight(false);
 
+setTargetType("global");
+setTargetCountries([]);
+setPrimaryMarket("");
+setCurrency("");
+
 fetchProducts();
 
 };
@@ -225,7 +381,222 @@ fetchProducts();
         
         
         <form className="product-form" onSubmit={(e)=>e.preventDefault()}>
-        
+
+        {/* PRODUCT IMPORT */}
+
+{/* PRODUCT IMPORT */}
+
+<div className="form-section">
+
+<h3>Product Import</h3>
+
+<input
+placeholder="Paste Product URL"
+value={productUrl}
+onChange={(e)=>setProductUrl(e.target.value)}
+/>
+
+
+<button
+type="button"
+className="load-product-btn"
+onClick={loadProduct}
+>
+Load Product
+</button>
+
+
+{detectedMarketplace && (
+
+<p>
+Detected: {detectedMarketplace}
+</p>
+
+)}
+
+
+
+</div>
+
+{/* TARGET MARKET */}
+
+<div className="form-section">
+
+<h3>
+Target Market
+</h3>
+
+
+<div className="input-grid">
+
+
+<select
+
+value={targetType}
+
+onChange={(e)=>setTargetType(e.target.value)}
+
+>
+
+<option value="global">
+Global
+</option>
+
+<option value="selected_countries">
+Selected Countries
+</option>
+
+<option value="specific_country">
+Specific Country
+</option>
+
+
+</select>
+
+
+
+<select
+
+value={primaryMarket}
+
+onChange={(e)=>{
+
+setPrimaryMarket(e.target.value);
+
+
+if(e.target.value==="USA"){
+setCurrency("USD");
+}
+
+else if(e.target.value==="UK"){
+setCurrency("GBP");
+}
+
+else if(e.target.value==="Australia"){
+setCurrency("AUD");
+}
+
+else{
+setCurrency("EUR");
+}
+
+
+}}
+
+>
+
+<option value="">
+Primary Country
+</option>
+
+
+{
+countryList.map(country=>(
+
+<option
+key={country}
+value={country}
+>
+
+{country}
+
+</option>
+
+))
+
+}
+
+
+</select>
+
+
+
+<input
+
+placeholder="Currency"
+
+value={currency}
+
+readOnly
+
+/>
+
+
+</div>
+
+
+{
+targetType==="selected_countries" && (
+
+<div className="country-checkbox">
+
+
+{
+countryList
+.filter(c=>c!=="Global")
+.map(country=>(
+
+
+<label key={country}>
+
+
+<input
+
+type="checkbox"
+
+checked={
+targetCountries.includes(country)
+}
+
+onChange={(e)=>{
+
+
+if(e.target.checked){
+
+setTargetCountries([
+...targetCountries,
+country
+]);
+
+}
+
+else{
+
+setTargetCountries(
+targetCountries.filter(
+(item)=>item!==country
+)
+);
+
+}
+
+
+}}
+
+/>
+
+
+{country}
+
+
+</label>
+
+
+))
+
+
+}
+
+
+</div>
+
+)
+
+
+}
+
+
+</div>
         
         {/* PRODUCT INFORMATION */}
         
@@ -891,38 +1262,39 @@ onClick={addProduct}
 Add Product
 </button>
 
-</div>
-
-
 {showPreview && (
 
 <div className="product-preview">
 
-<h3>
-Product Preview
-</h3>
-
-
 <div className="preview-card">
-
 
 <img
 src={image1 || "/placeholder.png"}
 alt={title}
 />
 
-
 <h3>
 {title || "Product Title"}
 </h3>
 
+<p>
+{shortDescription || "Short description"}
+</p>
+
+<div className="preview-category">
+
+{department || "Department"} /
+{category || "Category"} /
+{subcategory || "Subcategory"}
+
+</div>
+
 
 <div className="preview-actions">
 
-
 <a
 href={`/product/${productId}`}
-className="view-more-btn"
+className="view-more-link"
 target="_blank"
 >
 View More
@@ -936,6 +1308,90 @@ target="_blank"
 rel="noopener noreferrer"
 >
 Shop Now
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+)}
+
+</div>
+
+
+{showPreview && (
+
+<div className="product-preview">
+
+<div className="preview-card">
+
+
+<img
+
+src={image1 || "/placeholder.png"}
+
+alt={title}
+
+/>
+
+
+<h3>
+{title || "Product Title"}
+</h3>
+
+
+<p>
+{shortDescription}
+</p>
+
+
+<p>
+
+{department} /
+
+{category} /
+
+{subcategory}
+
+</p>
+
+
+
+<div className="preview-actions">
+
+
+<a
+
+href={`/product/${productId}`}
+
+target="_blank"
+
+className="view-more-link"
+
+>
+
+View More
+
+</a>
+
+
+
+<a
+
+href={affiliateUrl || "#"}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+className="shop-now-btn"
+
+>
+
+Shop Now
+
 </a>
 
 
