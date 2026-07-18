@@ -38,6 +38,9 @@ import Help from "./pages/Help/Help";
 import "./styles/theme.css";
 
 export default function App(){
+  
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [checking, setChecking] = useState(true);
 
   const location = useLocation();
   
@@ -70,12 +73,14 @@ export default function App(){
   
   
   if(!error && data){
-  
-  setMaintenance(
-  data.maintenance_mode
-  );
-  
-  }
+
+    setMaintenance(data.maintenance_mode);
+    
+    }else{
+    
+    setMaintenance(false);
+    
+    }
   
   
   };
@@ -85,6 +90,68 @@ export default function App(){
   
   
   },[]);
+
+  useEffect(() => {
+
+    const checkAccess = async()=>{
+    
+    
+    // Get maintenance status
+    
+    const {data: settings} = await supabase
+    .from("site_settings")
+    .select("maintenance_mode")
+    .eq("id",1)
+    .single();
+    
+    
+    if(settings?.maintenance_mode){
+    
+    setMaintenance(true);
+    
+    }
+    
+    
+    // Check logged user
+    
+    const {
+    data:{
+    user
+    }
+    
+    }= await supabase.auth.getUser();
+    
+    
+    
+    if(user){
+    
+      const {data:profile}=await supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id",user.id)
+      .single();
+    
+    
+    
+    if(profile?.is_admin === true){
+
+      setIsAdmin(true);
+      
+      }
+    
+    }
+    
+    
+    setChecking(false);
+    
+    
+    };
+    
+    
+    checkAccess();
+    
+    
+    },[]);
   
   
   
@@ -111,13 +178,9 @@ export default function App(){
   
   
   const {data:profile}=await supabase
-  
   .from("profiles")
-  
-  .select("id")
-  
+  .select("is_admin")
   .eq("id",user.id)
-  
   .single();
   
   
@@ -166,8 +229,15 @@ export default function App(){
   
   },[]);
 
-  if(maintenance){
+  if(checking){
 
+    return null;
+    
+    }
+    
+    
+    if(maintenance && !isAdmin){
+    
     return <Maintenance />;
     
     }

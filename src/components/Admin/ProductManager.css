@@ -346,3 +346,208 @@
 .category-details {
   grid-template-columns:1fr;
 }
+.product-actions{
+  display:flex;
+  gap:15px;
+  margin-top:30px;
+  }
+  
+  
+  .preview-btn{
+
+    background:#111;
+    color:white;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    
+    }
+    
+    
+    /* =========================
+    PRODUCT PREVIEW
+    ========================= */
+    
+    .product-preview{
+    
+    margin-top:40px;
+    padding:30px;
+    background:#f8fafc;
+    border-radius:20px;
+    
+    }
+    
+    
+    .preview-card{
+    
+    max-width:350px;
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    
+    }
+    
+    
+    .preview-card img{
+    
+    width:100%;
+    height:300px;
+    object-fit:contain;
+    border-radius:12px;
+    
+    }
+    
+    
+    .preview-card h3{
+    
+    font-size:18px;
+    margin:15px 0;
+    line-height:1.4;
+    
+    }
+    
+    
+    /* =========================
+    BADGES
+    ========================= */
+    
+    .preview-badges{
+    
+    display:flex;
+    gap:10px;
+    margin:15px 0;
+    
+    }
+    
+    
+    .preview-badges span{
+    
+    background:#ff9900;
+    color:white;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    
+    }
+    
+    
+    /* =========================
+    PREVIEW CONTENT
+    ========================= */
+    
+    .preview-content h2{
+    
+    font-size:20px;
+    margin:10px 0;
+    
+    }
+    
+    
+    .preview-brand{
+    
+    font-weight:600;
+    
+    }
+    
+    
+    .preview-description{
+    
+    font-size:14px;
+    color:#666;
+    
+    }
+    
+    
+    .preview-category{
+    
+    font-size:13px;
+    margin:10px 0;
+    
+    }
+    
+    
+    .preview-marketplace{
+    
+    font-size:13px;
+    font-weight:600;
+    margin-top:10px;
+    
+    }
+    
+    
+    /* =========================
+    BUTTONS
+    ========================= */
+    
+    .preview-actions{
+    
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+    
+    }
+    
+    
+    .view-more-btn,
+    .shop-now-btn{
+    
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    
+    flex:1;
+    
+    height:42px;
+    
+    border-radius:8px;
+    
+    text-decoration:none;
+    
+    font-size:14px;
+    font-weight:600;
+    
+    transition:all .3s ease;
+    
+    cursor:pointer;
+    
+    }
+    
+    
+    /* VIEW MORE */
+    
+    .view-more-btn{
+    
+    background:#111;
+    color:white;
+    
+    }
+    
+    
+    .view-more-btn:hover{
+    
+    background:#333;
+    color:white;
+    transform:translateY(-2px);
+    
+    }
+    
+    
+    /* SHOP NOW */
+    
+    .shop-now-btn{
+    
+    background:#ff9900;
+    color:white;
+    
+    }
+    
+    
+    .shop-now-btn:hover{
+    
+    background:#e68a00;
+    color:white;
+    transform:translateY(-2px);
+    
+    }

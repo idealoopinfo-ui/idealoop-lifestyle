@@ -13,6 +13,7 @@ const [description,setDescription] = useState("");
 const [shortDescription,setShortDescription] = useState("");
 const [shopName,setShopName] = useState("");
 const [brand,setBrand] = useState("");
+const [showPreview, setShowPreview] = useState(false);
 
 const [image1,setImage1] = useState("");
 const [image2,setImage2] = useState("");
@@ -498,11 +499,11 @@ onChange={(e)=>setEducationalFeatures(e.target.value)}
         onChange={(e)=>setImage4(e.target.value)}
         />
 
-        <input
-        placeholder="Image 5 URL"
-        value={image5}
-        onChange={(e)=>setImage4(e.target.value)}
-        />
+<input
+placeholder="Image 5 URL"
+value={image5}
+onChange={(e)=>setImage5(e.target.value)}
+/>
         
         
         
@@ -631,11 +632,11 @@ Other
         
         <select
 
-value={categoryId || ""}
+value={category}
 
-onChange={(e)=>
-setCategoryId(Number(e.target.value))
-}
+onChange={(e)=>setCategory(e.target.value)}
+
+disabled={!department}
 
 >
 
@@ -645,11 +646,14 @@ Select Category
 
 
 {
-categories.map((cat:any)=>(
+selectedMainCategory?.children?.map((cat:any)=>(
 
 <option
-key={cat.id}
-value={cat.id}
+
+key={cat.slug}
+
+value={cat.slug}
+
 >
 
 {cat.name}
@@ -657,7 +661,9 @@ value={cat.id}
 </option>
 
 ))
+
 }
+
 
 </select>
         
@@ -866,30 +872,85 @@ value={cat.id}
         
         </div>
         
-        
-        
-        
-        
-        <button
-        
-        type="button"
-        
-        className="add-product-btn"
-        
-        onClick={addProduct}
-        
-        >
-        
-        Add Product
-        
-        </button>
-        
-        
-        
-        </form>
-        
-        
-        </div>
-        
-        );
-    }
+<div className="product-actions">
+
+<button
+type="button"
+className="preview-btn"
+onClick={()=>setShowPreview(true)}
+>
+Preview Product
+</button>
+
+
+<button
+type="button"
+className="add-product-btn"
+onClick={addProduct}
+>
+Add Product
+</button>
+
+</div>
+
+
+{showPreview && (
+
+<div className="product-preview">
+
+<h3>
+Product Preview
+</h3>
+
+
+<div className="preview-card">
+
+
+<img
+src={image1 || "/placeholder.png"}
+alt={title}
+/>
+
+
+<h3>
+{title || "Product Title"}
+</h3>
+
+
+<div className="preview-actions">
+
+
+<a
+href={`/product/${productId}`}
+className="view-more-btn"
+target="_blank"
+>
+View More
+</a>
+
+
+<a
+href={affiliateUrl || "#"}
+className="shop-now-btn"
+target="_blank"
+rel="noopener noreferrer"
+>
+Shop Now
+</a>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+)}
+</form>
+
+</div>
+
+);
+
+}
