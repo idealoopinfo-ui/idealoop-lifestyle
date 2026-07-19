@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 
 // Product Import API
 app.post("/api/import-product", async (req, res) => {
+    console.log("Request received:", req.body);
 
     try {
 

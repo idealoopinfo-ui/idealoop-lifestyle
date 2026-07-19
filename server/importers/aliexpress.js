@@ -1,109 +1,97 @@
-const axios = require("axios");
-const cheerio = require("cheerio");
-
+const { chromium } = require("playwright");
 
 async function importAliExpress(url){
 
+    let browser;
+
     try {
 
-        const response = await axios.get(url, {
+        browser = await chromium.launch({
+            headless:true
+        });
 
-            timeout:20000,
-
-            headers:{
-
-                "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-
-            }
-
+        const page = await browser.newPage({
+            userAgent:
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
         });
 
 
-        const html = response.data;
+        await page.goto(url,{
+            waitUntil:"domcontentloaded",
+            timeout:60000
+        });
 
-        const $ = cheerio.load(html);
 
+        const data = await page.evaluate(()=>{
 
-        let title =
-            $("title").text()
+            const title =
+            document.title
             .replace(" | AliExpress","")
             .trim();
 
 
-        let images=[];
+            const images =
+            Array.from(document.images)
+            .map(img=>img.src)
+            .filter(src=>src.startsWith("http"))
+            .slice(0,5);
 
 
-        $("img").each((i,el)=>{
-
-            const src=$(el).attr("src");
-
-            if(src && src.startsWith("http")){
-
-                images.push(src);
-
-            }
+            return {
+                title,
+                images
+            };
 
         });
 
 
-        images=[...new Set(images)].slice(0,5);
-
+        await browser.close();
 
 
         return {
 
-
             title:
-            title || "AliExpress Product",
-
+            data.title || "AliExpress Product",
 
             brand:
             "Unknown Brand",
 
-
             description:
             "Imported from AliExpress",
-
 
             shortDescription:
             "Imported automatically",
 
-
             marketplace:
             "AliExpress",
-
 
             affiliateUrl:
             url,
 
-
             targetMarket:
             "Global",
 
-
-            images
-
+            images:
+            data.images
 
         };
 
 
-    }
+    } catch(error){
 
-    catch(error){
+        if(browser){
+            await browser.close();
+        }
 
         console.log(
             "ALIEXPRESS IMPORT ERROR:",
             error.message
         );
 
-
         throw error;
-
     }
-
 
 }
 
 
-module.exports=importAliExpress;
+module.exports = importAliExpress;
