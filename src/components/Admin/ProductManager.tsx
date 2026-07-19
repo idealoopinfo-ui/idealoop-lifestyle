@@ -33,11 +33,6 @@ const [marketplace,setMarketplace] = useState("");
 const [productId,setProductId] = useState("");
 const [productUrl,setProductUrl] = useState("");
 const [detectedMarketplace,setDetectedMarketplace] = useState("");
-const [importedImages,setImportedImages] = useState<string[]>([]);
-const [importedTitle,setImportedTitle] = useState("");
-const [importedDescription,setImportedDescription] = useState("");
-const [importedBrand,setImportedBrand] = useState("");
-const [selectedImages,setSelectedImages] = useState<string[]>([]);
 
 const [featured,setFeatured] = useState(false);
 const [trending,setTrending] = useState(false);
@@ -53,7 +48,6 @@ const [category,setCategory] = useState("");
 const [subcategory,setSubcategory] = useState("");
 const [material,setMaterial] = useState("");
 const [fit,setFit] = useState("");
-const [categoryId,setCategoryId] = useState<number | null>(null);
 
 // Beauty fields
 const [hairType, setHairType] = useState("");
@@ -142,130 +136,28 @@ setSubcategory("");
 const loadProduct = async()=>{
 
         if(!productUrl){
-        
-        alert("Please enter product URL");
-        return;
-        
+    
+            alert("Please enter product URL");
+    
+            return;
+    
         }
-        
-        try{
-        
-                const response = await fetch(
-                "http://localhost:5000/api/import-product",
-        {
-        method:"POST",
-        headers:{
-        "Content-Type":"application/json"
-        
-        },
-        body:JSON.stringify({
-        url:productUrl
-        })
-        }
+    
+    
+        setAffiliateUrl(productUrl);
+    
+        setMarketplace("");
+    
+    
+        setDetectedMarketplace("Manual");
+    
+    
+        alert(
+            "Product URL added. Please complete product details manually."
         );
+    
+    };
         
-        
-        const data = await response.json();
-
-        console.log("IMPORT DATA FULL:", JSON.stringify(data, null, 2));
-        
-        const product = data.product;
-        
-        
-        setTitle(product.title || "");
-        
-        setBrand(product.brand || "");
-        
-        setDescription(product.description || "");
-        
-        setShortDescription(
-            product.shortDescription || ""
-        );
-        
-        setMarketplace(
-            product.marketplace || ""
-        );
-        
-        setAffiliateUrl(
-            product.affiliateUrl || ""
-        );
-        
-        setDetectedMarketplace(
-            product.marketplace || "Unknown"
-        );
-        
-        setImportedImages(
-            product.images || []
-        );
-        setImage1(product.images?.[0] || "");
-        setImage2(product.images?.[1] || "");
-        setImage3(product.images?.[2] || "");
-        setImage4(product.images?.[3] || "");
-        setImage5(product.images?.[4] || "");
-        
-        setSelectedImages([]);
-        
-        
-        if(data.title)
-        setTitle(data.title);
-        
-        
-        if(data.brand)
-        setBrand(data.brand);
-        
-        
-        if(data.description)
-        setDescription(data.description);
-        
-        
-        }catch(error){
-        
-        console.log("IMPORT ERROR:",error);
-        
-        }
-        
-        };
-
-        const toggleImageSelection = (img:string)=>{
-
-                if(selectedImages.includes(img)){
-                
-                setSelectedImages(
-                selectedImages.filter(
-                (item)=>item !== img
-                )
-                );
-                
-                return;
-                
-                }
-                
-                
-                if(selectedImages.length >= 5){
-                
-                alert("You can select maximum 5 images");
-                
-                return;
-                
-                }
-                
-                
-                setSelectedImages([
-                        ...selectedImages,
-                        img
-                        ]);
-                        
-                        
-                        // automatically fill image fields
-                        
-                        if(!image1) setImage1(img);
-                        else if(!image2) setImage2(img);
-                        else if(!image3) setImage3(img);
-                        else if(!image4) setImage4(img);
-                        else if(!image5) setImage5(img);
-                
-                };
-
 /* ADD PRODUCT */
 
 const addProduct = async()=>{
@@ -303,7 +195,6 @@ currency,
 
 department,
 category,
-category_id: categoryId,
 subcategory,
 
 season,
