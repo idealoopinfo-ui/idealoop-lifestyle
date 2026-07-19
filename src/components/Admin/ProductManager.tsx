@@ -31,9 +31,6 @@ const [affiliateUrl,setAffiliateUrl] = useState("");
 const [marketplace,setMarketplace] = useState("");
 
 const [productId,setProductId] = useState("");
-const [productUrl,setProductUrl] = useState("");
-const [detectedMarketplace,setDetectedMarketplace] = useState("");
-
 const [featured,setFeatured] = useState(false);
 const [trending,setTrending] = useState(false);
 const [season,setSeason] = useState("");
@@ -133,30 +130,6 @@ setSubcategory("");
 
 },[category]);
 
-const loadProduct = async()=>{
-
-        if(!productUrl){
-    
-            alert("Please enter product URL");
-    
-            return;
-    
-        }
-    
-    
-        setAffiliateUrl(productUrl);
-    
-        setMarketplace("");
-    
-    
-        setDetectedMarketplace("Manual");
-    
-    
-        alert(
-            "Product URL added. Please complete product details manually."
-        );
-    
-    };
         
 /* ADD PRODUCT */
 
