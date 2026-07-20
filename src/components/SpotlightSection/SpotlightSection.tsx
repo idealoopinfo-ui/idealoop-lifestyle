@@ -9,6 +9,7 @@ export default function SpotlightSection() {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState<any[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     fetchSpotlightProducts();
@@ -35,73 +36,66 @@ export default function SpotlightSection() {
     setProducts(shuffled.slice(0, 3));
   };
 
+  useEffect(() => {
+    if (products.length === 0) return;
+  
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % products.length);
+    }, 5000);
+  
+    return () => clearInterval(timer);
+  }, [products]);
+
   return (
 
     <section className="spotlight-section">
-
-  <h2 className="spotlight-title">
-    Spotlight
-  </h2>
-
-
-  <div className="spotlight-grid">
-
-
-    {products[0] && (
-
-      <div
-        className="spotlight-large"
-        onClick={() =>
-          navigate(`/product/${products[0].product_id}`)
-        }
-      >
-
-        <img
-          src={products[0].image_1}
-          alt={products[0].title}
-        />
-
-      </div>
-
-    )}
-
-
-
-    <div className="spotlight-small-container">
-
-
-      {products.slice(1,3).map((product)=>(
-
+  
+      {products.length > 0 && (
+  
         <div
-
-          key={product.id}
-
-          className="spotlight-small"
-
+          className="spotlight-slider"
           onClick={() =>
-            navigate(`/product/${product.product_id}`)
+            navigate(`/product/${products[currentIndex].product_id}`)
           }
-
         >
-
-          <img
-            src={product.image_1}
-            alt={product.title}
+  
+          <div
+            className="spotlight-bg"
+            style={{
+              backgroundImage: `url(${products[currentIndex].image_1})`,
+            }}
           />
-
+  
+          <img
+            className="spotlight-image"
+            src={products[currentIndex].image_1}
+            alt={products[currentIndex].title}
+          />
+  
         </div>
-
-      ))}
-
-
-    </div>
-
-
-  </div>
-
-
-</section>
-
+  
+      )}
+  
+      <div className="spotlight-dots">
+  
+        {products.map((_, index) => (
+  
+          <button
+            key={index}
+            type="button"
+            className={
+              currentIndex === index
+                ? "dot active"
+                : "dot"
+            }
+            onClick={() => setCurrentIndex(index)}
+          />
+  
+        ))}
+  
+      </div>
+  
+    </section>
+  
   );
-
-}
+          }

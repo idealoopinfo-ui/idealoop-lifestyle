@@ -1,0 +1,218 @@
+/* =========================
+ PRODUCT MANAGEMENT
+========================= */
+
+
+.product-management{
+
+    margin-top:40px;
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    border:1px solid #e5e7eb;
+    
+    }
+    
+    
+    
+    /* TITLE */
+    
+    
+    .product-management h2{
+    
+    font-size:24px;
+    margin-bottom:20px;
+    
+    }
+    
+    
+    
+    /* SEARCH */
+    
+    
+    .product-search{
+    
+    width:100%;
+    max-width:500px;
+    
+    padding:12px 15px;
+    
+    border:1px solid #d1d5db;
+    
+    border-radius:10px;
+    
+    font-size:15px;
+    
+    margin-bottom:25px;
+    
+    outline:none;
+    
+    }
+    
+    
+    .product-search:focus{
+    
+    border-color:#ff9900;
+    
+    }
+    
+    
+    
+    /* PRODUCT LIST */
+    
+    
+    .product-list{
+    
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    
+    }
+    
+    
+    
+    /* PRODUCT ROW */
+    
+    
+    .manage-product-card{
+    
+    display:grid;
+    
+    grid-template-columns:70px 1fr 150px 140px;
+    
+    align-items:center;
+    
+    gap:20px;
+    
+    padding:15px;
+    
+    border:1px solid #e5e7eb;
+    
+    border-radius:12px;
+    
+    background:#fff;
+    
+    transition:.25s ease;
+    
+    }
+    
+    
+    
+    .manage-product-card:hover{
+    
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    
+    transform:translateY(-2px);
+    
+    }
+    
+    
+    
+    /* IMAGE */
+    
+    
+    .manage-product-card img{
+    
+    width:60px;
+    
+    height:60px;
+    
+    object-fit:contain;
+    
+    border-radius:10px;
+    
+    background:#f8fafc;
+    
+    }
+    
+    
+    
+    /* PRODUCT INFO */
+    
+    
+    .manage-product-card h3{
+    
+    font-size:16px;
+    
+    margin:0 0 5px;
+    
+    color:#111827;
+    
+    }
+    
+    
+    .manage-product-card p{
+    
+    font-size:14px;
+    
+    color:#6b7280;
+    
+    margin:3px 0;
+    
+    }
+    
+    
+    
+    /* ACTIONS */
+    
+    
+    .product-actions{
+    
+    display:flex;
+    
+    gap:10px;
+    
+    }
+    
+    
+    
+    .product-actions button{
+    
+    padding:8px 14px;
+    
+    border:none;
+    
+    border-radius:8px;
+    
+    cursor:pointer;
+    
+    font-weight:600;
+    
+    background:#f3f4f6;
+    
+    transition:.25s;
+    
+    }
+    
+    
+    .product-actions button:hover{
+    
+    background:#ff9900;
+    
+    color:white;
+    
+    }
+    
+    
+    
+    /* MOBILE */
+    
+    
+    @media(max-width:768px){
+    
+    
+    .manage-product-card{
+    
+    grid-template-columns:60px 1fr;
+    
+    }
+    
+    
+    .product-actions{
+    
+    grid-column:1 / -1;
+    
+    }
+    
+    
+    }

@@ -6,6 +6,7 @@ import CategoryManager from "../../components/Admin/CategoryManager";
 import HomepageCategoryManager from "../../components/Admin/HomepageCategoryManager/HomepageCategoryManager";
 import ProductManager from "../../components/Admin/ProductManager";
 import HelpManager from "../../components/Admin/HelpManager";
+import ProductManagement from "../../components/Admin/ProductManagement/ProductManagement";
 
 import "./Admin.css";
 
@@ -694,7 +695,7 @@ activeTab==="products" && (
 
 
 <ProductManager/>
-
+<ProductManagement />
 
 </div>
 

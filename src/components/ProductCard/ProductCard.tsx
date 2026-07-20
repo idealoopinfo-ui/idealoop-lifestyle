@@ -34,18 +34,11 @@ const [user,setUser] = useState<any>(null);
 const [liked,setLiked] = useState(false);
 
 
-
-
-
 useEffect(()=>{
 
 checkUser();
 
 },[product.product_id]);
-
-
-
-
 
 const checkUser = async()=>{
 
@@ -55,8 +48,6 @@ const {
 data:{user}
 
 }=await supabase.auth.getUser();
-
-
 
 setUser(user);
 
@@ -70,12 +61,6 @@ checkWishlist(user.id);
 
 
 };
-
-
-
-
-
-
 
 const checkWishlist = async(userId:string)=>{
 
@@ -240,58 +225,68 @@ navigate(
 
 return (
 
-<div className="product-card">
-<div className="product-image-wrapper">
+  <div className="product-card">
+  
+  
+    <div className="product-image-wrapper">
+  
+      <img
+        className="product-image"
+        src={
+          product.image_1 ||
+          product.main_image_url ||
+          product.image ||
+          "/placeholder.png"
+        }
+        alt={product.title}
+      />
+  
+  
+      <button
+        type="button"
+        className={`wishlist-hover-btn ${liked ? "liked" : ""}`}
+        onClick={handleWishlist}
+      >
+  
+        <FaHeart />
+  
+      </button>
+  
+  
+    </div>
+  
+  
+  
+    <h3 className="product-title">
+  
+      {product.title}
+  
+    </h3>
+  
+  
+  
+    <div className="product-actions">
 
-  <img
-    src={product.image_1}
-    alt={product.title}
-    className="product-image"
-  />
- <button
-  type="button"
-  className={`wishlist-hover-btn ${liked ? "liked" : ""}`}
-  onClick={handleWishlist}
->
-  <FaHeart />
-</button>
+  <span
+    className="view-more-link"
+    onClick={handleViewMore}
+  >
+    View More →
+  </span>
 
+
+  <button
+    type="button"
+    className="shop-now-btn"
+    onClick={handleShopNow}
+  >
+    Shop Now
+  </button>
 
 </div>
-
-<h3 className="product-title">
-
-{product.title}
-
-</h3>
-<button
-
-className="view-more-btn"
-onClick={handleViewMore}
-
->
-
-View More →
-
-</button>
-<button
-
-className="shop-now-btn"
-
-onClick={handleShopNow}
-
->
-
-Shop Now
-
-</button>
-
-
-
-</div>
-
-
-);
-
-
-}
+  
+  
+  </div>
+  
+  );
+      }
