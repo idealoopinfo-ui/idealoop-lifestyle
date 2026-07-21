@@ -119,6 +119,15 @@ useEffect(()=>{
         
         };
 
+        useEffect(() => {
+
+                if (department) {
+                  generateProductId();
+                  
+                }
+              
+              }, [department]);
+
 const loadProduct = async()=>{
 
         if(!productUrl){
@@ -135,6 +144,71 @@ const loadProduct = async()=>{
         
         };
 
+const generateProductId = async () => {
+
+        let prefix = "GEN";
+
+        if (department === "fashion") {
+          prefix = "CLT";
+        }
+        
+        if (department === "beauty") {
+          prefix = "BEA";
+        }
+        
+        if (department === "home-living") {
+          prefix = "HOM";
+        }
+        
+        if (department === "toys-gifts") {
+          prefix = "TOY";
+        }
+        
+        if (
+                department === "fitness" ||
+                department === "fitness-wellness" ||
+                department === "Fitness & Wellness"
+              ) {
+                prefix = "FIT";
+              
+        }
+
+  const { data, error } = await supabase
+    .from("products")
+    .select("product_id")
+    .ilike("product_id", `${prefix}-%`)
+    .order("created_at", { ascending: false })
+    .limit(1);
+
+
+  if (error) {
+    console.log("ID GENERATION ERROR:", error);
+    return;
+  }
+
+
+  let nextNumber = 1;
+
+
+  if (data && data.length > 0) {
+
+    const lastId = data[0].product_id;
+
+    const numberPart = lastId.split("-")[1];
+
+    const lastNumber = Number(numberPart);
+
+    if (!isNaN(lastNumber)) {
+      nextNumber = lastNumber + 1;
+    }
+  }
+
+
+  const newId = `${prefix}-${String(nextNumber).padStart(3,"0")}`;
+
+  setProductId(newId);
+
+};
         
 /* ADD PRODUCT */
 
@@ -324,10 +398,10 @@ fetchProducts();
                 
                 
                 <input
-                placeholder="Product ID"
-                value={productId}
-                onChange={(e)=>setProductId(e.target.value)}
-                />
+  placeholder="Product ID"
+  value={productId}
+  readOnly
+/>
                 
                 
                 
