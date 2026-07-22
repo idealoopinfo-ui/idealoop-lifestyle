@@ -51,6 +51,7 @@ const [gender, setGender] = useState("");
 const [department,setDepartment] = useState("");
 const [category,setCategory] = useState("");
 const [subcategory,setSubcategory] = useState("");
+const [collection,setCollection] = useState("");
 const [material,setMaterial] = useState("");
 const [fit,setFit] = useState("");
 
@@ -86,6 +87,15 @@ const [model,setModel] = useState("");
 const [warranty,setWarranty] = useState("");
 const [countryOrigin,setCountryOrigin] = useState("");
 const [packageIncludes,setPackageIncludes] = useState("");
+
+
+const [wellnessType,setWellnessType] = useState("");
+const [usageArea,setUsageArea] = useState("");
+const [wellnessBenefits,setWellnessBenefits] = useState("");
+const [powerSource,setPowerSource] = useState("");
+const [batteryCapacity,setBatteryCapacity] = useState("");
+const [heatFunction,setHeatFunction] = useState("");
+const [massageType,setMassageType] = useState("");
 
 
 
@@ -247,6 +257,7 @@ spotlight,
 department,
 category,
 subcategory,
+collection,
 
 season,
 style,
@@ -280,12 +291,19 @@ skill_level: skillLevel,
 target_area: targetArea,
 accessories,
 
+wellness_type: wellnessType,
+usage_area: usageArea,
+wellness_benefits: wellnessBenefits,
+power_source: powerSource,
+battery_capacity: batteryCapacity,
+heat_function: heatFunction,
+massage_type: massageType,
 }
 
 ]);
 if(error){
 
-console.log(error);
+  console.log("SUPABASE ERROR:", error.message);
 
 return;
 
@@ -513,6 +531,9 @@ setCategory={setCategory}
 subcategory={subcategory}
 setSubcategory={setSubcategory}
 
+collection={collection}
+setCollection={setCollection}
+
 />      
         {/* CATEGORY DETAILS */}
 
@@ -608,7 +629,7 @@ setDimensions={setDimensions}
 
 )}
 
-{department === "fitness" && (
+{department === "fitness-wellness" && (
 
 <FitnessDetails
 
@@ -638,6 +659,27 @@ setTargetArea={setTargetArea}
 
 accessories={accessories}
 setAccessories={setAccessories}
+
+wellnessType={wellnessType}
+setWellnessType={setWellnessType}
+
+usageArea={usageArea}
+setUsageArea={setUsageArea}
+
+wellnessBenefits={wellnessBenefits}
+setWellnessBenefits={setWellnessBenefits}
+
+powerSource={powerSource}
+setPowerSource={setPowerSource}
+
+batteryCapacity={batteryCapacity}
+setBatteryCapacity={setBatteryCapacity}
+
+heatFunction={heatFunction}
+setHeatFunction={setHeatFunction}
+
+massageType={massageType}
+setMassageType={setMassageType}
 
 />
 

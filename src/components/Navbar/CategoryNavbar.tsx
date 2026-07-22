@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { categories } from "../../data/categories";
+import { getCategories } from "../../utils/categoryHelper";
 import SearchBar from "../Search/SearchBar";
 
 import "./CategoryNavbar.css";
@@ -8,7 +8,7 @@ import "./CategoryNavbar.css";
 export default function CategoryNavbar() {
 
   const navigate = useNavigate();
-
+  const categories = getCategories();
   const [activeCategory, setActiveCategory] = useState<any | null>(null);
   const [activeChild, setActiveChild] = useState<any | null>(null);
 

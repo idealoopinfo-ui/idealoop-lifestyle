@@ -200,6 +200,34 @@ export const categories: CategoryNode[] = [
     { name: "Nutrition", slug: "nutrition", children: [] },
     { name: "Yoga Programs", slug: "yoga-programs", children: [] }
     ]
+    },
+    
+    {
+    name: "Wellness",
+    slug: "wellness",
+    children: [
+    
+    {
+    name: "Massage & Relaxation",
+    slug: "massage-relaxation",
+    children: [
+    { name: "Neck Massagers", slug: "neck-massagers", children: [] },
+    { name: "Massage Guns", slug: "massage-guns", children: [] },
+    { name: "Massage Pillows", slug: "massage-pillows", children: [] }
+    ]
+    },
+    
+    {
+    name: "Aromatherapy",
+    slug: "aromatherapy",
+    children: [
+    { name: "Essential Oils", slug: "essential-oils", children: [] },
+    { name: "Diffusers", slug: "diffusers", children: [] },
+    { name: "Candles & Fragrance", slug: "candles-fragrance", children: [] }
+    ]
+    }
+    
+    ]
     }
     
     ]

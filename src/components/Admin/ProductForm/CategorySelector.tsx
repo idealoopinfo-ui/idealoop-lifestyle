@@ -1,4 +1,4 @@
-import { categories } from "../../../data/categories";
+import { getCategories } from "../../../utils/categoryHelper";
 
 interface Props {
 
@@ -16,16 +16,20 @@ setSubcategory:(value:string)=>void;
 
 export default function CategorySelector({
 
-department,
-setDepartment,
-
-category,
-setCategory,
-
-subcategory,
-setSubcategory
-
-}:Props){
+        department,
+        setDepartment,
+        
+        category,
+        setCategory,
+        
+        subcategory,
+        setSubcategory,
+        
+        collection,
+        setCollection
+        
+        }:Props){
+    const categories = getCategories();
 
 
 const selectedDepartment = categories.find(
@@ -36,6 +40,10 @@ const selectedDepartment = categories.find(
 const selectedCategory = selectedDepartment?.children?.find(
 (item:any)=>item.slug === category
 );
+
+const selectedSubcategory = selectedCategory?.children?.find(
+    (item:any)=>item.slug === subcategory
+    );
 
 
 
@@ -57,11 +65,12 @@ value={department}
 
 onChange={(e)=>{
 
-setDepartment(e.target.value);
-setCategory("");
-setSubcategory("");
-
-}}
+    setDepartment(e.target.value);
+    setCategory("");
+    setSubcategory("");
+    setCollection("");
+    
+    }}
 
 >
 
@@ -101,10 +110,11 @@ disabled={!department}
 
 onChange={(e)=>{
 
-setCategory(e.target.value);
-setSubcategory("");
-
-}}
+    setCategory(e.target.value);
+    setSubcategory("");
+    setCollection("");
+    
+    }}
 
 >
 
@@ -143,8 +153,12 @@ value={subcategory}
 
 disabled={!category}
 
-onChange={(e)=>setSubcategory(e.target.value)}
+onChange={(e)=>{
 
+    setSubcategory(e.target.value);
+    setCollection("");
+    
+    }}
 >
 
 <option value="">
@@ -174,6 +188,40 @@ value={item.slug}
 
 </select>
 
+<select
+
+value={collection}
+
+disabled={!subcategory}
+
+onChange={(e)=>setCollection(e.target.value)}
+
+>
+
+<option value="">
+Select Collection
+</option>
+
+{
+selectedSubcategory?.children?.map((item:any)=>(
+
+<option
+
+key={item.slug}
+
+value={item.slug}
+
+>
+
+{item.name}
+
+</option>
+
+))
+
+}
+
+</select>
 
 </div>
 
