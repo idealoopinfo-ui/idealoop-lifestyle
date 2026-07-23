@@ -36,6 +36,7 @@ const [image4,setImage4] = useState("");
 const [image5,setImage5] = useState("");
 
 const [affiliateUrl,setAffiliateUrl] = useState("");
+const [sourceUrl, setSourceUrl] = useState("");
 const [marketplace,setMarketplace] = useState("");
 
 const [productId,setProductId] = useState("");
@@ -247,6 +248,7 @@ image_3:image3,
 image_4:image4,
 image_5:image5,
 affiliate_url:affiliateUrl,
+source_url: sourceUrl,
 shop_name: shopName,
 
 marketplace,
@@ -511,6 +513,9 @@ setImage5={setImage5}
 
 affiliateUrl={affiliateUrl}
 setAffiliateUrl={setAffiliateUrl}
+
+sourceUrl={sourceUrl}
+setSourceUrl={setSourceUrl}
 
 shopName={shopName}
 setShopName={setShopName}

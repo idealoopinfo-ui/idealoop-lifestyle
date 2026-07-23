@@ -230,13 +230,9 @@ export default function Login() {
       provider:"google",
 
 
-      options:{
-
-
-        redirectTo:window.location.origin
-
-
-      }
+      options: {
+        redirectTo: `${window.location.origin}/admin`
+    }
 
 
     });

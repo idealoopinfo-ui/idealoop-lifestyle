@@ -627,3 +627,18 @@ NOTICE PANEL
     font-size:16px;
     
     }
+    .monitor-badge{
+
+      background:red;
+  
+      color:white;
+  
+      border-radius:50%;
+  
+      padding:3px 8px;
+  
+      margin-left:8px;
+  
+      font-size:12px;
+  
+  }

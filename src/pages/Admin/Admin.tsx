@@ -7,12 +7,14 @@ import HomepageCategoryManager from "../../components/Admin/HomepageCategoryMana
 import ProductManager from "../../components/Admin/ProductManager";
 import HelpManager from "../../components/Admin/HelpManager";
 import ProductManagement from "../../components/Admin/ProductManagement/ProductManagement";
+import ProductMonitor from "../../components/Admin/ProductMonitor/ProductMonitor";
 
 import "./Admin.css";
 
 export default function Admin() {
 
 const [activeTab,setActiveTab] = useState("dashboard");
+const [monitorCount,setMonitorCount] = useState(0);
 
 // DASHBOARD STATS
 
@@ -452,6 +454,24 @@ Products
 
 </button>
 
+<button
+onClick={()=>setActiveTab("monitor")}
+>
+Monitor
+
+{
+monitorCount > 0 && (
+
+<span className="monitor-badge">
+{monitorCount}
+</span>
+
+)
+
+}
+
+</button>
+
 
 <button 
 onClick={()=>setActiveTab("categories")}
@@ -704,6 +724,15 @@ activeTab==="products" && (
 
 }
 
+{
+activeTab === "monitor" && (
+
+<ProductMonitor
+    setMonitorCount={setMonitorCount}
+/>
+
+)
+}
 
 
 {
