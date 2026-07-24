@@ -1,7 +1,22 @@
 .category-page {
-  width: 100%;
-  padding: 40px 5%;
+
+  width:100%;
+
+  padding:45px 5%;
+
 }
+
+.category-page h1{
+
+  font-size:32px;
+  
+  font-weight:700;
+  
+  margin-bottom:25px;
+  
+  color:#111827;
+  
+  }
 
 
 /* =========================
@@ -51,12 +66,15 @@ PRODUCT GRID
 
   display:grid;
 
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(5,1fr);
 
-  gap:22px;
+  gap:20px;
+
+  max-width:1500px;
+
+  margin:auto;
 
 }
-
 
 /* =========================
 STATES
@@ -74,50 +92,47 @@ STATES
 }
 
 
-/* =========================
-RESPONSIVE
-========================= */
-
-
 @media (max-width:1200px){
 
-.product-grid{
-
-grid-template-columns:repeat(3,1fr);
-
-}
-
-}
-
-
-
-@media (max-width:768px){
-
-.category-page{
-
-padding:25px 20px;
-
-}
-
-
-.product-grid{
-
-grid-template-columns:repeat(2,1fr);
-
-gap:16px;
-
-}
-
-}
-
-
-
-@media (max-width:480px){
-
-.product-grid{
-
-grid-template-columns:1fr;
-
-}
-
-}
+  .product-grid{
+  
+  grid-template-columns:repeat(4,1fr);
+  
+  }
+  
+  }
+  
+  
+  @media (max-width:900px){
+  
+  .product-grid{
+  
+  grid-template-columns:repeat(3,1fr);
+  
+  }
+  
+  }
+  
+  
+  @media (max-width:768px){
+  
+  .product-grid{
+  
+  grid-template-columns:repeat(2,1fr);
+  
+  gap:16px;
+  
+  }
+  
+  }
+  
+  
+  @media (max-width:480px){
+  
+  .product-grid{
+  
+  grid-template-columns:1fr;
+  
+  }
+  
+  }

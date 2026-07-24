@@ -5,8 +5,8 @@
   }
   
   .why-choose h2{
-  font-size:36px;
-  margin-bottom:12px;
+    font-size:32px;
+    margin-bottom:12px;
   }
   
   .why-description{
@@ -27,13 +27,14 @@
   
   
   .feature-card{
-  background:white;
-  padding:25px 15px;
-  border-radius:20px;
-  transition:.3s;
-  position:relative;
-  overflow:hidden;
-  }
+    background:white;
+    padding:30px 20px;
+    border-radius:20px;
+    transition:.3s ease;
+    position:relative;
+    overflow:hidden;
+    border:1px solid #eeeeee;
+    }
   
   
   .feature-card::before{
@@ -61,21 +62,22 @@
   
   
   .icon{
-  width:65px;
-  height:65px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 20px;
-  border-radius:50%;
-  background:#111;
-  font-size:30px;
-  }
+    width:65px;
+    height:65px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:#f3f4f6;
+    font-size:30px;
+    transition:.3s ease;
+    }
   
   
-  .feature-card:hover .icon{
-  background:#ff9900;
-  }
+    .feature-card:hover .icon{
+      background:#ff9900;
+      }
   
   
   .feature-card h3{

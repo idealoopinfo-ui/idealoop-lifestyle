@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
+import ProductCard from "../ProductCard/ProductCard";
 
 import "./TrendingProducts.css";
+
 
 export default function TrendingProducts() {
 
 const [products,setProducts] = useState<any[]>([]);
-const navigate = useNavigate();
 
 
 useEffect(()=>{
@@ -44,7 +44,7 @@ setProducts(data || []);
 
 return (
 
-<section className="trending-section">
+<section className="trending-products">
 
 
 <h2>
@@ -53,58 +53,22 @@ return (
 
 
 
-<div className="trending-wrapper">
+<div className="trending-grid">
 
 
 {
-products.map((product,index)=>(
+products.map((product)=>(
 
+<ProductCard
 
-<div 
-className="trending-card"
 key={product.id}
->
 
+product={product}
 
-
-<div className="trending-image">
-
-
-<img
-src={product.image_1}
-alt={product.title}
 />
 
-
-<span>
-#{index + 1}
-</span>
-
-
-</div>
-
-
-
-<h3>
-{product.title}
-</h3>
-
-
-
-
-<button 
-className="view-more-btn"
-onClick={()=>navigate(`/product/${product.product_id}`)}
->
-View More →
-</button>
-
-
-
-</div>
-
-
 ))
+
 }
 
 
@@ -112,7 +76,6 @@ View More →
 
 
 </section>
-
 
 );
 

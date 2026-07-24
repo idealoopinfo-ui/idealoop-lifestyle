@@ -38,16 +38,18 @@ export default function DiscoverPage() {
 
       const { data, error } = await supabase
 
-        .from("products")
+      .from("products")
 
-        .select(`
-          id,
-          product_id,
-          image_1,
-          department
-        `)
-
-        .eq("department", selectedCategory);
+      .select(`
+      id,
+      product_id,
+      image_1,
+      department
+      `)
+      
+      .eq("department", selectedCategory)
+      
+      .limit(40);
 
 
 
@@ -199,26 +201,26 @@ export default function DiscoverPage() {
           >
   
   
-            <div className="pin-image-wrapper">
-  
-  
-              <img
-  
-                src={product.image_1}
-  
-                alt={product.product_id}
-  
-                className="pin-image"
-  
-                loading="lazy"
-  
-              />
+  <div className="pin-image-wrapper">
+
+<img
+  src={product.image_1 || "/placeholder.png"}
+  alt={product.product_id}
+  className="pin-image"
+  loading="lazy"
+/>
+
+<div className="pin-category-badge">
+  {product.department}
+</div>
+
+</div>
   
   
             </div>
   
   
-          </div>
+        
   
   
         ))}

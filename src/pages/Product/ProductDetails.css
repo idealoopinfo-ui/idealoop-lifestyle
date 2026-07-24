@@ -32,11 +32,15 @@
   border-color:#ff9900;
   }
   
-  .image-area{
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  }
+  .main-image-area{
+
+    display:flex;
+    
+    justify-content:center;
+    
+    align-items:flex-start;
+    
+    }
   
   .main-product-image{
   width:100%;
@@ -63,11 +67,120 @@
   font-size:16px;
   line-height:1.6;
   }
+
+  .product-description{
+
+    margin-top:40px;
+    
+    padding:30px;
+    
+    background:white;
+    
+    border:1px solid #ececec;
+    
+    border-radius:18px;
+    
+    }
+    
+    
+    .product-description h2{
+    
+    margin-top:0;
+    
+    margin-bottom:20px;
+    
+    }
+    
+    
+    .product-description p{
+    
+    line-height:1.8;
+    
+    color:#555;
+    
+    margin-bottom:12px;
+    
+    }
   
   
   .short-description{
   margin:20px 0;
   color:#555;
+  }
+  /* =========================
+SPECIFICATIONS
+========================= */
+
+
+.product-specifications{
+
+  margin-top:50px;
+  
+  padding:30px;
+  
+  background:white;
+  
+  border:1px solid #ececec;
+  
+  border-radius:18px;
+  
+  }
+  
+  
+  .product-specifications h2{
+  
+  margin-top:0;
+  
+  margin-bottom:25px;
+  
+  font-size:24px;
+  
+  }
+  
+  
+  .spec-grid{
+  
+  display:grid;
+  
+  grid-template-columns:repeat(3,1fr);
+  
+  gap:15px;
+  
+  }
+  
+  
+  .spec-item{
+  
+  display:flex;
+  
+  flex-direction:column;
+  
+  gap:6px;
+  
+  padding:15px;
+  
+  background:#fafafa;
+  
+  border-radius:12px;
+  
+  }
+  
+  
+  .spec-item strong{
+  
+  color:#111;
+  
+  font-size:14px;
+  
+  }
+  
+  
+  .spec-item span{
+  
+  color:#666;
+  
+  font-size:14px;
+  
   }
   
   
@@ -127,8 +240,12 @@
   
   
   .detail-shop-btn:hover{
-  background:#e68900;
-  }
+
+    background:#e88900;
+    
+    transform:translateY(-2px);
+    
+    }
   
   
   
@@ -220,6 +337,11 @@
     .related-grid{
     grid-template-columns:repeat(3,1fr);
     }
+    .spec-grid{
+
+      grid-template-columns:1fr 1fr;
+      
+      }
     
     }
     
@@ -238,5 +360,57 @@
     .related-grid{
     grid-template-columns:1fr;
     }
+    .spec-grid{
+
+      grid-template-columns:1fr;
+      
+      }
     
     }
+    .description-list{
+
+      display:flex;
+      
+      flex-direction:column;
+      
+      gap:12px;
+      
+      }
+      
+      
+      .description-item{
+      
+      display:flex;
+      
+      gap:10px;
+      
+      align-items:flex-start;
+      
+      }
+      
+      
+      .description-item span{
+      
+      color:#ff9900;
+      
+      font-size:20px;
+      
+      font-weight:bold;
+      
+      }
+      
+      
+      .description-item p{
+      
+      margin:0;
+      
+      line-height:1.7;
+      
+      color:#555;
+      
+      }
+      .product-id{
+        color:#777;
+        font-size:14px;
+        margin:8px 0 15px;
+      }

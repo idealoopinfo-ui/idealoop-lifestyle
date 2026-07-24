@@ -1,27 +1,27 @@
 import "./WhyChoose.css";
 
 const features = [
-{
-icon:"🛍️",
-title:"All Products in One Place",
-text:"Discover fashion, home, and beauty products from trusted marketplaces in one simple view."
-},
-{
-icon:"⚡",
-title:"Fast Discovery",
-text:"Find trending and useful products without searching across many websites."
-},
-{
-icon:"🔗",
-title:"Trusted Marketplace Links",
-text:"We connect you with trusted external stores through carefully selected affiliate products."
-},
-{
-icon:"💡",
-title:"Smart Selection",
-text:"Explore relevant, useful, and trending products chosen for everyday lifestyles."
-}
-];
+    {
+    icon:"🛍️",
+    title:"Curated Product Selection",
+    text:"We research and select useful lifestyle products to help you discover items worth considering."
+    },
+    {
+    icon:"⚡",
+    title:"Easy Product Discovery",
+    text:"Explore trending fashion, beauty, wellness, home, and gift ideas without endless searching."
+    },
+    {
+    icon:"🔗",
+    title:"Trusted Shopping Partners",
+    text:"We connect shoppers with trusted retailers through carefully selected affiliate links."
+    },
+    {
+    icon:"💡",
+    title:"Helpful Recommendations",
+    text:"Discover products, trends, and ideas chosen to make everyday shopping easier."
+    }
+    ];
 
 export default function WhyChoose(){
 

@@ -1,7 +1,7 @@
 import Hero from "../../components/Hero/Hero";
 
 import SpotlightSection from "../../components/SpotlightSection/SpotlightSection";
-
+import WelcomeSection from "../../components/WelcomeSection/WelcomeSection";
 import FeaturedProducts from "../../components/Home/FeaturedProducts";
 import CategoryShowcase from "../../components/CategoryShowcase/CategoryShowcase";
 import TrendingProducts from "../../components/TrendingProducts/TrendingProducts";
@@ -21,6 +21,9 @@ return(
   <Hero/>
 </section>
 
+<section className="home-section">
+  <WelcomeSection/>
+</section>
 
 <section className="home-section">
   <CategoryShowcase/>

@@ -194,3 +194,67 @@
   }
 
 }
+.spotlight-content{
+
+  position:absolute;
+  
+  z-index:5;
+  
+  left:40px;
+  
+  bottom:40px;
+  
+  background:white;
+  
+  padding:20px 25px;
+  
+  border-radius:16px;
+  
+  max-width:380px;
+  
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+  
+  }
+  
+  
+  .spotlight-category{
+  
+  font-size:12px;
+  
+  font-weight:700;
+  
+  color:#ff9900;
+  
+  text-transform:uppercase;
+  
+  margin-bottom:8px;
+  
+  }
+  
+  
+  .spotlight-content h2{
+  
+  font-size:22px;
+  
+  margin-bottom:15px;
+  
+  }
+  
+  
+  .spotlight-content button{
+  
+  background:#ff9900;
+  
+  color:white;
+  
+  border:none;
+  
+  padding:10px 20px;
+  
+  border-radius:8px;
+  
+  font-weight:600;
+  
+  cursor:pointer;
+  
+  }

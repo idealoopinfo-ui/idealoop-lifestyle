@@ -41,9 +41,10 @@ export default function SearchBar() {
       .select("*")
       .or(
         `title.ilike.%${value}%,
-category.ilike.%${value}%,
-subcategory.ilike.%${value}%`
-      )
+        brand.ilike.%${value}%,
+        category.ilike.%${value}%,
+        subcategory.ilike.%${value}%`
+        )
       .limit(8);
 
     if (error) {
@@ -150,15 +151,19 @@ subcategory.ilike.%${value}%`
                 onClick={() => handleSelect(item)}
               >
 
-                <img
-                  src={item.image_1}
-                  alt={item.title}
-                  className="search-thumb"
-                />
+<img
+src={item.image_1 || "/placeholder.png"}
+alt={item.title}
+className="search-thumb"
+/>
 
                 <div className="search-info">
 
-                  <h4>{item.title}</h4>
+                <h4>
+{item.title.length > 55
+? item.title.substring(0,55)+"..."
+: item.title}
+</h4>
 
                   <p>
 

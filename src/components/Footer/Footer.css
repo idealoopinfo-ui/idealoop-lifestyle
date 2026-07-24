@@ -1,8 +1,9 @@
 .footer {
   background:#111;
   color:white;
-  padding:35px 30px 18px;
+  padding:45px 30px 20px;
   margin-top:0;
+  border-top:4px solid #ff9900;
 }
 
 /* TOP GRID */
@@ -95,7 +96,7 @@
   color:#ff9900;
 
   transform:translateX(4px);
-
+  display:inline-block;
 }
 
 
@@ -112,12 +113,10 @@
 
 
 
-.social-links {
-
+.social-links{
   display:flex;
-
-  gap:25px;
-
+  gap:20px;
+  align-items:center;
 }
 
 
@@ -177,6 +176,8 @@
   gap:20px;
 
   flex-wrap:wrap;
+  border-top:1px solid #333;
+  padding-top:20px;
 
 }
 
@@ -233,7 +234,9 @@
 
 }
 @media(max-width:600px){
-
+  .footer-bottom p{
+    text-align:center;
+  }
 
 .footer {
 

@@ -6,11 +6,11 @@ export default function Contact() {
 
       {/* Hero */}
       <section className="contact-hero">
-        <h1>Contact Us</h1>
-        <p>
-          We'd love to hear from you. Whether you have a question about our
-          products, partnerships, or anything else, our team is ready to help.
-        </p>
+      <h1>Contact Idealoop Lifestyle</h1>
+
+<p>
+Have questions, feedback, or partnership inquiries? Our team is here to help and would love to hear from you.
+</p>
       </section>
 
       {/* Content */}
@@ -21,11 +21,11 @@ export default function Contact() {
 
           <div className="info-card">
             <div className="info-icon">📍</div>
-            <h3>Our Office</h3>
-            <p>
-              Idealoop Lifestyle Store<br />
-              Colombo, Sri Lanka
-            </p>
+            <h3>Location</h3>
+<p>
+Idealoop Lifestyle<br />
+Sri Lanka
+</p>
           </div>
 
           <div className="info-card">
@@ -44,8 +44,8 @@ export default function Contact() {
             <div className="info-icon">🕒</div>
             <h3>Working Hours</h3>
             <p>
-              Monday - Friday<br />
-              9:00 AM - 6:00 PM
+            Monday - Friday
+9:00 AM - 6:00 PM (GMT+5:30)
             </p>
           </div>
 
@@ -54,7 +54,7 @@ export default function Contact() {
         {/* Contact Form */}
         <div className="contact-form-wrapper">
 
-          <h2>Send us a Message</h2>
+        <h2>Get in Touch</h2>
 
           <form className="contact-form">
 

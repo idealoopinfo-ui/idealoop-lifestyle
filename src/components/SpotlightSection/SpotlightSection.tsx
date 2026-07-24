@@ -71,6 +71,29 @@ export default function SpotlightSection() {
             src={products[currentIndex].image_1}
             alt={products[currentIndex].title}
           />
+
+<div className="spotlight-content">
+
+<p className="spotlight-category">
+{products[currentIndex].category || "Lifestyle"}
+</p>
+
+
+<h2>
+{products[currentIndex].title}
+</h2>
+
+
+<button
+type="button"
+onClick={() =>
+navigate(`/product/${products[currentIndex].product_id}`)
+}
+>
+View Product →
+</button>
+
+</div>
   
         </div>
   

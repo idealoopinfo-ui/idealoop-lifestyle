@@ -216,26 +216,20 @@
   
   
   
-  .shop-now-btn{
-  
-  background:#ff9900;
-  
-  color:white;
-  
-  border:none;
-  
-  padding:10px 18px;
-  
-  border-radius:8px;
-  
-  font-size:14px;
-  
-  font-weight:600;
-  
-  cursor:pointer;
-  
-  transition:.3s ease;
-  
+  .shop-now-btn {
+    background: #ff9900 !important;
+    color: #ffffff !important;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    visibility: visible;
+    opacity: 1;
   }
   
   
@@ -271,3 +265,69 @@ font-size:15px;
 
 
 }
+.product-category {
+  font-size:12px;
+  font-weight:700;
+  color:#ff9900;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+.product-image-wrapper{
+  width:100%;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  border-radius:12px;
+  position:relative;
+  }
+  .product-category-badge{
+
+    position:absolute;
+  
+    bottom:15px;
+  
+    left:15px;
+  
+    background:#111827;
+  
+    color:white;
+  
+    padding:7px 16px;
+  
+    border-radius:20px;
+  
+    font-size:12px;
+  
+    font-weight:700;
+  
+    letter-spacing:.5px;
+  
+    text-transform:uppercase;
+  
+    z-index:5;
+  
+  
+    opacity:0;
+  
+    transform:translateY(10px);
+  
+    transition:.3s ease;
+  
+  }
+  
+  
+  /* Show on card hover */
+  
+  .product-card:hover .product-category-badge{
+  
+    opacity:1;
+  
+    transform:translateY(0);
+  
+  }
+  
+  
+  .product-category-badge:hover{
+  
+    background:#ff9900;
+  
+  }

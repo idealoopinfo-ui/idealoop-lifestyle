@@ -228,65 +228,83 @@ return (
   <div className="product-card">
   
   
-    <div className="product-image-wrapper">
-  
-      <img
-        className="product-image"
-        src={
-          product.image_1 ||
-          product.main_image_url ||
-          product.image ||
-          "/placeholder.png"
-        }
-        alt={product.title}
-      />
+  <div className="product-image-wrapper">
   
   
-      <button
-        type="button"
-        className={`wishlist-hover-btn ${liked ? "liked" : ""}`}
-        onClick={handleWishlist}
-      >
-  
-        <FaHeart />
-  
-      </button>
-  
-  
-    </div>
+  <img
+  className="product-image"
+  src={
+  product.image_1 ||
+  product.main_image_url ||
+  product.image ||
+  "/placeholder.png"
+  }
+  alt={product.title}
+  loading="lazy"
+  />
   
   
   
-    <h3 className="product-title">
+  <div className="product-category-badge">
   
-      {product.title}
+  {product.category || product.department}
   
-    </h3>
+  </div>
   
   
   
-    <div className="product-actions">
-
-  <span
-    className="view-more-link"
-    onClick={handleViewMore}
-  >
-    View More →
-  </span>
-
-
   <button
-    type="button"
-    className="shop-now-btn"
-    onClick={handleShopNow}
+  type="button"
+  className={`wishlist-hover-btn ${liked ? "liked" : ""}`}
+  onClick={handleWishlist}
   >
-    Shop Now
+  
+  <FaHeart />
+  
   </button>
-
-</div>
+  
+  
+  </div>
+  
+  
+  
+  <h3 className="product-title">
+  
+  {product.title}
+  
+  </h3>
+  
+  
+  
+  <div className="product-actions">
+  
+  
+  <span
+  className="view-more-link"
+  onClick={handleViewMore}
+  >
+  
+  View More →
+  
+  </span>
+  
+  
+  
+  <button
+  type="button"
+  className="shop-now-btn"
+  onClick={handleShopNow}
+  >
+  
+  Shop Now
+  
+  </button>
+  
+  
+  </div>
   
   
   </div>
   
   );
-      }
+}

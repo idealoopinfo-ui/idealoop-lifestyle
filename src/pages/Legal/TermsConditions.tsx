@@ -1,34 +1,68 @@
 import LegalLayout from "../../components/Legal/LegalLayout";
 
 export default function TermsConditions() {
-  return (
-    <LegalLayout title="Terms & Conditions">
+return (
 
-      <h2>Acceptance of Terms</h2>
-      <p>
-        By using Idealoop Lifestyle, you agree to these terms and conditions.
-      </p>
+<LegalLayout>
 
-      <h2>Use of Website</h2>
-      <p>
-        You agree to use this website for personal and informational purposes only.
-      </p>
+<h2>Acceptance of Terms</h2>
 
-      <h2>Affiliate Links</h2>
-      <p>
-        Some links on this website are affiliate links and may generate commission for us.
-      </p>
+<p>
+By accessing and using Idealoop Lifestyle, you agree to these Terms and Conditions. If you do not agree with these terms, please do not use our website.
+</p>
 
-      <h2>Limitation of Liability</h2>
-      <p>
-        We are not responsible for any issues arising from third-party websites.
-      </p>
 
-      <h2>Changes</h2>
-      <p>
-        We may update these terms at any time without prior notice.
-      </p>
+<h2>Use of Website</h2>
 
-    </LegalLayout>
-  );
+<p>
+Idealoop Lifestyle provides product recommendations, lifestyle information, and links to external retailers. Our website is intended for personal and informational purposes.
+</p>
+
+
+<h2>Product Information</h2>
+
+<p>
+We aim to provide accurate product information; however, product details, prices, availability, and promotions may change without notice. Please verify information with the retailer before making a purchase.
+</p>
+
+
+<h2>Affiliate Links</h2>
+
+<p>
+Some links on Idealoop Lifestyle are affiliate links. If you make a purchase through these links, we may earn a commission at no additional cost to you.
+</p>
+
+
+<h2>Third-Party Websites</h2>
+
+<p>
+Our website may contain links to third-party websites. We are not responsible for the content, policies, products, services, or practices of external websites.
+</p>
+
+
+<h2>No Guarantee</h2>
+
+<p>
+We provide product recommendations based on our research and selection process, but we do not guarantee that every product will meet individual expectations.
+</p>
+
+
+<h2>Changes to These Terms</h2>
+
+<p>
+We may update these Terms and Conditions from time to time. Any changes will be posted on this page.
+</p>
+
+
+<h2>Contact</h2>
+
+<p>
+If you have questions about these Terms and Conditions, please contact us through our Contact Us page.
+</p>
+
+
+</LegalLayout>
+
+);
+
 }
