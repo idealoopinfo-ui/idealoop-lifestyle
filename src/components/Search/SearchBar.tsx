@@ -69,6 +69,19 @@ export default function SearchBar() {
 
   };
 
+  const handleSearch = () => {
+
+    if(!query.trim()) return;
+  
+  
+    navigate(`/search?q=${query.trim()}`);
+  
+  
+    setShowDropdown(false);
+    setResults([]);
+  
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 
     if (!showDropdown || results.length === 0) return;
@@ -96,13 +109,19 @@ export default function SearchBar() {
     if (e.key === "Enter") {
 
       e.preventDefault();
-
-      if (activeIndex >= 0) {
-
+    
+    
+      if(activeIndex >= 0){
+    
         handleSelect(results[activeIndex]);
-
+    
       }
-
+      else{
+    
+        handleSearch();
+    
+      }
+    
     }
 
     if (e.key === "Escape") {
