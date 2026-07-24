@@ -11,6 +11,8 @@ interface ProductCardProps {
   product: {
     product_id: string;
     title: string;
+    category?: string;
+    department?: string;
     main_image_url?: string;
     image?: string;
     image_1?: string;

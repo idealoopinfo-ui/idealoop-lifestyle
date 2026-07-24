@@ -2,8 +2,7 @@ import LegalLayout from "../../components/Legal/LegalLayout";
 
 export default function CookiePolicy() {
 return (
-
-<LegalLayout>
+<LegalLayout title="Cookie Policy">
 
 <h2>What Are Cookies</h2>
 

@@ -237,3 +237,28 @@ section{
     cursor:not-allowed;
 
 }
+.unread-badge{
+
+    display:inline-flex;
+    
+    align-items:center;
+    
+    justify-content:center;
+    
+    margin-left:10px;
+    
+    background:#ff9900;
+    
+    color:white;
+    
+    font-size:12px;
+    
+    font-weight:700;
+    
+    width:24px;
+    
+    height:24px;
+    
+    border-radius:50%;
+    
+    }

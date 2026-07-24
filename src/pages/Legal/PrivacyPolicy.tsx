@@ -3,7 +3,7 @@ import LegalLayout from "../../components/Legal/LegalLayout";
 export default function PrivacyPolicy() {
 return (
 
-<LegalLayout>
+<LegalLayout title="Privacy Policy">
 
 <h2>Introduction</h2>
 
@@ -77,7 +77,6 @@ You may request information about your personal data or ask for corrections or d
 <p>
 If you have questions about this Privacy Policy, please contact us at support@idealoop.com
 </p>
-
 
 </LegalLayout>
 

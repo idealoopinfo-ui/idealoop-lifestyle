@@ -2,8 +2,8 @@ import LegalLayout from "../../components/Legal/LegalLayout";
 
 export default function TermsConditions() {
 return (
-
-<LegalLayout>
+    
+<LegalLayout title="Privacy Policy">
 
 <h2>Acceptance of Terms</h2>
 
@@ -59,7 +59,6 @@ We may update these Terms and Conditions from time to time. Any changes will be 
 <p>
 If you have questions about these Terms and Conditions, please contact us through our Contact Us page.
 </p>
-
 
 </LegalLayout>
 

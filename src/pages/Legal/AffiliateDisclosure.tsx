@@ -3,7 +3,7 @@ import LegalLayout from "../../components/Legal/LegalLayout";
 export default function AffiliateDisclosure() {
 return (
 
-<LegalLayout>
+<LegalLayout title="Affiliate Disclosure">
 
 <h2>Affiliate Disclosure</h2>
 
@@ -42,7 +42,6 @@ Idealoop Lifestyle is a participant in the Amazon Services LLC Associates Progra
 <p>
 Affiliate commissions do not increase the price you pay. The price remains the same whether you use our affiliate links or visit the retailer directly.
 </p>
-
 
 </LegalLayout>
 

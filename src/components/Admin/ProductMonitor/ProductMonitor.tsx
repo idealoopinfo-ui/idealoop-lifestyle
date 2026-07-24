@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { supabase } from "../../../lib/supabase";
 
 import "./ProductMonitor.css";
@@ -10,8 +10,8 @@ export default function ProductMonitor({
     const [logs,setLogs] = useState<any[]>([]);
     const [notifications,setNotifications] = useState<any[]>([]);
     const [removedProducts,setRemovedProducts] = useState<any[]>([]);
-    const [running,setRunning] = useState(false);
-    const [lastRun,setLastRun] = useState("");
+    const [running] = useState(false);
+    const [lastRun] = useState("");
     const [unreadCount,setUnreadCount] = useState(0);
 
 
@@ -48,10 +48,7 @@ export default function ProductMonitor({
             "CHECK LOG ERROR:",
             logError
         );
-    
-    
-    
-    
+
         const {data: notificationData, error: notificationError} =
         await supabase
         .from("product_notifications")
@@ -152,6 +149,27 @@ export default function ProductMonitor({
     
     }
 
+    const runMonitor = async () => {
+
+        console.log("Product monitor started");
+      
+      };
+
+
+    const getStatusClass = (status:string)=>{
+
+        if(status === "success"){
+          return "status-success";
+        }
+      
+        if(status === "error"){
+          return "status-error";
+        }
+      
+        return "status-pending";
+      
+      };
+
     return (
 
         <div className="product-monitor">
@@ -161,9 +179,16 @@ export default function ProductMonitor({
         
                 <div>
         
-                    <h2>
-                        Product Monitor
-                    </h2>
+                <h1>
+ Product Monitor
+
+ {unreadCount > 0 && (
+   <span className="unread-badge">
+     {unreadCount}
+   </span>
+ )}
+
+</h1>
 
                     {
 lastRun && (

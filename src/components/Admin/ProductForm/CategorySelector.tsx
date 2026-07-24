@@ -11,6 +11,9 @@ setCategory:(value:string)=>void;
 subcategory:string;
 setSubcategory:(value:string)=>void;
 
+collection: string;
+setCollection: React.Dispatch<React.SetStateAction<string>>;
+
 }
 
 
