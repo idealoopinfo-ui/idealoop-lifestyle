@@ -53,6 +53,7 @@ const [department,setDepartment] = useState("");
 const [category,setCategory] = useState("");
 const [subcategory,setSubcategory] = useState("");
 const [collection,setCollection] = useState("");
+const [productType, setProductType] = useState("");
 const [material,setMaterial] = useState("");
 const [fit,setFit] = useState("");
 
@@ -260,7 +261,7 @@ department,
 category,
 subcategory,
 collection,
-
+product_type: productType,
 season,
 style,
 occasion,
@@ -539,6 +540,8 @@ setSubcategory={setSubcategory}
 collection={collection}
 setCollection={setCollection}
 
+productType={productType}
+setProductType={setProductType}
 />      
         {/* CATEGORY DETAILS */}
 

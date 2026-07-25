@@ -14,6 +14,9 @@ setSubcategory:(value:string)=>void;
 collection: string;
 setCollection: React.Dispatch<React.SetStateAction<string>>;
 
+productType:string;
+setProductType:(value:string)=>void;
+
 }
 
 
@@ -29,7 +32,10 @@ export default function CategorySelector({
         setSubcategory,
         
         collection,
-        setCollection
+        setCollection,
+        
+        productType,
+        setProductType
         
         }:Props){
     const categories = getCategories();
@@ -45,10 +51,15 @@ const selectedCategory = selectedDepartment?.children?.find(
 );
 
 const selectedSubcategory = selectedCategory?.children?.find(
-    (item:any)=>item.slug === subcategory
-    );
+(item:any)=>item.slug === subcategory
+);
 
+const selectedCollection = selectedSubcategory?.children?.find(
+(item:any)=>item.slug === collection
+);
 
+console.log("Selected Subcategory:", selectedSubcategory);
+console.log("Children:", selectedSubcategory?.children)
 
 return (
 
@@ -72,6 +83,7 @@ onChange={(e)=>{
     setCategory("");
     setSubcategory("");
     setCollection("");
+    setProductType("");
     
     }}
 
@@ -116,7 +128,7 @@ onChange={(e)=>{
     setCategory(e.target.value);
     setSubcategory("");
     setCollection("");
-    
+    setProductType("");
     }}
 
 >
@@ -160,7 +172,7 @@ onChange={(e)=>{
 
     setSubcategory(e.target.value);
     setCollection("");
-    
+    setProductType("");
     }}
 >
 
@@ -197,7 +209,10 @@ value={collection}
 
 disabled={!subcategory}
 
-onChange={(e)=>setCollection(e.target.value)}
+onChange={(e)=>{
+    setCollection(e.target.value);
+    setProductType("");
+    }}
 
 >
 
@@ -214,6 +229,38 @@ key={item.slug}
 
 value={item.slug}
 
+>
+
+{item.name}
+
+</option>
+
+))
+
+}
+
+</select>
+
+<select
+
+value={productType}
+
+disabled={!collection}
+
+onChange={(e)=>setProductType(e.target.value)}
+
+>
+
+<option value="">
+Select Product Type
+</option>
+
+{
+selectedCollection?.children?.map((item:any)=>(
+
+<option
+key={item.slug}
+value={item.slug}
 >
 
 {item.name}

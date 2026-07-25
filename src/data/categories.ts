@@ -2,8 +2,13 @@ export type CategoryNode = {
   name: string;
   slug: string;
   children: CategoryNode[];
+  level?: 
+    | "department"
+    | "category"
+    | "subcategory"
+    | "collection"
+    | "product-type";
 };
-
 export const categories: CategoryNode[] = [
   {
     name: "Fashion",
@@ -13,65 +18,619 @@ export const categories: CategoryNode[] = [
         name: "Women",
         slug: "women",
         children: [
-          { name: "Dresses", slug: "dresses", children: [] },
-          { name: "Tops", slug: "tops", children: [] },
-          { name: "Jeans", slug: "jeans", children: [] },
-          { name: "Skirts", slug: "skirts", children: [] },
-          { name: "Pants", slug: "pants", children: [] },
-          { name: "Shorts", slug: "shorts", children: [] },
-          { name: "Jackets", slug: "jackets", children: [] },
-          { name: "Hoodies", slug: "hoodies", children: [] },
-          { name: "Activewear", slug: "activewear", children: [] },
-          { name: "Sleepwear", slug: "sleepwear", children: [] },
-          { name: "Under Garments", slug: "under-garments", children: [] },
-          { name: "Sneakers", slug: "sneakers", children: [] },
-          { name: "Heels", slug: "heels", children: [] },
-          { name: "Boots", slug: "boots", children: [] },
-          { name: "Sandals", slug: "sandals", children: [] },
-          { name: "Flats", slug: "flats", children: [] },
-          { name: "Handbags", slug: "handbags", children: [] },
-          { name: "Tote Bags", slug: "tote-bags", children: [] },
-          { name: "Crossbody Bags", slug: "crossbody-bags", children: [] },
-          { name: "Backpacks", slug: "backpacks", children: [] },
-          { name: "Wallets", slug: "wallets", children: [] },
-          { name: "Jewelry", slug: "jewelry", children: [] },
-          { name: "Accessories", slug: "accessories", children: [] }
+          {
+            name: "Clothing",
+            slug: "women-clothing",
+            children: [
+              {
+                name: "Dresses",
+                slug: "dresses",
+                children: []
+              },
+              {
+                name: "Tops",
+                slug: "tops",
+                children: []
+              },
+              {
+                name: "Jeans",
+                slug: "jeans",
+                children: []
+              },
+              {
+                name: "Skirts",
+                slug: "skirts",
+                children: []
+              },
+              {
+                name: "Pants",
+                slug: "pants",
+                children: []
+              },
+              {
+                name: "Shorts",
+                slug: "shorts",
+                children: []
+              },
+              {
+                name: "Jackets",
+                slug: "jackets",
+                children: []
+              },
+              {
+                name: "Hoodies",
+                slug: "hoodies",
+                children: []
+              },
+              {
+                name: "Activewear",
+                slug: "activewear",
+                children: [
+                  {
+                    name: "Sports Bras",
+                    slug: "sports-bras",
+                    children: []
+                  },
+                  {
+                    name: "Leggings",
+                    slug: "leggings",
+                    children: []
+                  },
+                  {
+                    name: "Workout Shorts",
+                    slug: "workout-shorts",
+                    children: []
+                  },
+                  {
+                    name: "Sports Tops",
+                    slug: "sports-tops",
+                    children: []
+                  },
+                  {
+                    name: "Workout Shirts",
+                    slug: "workout-shirts",
+                    children: []
+                  },
+                  {
+                    name: "Yoga Pants",
+                    slug: "yoga-pants",
+                    children: []
+                  },
+                  {
+                    name: "Gym Sets",
+                    slug: "gym-sets",
+                    children: []
+                  },
+                  {
+                    name: "Sports Jackets",
+                    slug: "sports-jackets",
+                    children: []
+                  },
+                  {
+                    name: "Activewear Accessories",
+                    slug: "activewear-accessories",
+                    children: []
+                  }
+                ]
+              },
+              {
+                name: "Sleepwear",
+                slug: "sleepwear",
+                children: []
+              },
+              {
+                name: "Under Garments",
+                slug: "under-garments",
+                children: []
+              }
+            ]
+          },
+      
+          {
+            name: "Shoes",
+            slug: "women-shoes",
+            children: [
+              {
+                name: "Sneakers",
+                slug: "sneakers",
+                children: []
+              },
+              {
+                name: "Heels",
+                slug: "heels",
+                children: []
+              },
+              {
+                name: "Boots",
+                slug: "boots",
+                children: []
+              },
+              {
+                name: "Sandals",
+                slug: "sandals",
+                children: []
+              },
+              {
+                name: "Flats",
+                slug: "flats",
+                children: []
+              }
+            ]
+          },
+      
+          {
+            name: "Accessories",
+            slug: "women-accessories",
+            children: [
+              {
+                name: "Handbags",
+                slug: "handbags",
+                children: []
+              },
+              {
+                name: "Tote Bags",
+                slug: "tote-bags",
+                children: []
+              },
+              {
+                name: "Crossbody Bags",
+                slug: "crossbody-bags",
+                children: []
+              },
+              {
+                name: "Backpacks",
+                slug: "backpacks",
+                children: []
+              },
+              {
+                name: "Wallets",
+                slug: "wallets",
+                children: []
+              },
+              {
+                name: "Jewelry",
+                slug: "jewelry",
+                children: []
+              },
+              {
+                name: "Accessories",
+                slug: "accessories",
+                children: []
+              }
+            ]
+          }
         ]
       },
-
       {
         name: "Men",
         slug: "men",
         children: [
-          { name: "Shirts", slug: "shirts", children: [] },
-          { name: "T-Shirts", slug: "t-shirts", children: [] },
-          { name: "Jeans", slug: "jeans", children: [] },
-          { name: "Trousers", slug: "trousers", children: [] },
-          { name: "Jackets", slug: "jackets", children: [] },
-          { name: "Hoodies", slug: "hoodies", children: [] },
-          { name: "Under Garments", slug: "under-garments", children: [] },
-          { name: "Sneakers", slug: "sneakers", children: [] },
-          { name: "Formal Shoes", slug: "formal-shoes", children: [] },
-          { name: "Boots", slug: "boots", children: [] },
-          { name: "Sandals", slug: "sandals", children: [] },
-          { name: "Backpacks", slug: "backpacks", children: [] },
-          { name: "Messenger Bags", slug: "messenger-bags", children: [] },
-          { name: "Wallets", slug: "wallets", children: [] },
-          { name: "Watches", slug: "watches", children: [] },
-          { name: "Accessories", slug: "accessories", children: [] }
+          {
+            name: "Clothing",
+            slug: "men-clothing",
+            children: [
+              {
+                name: "Shirts",
+                slug: "shirts",
+                children: []
+              },
+              {
+                name: "T-Shirts",
+                slug: "t-shirts",
+                children: []
+              },
+              {
+                name: "Jeans",
+                slug: "men-jeans",
+                children: []
+              },
+              {
+                name: "Trousers",
+                slug: "trousers",
+                children: []
+              },
+              {
+                name: "Jackets",
+                slug: "men-jackets",
+                children: []
+              },
+              {
+                name: "Hoodies",
+                slug: "men-hoodies",
+                children: []
+              },
+              {
+                name: "Activewear",
+                slug: "men-activewear",
+                children: [
+                  {
+                    name: "Gym Shorts",
+                    slug: "gym-shorts",
+                    children: []
+                  },
+                  {
+                    name: "Training Shirts",
+                    slug: "training-shirts",
+                    children: []
+                  },
+                  {
+                    name: "Compression Wear",
+                    slug: "compression-wear",
+                    children: []
+                  },
+                  {
+                    name: "Joggers",
+                    slug: "joggers",
+                    children: []
+                  },
+                  {
+                    name: "Sports Jackets",
+                    slug: "men-sports-jackets",
+                    children: []
+                  },
+                  {
+                    name: "Gym Sets",
+                    slug: "men-gym-sets",
+                    children: []
+                  },
+                  {
+                    name: "Activewear Accessories",
+                    slug: "men-activewear-accessories",
+                    children: []
+                  }
+                ]
+              },
+              {
+                name: "Sleepwear",
+                slug: "men-sleepwear",
+                children: []
+              },
+              {
+                name: "Under Garments",
+                slug: "men-under-garments",
+                children: []
+              }
+            ]
+          },
+      
+          {
+            name: "Shoes",
+            slug: "men-shoes",
+            children: [
+              {
+                name: "Sneakers",
+                slug: "men-sneakers",
+                children: []
+              },
+              {
+                name: "Formal Shoes",
+                slug: "formal-shoes",
+                children: []
+              },
+              {
+                name: "Boots",
+                slug: "men-boots",
+                children: []
+              },
+              {
+                name: "Sandals",
+                slug: "men-sandals",
+                children: []
+              }
+            ]
+          },
+      
+          {
+            name: "Accessories",
+            slug: "men-accessories",
+            children: [
+              {
+                name: "Backpacks",
+                slug: "men-backpacks",
+                children: []
+              },
+              {
+                name: "Messenger Bags",
+                slug: "messenger-bags",
+                children: []
+              },
+              {
+                name: "Wallets",
+                slug: "men-wallets",
+                children: []
+              },
+              {
+                name: "Watches",
+                slug: "men-watches",
+                children: []
+              },
+              {
+                name: "Belts",
+                slug: "belts",
+                children: []
+              },
+              {
+                name: "Accessories",
+                slug: "men-accessories-items",
+                children: []
+              }
+            ]
+          }
         ]
       },
-
       {
         name: "Kids",
         slug: "kids",
         children: [
-          { name: "Boys", slug: "boys", children: [] },
-          { name: "Girls", slug: "girls", children: [] },
-          { name: "Baby", slug: "baby", children: [] }
+          {
+            name: "Boys",
+            slug: "boys",
+            children: [
+              {
+                name: "Clothing",
+                slug: "boys-clothing",
+                children: [
+                  {
+                    name: "T-Shirts",
+                    slug: "boys-t-shirts",
+                    children: []
+                  },
+                  {
+                    name: "Shirts",
+                    slug: "boys-shirts",
+                    children: []
+                  },
+                  {
+                    name: "Jeans",
+                    slug: "boys-jeans",
+                    children: []
+                  },
+                  {
+                    name: "Shorts",
+                    slug: "boys-shorts",
+                    children: []
+                  },
+                  {
+                    name: "Jackets",
+                    slug: "boys-jackets",
+                    children: []
+                  },
+                  {
+                    name: "Hoodies",
+                    slug: "boys-hoodies",
+                    children: []
+                  },
+                  {
+                    name: "Activewear",
+                    slug: "boys-activewear",
+                    children: [
+                      {
+                        name: "Sports Sets",
+                        slug: "boys-sports-sets",
+                        children: []
+                      },
+                      {
+                        name: "Training Clothes",
+                        slug: "boys-training-clothes",
+                        children: []
+                      },
+                      {
+                        name: "Sports Shorts",
+                        slug: "boys-sports-shorts",
+                        children: []
+                      }
+                    ]
+                  }
+                ]
+              },
+      
+              {
+                name: "Shoes",
+                slug: "boys-shoes",
+                children: [
+                  {
+                    name: "Sneakers",
+                    slug: "boys-sneakers",
+                    children: []
+                  },
+                  {
+                    name: "Sandals",
+                    slug: "boys-sandals",
+                    children: []
+                  },
+                  {
+                    name: "Boots",
+                    slug: "boys-boots",
+                    children: []
+                  }
+                ]
+              },
+      
+              {
+                name: "Accessories",
+                slug: "boys-accessories",
+                children: [
+                  {
+                    name: "Backpacks",
+                    slug: "boys-backpacks",
+                    children: []
+                  },
+                  {
+                    name: "Watches",
+                    slug: "boys-watches",
+                    children: []
+                  }
+                ]
+              }
+            ]
+          },
+      
+          {
+            name: "Girls",
+            slug: "girls",
+            children: [
+              {
+                name: "Clothing",
+                slug: "girls-clothing",
+                children: [
+                  {
+                    name: "Dresses",
+                    slug: "girls-dresses",
+                    children: []
+                  },
+                  {
+                    name: "Tops",
+                    slug: "girls-tops",
+                    children: []
+                  },
+                  {
+                    name: "Skirts",
+                    slug: "girls-skirts",
+                    children: []
+                  },
+                  {
+                    name: "Jeans",
+                    slug: "girls-jeans",
+                    children: []
+                  },
+                  {
+                    name: "Jackets",
+                    slug: "girls-jackets",
+                    children: []
+                  },
+                  {
+                    name: "Activewear",
+                    slug: "girls-activewear",
+                    children: [
+                      {
+                        name: "Sports Sets",
+                        slug: "girls-sports-sets",
+                        children: []
+                      },
+                      {
+                        name: "Leggings",
+                        slug: "girls-leggings",
+                        children: []
+                      },
+                      {
+                        name: "Sports Tops",
+                        slug: "girls-sports-tops",
+                        children: []
+                      }
+                    ]
+                  }
+                ]
+              },
+      
+              {
+                name: "Shoes",
+                slug: "girls-shoes",
+                children: [
+                  {
+                    name: "Sneakers",
+                    slug: "girls-sneakers",
+                    children: []
+                  },
+                  {
+                    name: "Sandals",
+                    slug: "girls-sandals",
+                    children: []
+                  },
+                  {
+                    name: "Boots",
+                    slug: "girls-boots",
+                    children: []
+                  }
+                ]
+              },
+      
+              {
+                name: "Accessories",
+                slug: "girls-accessories",
+                children: [
+                  {
+                    name: "Hair Accessories",
+                    slug: "hair-accessories",
+                    children: []
+                  },
+                  {
+                    name: "Bags",
+                    slug: "girls-bags",
+                    children: []
+                  }
+                ]
+              }
+            ]
+          },
+      
+          {
+            name: "Baby",
+            slug: "baby",
+            children: [
+              {
+                name: "Baby Clothing",
+                slug: "baby-clothing",
+                children: [
+                  {
+                    name: "Bodysuits",
+                    slug: "bodysuits",
+                    children: []
+                  },
+                  {
+                    name: "Baby Dresses",
+                    slug: "baby-dresses",
+                    children: []
+                  },
+                  {
+                    name: "Baby Sets",
+                    slug: "baby-sets",
+                    children: []
+                  },
+                  {
+                    name: "Sleepwear",
+                    slug: "baby-sleepwear",
+                    children: []
+                  }
+                ]
+              },
+      
+              {
+                name: "Baby Shoes",
+                slug: "baby-shoes",
+                children: [
+                  {
+                    name: "Baby Sneakers",
+                    slug: "baby-sneakers",
+                    children: []
+                  },
+                  {
+                    name: "Baby Sandals",
+                    slug: "baby-sandals",
+                    children: []
+                  }
+                ]
+              },
+      
+              {
+                name: "Baby Care",
+                slug: "baby-care",
+                children: [
+                  {
+                    name: "Blankets",
+                    slug: "baby-blankets",
+                    children: []
+                  },
+                  {
+                    name: "Accessories",
+                    slug: "baby-accessories",
+                    children: []
+                  }
+                ]
+              }
+            ]
+          }
         ]
       },
-
       {
         name: "Unisex",
         slug: "unisex",
