@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabase";
 
+import ProductEditForm from "../ProductEditForm/ProductEditForm";
+
 import "./ProductManagement.css";
 
 
 export default function ProductManagement(){
 
-const [products,setProducts]=useState<any[]>([]);
-const [search,setSearch]=useState("");
+const [products,setProducts] = useState<any[]>([]);
+
+const [search,setSearch] = useState("");
+
+const [editingProduct,setEditingProduct] = useState<any>(null);
+
 
 
 useEffect(()=>{
@@ -21,14 +27,21 @@ fetchProducts();
 const fetchProducts = async()=>{
 
 const {data,error}=await supabase
+
 .from("products")
+
 .select("*")
+
 .order("created_at",{ascending:false});
 
 
 if(error){
 
-console.log(error);
+console.log(
+"FETCH PRODUCTS ERROR:",
+error
+);
+
 return;
 
 }
@@ -40,17 +53,67 @@ setProducts(data || []);
 
 
 
+
+const handleDelete = async(id:string)=>{
+
+
+const confirmDelete = window.confirm(
+"Delete this product?"
+);
+
+
+if(!confirmDelete) return;
+
+
+
+const {error}=await supabase
+
+.from("products")
+
+.delete()
+
+.eq("id",id);
+
+
+
+if(error){
+
+console.log(
+"DELETE ERROR:",
+error
+);
+
+return;
+
+}
+
+
+
+fetchProducts();
+
+
+};
+
+
+
+
+
 const filteredProducts = products.filter((product)=>{
 
 
 const text = search.toLowerCase();
 
 
+
 return (
 
-product.title?.toLowerCase().includes(text) ||
+product.title?.toLowerCase().includes(text)
 
-product.product_id?.toLowerCase().includes(text) ||
+||
+
+product.product_id?.toLowerCase().includes(text)
+
+||
 
 product.brand?.toLowerCase().includes(text)
 
@@ -59,6 +122,9 @@ product.brand?.toLowerCase().includes(text)
 
 });
 
+const startEdit = (product: any) => {
+    console.log("Editing:", product);
+  };
 
 
 return (
@@ -69,6 +135,7 @@ return (
 <h2>
 Manage Products
 </h2>
+
 
 
 <input
@@ -85,28 +152,64 @@ onChange={(e)=>setSearch(e.target.value)}
 
 
 
+
+{/* ONLY ONE EDIT FORM */}
+
+{editingProduct && (
+
+<ProductEditForm
+
+product={editingProduct}
+
+onSaved={()=>{
+
+setEditingProduct(null);
+
+fetchProducts();
+
+}}
+
+onCancel={()=>{
+
+setEditingProduct(null);
+
+}}
+
+/>
+
+)}
+
+
+
+
+
 <div className="product-list">
 
 
 {filteredProducts.map((product)=>(
 
 
-<div 
+<div
+
 className="manage-product-card"
+
 key={product.id}
+
 >
 
 
 <img
 
-src={product.image_1}
+src={product.image_1 || "/placeholder.png"}
 
 alt={product.title}
 
 />
 
 
+
 <div>
+
 
 <h3>
 {product.title}
@@ -127,20 +230,35 @@ Brand: {product.brand}
 
 
 
+
 <div className="product-actions">
 
 
-<button>
-Edit
+<button
+  type="button"
+  onClick={() => startEdit(product)}
+>
+  Edit
 </button>
 
 
-<button>
+
+<button
+
+type="button"
+
+onClick={()=>handleDelete(product.id)}
+
+>
+
 Delete
+
 </button>
+
 
 
 </div>
+
 
 
 </div>
@@ -149,11 +267,13 @@ Delete
 ))}
 
 
-</div>
-
 
 </div>
 
-)
+
+</div>
+
+);
+
 
 }

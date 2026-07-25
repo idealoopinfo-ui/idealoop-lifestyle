@@ -443,6 +443,15 @@ return (
               element={<CategoryPage />}
             />
 
+<Route
+  path="/category/:department/:category/:subcategory/:collection/:productType"
+  element={
+    <PageTransition>
+      <CategoryPage />
+    </PageTransition>
+  }
+/>
+
             <Route
               path="/discover"
               element={<DiscoverPage />}

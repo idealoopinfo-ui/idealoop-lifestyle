@@ -28,6 +28,7 @@ const [productUrl,setProductUrl] = useState("");
 const [showPreview, setShowPreview] = useState(false);
 const [spotlight, setSpotlight] = useState(false);
 const [products, setProducts] = useState<any[]>([]);
+const [editingId,setEditingId] = useState<string | null>(null);
 
 const [image1,setImage1] = useState("");
 const [image2,setImage2] = useState("");
@@ -221,6 +222,62 @@ const generateProductId = async () => {
   setProductId(newId);
 
 };
+
+const editProduct = (product:any)=>{
+
+  setEditingId(product.id);
+  
+  setProductId(product.product_id || "");
+  
+  setTitle(product.title || "");
+  setBrand(product.brand || "");
+  
+  setDescription(product.description || "");
+  setShortDescription(product.short_description || "");
+  
+  setModel(product.model || "");
+  setWarranty(product.warranty || "");
+  setPackageIncludes(product.package_includes || "");
+  
+  setImage1(product.image_1 || "");
+  setImage2(product.image_2 || "");
+  setImage3(product.image_3 || "");
+  setImage4(product.image_4 || "");
+  setImage5(product.image_5 || "");
+  
+  setAffiliateUrl(product.affiliate_url || "");
+  setSourceUrl(product.source_url || "");
+  
+  setShopName(product.shop_name || "");
+  setMarketplace(product.marketplace || "");
+  
+  setDepartment(product.department || "");
+  setCategory(product.category || "");
+  setSubcategory(product.subcategory || "");
+  
+  setCollection(product.collection || "");
+  setProductType(product.product_type || "");
+  
+  setSeason(product.season || "");
+  setStyle(product.style || "");
+  setOccasion(product.occasion || "");
+  
+  setMaterial(product.material || "");
+  setFit(product.fit || "");
+  
+  setGender(product.gender || "");
+  
+  setFeatured(product.featured || false);
+  setTrending(product.trending || false);
+  setSpotlight(product.spotlight || false);
+  
+  
+  window.scrollTo({
+  top:0,
+  behavior:"smooth"
+  });
+  
+  };
         
 /* ADD PRODUCT */
 
@@ -355,6 +412,74 @@ setSpotlight(false);
 fetchProducts();
 
 };
+
+const updateProduct = async()=>{
+
+  if(!editingId) return;
+  
+  const {error}=await supabase
+  .from("products")
+  .update({
+  
+  title,
+  brand,
+  
+  description,
+  short_description:shortDescription,
+  
+  model,
+  warranty,
+  package_includes:packageIncludes,
+  
+  image_1:image1,
+  image_2:image2,
+  image_3:image3,
+  image_4:image4,
+  image_5:image5,
+  
+  affiliate_url:affiliateUrl,
+  source_url:sourceUrl,
+  
+  shop_name:shopName,
+  marketplace,
+  
+  department,
+  category,
+  subcategory,
+  
+  collection,
+  product_type:productType,
+  
+  season,
+  style,
+  occasion,
+  
+  material,
+  fit,
+  gender,
+  
+  featured,
+  trending,
+  spotlight
+  
+  })
+  .eq("id",editingId);
+  
+  if(error){
+  
+  console.log("UPDATE ERROR:", error.message);
+  
+  return;
+  
+  }
+  
+  alert("Product updated successfully");
+  
+  setEditingId(null);
+  
+  fetchProducts();
+  
+  };
 
     return (
 
@@ -776,12 +901,23 @@ setMassageType={setMassageType}
 </button>
 
 <button
-  type="button"
-  className="add-product-btn"
-  onClick={addProduct}
+type="button"
+className="add-product-btn"
+onClick={editingId ? updateProduct : addProduct}
 >
-  Add Product
+{editingId ? "Save Changes" : "Add Product"}
 </button>
+
+{editingId && (
+<button
+type="button"
+className="cancel-edit-btn"
+onClick={() => setEditingId(null)}
+>
+Cancel Edit
+</button>
+
+)}
 
 <div>
 

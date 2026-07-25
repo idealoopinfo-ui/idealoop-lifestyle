@@ -1,0 +1,101 @@
+.product-edit-form {
+
+    background: #ffffff;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    margin-top: 20px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+}
+
+
+
+.product-edit-form h3 {
+
+    margin-bottom: 20px;
+
+    font-size: 22px;
+
+}
+
+
+
+.product-edit-form input,
+
+.product-edit-form textarea {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-bottom: 15px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+}
+
+
+
+.product-edit-form textarea {
+
+    min-height: 120px;
+
+    resize: vertical;
+
+}
+
+
+
+.product-edit-form button {
+
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    margin-right: 10px;
+
+    font-weight: 600;
+
+}
+
+
+
+.product-edit-form button:first-of-type {
+
+    background: #ff9900;
+
+    color:white;
+
+}
+
+
+
+.product-edit-form button:last-of-type {
+
+    background:#333;
+
+    color:white;
+
+}
+
+
+
+.product-edit-form button:hover {
+
+    opacity:0.85;
+
+}
