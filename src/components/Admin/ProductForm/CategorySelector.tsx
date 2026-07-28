@@ -39,7 +39,13 @@ export default function CategorySelector({
         
         }:Props){
     const categories = getCategories();
-
+    console.log(
+        "CategorySelector Props",
+        department,
+        category,
+        subcategory,
+        collection
+      );
 
 const selectedDepartment = categories.find(
 (item:any)=>item.slug === department
@@ -58,8 +64,10 @@ const selectedCollection = selectedSubcategory?.children?.find(
 (item:any)=>item.slug === collection
 );
 
+console.log("Selected Department:", selectedDepartment);
+console.log("Selected Category:", selectedCategory);
 console.log("Selected Subcategory:", selectedSubcategory);
-console.log("Children:", selectedSubcategory?.children)
+console.log("Selected Collection:", selectedCollection);
 
 return (
 

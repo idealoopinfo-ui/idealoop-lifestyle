@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabase";
 
-import ProductEditForm from "../ProductEditForm/ProductEditForm";
+import ProductManager from "../ProductManager";
 
 import "./ProductManagement.css";
 
 
-export default function ProductManagement(){
+interface Props {
+  onEdit: (product: any) => void;
+}
+
+export default function ProductManagement({ onEdit }: Props){
 
 const [products,setProducts] = useState<any[]>([]);
 
 const [search,setSearch] = useState("");
-
-const [editingProduct,setEditingProduct] = useState<any>(null);
-
 
 
 useEffect(()=>{
@@ -123,21 +124,29 @@ product.brand?.toLowerCase().includes(text)
 });
 
 const startEdit = (product: any) => {
-    console.log("Editing:", product);
-  };
+  console.log("Editing:", product);
+  onEdit(product);
+};
 
+  return (
 
-return (
+    <div className="product-management">
+    
+    
+    <h2>
+    Manage Products
+    </h2>
+    
+    
+    <button
+type="button"
+className="add-product-btn"
+onClick={()=>onEdit(null)}
+>
+Add Product
+</button>
 
-<div className="product-management">
-
-
-<h2>
-Manage Products
-</h2>
-
-
-
+  
 <input
 
 className="product-search"
@@ -154,34 +163,6 @@ onChange={(e)=>setSearch(e.target.value)}
 
 
 {/* ONLY ONE EDIT FORM */}
-
-{editingProduct && (
-
-<ProductEditForm
-
-product={editingProduct}
-
-onSaved={()=>{
-
-setEditingProduct(null);
-
-fetchProducts();
-
-}}
-
-onCancel={()=>{
-
-setEditingProduct(null);
-
-}}
-
-/>
-
-)}
-
-
-
-
 
 <div className="product-list">
 

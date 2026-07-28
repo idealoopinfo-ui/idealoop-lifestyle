@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabase";
 
 interface Props {
@@ -17,6 +17,13 @@ const [title,setTitle]=useState(product.title || "");
 const [brand,setBrand]=useState(product.brand || "");
 const [description,setDescription]=useState(product.description || "");
 
+useEffect(() => {
+    if (!product) return;
+  
+    setTitle(product.title || "");
+    setBrand(product.brand || "");
+    setDescription(product.description || "");
+  }, [product]);
 
 const saveProduct = async()=>{
 

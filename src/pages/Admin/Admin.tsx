@@ -14,6 +14,7 @@ import "./Admin.css";
 export default function Admin() {
 
 const [activeTab,setActiveTab] = useState("dashboard");
+const [editingProduct, setEditingProduct] = useState<any>(null);
 const [monitorCount,setMonitorCount] = useState(0);
 
 // DASHBOARD STATS
@@ -707,22 +708,21 @@ Blogs
 
 
 
-{
-activeTab==="products" && (
-
+{activeTab==="products" && (
 
 <div className="admin-section">
 
+<ProductManager
+  selectedProduct={editingProduct}
+/>
 
-<ProductManager/>
-<ProductManagement />
+<ProductManagement
+  onEdit={setEditingProduct}
+/>
 
 </div>
 
-
-)
-
-}
+)}
 
 {
 activeTab === "monitor" && (

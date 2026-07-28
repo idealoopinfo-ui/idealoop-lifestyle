@@ -15,7 +15,11 @@ import CategorySelector from "./ProductForm/CategorySelector";
 import "./ProductManager.css";
 
 
-export default function ProductManager() {
+interface Props {
+  selectedProduct?: any;
+}
+
+export default function ProductManager({selectedProduct}: Props) {
 
 
 const [title,setTitle] = useState("");
@@ -106,10 +110,36 @@ const [massageType,setMassageType] = useState("");
 
 useEffect(()=>{
 
-        fetchProducts();
-        
-        },[]);
-        
+  fetchProducts();
+  
+  },[]);
+  
+  
+  useEffect(()=>{
+
+    if(selectedProduct){
+    
+      setEditingId(selectedProduct.id);
+    
+      setProductId(selectedProduct.product_id || "");
+      setTitle(selectedProduct.title || "");
+      setBrand(selectedProduct.brand || "");
+      setDescription(selectedProduct.description || "");
+      setShortDescription(selectedProduct.short_description || "");
+    
+      setImage1(selectedProduct.image_1 || "");
+      setImage2(selectedProduct.image_2 || "");
+      setImage3(selectedProduct.image_3 || "");
+      setImage4(selectedProduct.image_4 || "");
+      setImage5(selectedProduct.image_5 || "");
+    
+      setDepartment(selectedProduct.department || "");
+      setCategory(selectedProduct.category || "");
+      setSubcategory(selectedProduct.subcategory || "");
+    
+    }
+    
+    },[selectedProduct]);
         
         const fetchProducts = async()=>{
         
@@ -901,13 +931,18 @@ setMassageType={setMassageType}
 </button>
 
 <button
-type="button"
-className="add-product-btn"
-onClick={editingId ? updateProduct : addProduct}
+  type="button"
+  className="add-product-btn"
+  onClick={() => {
+    if (editingId) {
+      updateProduct();
+    } else {
+      addProduct();
+    }
+  }}
 >
-{editingId ? "Save Changes" : "Add Product"}
+  {editingId ? "Save Changes" : "Add Product"}
 </button>
-
 {editingId && (
 <button
 type="button"

@@ -340,7 +340,7 @@ return (
 
     {!isDiscover && <CategoryNavbar />}
 
-    <main>
+    <main className="route-container">
 
       <AnimatePresence
         mode="wait"
@@ -496,7 +496,7 @@ return (
     </main>
 
 
-    {!isDiscover && <Footer />}
+    <Footer className={isDiscover ? "hide-footer" : ""} />
 
   </>
 

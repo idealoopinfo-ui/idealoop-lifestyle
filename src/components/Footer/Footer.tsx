@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 
 import "./Footer.css";
 
-export default function Footer() {
+interface FooterProps {
+  className?: string;
+}
+
+interface FooterProps {
+  className?: string;
+}
+
+export default function Footer({className}: FooterProps){
 
 
   return (
