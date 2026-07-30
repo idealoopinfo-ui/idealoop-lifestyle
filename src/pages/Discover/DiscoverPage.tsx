@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import "./DiscoverPage.css";
 
@@ -83,8 +83,14 @@ export default function DiscoverPage() {
 
     <div className="discover-page">
   
-  
       <div className="discover-header">
+  
+        <Link
+          to="/"
+          className="discover-home-button"
+        >
+          ← Home
+        </Link>
   
         <h1>Discover</h1>
   

@@ -277,3 +277,6 @@
     text-align: center;
   }
 }
+.hide-footer {
+  display: none !important;
+}
