@@ -1,3 +1,4 @@
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -30,6 +31,25 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+/* =========================
+   HTML / BODY
+   ========================= */
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+
 /* =========================
    RESPONSIVE ROOT FONT
    ========================= */
@@ -39,6 +59,7 @@
     font-size: 16px;
   }
 }
+
 
 /* =========================
    DARK MODE
@@ -66,6 +87,7 @@
   }
 }
 
+
 /* =========================
    ROOT APP CONTAINER
    ========================= */
@@ -85,12 +107,14 @@
   box-sizing: border-box;
 }
 
+
 /* =========================
    MAIN LAYOUT
    ========================= */
 
 main {
-  flex: 1 1 auto;
+  flex: 1 0 auto;
+
   width: 100%;
   min-height: 0;
 
@@ -100,17 +124,20 @@ main {
   box-sizing: border-box;
 }
 
+
 /* =========================
    ROUTE CONTAINER
    ========================= */
 
 .route-container {
   flex: 1 1 auto;
+
   width: 100%;
   min-height: 0;
 
   box-sizing: border-box;
 }
+
 
 /* =========================
    HEADINGS
@@ -136,6 +163,7 @@ h2 {
   margin: 0 0 8px;
 }
 
+
 /* =========================
    RESPONSIVE HEADINGS
    ========================= */
@@ -151,6 +179,7 @@ h2 {
   }
 }
 
+
 /* =========================
    PARAGRAPHS
    ========================= */
@@ -158,6 +187,7 @@ h2 {
 p {
   margin: 0;
 }
+
 
 /* =========================
    CODE
@@ -177,3 +207,4 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
