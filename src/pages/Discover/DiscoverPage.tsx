@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { supabase } from "../../lib/supabase";
 import "./DiscoverPage.css";
 
@@ -83,22 +84,45 @@ export default function DiscoverPage() {
 
     <div className="discover-page">
   
-      <div className="discover-header">
-  
-        <Link
-          to="/"
-          className="discover-home-button"
-        >
-          ← Home
-        </Link>
-  
-        <h1>Discover</h1>
-  
-        <p>
-          Find inspiration for your lifestyle.
-        </p>
-  
-      </div>
+  <div className="discover-header">
+
+<div className="discover-title-row">
+
+  <h1>Discover</h1>
+
+  <Link
+    to="/"
+    className="discover-home-button"
+    aria-label="Go to homepage"
+  >
+    <svg
+      className="discover-home-icon"
+      width="17"
+      height="17"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M3 10.5L12 3L21 10.5V21H14.5V15H9.5V21H3V10.5Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+
+    <span>Home</span>
+  </Link>
+
+</div>
+
+<p>
+  Find inspiration for your lifestyle.
+</p>
+
+</div>
   
   
   
