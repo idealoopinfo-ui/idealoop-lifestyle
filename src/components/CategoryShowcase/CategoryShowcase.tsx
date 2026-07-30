@@ -1,6 +1,8 @@
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
+
 import "./CategoryShowcase.css";
 
 export default function CategoryShowcase() {
@@ -32,7 +34,6 @@ export default function CategoryShowcase() {
 
       if (!mainCategory) continue;
 
-      // Get child categories
       const { data: children } = await supabase
         .from("categories")
         .select("id")
@@ -43,15 +44,12 @@ export default function CategoryShowcase() {
         ...(children || []).map((c: any) => c.id),
       ];
 
-      // Get 5 products
       const { data: products } = await supabase
         .from("products")
         .select("product_id,title,image_1")
         .in("category_id", categoryIds)
         .not("image_1", "is", null)
         .limit(5);
-
-      console.log(mainCategory.name, products?.length);
 
       result.push({
         title: mainCategory.name,
@@ -66,29 +64,89 @@ export default function CategoryShowcase() {
 
   return (
     <section className="category-showcase">
-      <h2>Shop By Category</h2>
 
-      {sections.map((section) => (
-        <div className="category-container" key={section.title}>
-          <h3>{section.title}</h3>
+      {/* HEADER */}
 
-          <div className="category-grid">
-            {section.products.map((product: any) => (
+      <div className="category-showcase-header">
+
+        <span className="category-eyebrow">
+          Explore our collections
+        </span>
+
+        <h2>
+          Shop By Category
+        </h2>
+
+        <p>
+          Discover products curated for every part of your lifestyle.
+        </p>
+
+      </div>
+
+
+      {/* CATEGORY SECTIONS */}
+
+      <div className="category-sections">
+
+        {sections.map((section) => (
+
+          <div
+            className="category-container"
+            key={section.title}
+          >
+
+            <div className="category-heading">
+
+              <h3>
+                {section.title}
+              </h3>
+
               <Link
-                key={product.product_id}
-                to={`/product/${product.product_id}`}
-                className="category-product"
+                to={`/category/${section.title
+                  .toLowerCase()
+                  .replace(/ & /g, "-")
+                  .replace(/\s+/g, "-")}`}
+                className="category-view-link"
               >
-                <img
-                  src={product.image_1}
-                  alt={product.title}
-                  loading="lazy"
-                />
+                View All →
               </Link>
-            ))}
+
+            </div>
+
+
+            <div className="category-grid">
+
+              {section.products.map((product: any) => (
+
+                <Link
+                  key={product.product_id}
+                  to={`/product/${product.product_id}`}
+                  className="category-product"
+                >
+
+                  <div className="category-image">
+
+                    <img
+                      src={product.image_1}
+                      alt={product.title}
+                      loading="lazy"
+                    />
+
+                  </div>
+
+                </Link>
+
+              ))}
+
+            </div>
+
           </div>
-        </div>
-      ))}
+
+        ))}
+
+      </div>
+
     </section>
   );
 }
+

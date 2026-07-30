@@ -1,260 +1,421 @@
+
 /* =========================
    SPOTLIGHT SECTION
 ========================= */
 
-.spotlight-section{
-  width:100%;
-  max-width:1400px;
-  margin:40px auto;
-  padding:20px;
+.spotlight-section {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 80px 30px;
+
+  box-sizing: border-box;
 }
+
 
 /* =========================
    SLIDER
 ========================= */
 
-.spotlight-slider{
-  position:relative;
-  width:100%;
-  height:560px;
-  overflow:hidden;
+.spotlight-slider {
+  position: relative;
 
-  border-radius:28px;
+  width: 100%;
+  height: 560px;
 
-  background:#fff;
+  overflow: hidden;
 
-  cursor:pointer;
+  border-radius: 30px;
 
-  box-shadow:0 12px 35px rgba(0,0,0,.08);
+  background: #f7f7f7;
 
-  transition:all .35s ease;
+  cursor: pointer;
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.10);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-.spotlight-slider:hover{
-  transform:translateY(-6px);
-  box-shadow:0 18px 45px rgba(0,0,0,.12);
+
+.spotlight-slider:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.15);
 }
+
 
 /* =========================
    BLURRED BACKGROUND
 ========================= */
 
-.spotlight-bg{
-  position:absolute;
-  inset:0;
+.spotlight-bg {
+  position: absolute;
 
-  background-size:cover;
-  background-position:center;
+  inset: 0;
 
-  filter:blur(40px);
+  background-size: cover;
+  background-position: center;
 
-  transform:scale(1.35);
+  filter: blur(45px);
 
-  opacity:.35;
+  transform: scale(1.3);
+
+  opacity: 0.32;
 }
 
-/* White overlay */
 
-.spotlight-slider::after{
-  content:"";
+/* =========================
+   GRADIENT OVERLAY
+========================= */
 
-  position:absolute;
-  inset:0;
+.spotlight-slider::after {
+  content: "";
 
-  background:linear-gradient(
-    rgba(255,255,255,.15),
-    rgba(255,255,255,.55)
-  );
+  position: absolute;
 
-  z-index:1;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(255, 255, 255, 0.55) 38%,
+      rgba(255, 255, 255, 0.10) 75%
+    );
+
+  z-index: 1;
+
+  pointer-events: none;
 }
+
 
 /* =========================
    PRODUCT IMAGE
 ========================= */
 
-.spotlight-image{
-  position:relative;
-  z-index:2;
+.spotlight-image {
+  position: relative;
 
-  width:100%;
-  height:100%;
+  z-index: 2;
 
-  object-fit:contain;
+  width: 100%;
+  height: 100%;
 
-  padding:20px;
+  object-fit: contain;
 
-  display:block;
+  padding: 25px;
 
-  animation:fadeIn .6s ease, floatProduct 6s ease-in-out infinite;
+  box-sizing: border-box;
 
-  transition:transform .4s ease;
+  display: block;
+
+  animation:
+    fadeIn 0.6s ease,
+    floatProduct 6s ease-in-out infinite;
+
+  transition: transform 0.4s ease;
 }
 
-.spotlight-slider:hover .spotlight-image{
-  transform:scale(1.05);
+
+.spotlight-slider:hover .spotlight-image {
+  transform: scale(1.04);
 }
+
+
+/* =========================
+   CONTENT CARD
+========================= */
+
+.spotlight-content {
+  position: absolute;
+
+  z-index: 5;
+
+  left: 45px;
+  bottom: 45px;
+
+  width: min(400px, calc(100% - 90px));
+
+  padding: 25px 28px;
+
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  backdrop-filter: blur(12px);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.14);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+.spotlight-category {
+  margin: 0 0 8px;
+
+  color: #ff9900;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.spotlight-content h2 {
+  margin: 0 0 18px;
+
+  color: #111;
+
+  font-size: 24px;
+
+  line-height: 1.25;
+
+  font-weight: 800;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.spotlight-content button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #ff9900;
+
+  color: #ffffff;
+
+  border: none;
+
+  padding: 11px 20px;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.spotlight-content button:hover {
+  background: #e88a00;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(255, 153, 0, 0.30);
+}
+
 
 /* =========================
    DOTS
 ========================= */
 
-.spotlight-dots{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
-  margin-top:20px;
+.spotlight-dots {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 11px;
+
+  margin-top: 22px;
 }
 
-.dot{
-  width:12px;
-  height:12px;
 
-  border:none;
-  border-radius:50%;
+.dot {
+  width: 10px;
+  height: 10px;
 
-  background:#d1d5db;
+  padding: 0;
 
-  cursor:pointer;
+  border: none;
 
-  transition:.3s;
+  border-radius: 50%;
+
+  background: #d1d5db;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
 }
 
-.dot:hover{
-  background:#ff9900;
-  transform:scale(1.2);
+
+.dot:hover {
+  background: #ff9900;
+
+  transform: scale(1.2);
 }
 
-.dot.active{
-  background:#ff9900;
-  transform:scale(1.35);
+
+.dot.active {
+  background: #ff9900;
+
+  transform: scale(1.35);
 }
+
 
 /* =========================
    ANIMATIONS
 ========================= */
 
-@keyframes fadeIn{
+@keyframes fadeIn {
 
-  from{
-    opacity:0;
-    transform:scale(.97);
+  from {
+    opacity: 0;
+
+    transform: scale(0.97);
   }
 
-  to{
-    opacity:1;
-    transform:scale(1);
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+
+}
+
+
+@keyframes floatProduct {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0);
   }
 
 }
 
-@keyframes floatProduct{
 
-  0%{
-    transform:translateY(0px);
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+  .spotlight-section {
+    padding: 65px 25px;
   }
 
-  50%{
-    transform:translateY(-10px);
+  .spotlight-slider {
+    height: 500px;
   }
 
-  100%{
-    transform:translateY(0px);
+  .spotlight-content {
+    left: 30px;
+    bottom: 30px;
   }
 
 }
+
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width:768px){
+@media (max-width: 600px) {
 
-  .spotlight-section{
-    padding:15px;
+  .spotlight-section {
+    padding: 55px 18px;
   }
 
-  .spotlight-slider{
-    height:360px;
-    border-radius:20px;
+  .spotlight-slider {
+    height: 500px;
+
+    border-radius: 22px;
   }
 
-  .spotlight-image{
-    padding:15px;
+
+  .spotlight-slider::after {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.25) 45%,
+        rgba(255, 255, 255, 0.90) 100%
+      );
   }
 
-  .spotlight-dots{
-    gap:10px;
+
+  .spotlight-image {
+    padding: 15px;
   }
 
-  .dot{
-    width:10px;
-    height:10px;
+
+  .spotlight-content {
+    left: 18px;
+    bottom: 18px;
+
+    width: calc(100% - 36px);
+
+    padding: 20px;
+
+    border-radius: 16px;
+  }
+
+
+  .spotlight-content h2 {
+    font-size: 20px;
+
+    margin-bottom: 14px;
+  }
+
+
+  .spotlight-content button {
+    width: 100%;
+  }
+
+
+  .spotlight-dots {
+    margin-top: 18px;
+
+    gap: 10px;
+  }
+
+
+  .dot {
+    width: 9px;
+    height: 9px;
   }
 
 }
-.spotlight-content{
 
-  position:absolute;
-  
-  z-index:5;
-  
-  left:40px;
-  
-  bottom:40px;
-  
-  background:white;
-  
-  padding:20px 25px;
-  
-  border-radius:16px;
-  
-  max-width:380px;
-  
-  box-shadow:0 10px 30px rgba(0,0,0,.12);
-  
-  }
-  
-  
-  .spotlight-category{
-  
-  font-size:12px;
-  
-  font-weight:700;
-  
-  color:#ff9900;
-  
-  text-transform:uppercase;
-  
-  margin-bottom:8px;
-  
-  }
-  
-  
-  .spotlight-content h2{
-  
-  font-size:22px;
-  
-  margin-bottom:15px;
-  
-  }
-  
-  
-  .spotlight-content button{
-  
-  background:#ff9900;
-  
-  color:white;
-  
-  border:none;
-  
-  padding:10px 20px;
-  
-  border-radius:8px;
-  
-  font-weight:600;
-  
-  cursor:pointer;
-  
-  }

@@ -1,56 +1,111 @@
-.featured-products {
 
-    padding:45px 20px;
-    
-    }
-    
-    
-    .featured-products h2 {
-    
-    font-size:32px;
-    font-weight:700;
-    margin-top:0;
-    margin-bottom:35px;
-    color:#111827;
-    
-    }
-    
-    
-    
-    .featured-grid {
-    
-    display:grid;
-    
-    grid-template-columns:repeat(4,1fr);
-    
-    gap:25px;
-    
-    max-width:1400px;
-    
-    margin:auto;
-    
-    }
-    
-    
-    
-    @media(max-width:1000px){
-    
-    .featured-grid {
-    
-    grid-template-columns:repeat(2,1fr);
-    
-    }
-    
-    }
-    
-    
-    
-    @media(max-width:600px){
-    
-    .featured-grid {
-    
-    grid-template-columns:1fr;
-    
-    }
-    
-    }
+/* ===========================
+   FEATURED PRODUCTS
+=========================== */
+
+.featured-products {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 80px 30px;
+
+  background: #f8f8f8;
+}
+
+
+/* ===========================
+   TITLE
+=========================== */
+
+.featured-products h2 {
+  max-width: 1200px;
+
+  margin: 0 auto 40px;
+
+  text-align: center;
+
+  color: #111;
+
+  font-size: clamp(30px, 4vw, 42px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.8px;
+}
+
+
+/* ===========================
+   PRODUCT GRID
+=========================== */
+
+.featured-grid {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 22px;
+}
+
+
+/* ===========================
+   PRODUCT CARD
+=========================== */
+
+.featured-grid > * {
+  min-width: 0;
+
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+
+.featured-grid > *:hover {
+  transform: translateY(-6px);
+}
+
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (max-width: 1000px) {
+
+  .featured-products {
+    padding: 65px 25px;
+  }
+
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+  }
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width: 600px) {
+
+  .featured-products {
+    padding: 55px 18px;
+  }
+
+  .featured-products h2 {
+    margin-bottom: 30px;
+
+    font-size: 30px;
+  }
+
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+  }
+}

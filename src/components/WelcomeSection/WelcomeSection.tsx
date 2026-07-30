@@ -1,25 +1,34 @@
+
 import "./WelcomeSection.css";
 
-export default function WelcomeSection(){
-
-    return(
-    
+function WelcomeSection() {
+  return (
     <section className="welcome-section">
-    
-    <h2>
-    Welcome to Idealoop Lifestyle
-    </h2>
-    
-    <p>
-    At Idealoop Lifestyle, we help you discover carefully selected products across Fashion, Beauty, Fitness & Wellness, Home & Living, and Gifts.
-    </p>
-    
-    <p>
-    We research trending products and create simple shopping guides to help you find useful items for your everyday lifestyle.
-    </p>
-    
+      <div className="welcome-content">
+
+        <span className="welcome-label">
+          Welcome to Idealoop Lifestyle
+        </span>
+
+        <h2>
+          Discover products that fit
+          <span> your lifestyle.</span>
+        </h2>
+
+        <p className="welcome-intro">
+          Idealoop Lifestyle is a curated marketplace designed to
+          help you discover interesting products, useful ideas, and
+          everyday inspiration in one place.
+        </p>
+
+        <p className="welcome-description">
+          We explore trending products and create simple shopping
+          experiences to help you find things worth discovering.
+        </p>
+
+      </div>
     </section>
-    
-    );
-    
-    }
+  );
+}
+
+export default WelcomeSection;

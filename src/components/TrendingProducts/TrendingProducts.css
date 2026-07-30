@@ -1,47 +1,112 @@
-.trending-products {
 
-  width:100%;
+/* ===========================
+   TRENDING PRODUCTS
+=========================== */
+
+.trending-products {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 80px 30px;
+
+  background: #ffffff;
+}
+
+
+/* ===========================
+   TITLE
+=========================== */
+
+.trending-products h2 {
+  max-width: 1200px;
+
+  margin: 0 auto 40px;
+
+  text-align: center;
+
+  color: #111;
+
+  font-size: clamp(30px, 4vw, 42px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.8px;
+}
+
+
+/* ===========================
+   PRODUCT GRID
+=========================== */
+
+.trending-grid {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 22px;
+}
+
+
+/* ===========================
+   PRODUCT CARD HOVER
+=========================== */
+
+.trending-grid > * {
+  min-width: 0;
+
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+
+.trending-grid > *:hover {
+  transform: translateY(-6px);
+}
+
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (max-width: 1000px) {
+
+  .trending-products {
+    padding: 65px 25px;
   }
-  
-  
-  .trending-products h2 {
-  
-  font-size:28px;
-  margin-bottom:25px;
-  }
-  
-  
-  
+
   .trending-grid {
-  
-  display:grid;
-  
-  grid-template-columns:repeat(4,1fr);
-  
-  gap:25px;
-  
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
   }
-  
-  
-  
-  @media(max-width:900px){
-  
-  .trending-grid{
-  
-  grid-template-columns:repeat(2,1fr);
-  
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width: 600px) {
+
+  .trending-products {
+    padding: 55px 18px;
   }
-  
+
+  .trending-products h2 {
+    margin-bottom: 30px;
+
+    font-size: 30px;
   }
-  
-  
-  
-  @media(max-width:600px){
-  
-  .trending-grid{
-  
-  grid-template-columns:1fr;
-  
+
+  .trending-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
   }
-  
-  }
+}
+

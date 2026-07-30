@@ -1,17 +1,134 @@
+
+/* ===========================
+   WELCOME SECTION
+=========================== */
+
 .welcome-section {
-    max-width: 850px;
-    margin: 25px auto;
-    padding: 10px 20px;
-    text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 80px 25px;
+
+  background: #ffffff;
+
+  text-align: center;
+}
+
+
+/* ===========================
+   CONTENT
+=========================== */
+
+.welcome-content {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+
+/* ===========================
+   LABEL
+=========================== */
+
+.welcome-label {
+  display: inline-block;
+
+  margin-bottom: 18px;
+
+  color: #e88900;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+
+/* ===========================
+   HEADING
+=========================== */
+
+.welcome-section h2 {
+  margin: 0 auto 22px;
+
+  max-width: 750px;
+
+  color: #111111;
+
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 800;
+
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+
+
+.welcome-section h2 span {
+  color: #ff9900;
+}
+
+
+/* ===========================
+   TEXT
+=========================== */
+
+.welcome-section p {
+  max-width: 720px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  color: #555555;
+
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+
+.welcome-intro {
+  margin-top: 0;
+  margin-bottom: 14px;
+
+  font-size: 18px !important;
+  color: #333333 !important;
+}
+
+
+.welcome-description {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width: 600px) {
+
+  .welcome-section {
+    padding: 60px 20px;
   }
-  
+
+  .welcome-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
   .welcome-section h2 {
-    font-size: 28px;
-    margin-bottom: 8px;
+    font-size: 30px;
+    letter-spacing: -0.5px;
+
+    margin-bottom: 18px;
   }
-  
+
   .welcome-section p {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 5px;
+    font-size: 15px;
+    line-height: 1.65;
   }
+
+  .welcome-intro {
+    font-size: 16px !important;
+  }
+}
+
