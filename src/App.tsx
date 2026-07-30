@@ -3,7 +3,6 @@ import { lazy, Suspense, useEffect, useState } from "react";
 
 import { supabase } from "./lib/supabase";
 
-import { CountryProvider } from "./context/CountryContext";
 
 import AdminRoute from "./components/Auth/AdminRoute";
 import Maintenance from "./components/Maintenance/Maintenance";
@@ -333,7 +332,10 @@ return <Maintenance />;
 
 return (
 
-  <>
+  <div className="app-layout">
+
+<ScrollToTop />
+
     {!isDiscover && <TopNavbar />}
 
     {!isDiscover && <NoticePanel />}
@@ -498,7 +500,7 @@ return (
 
     <Footer className={isDiscover ? "hide-footer" : ""} />
 
-  </>
+    </div>
 
 );
             }
