@@ -8,6 +8,7 @@ import ProductManager from "../../components/Admin/ProductManager";
 import HelpManager from "../../components/Admin/HelpManager";
 import ProductManagement from "../../components/Admin/ProductManagement/ProductManagement";
 import ProductMonitor from "../../components/Admin/ProductMonitor/ProductMonitor";
+import PromotionCenter from "../../components/Admin/PromotionCenter/PromotionCenter";
 
 import "./Admin.css";
 
@@ -473,6 +474,16 @@ monitorCount > 0 && (
 
 </button>
 
+<button
+  className={
+    activeTab === "promotion"
+      ? "active"
+      : ""
+  }
+  onClick={() => setActiveTab("promotion")}
+>
+  Promotion Center
+</button>
 
 <button 
 onClick={()=>setActiveTab("categories")}
@@ -722,6 +733,10 @@ Blogs
 
 </div>
 
+)}
+
+{activeTab === "promotion" && (
+  <PromotionCenter />
 )}
 
 {
