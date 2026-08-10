@@ -1,0 +1,39 @@
+
+{
+  "nav": {
+    "home": "होम",
+    "discover": "खोजें",
+    "fashion": "फैशन",
+    "beauty": "ब्यूटी",
+    "homeLiving": "होम और लिविंग",
+    "toysGifts": "खिलौने और उपहार",
+    "search": "खोजें",
+    "wishlist": "विशलिस्ट",
+    "profile": "प्रोफ़ाइल",
+    "login": "लॉग इन",
+    "register": "रजिस्टर करें",
+    "logout": "लॉग आउट"
+  },
+
+  "common": {
+    "shopNow": "अभी खरीदें",
+    "viewMore": "और देखें",
+    "addToWishlist": "विशलिस्ट में जोड़ें",
+    "removeFromWishlist": "विशलिस्ट से हटाएं",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "close": "बंद करें",
+    "loading": "लोड हो रहा है...",
+    "language": "भाषा"
+  },
+
+  "footer": {
+    "followUs": "हमें फॉलो करें",
+    "about": "हमारे बारे में",
+    "contact": "संपर्क करें",
+    "privacy": "गोपनीयता नीति",
+    "terms": "नियम और शर्तें",
+    "affiliate": "एफिलिएट प्रकटीकरण"
+  }
+}
+

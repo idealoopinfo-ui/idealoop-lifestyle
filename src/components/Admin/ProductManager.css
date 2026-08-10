@@ -322,11 +322,13 @@ PRODUCT MANAGER
   ========================= */
   
   .product-actions {
-  
-  display:flex;
-  gap:15px;
-  margin-top:30px;
-  
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #e5e7eb;
   }
   
   
@@ -341,23 +343,42 @@ PRODUCT MANAGER
   cursor:pointer;
   
   }
-  
-  
-  
   .preview-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 12px 25px;
+    background: #111827;
+    color: #ffffff;
+    border: 1px solid #111827;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
   
-  background:#111;
-  color:white;
-  
+  .preview-btn:hover {
+    background: #333333;
+    border-color: #333333;
   }
   
   
   .add-product-btn {
-  
-  background:#ff9900;
-  color:white;
-  width:100%;
-  
+    background: #ff9900;
+    color: #ffffff;
+    min-height: 44px;
+    padding: 12px 25px;
+    border: 1px solid #ff9900;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: auto;
+    min-width: 150px;
   }
   
   
@@ -728,6 +749,194 @@ PACKAGE SECTION
   flex-direction:column;
   
   }
-  
-  
   }
+  .facebook-publish-btn {
+    background: #1877f2;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  
+  .facebook-publish-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+  
+  .facebook-publish-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  /* =========================
+   EDIT / SAVE ACTIONS
+========================= */
+
+.edit-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.save-changes-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 22px;
+  background: #ff9900;
+  color: #ffffff;
+  border: 1px solid #ff9900;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-changes-btn:hover {
+  background: #e68900;
+  border-color: #e68900;
+  transform: translateY(-1px);
+}
+
+.cancel-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 22px;
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-edit-btn:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+/* =========================
+   FACEBOOK ACTION
+========================= */
+
+.facebook-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.facebook-publish-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 20px;
+  background: #1877f2;
+  color: #ffffff;
+  border: 1px solid #1877f2;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.facebook-publish-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.facebook-publish-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================
+   FACEBOOK STATUS
+========================= */
+
+.facebook-success-message {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.facebook-error-message {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================
+   ACTION BUTTON CONTAINER
+========================= */
+
+.product-edit-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.product-edit-actions > button {
+  flex-shrink: 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .product-edit-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .edit-actions,
+  .facebook-action {
+    width: 100%;
+  }
+
+  .save-changes-btn,
+  .cancel-edit-btn,
+  .facebook-publish-btn {
+    width: 100%;
+  }
+
+  .facebook-success-message,
+  .facebook-error-message {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}

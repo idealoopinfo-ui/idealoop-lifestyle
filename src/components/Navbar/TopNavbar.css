@@ -130,128 +130,221 @@ TOP NAVBAR
   flex:0 0 auto;
   
   }
-  
-  
-  
   /* =========================
   NAV BUTTONS
   ========================= */
   
+  .nav-btn,
+  .auth-btn,
+  .nav-toggle-btn,
+  .language-selector select {
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    height: 40px;
+    min-width: 110px;
+  
+    padding: 0 16px;
+  
+    box-sizing: border-box;
+  
+    border-radius: 15px;
+  
+    font-size: 14px;
+    font-weight: 600;
+  
+    white-space: nowrap;
+  
+    cursor: pointer;
+  
+    transition: .25s;
+  }
+  
+  
+  /* =========================
+  STANDARD NAV BUTTONS
+  ========================= */
   
   .nav-btn,
   .auth-btn {
   
+    border: 1px solid rgba(255,255,255,.25);
   
-  display:flex;
+    background: transparent;
   
-  align-items:center;
+    color: white;
   
-  justify-content:center;
-  
-  
-  height:40px;
-  
-  
-  padding:0 16px;
-  
-  
-  border-radius:8px;
-  
-  
-  border:1px solid rgba(255,255,255,.25);
-  
-  
-  color:white;
-  
-  
-  text-decoration:none;
-  
-  
-  font-size:14px;
-  
-  
-  font-weight:600;
-  
-  
-  white-space:nowrap;
-  
-  
-  transition:.25s;
-  
-  
+    text-decoration: none;
   }
-  
   
   
   .nav-btn:hover,
   .auth-btn:hover {
   
-  
-  background:rgba(255,255,255,.12);
-  
+    background: rgba(255,255,255,.12);
   
   }
-  
   
   
   /* =========================
   DISCOVER BUTTON
   ========================= */
   
-  
   .nav-toggle-btn {
   
+    border: none;
+    border-radius: 15px;
+    background: white;
   
-  height:40px;
+    color: #111;
   
-  
-  min-width:110px;
-  
-  
-  padding:0 18px;
-  
-  
-  border:none;
-  
-  
-  border-radius:10px;
-  
-  
-  background:white;
-  
-  
-  color:#111;
-  
-  
-  font-size:14px;
-  
-  
-  font-weight:700;
-  
-  
-  cursor:pointer;
-  
-  
-  transition:.25s;
-  
-  
+    font-weight: 600;
   }
   
-  
-  
+   
   .nav-toggle-btn:hover {
   
+    background: #e60023;
   
-  background:#e60023;
-  
-  
-  color:white;
-  
+    color: white;
   
   }
   
   
   
+/* =========================
+LANGUAGE SELECTOR
+========================= */
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-icon {
+  display: none;
+}
+
+.language-selector select {
+  height: 40px;
+  min-width: 110px;
+  padding: 0 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 15px;
+
+  background: #ffffff;
+  color: #111111;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+  outline: none;
+
+  appearance: auto;
+  transition: background 0.25s ease,
+              color 0.25s ease,
+              border-color 0.25s ease;
+}
+
+/* HOVER */
+.language-selector select:hover {
+  background: #111111;
+  color: #ffffff;
+  
+}
+
+/* FOCUS */
+.language-selector select:focus {
+  outline: none;
+  background: #111111;
+  color: #ffffff;
+  border-color: #ff9900;
+  box-shadow: 0 0 0 2px rgba(255, 153, 0, 0.15);
+}
+
+/* DROPDOWN OPTIONS */
+.language-selector select option {
+  background: #ffffff;
+  color: #111111;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .language-selector select {
+    height: 40px;
+    min-width: 100px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+}
+
+
+  
+  /* =========================
+  REGISTER BUTTON
+  ========================= */
+  
+  .auth-btn:last-child {
+  
+    background: #e60023;
+  
+    border: none;
+  
+  }
+  
+  
+  .auth-btn:last-child:hover {
+  
+    background: #c9001e;
+  
+  }
+  
+  
+  /* =========================
+  RIGHT AREA
+  ========================= */
+  
+  .top-right {
+  
+    display: flex;
+  
+    align-items: center;
+  
+    justify-content: flex-end;
+  
+    gap: 12px;
+  
+    flex: 0 0 auto;
+  }
+  
+  
+  /* =========================
+  MOBILE
+  ========================= */
+  
+  @media (max-width: 768px) {
+  
+    .nav-btn,
+    .auth-btn,
+    .nav-toggle-btn,
+    .language-selector select {
+  
+      height: 40px;
+  
+      min-width: 105px;
+  
+      padding: 0 12px;
+  
+      font-size: 13px;
+  
+    }
+  
+  } 
   /* =========================
   AUTH BUTTON GROUP
   ========================= */
@@ -334,13 +427,13 @@ TOP NAVBAR
   padding:4px 14px 4px 6px;
   
   
-  border:none;
+  border-radius: 15px;
   
   
-  background:transparent;
+  background:white;
   
   
-  color:white;
+  color:black;
   
   
   cursor:pointer;
@@ -350,10 +443,6 @@ TOP NAVBAR
   
   
   font-weight:600;
-  
-  
-  border-radius:30px;
-  
   
   transition:.25s;
   
@@ -366,7 +455,7 @@ TOP NAVBAR
   
   
   background:rgba(255,255,255,.12);
-  
+  color:white;
   
   }
   

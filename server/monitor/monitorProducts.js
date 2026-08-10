@@ -15,7 +15,25 @@ export async function monitorProducts(){
     const { data, error } = await supabase
         .from("products")
         .select(
-            "id,title,marketplace,affiliate_url,source_url,shop_name"
+            `
+            id,
+            title,
+            short_description,
+            description,
+            marketplace,
+            affiliate_url,
+            source_url,
+            shop_name,
+            image_1,
+            image_2,
+            image_3,
+            image_4,
+            image_5,
+            department,
+            category,
+            subcategory,
+            gender
+            `
         )
         .eq("monitor_enabled", true);
 
@@ -47,6 +65,26 @@ export async function monitorProducts(){
         console.log(
             "\nChecking:",
             product.title
+        );
+        const productImages = [
+            product.image_1,
+            product.image_2,
+            product.image_3,
+            product.image_4,
+            product.image_5,
+        ]
+            .filter(Boolean)
+            .flatMap((value) =>
+                String(value)
+                    .split(",")
+                    .map((url) => url.trim())
+                    .filter(Boolean)
+            )
+            .slice(0, 5);
+        
+        console.log(
+            "📸 Product images:",
+            productImages.length
         );
 
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { supabase } from "../../lib/supabase";
 
 import CategoryManager from "../../components/Admin/CategoryManager";
@@ -13,10 +12,9 @@ import PromotionCenter from "../../components/Admin/PromotionCenter/PromotionCen
 import "./Admin.css";
 
 export default function Admin() {
-
-const [activeTab,setActiveTab] = useState("dashboard");
-const [editingProduct, setEditingProduct] = useState<any>(null);
-const [monitorCount,setMonitorCount] = useState(0);
+  const [activeTab, setActiveTab] = useState("dashboard");
+  const [editingProduct, setEditingProduct] = useState<any>(null);
+  const [monitorCount, setMonitorCount] = useState(0);
 
 // DASHBOARD STATS
 

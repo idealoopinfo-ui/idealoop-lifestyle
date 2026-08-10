@@ -1,259 +1,330 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabase";
 
-
 import "./ProductManagement.css";
-
 
 interface Props {
   onEdit: (product: any) => void;
 }
 
-export default function ProductManagement({ onEdit }: Props){
+export default function ProductManagement({ onEdit }: Props) {
 
-const [products,setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<any[]>([]);
+  const [search, setSearch] = useState("");
 
-const [search,setSearch] = useState("");
+  // Product currently waiting for delete confirmation
+  const [deleteId, setDeleteId] = useState<string | null>(null);
 
+  // Message shown near the product buttons
+  const [deleteMessage, setDeleteMessage] = useState<{
+    id: string | null;
+    type: "success" | "error" | null;
+    text: string;
+  }>({
+    id: null,
+    type: null,
+    text: "",
+  });
 
-useEffect(()=>{
+  const [deleting, setDeleting] = useState(false);
 
-fetchProducts();
 
-},[]);
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
 
+  const fetchProducts = async () => {
 
-const fetchProducts = async()=>{
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .order("created_at", { ascending: false });
 
-const {data,error}=await supabase
+    if (error) {
 
-.from("products")
+      console.log(
+        "FETCH PRODUCTS ERROR:",
+        error
+      );
 
-.select("*")
+      return;
+    }
 
-.order("created_at",{ascending:false});
+    setProducts(data || []);
+  };
 
 
-if(error){
+  const handleDelete = async (id: string) => {
 
-console.log(
-"FETCH PRODUCTS ERROR:",
-error
-);
+    if (deleting) {
+      return;
+    }
 
-return;
+    setDeleting(true);
 
-}
+    setDeleteMessage({
+      id: null,
+      type: null,
+      text: "",
+    });
 
 
-setProducts(data || []);
+    const { error } = await supabase
+      .from("products")
+      .delete()
+      .eq("id", id);
 
-};
 
+    if (error) {
 
+      console.log(
+        "DELETE ERROR:",
+        error
+      );
 
+      setDeleteMessage({
+        id,
+        type: "error",
+        text: "Failed to delete product.",
+      });
 
-const handleDelete = async(id:string)=>{
+      setDeleting(false);
 
+      return;
+    }
 
-const confirmDelete = window.confirm(
-"Delete this product?"
-);
 
+    // Remove immediately from the current list
+    setProducts((currentProducts) =>
+      currentProducts.filter(
+        (product) => product.id !== id
+      )
+    );
 
-if(!confirmDelete) return;
 
+    setDeleteId(null);
 
+    setDeleteMessage({
+      id,
+      type: "success",
+      text: "✓ Product deleted successfully",
+    });
 
-const {error}=await supabase
 
-.from("products")
+    setDeleting(false);
 
-.delete()
 
-.eq("id",id);
+    // Clear success message after 3 seconds
+    setTimeout(() => {
 
+      setDeleteMessage({
+        id: null,
+        type: null,
+        text: "",
+      });
 
+    }, 3000);
+  };
 
-if(error){
 
-console.log(
-"DELETE ERROR:",
-error
-);
+  const filteredProducts = products.filter((product) => {
 
-return;
+    const text = search.toLowerCase();
 
-}
+    return (
+      product.title
+        ?.toLowerCase()
+        .includes(text)
 
+      ||
 
+      product.product_id
+        ?.toLowerCase()
+        .includes(text)
 
-fetchProducts();
+      ||
 
+      product.brand
+        ?.toLowerCase()
+        .includes(text)
+    );
+  });
 
-};
 
+  const startEdit = (product: any) => {
 
+    console.log(
+      "Editing:",
+      product
+    );
 
+    onEdit(product);
+  };
 
-
-const filteredProducts = products.filter((product)=>{
-
-
-const text = search.toLowerCase();
-
-
-
-return (
-
-product.title?.toLowerCase().includes(text)
-
-||
-
-product.product_id?.toLowerCase().includes(text)
-
-||
-
-product.brand?.toLowerCase().includes(text)
-
-);
-
-
-});
-
-const startEdit = (product: any) => {
-  console.log("Editing:", product);
-  onEdit(product);
-};
 
   return (
 
     <div className="product-management">
-    
-    
-    <h2>
-    Manage Products
-    </h2>
-    
-    
-    <button
-type="button"
-className="add-product-btn"
-onClick={()=>onEdit(null)}
->
-Add Product
-</button>
 
-  
-<input
+      <h2>
+        Manage Products
+      </h2>
 
-className="product-search"
 
-placeholder="Search product ID, title, brand..."
+      
 
-value={search}
 
-onChange={(e)=>setSearch(e.target.value)}
+      <input
+        className="product-search"
+        placeholder="Search product ID, title, brand..."
+        value={search}
+        onChange={(e) =>
+          setSearch(e.target.value)
+        }
+      />
 
-/>
 
+      {/* PRODUCTS */}
 
+      <div className="manage-products-list">
 
+        {filteredProducts.map((product) => (
 
-{/* ONLY ONE EDIT FORM */}
+          <div
+            className="manage-product-card"
+            key={product.id}
+          >
 
-<div className="product-list">
+            <img
+              src={
+                product.image_1 ||
+                "/placeholder.png"
+              }
+              alt={product.title}
+            />
 
 
-{filteredProducts.map((product)=>(
+            <div className="manage-product-info">
 
+              <h3>
+                {product.title}
+              </h3>
 
-<div
+              <p>
+                {product.product_id}
+              </p>
 
-className="manage-product-card"
+              {product.brand && (
+                <p>
+                  {product.brand}
+                </p>
+              )}
 
-key={product.id}
+            </div>
 
->
 
+            {/* ACTIONS */}
 
-<img
+            <div className="manage-product-actions">
 
-src={product.image_1 || "/placeholder.png"}
+              <button
+                type="button"
+                className="edit-product-btn"
+                onClick={() =>
+                  startEdit(product)
+                }
+              >
+                Edit
+              </button>
 
-alt={product.title}
 
-/>
+              <button
+                type="button"
+                className="delete-product-btn"
+                onClick={() => {
 
+                  setDeleteId(product.id);
 
+                  setDeleteMessage({
+                    id: null,
+                    type: null,
+                    text: "",
+                  });
 
-<div>
+                }}
+                disabled={deleting}
+              >
+                Delete
+              </button>
 
 
-<h3>
-{product.title}
-</h3>
+              {/* INLINE CONFIRMATION */}
 
+              {deleteId === product.id && (
 
-<p>
-ID: {product.product_id}
-</p>
+                <div className="delete-confirmation">
 
+                  <span>
+                    Are you sure?
+                  </span>
 
-<p>
-Brand: {product.brand}
-</p>
 
+                  <button
+                    type="button"
+                    className="confirm-delete-btn"
+                    onClick={() =>
+                      handleDelete(product.id)
+                    }
+                    disabled={deleting}
+                  >
+                    {deleting
+                      ? "Deleting..."
+                      : "Yes, Delete"}
+                  </button>
 
-</div>
 
+                  <button
+                    type="button"
+                    className="cancel-delete-btn"
+                    onClick={() =>
+                      setDeleteId(null)
+                    }
+                    disabled={deleting}
+                  >
+                    Cancel
+                  </button>
 
+                </div>
 
+              )}
 
-<div className="product-actions">
 
+              {/* SUCCESS / ERROR MESSAGE */}
 
-<button
-  type="button"
-  onClick={() => startEdit(product)}
->
-  Edit
-</button>
+              {deleteMessage.id === product.id &&
+                deleteMessage.type && (
 
+                  <span
+                    className={
+                      deleteMessage.type === "success"
+                        ? "delete-success-message"
+                        : "delete-error-message"
+                    }
+                  >
+                    {deleteMessage.text}
+                  </span>
 
+                )}
 
-<button
+            </div>
 
-type="button"
+          </div>
 
-onClick={()=>handleDelete(product.id)}
+        ))}
 
->
+      </div>
 
-Delete
-
-</button>
-
-
-
-</div>
-
-
-
-</div>
-
-
-))}
-
-
-
-</div>
-
-
-</div>
-
-);
-
-
+    </div>
+  );
 }

@@ -1,0 +1,39 @@
+
+{
+  "nav": {
+    "home": "Accueil",
+    "discover": "Découvrir",
+    "fashion": "Mode",
+    "beauty": "Beauté",
+    "homeLiving": "Maison & Vie",
+    "toysGifts": "Jouets & Cadeaux",
+    "search": "Rechercher",
+    "wishlist": "Liste de souhaits",
+    "profile": "Profil",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "logout": "Déconnexion"
+  },
+
+  "common": {
+    "shopNow": "Acheter maintenant",
+    "viewMore": "Voir plus",
+    "addToWishlist": "Ajouter aux favoris",
+    "removeFromWishlist": "Retirer des favoris",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "loading": "Chargement...",
+    "language": "Langue"
+  },
+
+  "footer": {
+    "followUs": "Suivez-nous",
+    "about": "À propos",
+    "contact": "Contact",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions générales",
+    "affiliate": "Divulgation d'affiliation"
+  }
+}
+

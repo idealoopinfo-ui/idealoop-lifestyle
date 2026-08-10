@@ -1,47 +1,31 @@
 import { Link } from "react-router-dom";
 
-
 import "./Footer.css";
 
 interface FooterProps {
   className?: string;
 }
 
-export default function Footer({className}: FooterProps){
-
-
+export default function Footer({ className }: FooterProps) {
   return (
-
     <footer className={`footer ${className || ""}`}>
-    
+
       {/* TOP GRID */}
       <div className="footer-container">
-
 
         {/* BRAND */}
         <div className="footer-brand">
 
-        <h2 className="footer-logo">
-
-  <img
-    src="https://lxvoytlpnbzwxplxfnxj.supabase.co/storage/v1/object/public/my/Untitled_design-removebg-preview.png"
-    alt="Idealoop Lifestyle"
-    className="footer-logo-icon"
-  />
-
-  Idealoop Lifestyle
-
-</h2>
+          <h2 className="footer-logo">
+            Idealoop Lifestyle
+          </h2>
 
           <p className="footer-text">
-
             A modern lifestyle marketplace offering curated
             fashion, beauty, home essentials, and trending products.
-
           </p>
 
         </div>
-
 
 
         {/* SHOP */}
@@ -51,34 +35,27 @@ export default function Footer({className}: FooterProps){
             Shop
           </h3>
 
-
           <Link to="/">
             Home
           </Link>
-
 
           <Link to="/category/fashion">
             Fashion
           </Link>
 
-
           <Link to="/category/beauty">
             Beauty
           </Link>
 
-
           <Link to="/category/home-living">
             Home & Living
           </Link>
-
 
           <Link to="/category/toys-gifts">
             Toys & Gifts
           </Link>
 
         </div>
-
-
 
 
         {/* SUPPORT */}
@@ -88,17 +65,15 @@ export default function Footer({className}: FooterProps){
             Support
           </h3>
 
-          <a href="/about">
+          <Link to="/about">
             About Us
-          </a>
+          </Link>
 
           <Link to="/contact">
             Contact Us
           </Link>
 
         </div>
-
-
 
 
         {/* LEGAL */}
@@ -108,16 +83,13 @@ export default function Footer({className}: FooterProps){
             Legal
           </h3>
 
-
           <Link to="/privacy">
             Privacy Policy
           </Link>
 
-
           <Link to="/terms">
             Terms & Conditions
           </Link>
-
 
           <Link to="/affiliate-disclosure">
             Affiliate Disclosure
@@ -125,9 +97,7 @@ export default function Footer({className}: FooterProps){
 
         </div>
 
-
       </div>
-
 
 
       {/* SOCIAL SECTION */}
@@ -137,38 +107,55 @@ export default function Footer({className}: FooterProps){
           Follow Us
         </h3>
 
-
         <div className="social-links">
 
-          <a href="#" target="_blank" rel="noreferrer">
+          {/* FACEBOOK */}
+          <a
+            href="https://www.facebook.com/idealoop.lifestyle/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Facebook
           </a>
 
 
-          <a href="#" target="_blank" rel="noreferrer">
-            Instagram
+          {/* PINTEREST FITNESS */}
+          <a
+            href="https://www.pinterest.com/BloomVix/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pinterest – Fitness
           </a>
 
 
-          <a href="#" target="_blank" rel="noreferrer">
-            Pinterest
+          {/* FUTURE PINTEREST ACCOUNTS */}
+          {/*
+          <a
+            href="BEAUTY_PINTEREST_URL"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pinterest – Beauty
           </a>
 
-
-          <a href="#" target="_blank" rel="noreferrer">
-            X
+          <a
+            href="HOME_DECOR_PINTEREST_URL"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pinterest – Home Decor
           </a>
+          */}
+
 
         </div>
 
       </div>
 
 
-
-
       {/* DIVIDER */}
       <div className="footer-divider"></div>
-
 
 
       {/* BOTTOM */}
@@ -179,15 +166,12 @@ export default function Footer({className}: FooterProps){
           All rights reserved.
         </p>
 
-
         <p className="footer-note">
           Some links may be affiliate links.
           We may earn a commission at no extra cost to you.
         </p>
 
-
       </div>
-
 
     </footer>
   );

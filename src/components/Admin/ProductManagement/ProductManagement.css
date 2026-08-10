@@ -178,7 +178,7 @@
     
     font-weight:600;
     
-    background:#f3f4f6;
+    background:#ff9900;
     
     transition:.25s;
     
@@ -240,6 +240,7 @@
         border-radius: 8px;
         font-size: 15px;
         margin-bottom: 25px;
+        gap: 5px;
       }
       
       
@@ -449,5 +450,188 @@
   background:#e68900;
 
   transform:translateY(-1px);
+
+}
+/* =========================
+   PRODUCT ACTIONS
+========================= */
+
+.manage-product-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+
+/* =========================
+   EDIT BUTTON
+========================= */
+
+.edit-product-btn {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.edit-product-btn:hover {
+  background: #374151;
+}
+
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.delete-product-btn {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.delete-product-btn:hover {
+  background: #b91c1c;
+}
+
+.delete-product-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =========================
+   DELETE CONFIRMATION
+========================= */
+
+.delete-confirmation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px 10px;
+
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+
+  font-size: 13px;
+  color: #9a3412;
+}
+
+
+/* YES DELETE */
+
+.confirm-delete-btn {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 6px;
+
+  background: #dc2626;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.confirm-delete-btn:hover {
+  background: #b91c1c;
+}
+
+
+/* CANCEL */
+
+.cancel-delete-btn {
+  padding: 7px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+
+  background: #ffffff;
+  color: #374151;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.cancel-delete-btn:hover {
+  background: #f3f4f6;
+}
+
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
+
+.delete-success-message {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 7px 12px;
+
+  border-radius: 6px;
+
+  background: #dcfce7;
+  border: 1px solid #86efac;
+
+  color: #166534;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   ERROR MESSAGE
+========================= */
+
+.delete-error-message {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 7px 12px;
+
+  border-radius: 6px;
+
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+
+  color: #991b1b;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .manage-product-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .delete-confirmation {
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+  }
 
 }

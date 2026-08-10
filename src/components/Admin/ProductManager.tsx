@@ -31,6 +31,9 @@ const [productUrl,setProductUrl] = useState("");
 
 const [showPreview, setShowPreview] = useState(false);
 const [spotlight, setSpotlight] = useState(false);
+const [facebookPublishing, setFacebookPublishing] = useState(false);
+const [facebookPublished, setFacebookPublished] = useState(false);
+const [facebookPublishError, setFacebookPublishError] = useState("");
 const [products, setProducts] = useState<any[]>([]);
 const [editingId,setEditingId] = useState<string | null>(null);
 
@@ -115,31 +118,223 @@ useEffect(()=>{
   },[]);
   
   
-  useEffect(()=>{
+  useEffect(() => {
 
-    if(selectedProduct){
-    
-      setEditingId(selectedProduct.id);
-    
-      setProductId(selectedProduct.product_id || "");
-      setTitle(selectedProduct.title || "");
-      setBrand(selectedProduct.brand || "");
-      setDescription(selectedProduct.description || "");
-      setShortDescription(selectedProduct.short_description || "");
-    
-      setImage1(selectedProduct.image_1 || "");
-      setImage2(selectedProduct.image_2 || "");
-      setImage3(selectedProduct.image_3 || "");
-      setImage4(selectedProduct.image_4 || "");
-      setImage5(selectedProduct.image_5 || "");
-    
-      setDepartment(selectedProduct.department || "");
-      setCategory(selectedProduct.category || "");
-      setSubcategory(selectedProduct.subcategory || "");
-    
+    if (!selectedProduct) {
+      return;
     }
-    
-    },[selectedProduct]);
+  
+    setEditingId(selectedProduct.id || null);
+  
+    // GENERAL
+    setProductId(selectedProduct.product_id || "");
+    setTitle(selectedProduct.title || "");
+    setBrand(selectedProduct.brand || "");
+    setDescription(selectedProduct.description || "");
+    setShortDescription(
+      selectedProduct.short_description || ""
+    );
+  
+    // IMAGES
+    setImage1(selectedProduct.image_1 || "");
+    setImage2(selectedProduct.image_2 || "");
+    setImage3(selectedProduct.image_3 || "");
+    setImage4(selectedProduct.image_4 || "");
+    setImage5(selectedProduct.image_5 || "");
+  
+    // AFFILIATE
+    setAffiliateUrl(
+      selectedProduct.affiliate_url || ""
+    );
+  
+    setSourceUrl(
+      selectedProduct.source_url || ""
+    );
+  
+    setShopName(
+      selectedProduct.shop_name || ""
+    );
+  
+    setMarketplace(
+      selectedProduct.marketplace || ""
+    );
+  
+    // CATEGORY
+    setDepartment(
+      selectedProduct.department || ""
+    );
+  
+    setCategory(
+      selectedProduct.category || ""
+    );
+  
+    setSubcategory(
+      selectedProduct.subcategory || ""
+    );
+  
+    setCollection(
+      selectedProduct.collection || ""
+    );
+  
+    setProductType(
+      selectedProduct.product_type || ""
+    );
+  
+    // FASHION
+    setSeason(
+      selectedProduct.season || ""
+    );
+  
+    setStyle(
+      selectedProduct.style || ""
+    );
+  
+    setOccasion(
+      selectedProduct.occasion || ""
+    );
+  
+    setMaterial(
+      selectedProduct.material || ""
+    );
+  
+    setFit(
+      selectedProduct.fit || ""
+    );
+  
+    setGender(
+      selectedProduct.gender || ""
+    );
+  
+    // BEAUTY
+    setHairType(
+      selectedProduct.hair_type || ""
+    );
+  
+    setSkinType(
+      selectedProduct.skin_type || ""
+    );
+  
+    setIngredients(
+      selectedProduct.ingredients || ""
+    );
+  
+    setVolumeSize(
+      selectedProduct.volume_size || ""
+    );
+  
+    setScent(
+      selectedProduct.scent || ""
+    );
+  
+    setBenefits(
+      selectedProduct.benefits || ""
+    );
+  
+    setSuitableFor(
+      selectedProduct.suitable_for || ""
+    );
+  
+    // HOME & LIVING
+    setDimensions(
+      selectedProduct.dimensions || ""
+    );
+  
+    setColor(
+      selectedProduct.color || ""
+    );
+  
+    setRoomType(
+      selectedProduct.room_type || ""
+    );
+  
+    setWeight(
+      selectedProduct.weight || ""
+    );
+  
+    // TOYS & GIFTS
+    setAgeRange(
+      selectedProduct.age_range || ""
+    );
+  
+    setEducationalFeatures(
+      selectedProduct.educational_features || ""
+    );
+  
+    // FITNESS
+    setEquipmentType(
+      selectedProduct.equipment_type || ""
+    );
+  
+    setWorkoutType(
+      selectedProduct.workout_type || ""
+    );
+  
+    setSportType(
+      selectedProduct.sport_type || ""
+    );
+  
+    setSize(
+      selectedProduct.size || ""
+    );
+  
+    setWeightCapacity(
+      selectedProduct.weight_capacity || ""
+    );
+  
+    setSkillLevel(
+      selectedProduct.skill_level || ""
+    );
+  
+    setTargetArea(
+      selectedProduct.target_area || ""
+    );
+  
+    setAccessories(
+      selectedProduct.accessories || ""
+    );
+  
+    setWellnessType(
+      selectedProduct.wellness_type || ""
+    );
+  
+    setUsageArea(
+      selectedProduct.usage_area || ""
+    );
+  
+    setWellnessBenefits(
+      selectedProduct.wellness_benefits || ""
+    );
+  
+    setPowerSource(
+      selectedProduct.power_source || ""
+    );
+  
+    setBatteryCapacity(
+      selectedProduct.battery_capacity || ""
+    );
+  
+    setHeatFunction(
+      selectedProduct.heat_function || ""
+    );
+  
+    setMassageType(
+      selectedProduct.massage_type || ""
+    );
+  
+    // VISIBILITY
+    setFeatured(
+      selectedProduct.featured || false
+    );
+  
+    setTrending(
+      selectedProduct.trending || false
+    );
+  
+    setSpotlight(
+      selectedProduct.spotlight || false
+    );
+  
+  }, [selectedProduct]);
         
         const fetchProducts = async()=>{
         
@@ -448,23 +643,85 @@ const updateProduct = async()=>{
   
   }
   
-  alert("Product updated successfully");
-  
   setEditingId(null);
   
   fetchProducts();
   
   };
 
+  const publishToFacebook = async () => {
+    if (!editingId) {
+      setFacebookPublishError("Please select or save a product first.");
+      return;
+    }
+  
+    if (facebookPublishing) {
+      return;
+    }
+  
+    try {
+      setFacebookPublishing(true);
+      setFacebookPublished(false);
+      setFacebookPublishError("");
+  
+      console.log(
+        "📘 Publishing product to Facebook:",
+        editingId
+      );
+  
+      const response = await fetch(
+        `http://localhost:5000/api/facebook/publish-product/${editingId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      const result = await response.json();
+  
+      console.log(
+        "Facebook publish response:",
+        result
+      );
+  
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.error ||
+          "Facebook publishing failed"
+        );
+      }
+  
+      setFacebookPublished(true);
+  
+      // Refresh product list automatically
+      await fetchProducts();
+  
+    } catch (error) {
+  
+      console.error(
+        "❌ Facebook publishing error:",
+        error
+      );
+  
+      setFacebookPublished(false);
+  
+      setFacebookPublishError(
+        error instanceof Error
+          ? error.message
+          : "Facebook publishing failed"
+      );
+  
+    } finally {
+  
+      setFacebookPublishing(false);
+    }
+  };
+
     return (
 
                 <div className="product-manager">
-                
-                <div>
-                <h3>
-                Products Loaded: {products.length}
-                </h3>
-                </div>
                 
                 <form 
                 className="product-form" 
@@ -867,37 +1124,70 @@ setMassageType={setMassageType}
         
         <div className="product-actions">
 
-<button
-  type="button"
-  className="preview-btn"
-  onClick={() => setShowPreview(true)}
->
-  Preview Product
-</button>
+  <button
+    type="button"
+    className="preview-btn"
+    onClick={() => setShowPreview(true)}
+  >
+    Preview Product
+  </button>
 
-<button
-  type="button"
-  className="add-product-btn"
-  onClick={() => {
-    if (editingId) {
-      updateProduct();
-    } else {
-      addProduct();
-    }
-  }}
->
-  {editingId ? "Save Changes" : "Add Product"}
-</button>
-{editingId && (
-<button
-type="button"
-className="cancel-edit-btn"
-onClick={() => setEditingId(null)}
->
-Cancel Edit
-</button>
+  <button
+    type="button"
+    className="add-product-btn"
+    onClick={() => {
+      if (editingId) {
+        updateProduct();
+      } else {
+        addProduct();
+      }
+    }}
+  >
+    {editingId ? "Save Changes" : "Add Product"}
+  </button>
 
-)}
+  {editingId && (
+    <div className="facebook-action">
+
+      <button
+        type="button"
+        className="facebook-publish-btn"
+        onClick={publishToFacebook}
+        disabled={facebookPublishing}
+      >
+        {facebookPublishing
+          ? "Publishing..."
+          : "📘 Publish to Facebook"}
+      </button>
+
+      {facebookPublished && (
+        <div className="facebook-success-message">
+          ✓ Published to Facebook successfully
+        </div>
+      )}
+
+      {facebookPublishError && (
+        <div className="facebook-error-message">
+          {facebookPublishError}
+        </div>
+      )}
+
+    </div>
+  )}
+
+  {editingId && (
+    <button
+      type="button"
+      className="cancel-edit-btn"
+      onClick={() => {
+        setEditingId(null);
+        setFacebookPublished(false);
+        setFacebookPublishError("");
+      }}
+    >
+      Cancel Edit
+    </button>
+  )}
 
 <div>
 

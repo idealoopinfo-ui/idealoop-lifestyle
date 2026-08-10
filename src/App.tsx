@@ -3,10 +3,9 @@ import { lazy, Suspense, useEffect, useState } from "react";
 
 import { supabase } from "./lib/supabase";
 
-
 import AdminRoute from "./components/Auth/AdminRoute";
-import Maintenance from "./components/Maintenance/Maintenance";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import Maintenance from "./components/Maintenance/Maintenance";
 
 import TopNavbar from "./components/Navbar/TopNavbar";
 import NoticePanel from "./components/NoticePanel/NoticePanel";
@@ -21,11 +20,9 @@ import PageTransition from "./components/PageTransition/PageTransition";
 import "./styles/theme.css";
 
 
-
 // ======================
 // LAZY LOADED PAGES
 // ======================
-
 
 const Home = lazy(() =>
   import("./pages/Home/Home")
@@ -96,411 +93,479 @@ const Help = lazy(() =>
 );
 
 
-
-
-
-export default function App(){
-
-
-const [isAdmin,setIsAdmin] = useState(false);
-
-const [checking,setChecking] = useState(true);
-
-const [maintenance,setMaintenance] =
-useState<boolean | null>(null);
-
-
-
-const location = useLocation();
-
-
-const isDiscover =
-location.pathname.startsWith("/discover");
-
-
-
-
-
-useEffect(()=>{
-
-
-const initializeApp = async()=>{
-
-
-try{
-
-
 // ======================
-// CHECK MAINTENANCE
+// APP
 // ======================
 
+export default function App() {
 
-const {
-data:settings,
-error
-}= await supabase
+  const [isAdmin, setIsAdmin] = useState(false);
 
-.from("site_settings")
+  const [checking, setChecking] = useState(true);
 
-.select("maintenance_mode")
+  const [maintenance, setMaintenance] =
+    useState<boolean | null>(null);
 
-.eq("id",1)
+  const location = useLocation();
 
-.single();
+  const isDiscover =
+    location.pathname.startsWith("/discover");
 
 
+  // ======================
+  // INITIALIZE APP
+  // ======================
 
-console.log(
-"MAINTENANCE STATUS:",
-settings
-);
+  useEffect(() => {
 
+    const initializeApp = async () => {
 
+      try {
 
-if(!error && settings){
+        // ======================
+        // CHECK MAINTENANCE
+        // ======================
 
-setMaintenance(
-settings.maintenance_mode
-);
+        const {
+          data: settings,
+          error
+        } = await supabase
 
-}
-else{
+          .from("site_settings")
 
-setMaintenance(false);
+          .select("maintenance_mode")
 
-}
+          .eq("id", 1)
 
+          .single();
 
 
+        console.log(
+          "MAINTENANCE STATUS:",
+          settings
+        );
 
 
-// ======================
-// CHECK USER
-// ======================
+        if (!error && settings) {
 
+          setMaintenance(
+            settings.maintenance_mode
+          );
 
-const {
-data:{
-user
-}
+        } else {
 
-}= await supabase.auth.getUser();
+          setMaintenance(false);
 
+        }
 
 
+        // ======================
+        // CHECK USER
+        // ======================
 
-if(user){
-
-
-
-const {
-data:profile
-}= await supabase
-
-.from("profiles")
-
-.select("is_admin")
-
-.eq("id",user.id)
-
-.single();
-
-
-
-
-
-if(profile?.is_admin === true){
-
-setIsAdmin(true);
-
-}
-
-
-
-
-
-// ======================
-// CREATE PROFILE
-// ======================
-
-
-if(!profile){
-
-
-
-const metadata =
-user.user_metadata || {};
-
-
-
-await supabase
-
-.from("profiles")
-
-.insert({
-
-id:user.id,
-
-email:user.email,
-
-
-first_name:
-metadata.full_name
-?.split(" ")[0] || "",
-
-
-last_name:
-metadata.full_name
-?.split(" ")
-.slice(1)
-.join(" ") || "",
-
-
-avatar_url:
-metadata.avatar_url ||
-metadata.picture ||
-null
-
-
-});
-
-
-}
-
-
-
-}
-
-
-
-
-}
-
-catch(error){
-
-
-console.log(
-"APP INITIALIZE ERROR:",
-error
-);
-
-
-setMaintenance(false);
-
-
-}
-
-
-finally{
-
-
-setChecking(false);
-
-
-}
-
-
-
-};
-
-
-
-initializeApp();
-
-
-
-},[]);
-
-
-
-
-
-if(checking){
-
-return null;
-
-}
-
-
-
-if(maintenance && !isAdmin){
-
-return <Maintenance />;
-
-}
-
-
-return (
-
-  <div className="app-layout">
-
-<ScrollToTop />
-
-    {!isDiscover && <TopNavbar />}
-
-    {!isDiscover && <NoticePanel />}
-
-    {!isDiscover && <CategoryNavbar />}
-
-    <main className="route-container">
-
-      <AnimatePresence
-        mode="wait"
-      >
-
-        <Suspense
-          fallback={
-            <div>Loading...</div>
+        const {
+          data: {
+            user
           }
+        } = await supabase.auth.getUser();
+
+
+        if (user) {
+
+          const {
+            data: profile
+          } = await supabase
+
+            .from("profiles")
+
+            .select("is_admin")
+
+            .eq("id", user.id)
+
+            .single();
+
+
+          // ======================
+          // ADMIN
+          // ======================
+
+          if (profile?.is_admin === true) {
+
+            setIsAdmin(true);
+
+          }
+
+
+          // ======================
+          // CREATE PROFILE
+          // ======================
+
+          if (!profile) {
+
+            const metadata =
+              user.user_metadata || {};
+
+
+            await supabase
+
+              .from("profiles")
+
+              .insert({
+
+                id: user.id,
+
+                email: user.email,
+
+                first_name:
+                  metadata.full_name
+                    ?.split(" ")[0] || "",
+
+                last_name:
+                  metadata.full_name
+                    ?.split(" ")
+                    .slice(1)
+                    .join(" ") || "",
+
+                avatar_url:
+                  metadata.avatar_url ||
+                  metadata.picture ||
+                  null
+
+              });
+
+          }
+
+        }
+
+      }
+
+      catch (error) {
+
+        console.log(
+          "APP INITIALIZE ERROR:",
+          error
+        );
+
+        setMaintenance(false);
+
+      }
+
+      finally {
+
+        setChecking(false);
+
+      }
+
+    };
+
+
+    initializeApp();
+
+  }, []);
+
+
+  // ======================
+  // LOADING
+  // ======================
+
+  if (checking) {
+
+    return null;
+
+  }
+
+
+  // ======================
+  // MAINTENANCE
+  // ======================
+
+  if (maintenance && !isAdmin) {
+
+    return <Maintenance />;
+
+  }
+
+
+  // ======================
+  // APP LAYOUT
+  // ======================
+
+  return (
+    <>
+
+      {/* ======================
+          TOP NAVIGATION
+      ====================== */}
+
+      {!isDiscover && (
+        <TopNavbar />
+      )}
+
+
+      {/* ======================
+          NOTICE
+      ====================== */}
+
+      {!isDiscover && (
+        <NoticePanel />
+      )}
+
+
+      {/* ======================
+          CATEGORY NAVIGATION
+      ====================== */}
+
+      {!isDiscover && (
+        <CategoryNavbar />
+      )}
+
+
+      {/* ======================
+          MAIN PAGE AREA
+      ====================== */}
+
+      <main className="route-container">
+
+        <AnimatePresence
+          mode="wait"
         >
 
-          <Routes
-            location={location}
-            key={location.pathname}
+          <Suspense
+            fallback={
+              <div>Loading...</div>
+            }
           >
 
-            <Route
-              path="/"
-              element={
-                <PageTransition>
-                  <Home />
-                </PageTransition>
-              }
-            />
+            <Routes
+              location={location}
+              key={location.pathname}
+            >
 
-            <Route
-              path="/help"
-              element={
-                <PageTransition>
-                  <Help />
-                </PageTransition>
-              }
-            />
+              {/* HOME */}
 
-            <Route
-              path="/admin"
-              element={
-                <AdminRoute>
-                  <Admin />
-                </AdminRoute>
-              }
-            />
-
-            <Route
-              path="/wishlist"
-              element={
-                <PageTransition>
-                  <Wishlist />
-                </PageTransition>
-              }
-            />
-
-            <Route
-              path="/login"
-              element={<Login />}
-            />
-
-            <Route
-              path="/register"
-              element={<Register />}
-            />
-
-            <Route
-              path="/forgot-password"
-              element={<ForgotPassword />}
-            />
-
-            <Route
-              path="/profile"
-              element={<Profile />}
-            />
-
-            <Route
-              path="/search"
-              element={<SearchPage />}
-            />
-
-            <Route
-              path="/product/:productId"
-              element={<ProductDetails />}
-            />
-
-            <Route
-              path="/category/:department"
-              element={<CategoryPage />}
-            />
-
-            <Route
-              path="/category/:department/:category"
-              element={<CategoryPage />}
-            />
-
-            <Route
-              path="/category/:department/:category/:subcategory"
-              element={<CategoryPage />}
-            />
-
-            <Route
-              path="/category/:department/:category/:subcategory/:collection"
-              element={<CategoryPage />}
-            />
-
-<Route
-  path="/category/:department/:category/:subcategory/:collection/:productType"
-  element={
-    <PageTransition>
-      <CategoryPage />
-    </PageTransition>
-  }
-/>
-
-            <Route
-              path="/discover"
-              element={<DiscoverPage />}
-            />
-
-            <Route
-              path="/clothing"
-              element={<ClothingCategory />}
-            />
-
-            <Route
-              path="/about"
-              element={<About />}
-            />
-
-            <Route
-              path="/contact"
-              element={<Contact />}
-            />
-
-            <Route
-              path="/privacy"
-              element={<Privacy />}
-            />
-
-            <Route
-              path="/terms"
-              element={<Terms />}
-            />
-
-            <Route
-              path="/affiliate-disclosure"
-              element={<AffiliateDisclosure />}
-            />
-
-          </Routes>
-
-        </Suspense>
-
-      </AnimatePresence>
-
-    </main>
+              <Route
+                path="/"
+                element={
+                  <PageTransition>
+                    <Home />
+                  </PageTransition>
+                }
+              />
 
 
-    <Footer className={isDiscover ? "hide-footer" : ""} />
+              {/* HELP */}
 
-    </div>
+              <Route
+                path="/help"
+                element={
+                  <PageTransition>
+                    <Help />
+                  </PageTransition>
+                }
+              />
 
-);
-            }
+
+              {/* ADMIN */}
+
+              <Route
+                path="/admin"
+                element={
+                  <AdminRoute>
+                    <Admin />
+                  </AdminRoute>
+                }
+              />
+
+
+              {/* WISHLIST */}
+
+              <Route
+                path="/wishlist"
+                element={
+                  <PageTransition>
+                    <Wishlist />
+                  </PageTransition>
+                }
+              />
+
+
+              {/* AUTH */}
+
+              <Route
+                path="/login"
+                element={
+                  <Login />
+                }
+              />
+
+              <Route
+                path="/register"
+                element={
+                  <Register />
+                }
+              />
+
+              <Route
+                path="/forgot-password"
+                element={
+                  <ForgotPassword />
+                }
+              />
+
+
+              {/* PROFILE */}
+
+              <Route
+                path="/profile"
+                element={
+                  <Profile />
+                }
+              />
+
+
+              {/* SEARCH */}
+
+              <Route
+                path="/search"
+                element={
+                  <SearchPage />
+                }
+              />
+
+
+              {/* PRODUCT */}
+
+              <Route
+                path="/product/:productId"
+                element={
+                  <ProductDetails />
+                }
+              />
+
+
+              {/* CATEGORY */}
+
+              <Route
+                path="/category/:department"
+                element={
+                  <CategoryPage />
+                }
+              />
+
+              <Route
+                path="/category/:department/:category"
+                element={
+                  <CategoryPage />
+                }
+              />
+
+              <Route
+                path="/category/:department/:category/:subcategory"
+                element={
+                  <CategoryPage />
+                }
+              />
+
+              <Route
+                path="/category/:department/:category/:subcategory/:collection"
+                element={
+                  <CategoryPage />
+                }
+              />
+
+              <Route
+                path="/category/:department/:category/:subcategory/:collection/:productType"
+                element={
+                  <CategoryPage />
+                }
+              />
+
+
+              {/* DISCOVER */}
+
+              <Route
+                path="/discover"
+                element={
+                  <DiscoverPage />
+                }
+              />
+
+
+              {/* CLOTHING */}
+
+              <Route
+                path="/clothing"
+                element={
+                  <ClothingCategory />
+                }
+              />
+
+
+              {/* ABOUT */}
+
+              <Route
+                path="/about"
+                element={
+                  <About />
+                }
+              />
+
+
+              {/* CONTACT */}
+
+              <Route
+                path="/contact"
+                element={
+                  <Contact />
+                }
+              />
+
+
+              {/* LEGAL */}
+
+              <Route
+                path="/privacy"
+                element={
+                  <Privacy />
+                }
+              />
+
+              <Route
+                path="/terms"
+                element={
+                  <Terms />
+                }
+              />
+
+              <Route
+                path="/affiliate-disclosure"
+                element={
+                  <AffiliateDisclosure />
+                }
+              />
+
+            </Routes>
+
+          </Suspense>
+
+        </AnimatePresence>
+
+      </main>
+
+
+      {/* ======================
+          FOOTER
+      ====================== */}
+
+      <Footer
+        className={
+          isDiscover
+            ? "hide-footer"
+            : ""
+        }
+      />
+
+    </>
+  );
+}
+

@@ -1,0 +1,39 @@
+
+{
+  "nav": {
+    "home": "Home",
+    "discover": "Discover",
+    "fashion": "Fashion",
+    "beauty": "Beauty",
+    "homeLiving": "Home & Living",
+    "toysGifts": "Toys & Gifts",
+    "search": "Search",
+    "wishlist": "Wishlist",
+    "profile": "Profile",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+
+  "common": {
+    "shopNow": "Shop Now",
+    "viewMore": "View More",
+    "addToWishlist": "Add to Wishlist",
+    "removeFromWishlist": "Remove from Wishlist",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "loading": "Loading...",
+    "language": "Language"
+  },
+
+  "footer": {
+    "followUs": "Follow Us",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "affiliate": "Affiliate Disclosure"
+  }
+}
+
