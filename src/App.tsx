@@ -269,9 +269,11 @@ export default function App() {
   // ======================
 
   if (checking) {
-
-    return null;
-
+    return (
+      <div className="app-loading">
+        Loading...
+      </div>
+    );
   }
 
 
