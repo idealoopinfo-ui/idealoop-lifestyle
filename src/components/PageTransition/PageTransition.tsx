@@ -1,31 +1,34 @@
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 
-export default function PageTransition({children}:any){
+interface PageTransitionProps {
+  children: React.ReactNode;
+  duration?: number;
+}
 
-return(
-
-<motion.div
-initial={{
-opacity:0,
-y:15
-}}
-animate={{
-opacity:1,
-y:0
-}}
-exit={{
-opacity:0,
-y:-15
-}}
-transition={{
-duration:0.35
-}}
->
-
-{children}
-
-</motion.div>
-
-);
-
+export default function PageTransition({
+  children,
+  duration = 0.35,
+}: PageTransitionProps) {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 15,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      exit={{
+        opacity: 0,
+        y: -15,
+      }}
+      transition={{
+        duration,
+        ease: "easeOut",
+      }}
+    >
+      {children}
+    </motion.div>
+  );
 }

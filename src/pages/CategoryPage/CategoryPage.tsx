@@ -118,121 +118,109 @@ export default function CategoryPage() {
     subcategory
   ]);
 
+return (
+  <div className="category-page">
 
+    {/* =========================
+        BREADCRUMB
+    ========================== */}
 
-  return (
+    <div className="breadcrumb">
 
-    <div className="category-page">
+      <Link to="/">
+        Home
+      </Link>
 
+      {department && (
+        <>
+          <span> / </span>
 
-      <div className="breadcrumb">
+          <Link to={`/category/${department}`}>
+            {formatTitle(department)}
+          </Link>
+        </>
+      )}
 
-        <Link to="/">
-          Home
-        </Link>
+      {category && (
+        <>
+          <span> / </span>
 
+          <Link
+            to={`/category/${department}/${category}`}
+          >
+            {formatTitle(category)}
+          </Link>
+        </>
+      )}
 
-        {department && (
+      {subcategory && (
+        <>
+          <span> / </span>
 
-          <>
-            <span> / </span>
-
-            <Link to={`/category/${department}`}>
-              {formatTitle(department)}
-            </Link>
-          </>
-
-        )}
-
-
-        {category && (
-
-          <>
-            <span> / </span>
-
-            <Link to={`/category/${department}/${category}`}>
-              {formatTitle(category)}
-            </Link>
-          </>
-
-        )}
-
-
-        {subcategory && (
-
-          <>
-            <span> / </span>
-
-            <span>
-              {formatTitle(subcategory)}
-            </span>
-          </>
-
-        )}
-
-      </div>
-
-
-
-      <h1>
-
-        {
-          subcategory
-            ? formatTitle(subcategory)
-            : category
-              ? formatTitle(category)
-              : formatTitle(department || "")
-        }
-
-      </h1>
-
-
-
-      {
-        loading ? (
-
-          <p>
-            Loading products...
-          </p>
-
-        )
-
-        :
-
-        products.length === 0 ? (
-
-          <p>
-            No products found.
-          </p>
-
-        )
-
-        :
-
-        (
-
-          <div className="product-grid">
-
-            {
-              products.map((product) => (
-
-                <ProductCard
-  key={product.product_id}
-  product={product}
-/>
-
-              ))
-            }
-
-          </div>
-
-        )
-
-      }
-
+          <span>
+            {formatTitle(subcategory)}
+          </span>
+        </>
+      )}
 
     </div>
 
-  );
 
-}
+    {/* =========================
+        PAGE TITLE
+    ========================== */}
+
+    <h1>
+      {subcategory
+        ? formatTitle(subcategory)
+        : category
+          ? formatTitle(category)
+          : formatTitle(department || "")}
+    </h1>
+
+
+    {/* =========================
+        PRODUCTS
+    ========================== */}
+
+    {loading ? (
+
+      <div className="category-loading">
+        <p>Loading products...</p>
+      </div>
+
+    ) : products.length === 0 ? (
+
+      <div className="empty-category-message">
+
+        <h2>
+          This collection is growing
+        </h2>
+
+        <p>
+          New products are being added regularly.
+          Check back soon for more.
+        </p>
+
+      </div>
+
+    ) : (
+
+      <div className="product-grid">
+
+        {products.map((product) => (
+
+          <ProductCard
+            key={product.product_id || product.id}
+            product={product}
+          />
+
+        ))}
+
+      </div>
+
+    )}
+
+  </div>
+);
+        }

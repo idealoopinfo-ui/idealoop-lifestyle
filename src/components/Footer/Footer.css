@@ -302,4 +302,38 @@
 .hide-footer {
   display: none !important;
 }
+/* =========================
+   FOOTER SLOW REVEAL
+========================= */
 
+.footer {
+  opacity: 0;
+  transform: translateY(35px);
+
+  animation: footerReveal 1.5s ease-out 0.3s forwards;
+}
+
+@keyframes footerReveal {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   REDUCE MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .footer {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

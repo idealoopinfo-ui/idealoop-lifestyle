@@ -1,5 +1,4 @@
 import Hero from "../../components/Hero/Hero";
-
 import SpotlightSection from "../../components/SpotlightSection/SpotlightSection";
 import WelcomeSection from "../../components/WelcomeSection/WelcomeSection";
 import FeaturedProducts from "../../components/Home/FeaturedProducts";
@@ -7,50 +6,74 @@ import CategoryShowcase from "../../components/CategoryShowcase/CategoryShowcase
 import TrendingProducts from "../../components/TrendingProducts/TrendingProducts";
 import WhyChoose from "../../components/WhyChoose/WhyChoose";
 
-
 import "./Home.css";
 
-export default function Home(){
+export default function Home() {
+  return (
+    <div className="home-page">
 
-return(
+      {/* =========================
+          HERO
+      ========================= */}
 
-<div className="home-page">
-
-
-<section className="home-section">
-  <Hero/>
-</section>
-
-<section className="home-section">
-  <WelcomeSection/>
-</section>
-
-<section className="home-section">
-  <CategoryShowcase/>
-</section>
+      <section className="home-section home-section-1">
+        <Hero />
+      </section>
 
 
-<section className="home-section">
-  <FeaturedProducts/>
-</section>
+      {/* =========================
+          WELCOME
+      ========================= */}
+
+      <section className="home-section home-section-2">
+        <WelcomeSection />
+      </section>
 
 
-<section className="home-section">
-  <TrendingProducts/>
-</section>
+      {/* =========================
+          CATEGORIES
+      ========================= */}
+
+      <section className="home-section home-section-3">
+        <CategoryShowcase />
+      </section>
 
 
-<section className="home-section">
-  <SpotlightSection/>
-</section>
+      {/* =========================
+          FEATURED PRODUCTS
+      ========================= */}
+
+      <section className="home-section home-section-4">
+        <FeaturedProducts />
+      </section>
 
 
-<section className="home-section">
-  <WhyChoose/>
-</section>
+      {/* =========================
+          TRENDING PRODUCTS
+      ========================= */}
 
-</div>
+      <section className="home-section home-section-5">
+        <TrendingProducts />
+      </section>
 
-);
 
+      {/* =========================
+          SPOTLIGHT
+      ========================= */}
+
+      <section className="home-section home-section-6">
+        <SpotlightSection />
+      </section>
+
+
+      {/* =========================
+          WHY CHOOSE US
+      ========================= */}
+
+      <section className="home-section home-section-7">
+        <WhyChoose />
+      </section>
+
+    </div>
+  );
 }

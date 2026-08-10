@@ -287,64 +287,54 @@ export default function App() {
 
   }
 
-
-  // ======================
-  // APP LAYOUT
-  // ======================
-
   return (
-    <>
-
+    <div className="app-shell">
+      <ScrollToTop />
+  
       {/* ======================
           TOP NAVIGATION
       ====================== */}
-
-      {!isDiscover && (
-        <TopNavbar />
-      )}
-
-
+  
+      {!isDiscover && <TopNavbar />}
+  
+  
       {/* ======================
           NOTICE
       ====================== */}
-
-      {!isDiscover && (
-        <NoticePanel />
-      )}
-
-
+  
+      {!isDiscover && <NoticePanel />}
+  
+  
       {/* ======================
           CATEGORY NAVIGATION
       ====================== */}
-
-      {!isDiscover && (
-        <CategoryNavbar />
-      )}
-
-
+  
+      {!isDiscover && <CategoryNavbar />}
+  
+  
       {/* ======================
           MAIN PAGE AREA
       ====================== */}
-
+  
       <main className="route-container">
-
-        <AnimatePresence
-          mode="wait"
-        >
-
+  
+        <AnimatePresence mode="wait">
+  
           <Suspense
             fallback={
-              <div>Loading...</div>
+              <div className="page-loading">
+                Loading...
+              </div>
             }
           >
-
+  
             <Routes
               location={location}
               key={location.pathname}
             >
-
+  
               {/* HOME */}
-
+  
               <Route
                 path="/"
                 element={
@@ -353,10 +343,9 @@ export default function App() {
                   </PageTransition>
                 }
               />
-
-
+  
               {/* HELP */}
-
+  
               <Route
                 path="/help"
                 element={
@@ -365,10 +354,9 @@ export default function App() {
                   </PageTransition>
                 }
               />
-
-
+  
               {/* ADMIN */}
-
+  
               <Route
                 path="/admin"
                 element={
@@ -377,10 +365,9 @@ export default function App() {
                   </AdminRoute>
                 }
               />
-
-
+  
               {/* WISHLIST */}
-
+  
               <Route
                 path="/wishlist"
                 element={
@@ -389,185 +376,138 @@ export default function App() {
                   </PageTransition>
                 }
               />
-
-
+  
               {/* AUTH */}
-
+  
               <Route
                 path="/login"
-                element={
-                  <Login />
-                }
+                element={<Login />}
               />
-
+  
               <Route
                 path="/register"
-                element={
-                  <Register />
-                }
+                element={<Register />}
               />
-
+  
               <Route
                 path="/forgot-password"
-                element={
-                  <ForgotPassword />
-                }
+                element={<ForgotPassword />}
               />
-
-
+  
               {/* PROFILE */}
-
+  
               <Route
                 path="/profile"
-                element={
-                  <Profile />
-                }
+                element={<Profile />}
               />
-
-
+  
               {/* SEARCH */}
-
+  
               <Route
                 path="/search"
-                element={
-                  <SearchPage />
-                }
+                element={<SearchPage />}
               />
-
-
+  
               {/* PRODUCT */}
-
+  
               <Route
                 path="/product/:productId"
-                element={
-                  <ProductDetails />
-                }
+                element={<ProductDetails />}
               />
-
-
+  
               {/* CATEGORY */}
-
+  
               <Route
                 path="/category/:department"
-                element={
-                  <CategoryPage />
-                }
+                element={<CategoryPage />}
               />
-
+  
               <Route
                 path="/category/:department/:category"
-                element={
-                  <CategoryPage />
-                }
+                element={<CategoryPage />}
               />
-
+  
               <Route
                 path="/category/:department/:category/:subcategory"
-                element={
-                  <CategoryPage />
-                }
+                element={<CategoryPage />}
               />
-
+  
               <Route
                 path="/category/:department/:category/:subcategory/:collection"
-                element={
-                  <CategoryPage />
-                }
+                element={<CategoryPage />}
               />
-
+  
               <Route
                 path="/category/:department/:category/:subcategory/:collection/:productType"
-                element={
-                  <CategoryPage />
-                }
+                element={<CategoryPage />}
               />
-
-
+  
+              {/* DISCOVER */}
+  
               {/* DISCOVER */}
 
-              <Route
-                path="/discover"
-                element={
-                  <DiscoverPage />
-                }
-              />
-
-
+<Route
+  path="/discover"
+  element={
+    <PageTransition>
+      <DiscoverPage />
+    </PageTransition>
+  }
+/>
+  
               {/* CLOTHING */}
-
+  
               <Route
                 path="/clothing"
-                element={
-                  <ClothingCategory />
-                }
+                element={<ClothingCategory />}
               />
-
-
+  
               {/* ABOUT */}
-
+  
               <Route
                 path="/about"
-                element={
-                  <About />
-                }
+                element={<About />}
               />
-
-
+  
               {/* CONTACT */}
-
+  
               <Route
                 path="/contact"
-                element={
-                  <Contact />
-                }
+                element={<Contact />}
               />
-
-
+  
               {/* LEGAL */}
-
+  
               <Route
                 path="/privacy"
-                element={
-                  <Privacy />
-                }
+                element={<Privacy />}
               />
-
+  
               <Route
                 path="/terms"
-                element={
-                  <Terms />
-                }
+                element={<Terms />}
               />
-
+  
               <Route
                 path="/affiliate-disclosure"
-                element={
-                  <AffiliateDisclosure />
-                }
+                element={<AffiliateDisclosure />}
               />
-
+  
             </Routes>
-
+  
           </Suspense>
-
+  
         </AnimatePresence>
-
+  
       </main>
-
-
+  
+  
       {/* ======================
           FOOTER
       ====================== */}
-
-      <Footer
-        className={
-          isDiscover
-            ? "hide-footer"
-            : ""
-        }
-      />
-
-    </>
+  
+      {!isDiscover && <Footer />}
+  
+    </div>
   );
-}
-
+    }

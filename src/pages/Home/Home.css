@@ -1,36 +1,169 @@
+/* =========================
+   HOME PAGE
+========================= */
+
 .home-page {
+  width: 100%;
+  min-height: 100%;
+
   background: #fafafa;
-  min-height: 100vh;
+
+  box-sizing: border-box;
+
+  opacity: 0;
+  transform: translateY(10px);
+
+  animation: homePageEnter 0.6s ease-out forwards;
 }
 
-/* GLOBAL SECTION SPACING */
-section {
+
+/* =========================
+   HOME SECTIONS
+========================= */
+
+.home-section {
+  width: 100%;
   max-width: 1200px;
+
   margin: 0 auto;
-  padding: 60px 20px;
+
+  padding: 20px 20px;
+
+  box-sizing: border-box;
+
+  opacity: 0;
+  transform: translateY(12px);
+
+  animation: homeSectionEnter 0.55s ease-out forwards;
 }
 
-/* REMOVE TOP GAP ON FIRST SECTION */
-section:first-child {
+
+/* =========================
+   FIRST SECTION
+========================= */
+
+.home-section:first-child {
   padding-top: 30px;
 }
 
-/* SECTION CONSISTENCY */
-section > * {
+
+/* =========================
+   SECTION CONTENT
+========================= */
+
+.home-section > * {
   width: 100%;
 }
 
-/* OPTIONAL: smooth spacing feel */
-section:not(:last-child) {
-  border-bottom: 1px solid rgba(0,0,0,0.03);
+
+/* =========================
+   SECTION DIVIDER
+========================= */
+
+.home-section:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  section {
-    padding: 40px 15px;
+
+/* =========================
+   STAGGERED ANIMATION
+========================= */
+
+.home-section-1 {
+  animation-delay: 0.05s;
+}
+
+.home-section-2 {
+  animation-delay: 0.12s;
+}
+
+.home-section-3 {
+  animation-delay: 0.19s;
+}
+
+.home-section-4 {
+  animation-delay: 0.26s;
+}
+
+.home-section-5 {
+  animation-delay: 0.33s;
+}
+
+.home-section-6 {
+  animation-delay: 0.40s;
+}
+
+.home-section-7 {
+  animation-delay: 0.47s;
+}
+
+
+/* =========================
+   PAGE TRANSITION
+========================= */
+
+@keyframes homePageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
-.home-section{
-  padding:20px 0;
+
+
+/* =========================
+   SECTION TRANSITION
+========================= */
+
+@keyframes homeSectionEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .home-section {
+    padding: 40px 15px;
+  }
+
+  .home-section:first-child {
+    padding-top: 25px;
+  }
+
+  .home-page {
+    transform: translateY(6px);
+  }
+
+  .home-section {
+    transform: translateY(8px);
+  }
+}
+
+
+/* =========================
+   REDUCE MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page,
+  .home-section {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
