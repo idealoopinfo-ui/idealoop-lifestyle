@@ -1,290 +1,295 @@
+import { useEffect, useState } from "react";
 import { getCategories } from "../../../utils/categoryHelper";
 
 interface Props {
+  department: string;
+  setDepartment: (value: string) => void;
 
-department:string;
-setDepartment:(value:string)=>void;
+  category: string;
+  setCategory: (value: string) => void;
 
-category:string;
-setCategory:(value:string)=>void;
+  subcategory: string;
+  setSubcategory: (value: string) => void;
 
-subcategory:string;
-setSubcategory:(value:string)=>void;
+  collection: string;
+  setCollection: React.Dispatch<React.SetStateAction<string>>;
 
-collection: string;
-setCollection: React.Dispatch<React.SetStateAction<string>>;
-
-productType:string;
-setProductType:(value:string)=>void;
-
+  productType: string;
+  setProductType: (value: string) => void;
 }
 
-
 export default function CategorySelector({
+  department,
+  setDepartment,
+  category,
+  setCategory,
+  subcategory,
+  setSubcategory,
+  collection,
+  setCollection,
+  productType,
+  setProductType,
+}: Props) {
+  const [selectedDepartment, setSelectedDepartment] =
+    useState<CategoryNode | null>(null);
 
-        department,
-        setDepartment,
-        
-        category,
-        setCategory,
-        
-        subcategory,
-        setSubcategory,
-        
-        collection,
-        setCollection,
-        
-        productType,
-        setProductType
-        
-        }:Props){
-    const categories = getCategories();
-    console.log(
-        "CategorySelector Props",
-        department,
-        category,
-        subcategory,
-        collection
+  const [selectedCategory, setSelectedCategory] =
+    useState<CategoryNode | null>(null);
+
+  const [selectedSubcategory, setSelectedSubcategory] =
+    useState<CategoryNode | null>(null);
+
+  const [selectedCollection, setSelectedCollection] =
+    useState<CategoryNode | null>(null);
+
+  // =========================================
+  // FIND SELECTED DEPARTMENT
+  // =========================================
+
+  useEffect(() => {
+    const found = categories.find(
+      (item) => item.slug === department
+    );
+
+    setSelectedDepartment(found || null);
+  }, [department]);
+
+  // =========================================
+  // FIND SELECTED CATEGORY
+  // =========================================
+
+  useEffect(() => {
+    const found =
+      selectedDepartment?.children?.find(
+        (item) => item.slug === category
       );
 
-const selectedDepartment = categories.find(
-(item:any)=>item.slug === department
-);
+    setSelectedCategory(found || null);
+  }, [category, selectedDepartment]);
 
+  // =========================================
+  // FIND SELECTED SUBCATEGORY
+  // =========================================
 
-const selectedCategory = selectedDepartment?.children?.find(
-(item:any)=>item.slug === category
-);
+  useEffect(() => {
+    const found =
+      selectedCategory?.children?.find(
+        (item) => item.slug === subcategory
+      );
 
-const selectedSubcategory = selectedCategory?.children?.find(
-(item:any)=>item.slug === subcategory
-);
+    setSelectedSubcategory(found || null);
+  }, [subcategory, selectedCategory]);
 
-const selectedCollection = selectedSubcategory?.children?.find(
-(item:any)=>item.slug === collection
-);
+  // =========================================
+  // FIND SELECTED COLLECTION
+  // =========================================
 
-console.log("Selected Department:", selectedDepartment);
-console.log("Selected Category:", selectedCategory);
-console.log("Selected Subcategory:", selectedSubcategory);
-console.log("Selected Collection:", selectedCollection);
+  useEffect(() => {
+    const found =
+      selectedSubcategory?.children?.find(
+        (item) => item.slug === collection
+      );
 
-return (
+    setSelectedCollection(found || null);
+  }, [collection, selectedSubcategory]);
 
-<div className="form-section">
+  // =========================================
+  // RESET LOWER LEVELS
+  // =========================================
 
-<h3>
-Category
-</h3>
-
-
-<div className="input-grid">
-
-
-<select
-
-value={department}
-
-onChange={(e)=>{
-
-    setDepartment(e.target.value);
+  const resetFromCategory = () => {
     setCategory("");
     setSubcategory("");
     setCollection("");
     setProductType("");
-    
-    }}
+  };
 
->
-
-<option value="">
-Select Department
-</option>
-
-
-{
-categories.map((item:any)=>(
-
-<option
-
-key={item.slug}
-
-value={item.slug}
-
->
-
-{item.name}
-
-</option>
-
-))
-
-}
-
-</select>
-
-
-
-<select
-
-value={category}
-
-disabled={!department}
-
-onChange={(e)=>{
-
-    setCategory(e.target.value);
+  const resetFromSubcategory = () => {
     setSubcategory("");
     setCollection("");
     setProductType("");
-    }}
+  };
 
->
-
-<option value="">
-Select Category
-</option>
-
-
-{
-selectedDepartment?.children?.map((item:any)=>(
-
-<option
-
-key={item.slug}
-
-value={item.slug}
-
->
-
-{item.name}
-
-</option>
-
-))
-
-}
-
-
-</select>
-
-
-
-<select
-
-value={subcategory}
-
-disabled={!category}
-
-onChange={(e)=>{
-
-    setSubcategory(e.target.value);
+  const resetFromCollection = () => {
     setCollection("");
     setProductType("");
-    }}
->
+  };
 
-<option value="">
-Select Subcategory
-</option>
+  // =========================================
+  // RENDER
+  // =========================================
+
+  return (
+    <div className="category-selector">
+
+      {/* =====================================
+          DEPARTMENT
+      ===================================== */}
+
+      <div className="category-field">
+        <label>Department</label>
+
+        <select
+          value={department}
+          onChange={(e) => {
+            setDepartment(e.target.value);
+            resetFromCategory();
+          }}
+        >
+          <option value="">
+            Select Department
+          </option>
+
+          {categories.map((item) => (
+            <option
+              key={item.slug}
+              value={item.slug}
+            >
+              {item.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
 
-{
-selectedCategory?.children?.map((item:any)=>(
+      {/* =====================================
+          CATEGORY
+      ===================================== */}
 
-<option
+      {selectedDepartment &&
+        selectedDepartment.children.length > 0 && (
+          <div className="category-field">
+            <label>Category</label>
 
-key={item.slug}
+            <select
+              value={category}
+              onChange={(e) => {
+                setCategory(e.target.value);
+                resetFromSubcategory();
+              }}
+            >
+              <option value="">
+                Select Category
+              </option>
 
-value={item.slug}
+              {selectedDepartment.children.map(
+                (item) => (
+                  <option
+                    key={item.slug}
+                    value={item.slug}
+                  >
+                    {item.name}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
+        )}
 
->
 
-{item.name}
+      {/* =====================================
+          SUBCATEGORY
+      ===================================== */}
 
-</option>
+      {selectedCategory &&
+        selectedCategory.children.length > 0 && (
+          <div className="category-field">
+            <label>Subcategory</label>
 
-))
+            <select
+              value={subcategory}
+              onChange={(e) => {
+                setSubcategory(e.target.value);
+                resetFromCollection();
+              }}
+            >
+              <option value="">
+                Select Subcategory
+              </option>
 
-}
+              {selectedCategory.children.map(
+                (item) => (
+                  <option
+                    key={item.slug}
+                    value={item.slug}
+                  >
+                    {item.name}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
+        )}
 
 
-</select>
+      {/* =====================================
+          COLLECTION
+      ===================================== */}
 
-<select
+      {selectedSubcategory &&
+        selectedSubcategory.children.length > 0 && (
+          <div className="category-field">
+            <label>Collection</label>
 
-value={collection}
+            <select
+              value={collection}
+              onChange={(e) => {
+                setCollection(e.target.value);
+                setProductType("");
+              }}
+            >
+              <option value="">
+                Select Collection
+              </option>
 
-disabled={!subcategory}
+              {selectedSubcategory.children.map(
+                (item) => (
+                  <option
+                    key={item.slug}
+                    value={item.slug}
+                  >
+                    {item.name}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
+        )}
 
-onChange={(e)=>{
-    setCollection(e.target.value);
-    setProductType("");
-    }}
 
->
+      {/* =====================================
+          PRODUCT TYPE
+      ===================================== */}
 
-<option value="">
-Select Collection
-</option>
+      {selectedCollection &&
+        selectedCollection.children.length > 0 && (
+          <div className="category-field">
+            <label>Product Type</label>
 
-{
-selectedSubcategory?.children?.map((item:any)=>(
+            <select
+              value={productType}
+              onChange={(e) =>
+                setProductType(e.target.value)
+              }
+            >
+              <option value="">
+                Select Product Type
+              </option>
 
-<option
+              {selectedCollection.children.map(
+                (item) => (
+                  <option
+                    key={item.slug}
+                    value={item.slug}
+                  >
+                    {item.name}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
+        )}
 
-key={item.slug}
-
-value={item.slug}
-
->
-
-{item.name}
-
-</option>
-
-))
-
-}
-
-</select>
-
-<select
-
-value={productType}
-
-disabled={!collection}
-
-onChange={(e)=>setProductType(e.target.value)}
-
->
-
-<option value="">
-Select Product Type
-</option>
-
-{
-selectedCollection?.children?.map((item:any)=>(
-
-<option
-key={item.slug}
-value={item.slug}
->
-
-{item.name}
-
-</option>
-
-))
-
-}
-
-</select>
-
-</div>
-
-</div>
-
-)
-
+    </div>
+  );
 }

@@ -21,6 +21,7 @@ interface Props {
 
 export default function ProductManager({selectedProduct}: Props) {
 
+const [productSearch, setProductSearch] = useState("");
 
 const [title,setTitle] = useState("");
 const [description,setDescription] = useState("");
@@ -719,6 +720,24 @@ const updateProduct = async()=>{
     }
   };
 
+  const filteredProducts = products.filter((product) => {
+    const search = productSearch.trim().toLowerCase();
+  
+    if (!search) {
+      return false;
+    }
+  
+    const productId = String(product.product_id || "").toLowerCase();
+    const title = String(product.title || "").toLowerCase();
+  
+    return (
+      productId.includes(search) ||
+      title.includes(search)
+    );
+  });
+
+
+  
     return (
 
                 <div className="product-manager">
@@ -1188,17 +1207,222 @@ setMassageType={setMassageType}
       Cancel Edit
     </button>
   )}
-
-<div>
-
-<h3>
-Products Loaded: {products.length}
-</h3>
-
 </div>
 
-</div>
+{/* =========================
+    MANAGE PRODUCTS
+========================= */}
 
+<div className="manage-products-section">
+
+  <div className="manage-products-header">
+    <div>
+      <h3>Manage Products</h3>
+      <p>Search by Product ID or Product Title to edit or delete a product.</p>
+    </div>
+  </div>
+
+  <div className="product-search-box">
+
+    <input
+      type="text"
+      placeholder="Search Product ID or Product Title..."
+      value={productSearch}
+      onChange={(e) => setProductSearch(e.target.value)}
+    />
+
+    {productSearch && (
+      <button
+        type="button"
+        className="clear-product-search"
+        onClick={() => setProductSearch("")}
+      >
+        Clear
+      </button>
+    )}
+
+  </div>
+
+  {/* Show products ONLY after searching */}
+  {productSearch.trim() !== "" && (
+
+    <div className="products-list">
+
+      {filteredProducts.length === 0 ? (
+
+        <div className="no-products-found">
+          No products found.
+        </div>
+
+      ) : (
+
+        filteredProducts.map((product) => (
+
+          <div
+            className="product-row"
+            key={product.id}
+          >
+
+            <div className="product-row-info">
+
+              <span className="product-row-title">
+                {product.title}
+              </span>
+
+              <span className="product-row-id">
+                {product.product_id}
+              </span>
+
+            </div>
+
+            <div className="product-row-actions">
+
+              <button
+                type="button"
+                className="edit-product-btn"
+                onClick={() => {
+
+                  setEditingId(product.id || null);
+
+                  setProductId(product.product_id || "");
+                  setTitle(product.title || "");
+                  setBrand(product.brand || "");
+
+                  setDescription(product.description || "");
+                  setShortDescription(
+                    product.short_description || ""
+                  );
+
+                  setImage1(product.image_1 || "");
+                  setImage2(product.image_2 || "");
+                  setImage3(product.image_3 || "");
+                  setImage4(product.image_4 || "");
+                  setImage5(product.image_5 || "");
+
+                  setAffiliateUrl(
+                    product.affiliate_url || ""
+                  );
+
+                  setSourceUrl(
+                    product.source_url || ""
+                  );
+
+                  setShopName(
+                    product.shop_name || ""
+                  );
+
+                  setMarketplace(
+                    product.marketplace || ""
+                  );
+
+                  setDepartment(
+                    product.department || ""
+                  );
+
+                  setCategory(
+                    product.category || ""
+                  );
+
+                  setSubcategory(
+                    product.subcategory || ""
+                  );
+
+                  setCollection(
+                    product.collection || ""
+                  );
+
+                  setProductType(
+                    product.product_type || ""
+                  );
+
+                  setSeason(product.season || "");
+                  setStyle(product.style || "");
+                  setOccasion(product.occasion || "");
+                  setMaterial(product.material || "");
+                  setFit(product.fit || "");
+                  setGender(product.gender || "");
+
+                  setFeatured(
+                    product.featured || false
+                  );
+
+                  setTrending(
+                    product.trending || false
+                  );
+
+                  setSpotlight(
+                    product.spotlight || false
+                  );
+
+                  setFacebookPublished(false);
+                  setFacebookPublishError("");
+
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+
+                }}
+              >
+                Edit
+              </button>
+
+              <button
+                type="button"
+                className="delete-product-btn"
+                onClick={async () => {
+
+                  const confirmed = window.confirm(
+                    `Delete "${product.title}"?`
+                  );
+
+                  if (!confirmed) {
+                    return;
+                  }
+
+                  const { error } = await supabase
+                    .from("products")
+                    .delete()
+                    .eq("id", product.id);
+
+                  if (error) {
+
+                    console.error(
+                      "DELETE ERROR:",
+                      error
+                    );
+
+                    alert(
+                      "Failed to delete product."
+                    );
+
+                    return;
+                  }
+
+                  if (editingId === product.id) {
+                    setEditingId(null);
+                  }
+
+                  await fetchProducts();
+
+                }}
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        ))
+
+      )}
+
+    </div>
+
+  )}
+
+</div>
 
 {showPreview && (
 <div className="product-preview">
@@ -1226,7 +1450,7 @@ Products Loaded: {products.length}
       >
         View More
       </a>
-
+      
       <a
         href={affiliateUrl || "#"}
         className="shop-now-btn"

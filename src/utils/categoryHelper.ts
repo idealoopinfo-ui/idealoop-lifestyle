@@ -49,7 +49,11 @@ export async function getCategories(): Promise<CategoryNode[]> {
       .order("id"),
   ]);
 
-  console.log("CATEGORY DATA:", {
+  // =========================================
+  // DEBUG DATABASE DATA
+  // =========================================
+
+  console.log("CATEGORY DATABASE DATA:", {
     departments,
     categories,
     subcategories,
@@ -57,11 +61,9 @@ export async function getCategories(): Promise<CategoryNode[]> {
     productTypes,
   });
 
-  /*
-  ==========================================
-  ERROR CHECKING
-  ==========================================
-  */
+  // =========================================
+  // ERROR CHECKING
+  // =========================================
 
   if (departmentError) {
     console.error(
@@ -108,47 +110,45 @@ export async function getCategories(): Promise<CategoryNode[]> {
     return [];
   }
 
-  /*
-  ==========================================
-  LEVEL 1
-  DEPARTMENT
-  ==========================================
-  */
+  // =========================================
+  // DEPARTMENTS
+  // =========================================
 
   const departmentNodes: CategoryNode[] = (
     departments || []
   ).map((department) => ({
-    id: department.id,
+    id: Number(department.id),
     name: department.name,
     slug: department.slug,
     children: [],
     level: "department",
   }));
 
-  /*
-  ==========================================
-  LEVEL 2
-  CATEGORY
-  ==========================================
-  */
+  // =========================================
+  // CATEGORIES
+  // =========================================
 
   (categories || []).forEach((category) => {
     const parentDepartment = departmentNodes.find(
       (department) =>
-        department.id === category.department_id
+        String(department.id) ===
+        String(category.department_id)
     );
 
     if (!parentDepartment) {
       console.warn(
         "Category parent department not found:",
-        category
+        {
+          category,
+          department_id: category.department_id,
+        }
       );
 
       return;
     }
 
     parentDepartment.children.push({
-      id: category.id,
+      id: Number(category.id),
       name: category.name,
       slug: category.slug,
       children: [],
@@ -156,12 +156,9 @@ export async function getCategories(): Promise<CategoryNode[]> {
     });
   });
 
-  /*
-  ==========================================
-  LEVEL 3
-  SUBCATEGORY
-  ==========================================
-  */
+  // =========================================
+  // SUBCATEGORIES
+  // =========================================
 
   (subcategories || []).forEach((subcategory) => {
     let parentCategory: CategoryNode | null = null;
@@ -169,7 +166,8 @@ export async function getCategories(): Promise<CategoryNode[]> {
     for (const department of departmentNodes) {
       const found = department.children.find(
         (category) =>
-          category.id === subcategory.category_id
+          String(category.id) ===
+          String(subcategory.category_id)
       );
 
       if (found) {
@@ -180,15 +178,18 @@ export async function getCategories(): Promise<CategoryNode[]> {
 
     if (!parentCategory) {
       console.warn(
-        "Subcategory parent not found:",
-        subcategory
+        "Subcategory parent category not found:",
+        {
+          subcategory,
+          category_id: subcategory.category_id,
+        }
       );
 
       return;
     }
 
     parentCategory.children.push({
-      id: subcategory.id,
+      id: Number(subcategory.id),
       name: subcategory.name,
       slug: subcategory.slug,
       children: [],
@@ -196,12 +197,9 @@ export async function getCategories(): Promise<CategoryNode[]> {
     });
   });
 
-  /*
-  ==========================================
-  LEVEL 4
-  COLLECTION
-  ==========================================
-  */
+  // =========================================
+  // COLLECTIONS
+  // =========================================
 
   (collections || []).forEach((collection) => {
     let parentSubcategory: CategoryNode | null = null;
@@ -210,7 +208,8 @@ export async function getCategories(): Promise<CategoryNode[]> {
       for (const category of department.children) {
         const found = category.children.find(
           (subcategory) =>
-            subcategory.id === collection.subcategory_id
+            String(subcategory.id) ===
+            String(collection.subcategory_id)
         );
 
         if (found) {
@@ -227,14 +226,18 @@ export async function getCategories(): Promise<CategoryNode[]> {
     if (!parentSubcategory) {
       console.warn(
         "Collection parent subcategory not found:",
-        collection
+        {
+          collection,
+          subcategory_id:
+            collection.subcategory_id,
+        }
       );
 
       return;
     }
 
     parentSubcategory.children.push({
-      id: collection.id,
+      id: Number(collection.id),
       name: collection.name,
       slug: collection.slug,
       children: [],
@@ -242,12 +245,9 @@ export async function getCategories(): Promise<CategoryNode[]> {
     });
   });
 
-  /*
-  ==========================================
-  LEVEL 5
-  PRODUCT TYPE
-  ==========================================
-  */
+  // =========================================
+  // PRODUCT TYPES
+  // =========================================
 
   (productTypes || []).forEach((productType) => {
     let parentCollection: CategoryNode | null = null;
@@ -257,7 +257,8 @@ export async function getCategories(): Promise<CategoryNode[]> {
         for (const subcategory of category.children) {
           const found = subcategory.children.find(
             (collection) =>
-              collection.id === productType.collection_id
+              String(collection.id) ===
+              String(productType.collection_id)
           );
 
           if (found) {
@@ -279,14 +280,18 @@ export async function getCategories(): Promise<CategoryNode[]> {
     if (!parentCollection) {
       console.warn(
         "Product type parent collection not found:",
-        productType
+        {
+          productType,
+          collection_id:
+            productType.collection_id,
+        },
       );
 
       return;
     }
 
     parentCollection.children.push({
-      id: productType.id,
+      id: Number(productType.id),
       name: productType.name,
       slug: productType.slug,
       children: [],
@@ -294,11 +299,9 @@ export async function getCategories(): Promise<CategoryNode[]> {
     });
   });
 
-  /*
-  ==========================================
-  FINAL TREE
-  ==========================================
-  */
+  // =========================================
+  // FINAL CATEGORY TREE
+  // =========================================
 
   console.log(
     "FINAL CATEGORY TREE:",
@@ -307,3 +310,4 @@ export async function getCategories(): Promise<CategoryNode[]> {
 
   return departmentNodes;
 }
+
