@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getCategories } from "../../../utils/categoryHelper";
+
+import {
+  categories,
+  type CategoryNode,
+} from "../../../data/categories";
 
 interface Props {
   department: string;
@@ -43,7 +47,7 @@ export default function CategorySelector({
     useState<CategoryNode | null>(null);
 
   // =========================================
-  // FIND SELECTED DEPARTMENT
+  // DEPARTMENT
   // =========================================
 
   useEffect(() => {
@@ -51,67 +55,99 @@ export default function CategorySelector({
       (item) => item.slug === department
     );
 
-    setSelectedDepartment(found || null);
+    setSelectedDepartment(found ?? null);
   }, [department]);
 
   // =========================================
-  // FIND SELECTED CATEGORY
+  // CATEGORY
   // =========================================
 
   useEffect(() => {
     const found =
-      selectedDepartment?.children?.find(
+      selectedDepartment?.children.find(
         (item) => item.slug === category
-      );
+      ) ?? null;
 
-    setSelectedCategory(found || null);
+    setSelectedCategory(found);
   }, [category, selectedDepartment]);
 
   // =========================================
-  // FIND SELECTED SUBCATEGORY
+  // SUBCATEGORY
   // =========================================
 
   useEffect(() => {
     const found =
-      selectedCategory?.children?.find(
+      selectedCategory?.children.find(
         (item) => item.slug === subcategory
-      );
+      ) ?? null;
 
-    setSelectedSubcategory(found || null);
+    setSelectedSubcategory(found);
   }, [subcategory, selectedCategory]);
 
   // =========================================
-  // FIND SELECTED COLLECTION
+  // COLLECTION
   // =========================================
 
   useEffect(() => {
     const found =
-      selectedSubcategory?.children?.find(
+      selectedSubcategory?.children.find(
         (item) => item.slug === collection
-      );
+      ) ?? null;
 
-    setSelectedCollection(found || null);
+    setSelectedCollection(found);
   }, [collection, selectedSubcategory]);
 
   // =========================================
-  // RESET LOWER LEVELS
+  // DEPARTMENT CHANGE
   // =========================================
 
-  const resetFromCategory = () => {
+  const handleDepartmentChange = (
+    value: string
+  ) => {
+    setDepartment(value);
+
     setCategory("");
     setSubcategory("");
     setCollection("");
     setProductType("");
   };
 
-  const resetFromSubcategory = () => {
+  // =========================================
+  // CATEGORY CHANGE
+  // =========================================
+
+  const handleCategoryChange = (
+    value: string
+  ) => {
+    setCategory(value);
+
     setSubcategory("");
     setCollection("");
     setProductType("");
   };
 
-  const resetFromCollection = () => {
+  // =========================================
+  // SUBCATEGORY CHANGE
+  // =========================================
+
+  const handleSubcategoryChange = (
+    value: string
+  ) => {
+    setSubcategory(value);
+
     setCollection("");
+    setProductType("");
+  };
+
+  // =========================================
+  // COLLECTION CHANGE
+  // =========================================
+
+  const handleCollectionChange = (
+    value: string
+  ) => {
+    setCollection(value);
+
     setProductType("");
   };
 
@@ -124,17 +160,18 @@ export default function CategorySelector({
 
       {/* =====================================
           DEPARTMENT
-      ===================================== */}
+      ====================================== */}
 
       <div className="category-field">
         <label>Department</label>
 
         <select
           value={department}
-          onChange={(e) => {
-            setDepartment(e.target.value);
-            resetFromCategory();
-          }}
+          onChange={(e) =>
+            handleDepartmentChange(
+              e.target.value
+            )
+          }
         >
           <option value="">
             Select Department
@@ -151,10 +188,9 @@ export default function CategorySelector({
         </select>
       </div>
 
-
       {/* =====================================
           CATEGORY
-      ===================================== */}
+      ====================================== */}
 
       {selectedDepartment &&
         selectedDepartment.children.length > 0 && (
@@ -163,10 +199,11 @@ export default function CategorySelector({
 
             <select
               value={category}
-              onChange={(e) => {
-                setCategory(e.target.value);
-                resetFromSubcategory();
-              }}
+              onChange={(e) =>
+                handleCategoryChange(
+                  e.target.value
+                )
+              }
             >
               <option value="">
                 Select Category
@@ -186,10 +223,9 @@ export default function CategorySelector({
           </div>
         )}
 
-
       {/* =====================================
           SUBCATEGORY
-      ===================================== */}
+      ====================================== */}
 
       {selectedCategory &&
         selectedCategory.children.length > 0 && (
@@ -198,10 +234,11 @@ export default function CategorySelector({
 
             <select
               value={subcategory}
-              onChange={(e) => {
-                setSubcategory(e.target.value);
-                resetFromCollection();
-              }}
+              onChange={(e) =>
+                handleSubcategoryChange(
+                  e.target.value
+                )
+              }
             >
               <option value="">
                 Select Subcategory
@@ -221,10 +258,9 @@ export default function CategorySelector({
           </div>
         )}
 
-
       {/* =====================================
           COLLECTION
-      ===================================== */}
+      ====================================== */}
 
       {selectedSubcategory &&
         selectedSubcategory.children.length > 0 && (
@@ -233,10 +269,11 @@ export default function CategorySelector({
 
             <select
               value={collection}
-              onChange={(e) => {
-                setCollection(e.target.value);
-                setProductType("");
-              }}
+              onChange={(e) =>
+                handleCollectionChange(
+                  e.target.value
+                )
+              }
             >
               <option value="">
                 Select Collection
@@ -256,10 +293,9 @@ export default function CategorySelector({
           </div>
         )}
 
-
       {/* =====================================
           PRODUCT TYPE
-      ===================================== */}
+      ====================================== */}
 
       {selectedCollection &&
         selectedCollection.children.length > 0 && (
@@ -269,7 +305,9 @@ export default function CategorySelector({
             <select
               value={productType}
               onChange={(e) =>
-                setProductType(e.target.value)
+                setProductType(
+                  e.target.value
+                )
               }
             >
               <option value="">

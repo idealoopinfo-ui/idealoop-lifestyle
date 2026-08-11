@@ -85,28 +85,27 @@ const [weight, setWeight] = useState("");
 const [ageRange, setAgeRange] = useState("");
 const [educationalFeatures, setEducationalFeatures] = useState("");
 
-const [equipmentType,setEquipmentType] = useState("");
-const [workoutType,setWorkoutType] = useState("");
-const [sportType,setSportType] = useState("");
-const [size,setSize] = useState("");
-const [weightCapacity,setWeightCapacity] = useState("");
-const [skillLevel,setSkillLevel] = useState("");
-const [targetArea,setTargetArea] = useState("");
-const [accessories,setAccessories] = useState("");
-
 const [model,setModel] = useState("");
 const [warranty,setWarranty] = useState("");
 const [countryOrigin,setCountryOrigin] = useState("");
 const [packageIncludes,setPackageIncludes] = useState("");
 
+const [equipmentType, setEquipmentType] = useState("");
+const [workoutType, setWorkoutType] = useState("");
+const [sportType, setSportType] = useState("");
 
-const [wellnessType,setWellnessType] = useState("");
-const [usageArea,setUsageArea] = useState("");
-const [wellnessBenefits,setWellnessBenefits] = useState("");
-const [powerSource,setPowerSource] = useState("");
-const [batteryCapacity,setBatteryCapacity] = useState("");
-const [heatFunction,setHeatFunction] = useState("");
-const [massageType,setMassageType] = useState("");
+const [size, setSize] = useState("");
+const [weightCapacity, setWeightCapacity] = useState("");
+const [skillLevel, setSkillLevel] = useState("");
+const [targetArea, setTargetArea] = useState("");
+const [accessories, setAccessories] = useState("");
+const [wellnessType, setWellnessType] = useState("");
+const [usageArea, setUsageArea] = useState("");
+const [wellnessBenefits, setWellnessBenefits] = useState("");
+const [powerSource, setPowerSource] = useState("");
+const [batteryCapacity, setBatteryCapacity] = useState("");
+const [heatFunction, setHeatFunction] = useState("");
+const [massageType, setMassageType] = useState("");
 
 
 
