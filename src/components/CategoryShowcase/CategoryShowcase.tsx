@@ -11,7 +11,6 @@ type Product = {
 };
 
 type DepartmentConfig = {
-  id: number;
   name: string;
   slug: string;
 };
@@ -22,52 +21,52 @@ type CategorySection = {
   products: Product[];
 };
 
-/*
- * Actual departments from Supabase
- *
- * 1  = Fashion
- * 2  = Beauty
- * 3  = Home & Living
- * 10 = Fitness
- */
+
+/* =========================================================
+   MAIN DEPARTMENTS
+========================================================= */
+
 const DEPARTMENT_CONFIG: DepartmentConfig[] = [
   {
-    id: 1,
     name: "Fashion",
     slug: "fashion",
   },
+
   {
-    id: 2,
     name: "Beauty",
     slug: "beauty",
   },
+
   {
-    id: 3,
     name: "Home & Living",
     slug: "home-living",
   },
+
   {
-    id: 10,
-    name: "Fitness",
-    slug: "fitness",
+    name: "Fitness & Wellness",
+    slug: "fitness-wellness",
   },
 ];
 
-/*
- * Select four products.
- *
- * Products automatically change based
- * on the current date.
- */
+
+/* =========================================================
+   DAILY PRODUCT SELECTION
+========================================================= */
+
 function getDailyProducts(
   products: Product[],
   count = 4
 ): Product[] {
+
   if (products.length <= count) {
     return products;
   }
 
   const today = new Date();
+
+  /*
+   * Create a different seed every day.
+   */
 
   const daySeed =
     today.getFullYear() * 10000 +
@@ -78,14 +77,32 @@ function getDailyProducts(
 
   let seed = daySeed;
 
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    seed = (seed * 9301 + 49297) % 233280;
+  /*
+   * Deterministic daily shuffle.
+   *
+   * Same products during the same day.
+   * Different arrangement on the next day.
+   */
+
+  for (
+    let i = shuffled.length - 1;
+    i > 0;
+    i--
+  ) {
+
+    seed =
+      (seed * 9301 + 49297) %
+      233280;
 
     const j = Math.floor(
-      (seed / 233280) * (i + 1)
+      (seed / 233280) *
+      (i + 1)
     );
 
-    [shuffled[i], shuffled[j]] = [
+    [
+      shuffled[i],
+      shuffled[j],
+    ] = [
       shuffled[j],
       shuffled[i],
     ];
@@ -94,114 +111,89 @@ function getDailyProducts(
   return shuffled.slice(0, count);
 }
 
-export default function CategoryShowcase() {
-  const [sections, setSections] = useState<CategorySection[]>(
-    []
-  );
 
-  const [loading, setLoading] = useState(true);
+/* =========================================================
+   CATEGORY SHOWCASE
+========================================================= */
+
+export default function CategoryShowcase() {
+
+  const [sections, setSections] =
+    useState<CategorySection[]>([]);
+
+  const [loading, setLoading] =
+    useState(true);
+
+
+  /* =======================================================
+     LOAD PRODUCTS
+  ======================================================= */
 
   useEffect(() => {
+
     loadProducts();
+
   }, []);
 
+
   const loadProducts = async () => {
+
     setLoading(true);
 
     try {
+
       const result: CategorySection[] = [];
 
-      /*
-       * Process each department.
-       */
-      for (const department of DEPARTMENT_CONFIG) {
-        /*
-         * ------------------------------------------------
-         * STEP 1
-         * Find categories directly belonging
-         * to this department.
-         * ------------------------------------------------
-         */
-        const {
-          data: departmentCategories,
-          error: departmentCategoryError,
-        } = await supabase
-          .from("categories")
-          .select("id")
-          .eq("department_id", department.id);
 
-        if (departmentCategoryError) {
-          console.error(
-            `Department category error for ${department.name}:`,
-            departmentCategoryError
-          );
+      /* =================================================
+         PROCESS EACH MAIN DEPARTMENT
+      ================================================= */
 
-          continue;
-        }
-
-        const parentCategoryIds = (
-          departmentCategories || []
-        ).map((category: any) => category.id);
-
-        /*
-         * ------------------------------------------------
-         * STEP 2
-         * Find child categories.
-         *
-         * Example:
-         *
-         * Women Fashion = 1
-         * Women = 10
-         *
-         * So both category IDs can contain products.
-         * ------------------------------------------------
-         */
-        let childCategoryIds: number[] = [];
-
-        if (parentCategoryIds.length > 0) {
-          const {
-            data: children,
-            error: childrenError,
-          } = await supabase
-            .from("categories")
-            .select("id")
-            .in("parent_id", parentCategoryIds);
-
-          if (childrenError) {
-            console.error(
-              `Child category error for ${department.name}:`,
-              childrenError
-            );
-          } else {
-            childCategoryIds = (
-              children || []
-            ).map((category: any) => category.id);
-          }
-        }
-
-        /*
-         * Combine parent + child category IDs.
-         */
-        const categoryIds = [
-          ...parentCategoryIds,
-          ...childCategoryIds,
-        ];
-
-        /*
-         * Remove duplicates.
-         */
-        const uniqueCategoryIds = [
-          ...new Set(categoryIds),
-        ];
+      for (
+        const department of DEPARTMENT_CONFIG
+      ) {
 
         console.log(
-          `${department.name} CATEGORY IDS:`,
-          uniqueCategoryIds
+          `Loading ${department.name} products...`
         );
 
-        if (uniqueCategoryIds.length === 0) {
-          console.warn(
-            `No categories found for ${department.name}`
+
+        /* ===============================================
+           GET PRODUCTS BY MAIN DEPARTMENT
+        =============================================== */
+
+        const {
+          data,
+          error,
+        } = await supabase
+
+          .from("products")
+
+          .select(
+            "product_id,title,image_1,department"
+          )
+
+          .eq(
+            "department",
+            department.slug
+          )
+
+          .not(
+            "image_1",
+            "is",
+            null
+          );
+
+
+        /* ===============================================
+           ERROR
+        =============================================== */
+
+        if (error) {
+
+          console.error(
+            `Products error for ${department.name}:`,
+            error
           );
 
           result.push({
@@ -213,92 +205,102 @@ export default function CategoryShowcase() {
           continue;
         }
 
-        /*
-         * ------------------------------------------------
-         * STEP 3
-         * Get products belonging to those categories.
-         * ------------------------------------------------
-         */
-        const {
-          data: products,
-          error: productError,
-        } = await supabase
-          .from("products")
-          .select(
-            "product_id,title,image_1"
-          )
-          .in(
-            "category_id",
-            uniqueCategoryIds
-          )
-          .not("image_1", "is", null)
-          .limit(20);
 
-        if (productError) {
-          console.error(
-            `Products error for ${department.name}:`,
-            productError
+        /* ===============================================
+           VALID PRODUCTS
+        =============================================== */
+
+        const validProducts =
+          (data || []).filter(
+            (product: Product) =>
+              product.product_id &&
+              product.image_1
           );
 
-          continue;
-        }
-
-        /*
-         * Only keep products with valid IDs
-         * and images.
-         */
-        const validProducts = (
-          products || []
-        ).filter(
-          (product: Product) =>
-            product.product_id &&
-            product.image_1
-        );
 
         console.log(
-          `${department.name} PRODUCTS:`,
-          validProducts
+          `${department.name} total products:`,
+          validProducts.length
         );
 
-        /*
-         * ------------------------------------------------
-         * STEP 4
-         * Select four products for today's display.
-         * ------------------------------------------------
-         */
+
+        /* ===============================================
+           DAILY PRODUCTS
+        =============================================== */
+
         const dailyProducts =
           getDailyProducts(
             validProducts,
             4
           );
 
+
+        console.log(
+          `${department.name} today's products:`,
+          dailyProducts
+        );
+
+
+        /* ===============================================
+           ADD SECTION
+        =============================================== */
+
         result.push({
+
           title: department.name,
+
           slug: department.slug,
+
           products: dailyProducts,
+
         });
+
       }
 
+
+      /* =================================================
+         SAVE RESULTS
+      ================================================= */
+
       console.log(
-        "FINAL DEPARTMENT SECTIONS:",
+        "FINAL CATEGORY SHOWCASE:",
         result
       );
 
       setSections(result);
-    } catch (error) {
+
+    }
+
+    catch (error) {
+
       console.error(
         "Category showcase error:",
         error
       );
-    } finally {
-      setLoading(false);
+
     }
+
+    finally {
+
+      setLoading(false);
+
+    }
+
   };
 
+
+  /* =======================================================
+     RENDER
+  ======================================================= */
+
   return (
+
     <section className="category-showcase">
 
-      {/* HEADER */}
+
+      {/* =================================================
+          HEADER
+      ================================================= */}
 
       <div className="category-showcase-header">
 
@@ -317,16 +319,21 @@ export default function CategoryShowcase() {
 
       </div>
 
-      {/* LOADING */}
+
+      {/* =================================================
+          LOADING
+      ================================================= */}
 
       {loading ? (
+
         <div className="category-sections">
 
           {DEPARTMENT_CONFIG.map(
             (department) => (
+
               <div
                 className="category-container category-skeleton"
-                key={department.id}
+                key={department.slug}
               >
 
                 <div className="category-skeleton-grid">
@@ -339,13 +346,17 @@ export default function CategoryShowcase() {
                 </div>
 
               </div>
+
             )
           )}
 
         </div>
+
       ) : (
 
-        /* DEPARTMENT SECTIONS */
+        /* =================================================
+           DEPARTMENT SECTIONS
+        ================================================= */
 
         <div className="category-sections">
 
@@ -371,7 +382,7 @@ export default function CategoryShowcase() {
 
                         <img
                           src={product.image_1}
-                          alt=""
+                          alt={product.title}
                           loading="lazy"
                         />
 
@@ -380,14 +391,19 @@ export default function CategoryShowcase() {
                     )
                   )}
 
-                  {/* Fill missing positions */}
+
+                  {/* ====================================
+                      FILL EMPTY POSITIONS
+                  ==================================== */}
 
                   {Array.from({
+
                     length: Math.max(
                       0,
                       4 -
                         section.products.length
                     ),
+
                   }).map(
                     (_, index) => (
 
@@ -407,8 +423,11 @@ export default function CategoryShowcase() {
           )}
 
         </div>
+
       )}
 
     </section>
+
   );
+
 }

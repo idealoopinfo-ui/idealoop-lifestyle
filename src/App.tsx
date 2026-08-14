@@ -108,8 +108,7 @@ export default function App() {
 
   const location = useLocation();
 
-  const isDiscover =
-    location.pathname.startsWith("/discover");
+  const isDiscover = location.pathname === "/discover";
 
 
   // ======================

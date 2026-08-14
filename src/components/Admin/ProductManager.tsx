@@ -28,14 +28,12 @@ const [description,setDescription] = useState("");
 const [shortDescription,setShortDescription] = useState("");
 const [shopName,setShopName] = useState("");
 const [brand,setBrand] = useState("");
-const [productUrl,setProductUrl] = useState("");
 
-const [showPreview, setShowPreview] = useState(false);
 const [spotlight, setSpotlight] = useState(false);
 const [facebookPublishing, setFacebookPublishing] = useState(false);
 const [facebookPublished, setFacebookPublished] = useState(false);
 const [facebookPublishError, setFacebookPublishError] = useState("");
-const [products, setProducts] = useState<any[]>([]);
+
 const [editingId,setEditingId] = useState<string | null>(null);
 
 const [image1,setImage1] = useState("");
@@ -65,7 +63,16 @@ const [collection,setCollection] = useState("");
 const [productType, setProductType] = useState("");
 const [material,setMaterial] = useState("");
 const [fit,setFit] = useState("");
-
+const [pattern, setPattern] = useState("");
+const [fashionType, setFashionType] = useState("");
+const [sleeveType, setSleeveType] = useState("");
+const [collarStyle, setCollarStyle] = useState("");
+const [fabric, setFabric] = useState("");
+const [fabricType, setFabricType] = useState("");
+const [fashionDetails, setFashionDetails] = useState("");
+const [printingType, setPrintingType] = useState("");
+const [sheer, setSheer] = useState("");
+const [careInstructions, setCareInstructions] = useState("");
 // Beauty fields
 const [hairType, setHairType] = useState("");
 const [skinType, setSkinType] = useState("");
@@ -95,6 +102,11 @@ const [workoutType, setWorkoutType] = useState("");
 const [sportType, setSportType] = useState("");
 
 const [size, setSize] = useState("");
+const [clothingLength, setClothingLength] = useState("");
+const [waistType, setWaistType] = useState("");
+const [closureType, setClosureType] = useState("");
+const [stretch, setStretch] = useState("");
+const [ageGroup, setAgeGroup] = useState("");
 const [weightCapacity, setWeightCapacity] = useState("");
 const [skillLevel, setSkillLevel] = useState("");
 const [targetArea, setTargetArea] = useState("");
@@ -203,6 +215,74 @@ useEffect(()=>{
   
     setGender(
       selectedProduct.gender || ""
+    );
+
+    setPattern(
+      selectedProduct.pattern || ""
+    );
+
+    setSize(
+      selectedProduct.size || ""
+    );
+    
+    setColor(
+      selectedProduct.color || ""
+    );
+    
+    setClothingLength(
+      selectedProduct.clothing_length || ""
+    );
+    
+    setWaistType(
+      selectedProduct.waist_type || ""
+    );
+    
+    setClosureType(
+      selectedProduct.closure_type || ""
+    );
+    
+    setStretch(
+      selectedProduct.stretch || ""
+    );
+    
+    setAgeGroup(
+      selectedProduct.age_group || ""
+    );
+    
+    setFashionType(
+      selectedProduct.fashion_type || ""
+    );
+    
+    setSleeveType(
+      selectedProduct.sleeve_type || ""
+    );
+    
+    setCollarStyle(
+      selectedProduct.collar_style || ""
+    );
+    
+    setFabric(
+      selectedProduct.fabric || ""
+    );
+    
+    setFabricType(
+      selectedProduct.fabric_type || ""
+    );
+    
+    setFashionDetails(
+      selectedProduct.fashion_details || ""
+    );
+    
+    setPrintingType(
+      selectedProduct.printing_type || ""
+    );
+    
+    setSheer(
+      selectedProduct.sheer || ""
+    );
+    
+    setCareInstructions(
+      selectedProduct.care_instructions || ""
     );
   
     // BEAUTY
@@ -336,26 +416,16 @@ useEffect(()=>{
   
   }, [selectedProduct]);
         
-        const fetchProducts = async()=>{
-        
-        const {data,error}=await supabase
-        .from("products")
-        .select("*")
-        .order("created_at",{ascending:false});
-        
-        
-        if(error){
-        
-        console.log(error);
-        
-        return;
-        
-        }
-        
-        
-        setProducts(data || []);
-        
-        };
+  const fetchProducts = async () => {
+    const { error } = await supabase
+      .from("products")
+      .select("id")
+      .limit(1);
+  
+    if (error) {
+      console.log(error);
+    }
+  };
 
         useEffect(() => {
 
@@ -366,21 +436,6 @@ useEffect(()=>{
               
               }, [department]);
 
-const loadProduct = async()=>{
-
-        if(!productUrl){
-        
-        alert("Please paste product URL");
-        
-        return;
-        
-        }
-        
-        
-        console.log("Loading product:", productUrl);
-        
-        
-        };
 
 const generateProductId = async () => {
 
@@ -451,204 +506,371 @@ const generateProductId = async () => {
 
 /* ADD PRODUCT */
 
-const addProduct = async()=>{
+const addProduct = async () => {
 
+  const { error } = await supabase
+    .from("products")
+    .insert([
+      {
+        product_id: productId,
 
-const {error}=await supabase
-.from("products")
-.insert([
+        title,
+        brand,
 
-{
+        model,
+        warranty,
+        country_origin: countryOrigin,
+        package_includes: packageIncludes,
 
+        description,
+        short_description: shortDescription,
 
-product_id:productId,
-title,
-brand: brand,
-model,
-warranty,
-country_origin: countryOrigin,
-package_includes: packageIncludes,
-description,
-short_description:shortDescription,
-image_1:image1,
-image_2:image2,
-image_3:image3,
-image_4:image4,
-image_5:image5,
-affiliate_url:affiliateUrl,
-source_url: sourceUrl,
-shop_name: shopName,
+        image_1: image1,
+        image_2: image2,
+        image_3: image3,
+        image_4: image4,
+        image_5: image5,
 
-marketplace,
-featured,
-trending,
-spotlight,
+        affiliate_url: affiliateUrl,
+        source_url: sourceUrl,
 
-department,
-category,
-subcategory,
-collection,
-product_type: productType,
-season,
-style,
-occasion,
-material,
-fit,
-gender,
+        shop_name: shopName,
+        marketplace,
 
-hair_type: hairType,
-skin_type: skinType,
-ingredients,
-volume_size: volumeSize,
-scent,
-benefits,
-suitable_for: suitableFor,
+        featured,
+        trending,
+        spotlight,
 
+        department,
+        category,
+        subcategory,
+        collection,
+        product_type: productType,
 
-age_range: ageRange,
-educational_features: educationalFeatures,
-dimensions,
-color,
-room_type: roomType,
-weight,
+        /* =========================
+           FASHION
+        ========================= */
 
-equipment_type: equipmentType,
-workout_type: workoutType,
-sport_type: sportType,
-size,
-weight_capacity: weightCapacity,
-skill_level: skillLevel,
-target_area: targetArea,
-accessories,
+        season,
+        style,
+        occasion,
+        material,
+        fit,
+        gender,
 
-wellness_type: wellnessType,
-usage_area: usageArea,
-wellness_benefits: wellnessBenefits,
-power_source: powerSource,
-battery_capacity: batteryCapacity,
-heat_function: heatFunction,
-massage_type: massageType,
-}
+        pattern,
+        fashion_type: fashionType,
+        sleeve_type: sleeveType,
+        collar_style: collarStyle,
+        fabric,
+        fabric_type: fabricType,
+        fashion_details: fashionDetails,
+        printing_type: printingType,
+        sheer,
+        care_instructions: careInstructions,
 
-]);
-if(error){
+        size,
+        color,
+        clothing_length: clothingLength,
+        waist_type: waistType,
+        closure_type: closureType,
+        stretch,
+        age_group: ageGroup,
 
-  console.log("SUPABASE ERROR:", error.message);
+        /* =========================
+           BEAUTY
+        ========================= */
 
-return;
+        hair_type: hairType,
+        skin_type: skinType,
+        ingredients,
+        volume_size: volumeSize,
+        scent,
+        benefits,
+        suitable_for: suitableFor,
 
-}
+        /* =========================
+           HOME & LIVING
+        ========================= */
 
+        dimensions,
+        room_type: roomType,
+        weight,
 
+        /* =========================
+           TOYS & GIFTS
+        ========================= */
 
-setProductId("");
-setTitle("");
-setDescription("");
-setShortDescription("");
+        age_range: ageRange,
+        educational_features: educationalFeatures,
 
-setBrand("");
-setModel("");
-setWarranty("");
-setCountryOrigin("");
-setPackageIncludes("");
-setEquipmentType("");
-setWorkoutType("");
-setSportType("");
-setSize("");
-setWeightCapacity("");
-setSkillLevel("");
-setTargetArea("");
-setAccessories("");
+        /* =========================
+           FITNESS
+        ========================= */
 
-setImage1("");
-setImage2("");
-setImage3("");
-setImage4("");
-setImage5("");
+        equipment_type: equipmentType,
+        workout_type: workoutType,
+        sport_type: sportType,
+        weight_capacity: weightCapacity,
+        skill_level: skillLevel,
+        target_area: targetArea,
+        accessories,
 
-setAffiliateUrl("");
+        wellness_type: wellnessType,
+        usage_area: usageArea,
+        wellness_benefits: wellnessBenefits,
+        power_source: powerSource,
+        battery_capacity: batteryCapacity,
+        heat_function: heatFunction,
+        massage_type: massageType,
+      }
+    ]);
 
-setMarketplace("");
-setDepartment("");
-setCategory("");
-setSubcategory("");
-setSeason("");
-setStyle("");
-setOccasion("");
-setFeatured(false);
-setTrending(false);
-setSpotlight(false);
+  if (error) {
+    console.log("SUPABASE ERROR:", error.message);
+    return;
+  }
 
-fetchProducts();
+  /* =========================
+     RESET FORM
+  ========================= */
 
+  setProductId("");
+  setTitle("");
+  setDescription("");
+  setShortDescription("");
+
+  setBrand("");
+  setModel("");
+  setWarranty("");
+  setCountryOrigin("");
+  setPackageIncludes("");
+
+  setImage1("");
+  setImage2("");
+  setImage3("");
+  setImage4("");
+  setImage5("");
+
+  setAffiliateUrl("");
+  setSourceUrl("");
+  setShopName("");
+  setMarketplace("");
+
+  setDepartment("");
+  setCategory("");
+  setSubcategory("");
+  setCollection("");
+  setProductType("");
+
+  /* FASHION */
+
+  setSeason("");
+  setStyle("");
+  setOccasion("");
+  setMaterial("");
+  setFit("");
+  setGender("");
+
+  setPattern("");
+  setFashionType("");
+  setSleeveType("");
+  setCollarStyle("");
+  setFabric("");
+  setFabricType("");
+  setFashionDetails("");
+  setPrintingType("");
+  setSheer("");
+  setCareInstructions("");
+
+  setSize("");
+  setColor("");
+  setClothingLength("");
+  setWaistType("");
+  setClosureType("");
+  setStretch("");
+  setAgeGroup("");
+
+  /* BEAUTY */
+
+  setHairType("");
+  setSkinType("");
+  setIngredients("");
+  setVolumeSize("");
+  setScent("");
+  setBenefits("");
+  setSuitableFor("");
+
+  /* HOME */
+
+  setDimensions("");
+  setRoomType("");
+  setWeight("");
+
+  /* TOYS */
+
+  setAgeRange("");
+  setEducationalFeatures("");
+
+  /* FITNESS */
+
+  setEquipmentType("");
+  setWorkoutType("");
+  setSportType("");
+  setWeightCapacity("");
+  setSkillLevel("");
+  setTargetArea("");
+  setAccessories("");
+
+  setWellnessType("");
+  setUsageArea("");
+  setWellnessBenefits("");
+  setPowerSource("");
+  setBatteryCapacity("");
+  setHeatFunction("");
+  setMassageType("");
+
+  setFeatured(false);
+  setTrending(false);
+  setSpotlight(false);
+
+  await fetchProducts();
 };
 
-const updateProduct = async()=>{
+const updateProduct = async () => {
 
-  if(!editingId) return;
-  
-  const {error}=await supabase
-  .from("products")
-  .update({
-  
-  title,
-  brand,
-  
-  description,
-  short_description:shortDescription,
-  
-  model,
-  warranty,
-  package_includes:packageIncludes,
-  
-  image_1:image1,
-  image_2:image2,
-  image_3:image3,
-  image_4:image4,
-  image_5:image5,
-  
-  affiliate_url:affiliateUrl,
-  source_url:sourceUrl,
-  
-  shop_name:shopName,
-  marketplace,
-  
-  department,
-  category,
-  subcategory,
-  
-  collection,
-  product_type:productType,
-  
-  season,
-  style,
-  occasion,
-  
-  material,
-  fit,
-  gender,
-  
-  featured,
-  trending,
-  spotlight
-  
-  })
-  .eq("id",editingId);
-  
-  if(error){
-  
-  console.log("UPDATE ERROR:", error.message);
-  
-  return;
-  
+  if (!editingId) return;
+
+  const { error } = await supabase
+    .from("products")
+    .update({
+
+      title,
+      brand,
+
+      model,
+      warranty,
+      country_origin: countryOrigin,
+      package_includes: packageIncludes,
+
+      description,
+      short_description: shortDescription,
+
+      image_1: image1,
+      image_2: image2,
+      image_3: image3,
+      image_4: image4,
+      image_5: image5,
+
+      affiliate_url: affiliateUrl,
+      source_url: sourceUrl,
+
+      shop_name: shopName,
+      marketplace,
+
+      department,
+      category,
+      subcategory,
+      collection,
+      product_type: productType,
+
+      /* =========================
+         FASHION
+      ========================= */
+
+      season,
+      style,
+      occasion,
+      material,
+      fit,
+      gender,
+
+      pattern,
+      fashion_type: fashionType,
+      sleeve_type: sleeveType,
+      collar_style: collarStyle,
+      fabric,
+      fabric_type: fabricType,
+      fashion_details: fashionDetails,
+      printing_type: printingType,
+      sheer,
+      care_instructions: careInstructions,
+
+      size,
+      color,
+      clothing_length: clothingLength,
+      waist_type: waistType,
+      closure_type: closureType,
+      stretch,
+      age_group: ageGroup,
+
+      /* =========================
+         BEAUTY
+      ========================= */
+
+      hair_type: hairType,
+      skin_type: skinType,
+      ingredients,
+      volume_size: volumeSize,
+      scent,
+      benefits,
+      suitable_for: suitableFor,
+
+      /* =========================
+         HOME & LIVING
+      ========================= */
+
+      dimensions,
+      room_type: roomType,
+      weight,
+
+      /* =========================
+         TOYS & GIFTS
+      ========================= */
+
+      age_range: ageRange,
+      educational_features: educationalFeatures,
+
+      /* =========================
+         FITNESS
+      ========================= */
+
+      equipment_type: equipmentType,
+      workout_type: workoutType,
+      sport_type: sportType,
+      weight_capacity: weightCapacity,
+      skill_level: skillLevel,
+      target_area: targetArea,
+      accessories,
+
+      wellness_type: wellnessType,
+      usage_area: usageArea,
+      wellness_benefits: wellnessBenefits,
+      power_source: powerSource,
+      battery_capacity: batteryCapacity,
+      heat_function: heatFunction,
+      massage_type: massageType,
+
+      /* VISIBILITY */
+
+      featured,
+      trending,
+      spotlight,
+
+    })
+    .eq("id", editingId);
+
+  if (error) {
+
+    console.log("UPDATE ERROR:", error.message);
+    return;
+
   }
-  
-  setEditingId(null);
-  
-  fetchProducts();
-  
-  };
 
+  setEditingId(null);
+
+  await fetchProducts();
+};
   const publishToFacebook = async () => {
     if (!editingId) {
       setFacebookPublishError("Please select or save a product first.");
@@ -719,756 +941,490 @@ const updateProduct = async()=>{
     }
   };
 
-  const filteredProducts = products.filter((product) => {
-    const search = productSearch.trim().toLowerCase();
+  return (
+    <div className="product-manager">
+      <form
+        className="product-form"
+        onSubmit={(e) => e.preventDefault()}
+      >
   
-    if (!search) {
-      return false;
-    }
+        {/* =========================
+            PRODUCT INFORMATION
+        ========================= */}
   
-    const productId = String(product.product_id || "").toLowerCase();
-    const title = String(product.title || "").toLowerCase();
+        <div className="form-section">
   
-    return (
-      productId.includes(search) ||
-      title.includes(search)
-    );
-  });
-
-
+          <h3>Product Information</h3>
   
-    return (
-
-                <div className="product-manager">
-                
-                <form 
-                className="product-form" 
-                onSubmit={(e)=>e.preventDefault()}
-                >
-                
-                
-                {/* PRODUCT IMPORT */}
-                
-                <div className="form-section product-import-section">
-                
-                <h3>
-                Import Product
-                </h3>
-                
-                
-                <div className="import-box">
-                
-                <input
-                className="product-url-input"
-                placeholder="Paste Product URL"
-                value={productUrl}
-                onChange={(e)=>setProductUrl(e.target.value)}
-                />
-                
-                
-                <button
-                type="button"
-                className="load-product-btn"
-                onClick={loadProduct}
-                >
-                Load Product
-                </button>
-                
-                
-                </div>
-                
-                </div>
-                
-                
-                
-                {/* PRODUCT INFORMATION */}
-                
-                <div className="form-section">
-                
-                <h3>
-                Product Information
-                </h3>
-                
-                
-                <div className="input-grid">
-                
-                
-                <input
-  placeholder="Product ID"
-  value={productId}
-  readOnly
-/>
-                
-                
-                
-                <input
-                placeholder="Product Title"
-                value={title}
-                onChange={(e)=>setTitle(e.target.value)}
-                />
-                
-                
-                
-                <input
-                placeholder="Brand"
-                value={brand}
-                onChange={(e)=>setBrand(e.target.value)}
-                />
-                
-                
-                </div>
-                
-                
-                <GeneralDetails
-                
-                model={model}
-                setModel={setModel}
-                
-                color={color}
-                setColor={setColor}
-                
-                dimensions={dimensions}
-                setDimensions={setDimensions}
-                
-                weight={weight}
-                setWeight={setWeight}
-                
-                warranty={warranty}
-                setWarranty={setWarranty}
-                
-                countryOrigin={countryOrigin}
-                setCountryOrigin={setCountryOrigin}
-                
-                packageIncludes={packageIncludes}
-                setPackageIncludes={setPackageIncludes}
-                
-                />  
-
-<textarea
-
-placeholder="Short Description"
-
-value={shortDescription}
-
-onChange={(e)=>setShortDescription(e.target.value)}
-
- />
-
-
-
-<textarea
-
-placeholder="Product Highlights / Description"
-
-value={description}
-
-onChange={(e)=>setDescription(e.target.value)}
-
- />
-        
-        <ProductImages
-
-image1={image1}
-setImage1={setImage1}
-
-image2={image2}
-setImage2={setImage2}
-
-image3={image3}
-setImage3={setImage3}
-
-image4={image4}
-setImage4={setImage4}
-
-image5={image5}
-setImage5={setImage5}
-
-/>
-        
-<AffiliateInformation
-
-affiliateUrl={affiliateUrl}
-setAffiliateUrl={setAffiliateUrl}
-
-sourceUrl={sourceUrl}
-setSourceUrl={setSourceUrl}
-
-shopName={shopName}
-setShopName={setShopName}
-
-marketplace={marketplace}
-setMarketplace={setMarketplace}
-
-/>
-
-        <CategorySelector
-
-department={department}
-setDepartment={setDepartment}
-
-category={category}
-setCategory={setCategory}
-
-subcategory={subcategory}
-setSubcategory={setSubcategory}
-
-collection={collection}
-setCollection={setCollection}
-
-productType={productType}
-setProductType={setProductType}
-/>      
-        {/* CATEGORY DETAILS */}
-
-{department === "fashion" && (
-
-<FashionDetails
-
-material={material}
-setMaterial={setMaterial}
-
-fit={fit}
-setFit={setFit}
-
-style={style}
-setStyle={setStyle}
-
-occasion={occasion}
-setOccasion={setOccasion}
-
-season={season}
-setSeason={setSeason}
-
-gender={gender}
-setGender={setGender}
-
-/>
-
-)}
-
-{department === "beauty" && (
-
-<BeautyDetails
-
-hairType={hairType}
-setHairType={setHairType}
-
-skinType={skinType}
-setSkinType={setSkinType}
-
-ingredients={ingredients}
-setIngredients={setIngredients}
-
-volumeSize={volumeSize}
-setVolumeSize={setVolumeSize}
-
-scent={scent}
-setScent={setScent}
-
-benefits={benefits}
-setBenefits={setBenefits}
-
-suitableFor={suitableFor}
-setSuitableFor={setSuitableFor}
-
-/>
-
-)}
-
-{department === "home-living" && (
-
-<HomeLivingDetails
-
-dimensions={dimensions}
-setDimensions={setDimensions}
-
-color={color}
-setColor={setColor}
-
-roomType={roomType}
-setRoomType={setRoomType}
-
-weight={weight}
-setWeight={setWeight}
-
-/>
-
-)}
-
-{department === "toys-gifts" && (
-
-<ToysGiftsDetails
-
-ageRange={ageRange}
-setAgeRange={setAgeRange}
-
-educationalFeatures={educationalFeatures}
-setEducationalFeatures={setEducationalFeatures}
-
-dimensions={dimensions}
-setDimensions={setDimensions}
-
-/>
-
-)}
-
-{department === "fitness-wellness" && (
-
-<FitnessDetails
-
-equipmentType={equipmentType}
-setEquipmentType={setEquipmentType}
-
-workoutType={workoutType}
-setWorkoutType={setWorkoutType}
-
-sportType={sportType}
-setSportType={setSportType}
-
-material={material}
-setMaterial={setMaterial}
+          <div className="input-grid">
+  
+            <input
+              placeholder="Product ID"
+              value={productId}
+              readOnly
+            />
+  
+            <input
+              placeholder="Product Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+  
+            <input
+              placeholder="Brand"
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
+            />
+  
+          </div>
+  
+          <GeneralDetails
+            model={model}
+            setModel={setModel}
+            color={color}
+            setColor={setColor}
+            dimensions={dimensions}
+            setDimensions={setDimensions}
+            weight={weight}
+            setWeight={setWeight}
+            warranty={warranty}
+            setWarranty={setWarranty}
+            countryOrigin={countryOrigin}
+            setCountryOrigin={setCountryOrigin}
+            packageIncludes={packageIncludes}
+            setPackageIncludes={setPackageIncludes}
+          />
+  
+          <textarea
+            placeholder="Short Description"
+            value={shortDescription}
+            onChange={(e) =>
+              setShortDescription(e.target.value)
+            }
+          />
+  
+          <textarea
+            placeholder="Product Highlights / Description"
+            value={description}
+            onChange={(e) =>
+              setDescription(e.target.value)
+            }
+          />
+  
+          <ProductImages
+            image1={image1}
+            setImage1={setImage1}
+            image2={image2}
+            setImage2={setImage2}
+            image3={image3}
+            setImage3={setImage3}
+            image4={image4}
+            setImage4={setImage4}
+            image5={image5}
+            setImage5={setImage5}
+          />
+  
+          <AffiliateInformation
+            affiliateUrl={affiliateUrl}
+            setAffiliateUrl={setAffiliateUrl}
+            sourceUrl={sourceUrl}
+            setSourceUrl={setSourceUrl}
+            shopName={shopName}
+            setShopName={setShopName}
+            marketplace={marketplace}
+            setMarketplace={setMarketplace}
+          />
+  
+          <CategorySelector
+            department={department}
+            setDepartment={setDepartment}
+            category={category}
+            setCategory={setCategory}
+            subcategory={subcategory}
+            setSubcategory={setSubcategory}
+            collection={collection}
+            setCollection={setCollection}
+            productType={productType}
+            setProductType={setProductType}
+          />
+  
+          {/* =========================
+              FASHION DETAILS
+          ========================= */}
+  
+          {department === "fashion" && (
+            <FashionDetails
+            material={material}
+            setMaterial={setMaterial}
+          
+            fit={fit}
+            setFit={setFit}
+          
+            style={style}
+            setStyle={setStyle}
+          
+            occasion={occasion}
+            setOccasion={setOccasion}
+          
+            season={season}
+            setSeason={setSeason}
+          
+            gender={gender}
+            setGender={setGender}
+          
+            pattern={pattern}
+            setPattern={setPattern}
+          
+            type={fashionType}
+            setType={setFashionType}
+          
+            sleeveType={sleeveType}
+            setSleeveType={setSleeveType}
+          
+            collarStyle={collarStyle}
+            setCollarStyle={setCollarStyle}
+          
+            fabric={fabric}
+            setFabric={setFabric}
+          
+            fabricType={fabricType}
+            setFabricType={setFabricType}
+          
+            details={fashionDetails}
+            setDetails={setFashionDetails}
+          
+            printingType={printingType}
+            setPrintingType={setPrintingType}
+          
+            sheer={sheer}
+            setSheer={setSheer}
+          
+            careInstructions={careInstructions}
+setCareInstructions={setCareInstructions}
 
 size={size}
 setSize={setSize}
 
-weightCapacity={weightCapacity}
-setWeightCapacity={setWeightCapacity}
+color={color}
+setColor={setColor}
 
-skillLevel={skillLevel}
-setSkillLevel={setSkillLevel}
+clothingLength={clothingLength}
+setClothingLength={setClothingLength}
 
-targetArea={targetArea}
-setTargetArea={setTargetArea}
+waistType={waistType}
+setWaistType={setWaistType}
 
-accessories={accessories}
-setAccessories={setAccessories}
+closureType={closureType}
+setClosureType={setClosureType}
 
-wellnessType={wellnessType}
-setWellnessType={setWellnessType}
+stretch={stretch}
+setStretch={setStretch}
 
-usageArea={usageArea}
-setUsageArea={setUsageArea}
-
-wellnessBenefits={wellnessBenefits}
-setWellnessBenefits={setWellnessBenefits}
-
-powerSource={powerSource}
-setPowerSource={setPowerSource}
-
-batteryCapacity={batteryCapacity}
-setBatteryCapacity={setBatteryCapacity}
-
-heatFunction={heatFunction}
-setHeatFunction={setHeatFunction}
-
-massageType={massageType}
-setMassageType={setMassageType}
-
-/>
-
-)}
-        
-
-        {/* SETTINGS */}
-        
-        <div className="form-section">
-        
-        <h3>
-        Visibility
-        </h3>
-        
-        
-        <div className="checkbox-group">
-        
-        
-        <label>
-        
-        <input
-        
-        type="checkbox"
-        
-        checked={featured}
-        
-        onChange={(e)=>setFeatured(e.target.checked)}
-        
-         />
-        
-        Featured
-        
-        </label>
-        
-        
-        
-        <label>
-        
-        <input
-        
-        type="checkbox"
-        
-        checked={trending}
-        
-        onChange={(e)=>setTrending(e.target.checked)}
-        
-         />
-        
-        Trending
-        
-        </label>
-        
-        
-        
-        <label>
-        
-        <input
-        
-        type="checkbox"
-        
-        checked={spotlight}
-        
-        onChange={(e)=>setSpotlight(e.target.checked)}
-        
-         />
-        
-        Spotlight
-        
-        </label>
-        
-        
-        
-        </div>
-        
-        
-        </div>
-        
-        <div className="product-actions">
-
-  <button
-    type="button"
-    className="preview-btn"
-    onClick={() => setShowPreview(true)}
-  >
-    Preview Product
-  </button>
-
-  <button
-    type="button"
-    className="add-product-btn"
-    onClick={() => {
-      if (editingId) {
-        updateProduct();
-      } else {
-        addProduct();
-      }
-    }}
-  >
-    {editingId ? "Save Changes" : "Add Product"}
-  </button>
-
-  {editingId && (
-    <div className="facebook-action">
-
-      <button
-        type="button"
-        className="facebook-publish-btn"
-        onClick={publishToFacebook}
-        disabled={facebookPublishing}
-      >
-        {facebookPublishing
-          ? "Publishing..."
-          : "📘 Publish to Facebook"}
-      </button>
-
-      {facebookPublished && (
-        <div className="facebook-success-message">
-          ✓ Published to Facebook successfully
-        </div>
-      )}
-
-      {facebookPublishError && (
-        <div className="facebook-error-message">
-          {facebookPublishError}
-        </div>
-      )}
-
-    </div>
-  )}
-
-  {editingId && (
-    <button
-      type="button"
-      className="cancel-edit-btn"
-      onClick={() => {
-        setEditingId(null);
-        setFacebookPublished(false);
-        setFacebookPublishError("");
-      }}
-    >
-      Cancel Edit
-    </button>
-  )}
-</div>
-
-{/* =========================
-    MANAGE PRODUCTS
-========================= */}
-
-<div className="manage-products-section">
-
-  <div className="manage-products-header">
-    <div>
-      <h3>Manage Products</h3>
-      <p>Search by Product ID or Product Title to edit or delete a product.</p>
-    </div>
-  </div>
-
-  <div className="product-search-box">
-
-    <input
-      type="text"
-      placeholder="Search Product ID or Product Title..."
-      value={productSearch}
-      onChange={(e) => setProductSearch(e.target.value)}
-    />
-
-    {productSearch && (
-      <button
-        type="button"
-        className="clear-product-search"
-        onClick={() => setProductSearch("")}
-      >
-        Clear
-      </button>
-    )}
-
-  </div>
-
-  {/* Show products ONLY after searching */}
-  {productSearch.trim() !== "" && (
-
-    <div className="products-list">
-
-      {filteredProducts.length === 0 ? (
-
-        <div className="no-products-found">
-          No products found.
-        </div>
-
-      ) : (
-
-        filteredProducts.map((product) => (
-
-          <div
-            className="product-row"
-            key={product.id}
-          >
-
-            <div className="product-row-info">
-
-              <span className="product-row-title">
-                {product.title}
-              </span>
-
-              <span className="product-row-id">
-                {product.product_id}
-              </span>
-
+ageGroup={ageGroup}
+setAgeGroup={setAgeGroup}
+          />
+          )}
+  
+          {/* =========================
+              BEAUTY DETAILS
+          ========================= */}
+  
+          {department === "beauty" && (
+            <BeautyDetails
+              hairType={hairType}
+              setHairType={setHairType}
+              skinType={skinType}
+              setSkinType={setSkinType}
+              ingredients={ingredients}
+              setIngredients={setIngredients}
+              volumeSize={volumeSize}
+              setVolumeSize={setVolumeSize}
+              scent={scent}
+              setScent={setScent}
+              benefits={benefits}
+              setBenefits={setBenefits}
+              suitableFor={suitableFor}
+              setSuitableFor={setSuitableFor}
+            />
+          )}
+  
+          {/* =========================
+              HOME & LIVING DETAILS
+          ========================= */}
+  
+          {department === "home-living" && (
+            <HomeLivingDetails
+              dimensions={dimensions}
+              setDimensions={setDimensions}
+              color={color}
+              setColor={setColor}
+              roomType={roomType}
+              setRoomType={setRoomType}
+              weight={weight}
+              setWeight={setWeight}
+            />
+          )}
+  
+          {/* =========================
+              TOYS & GIFTS DETAILS
+          ========================= */}
+  
+          {department === "toys-gifts" && (
+            <ToysGiftsDetails
+              ageRange={ageRange}
+              setAgeRange={setAgeRange}
+              educationalFeatures={educationalFeatures}
+              setEducationalFeatures={setEducationalFeatures}
+              dimensions={dimensions}
+              setDimensions={setDimensions}
+            />
+          )}
+  
+          {/* =========================
+              FITNESS & WELLNESS
+          ========================= */}
+  
+          {department === "fitness-wellness" && (
+            <FitnessDetails
+              equipmentType={equipmentType}
+              setEquipmentType={setEquipmentType}
+              workoutType={workoutType}
+              setWorkoutType={setWorkoutType}
+              sportType={sportType}
+              setSportType={setSportType}
+              material={material}
+              setMaterial={setMaterial}
+              size={size}
+              setSize={setSize}
+              weightCapacity={weightCapacity}
+              setWeightCapacity={setWeightCapacity}
+              skillLevel={skillLevel}
+              setSkillLevel={setSkillLevel}
+              targetArea={targetArea}
+              setTargetArea={setTargetArea}
+              accessories={accessories}
+              setAccessories={setAccessories}
+              wellnessType={wellnessType}
+              setWellnessType={setWellnessType}
+              usageArea={usageArea}
+              setUsageArea={setUsageArea}
+              wellnessBenefits={wellnessBenefits}
+              setWellnessBenefits={setWellnessBenefits}
+              powerSource={powerSource}
+              setPowerSource={setPowerSource}
+              batteryCapacity={batteryCapacity}
+              setBatteryCapacity={setBatteryCapacity}
+              heatFunction={heatFunction}
+              setHeatFunction={setHeatFunction}
+              massageType={massageType}
+              setMassageType={setMassageType}
+              scent={scent}
+              setScent={setScent}
+              volumeSize={volumeSize}
+              setVolumeSize={setVolumeSize}
+              ingredients={ingredients}
+              setIngredients={setIngredients}
+            />
+          )}
+  
+          {/* =========================
+              VISIBILITY
+          ========================= */}
+  
+          <div className="form-section visibility-section">
+  
+            <h3>Visibility</h3>
+  
+            <div className="checkbox-group">
+  
+              <label className="visibility-option">
+                <input
+                  type="checkbox"
+                  checked={featured}
+                  onChange={(e) =>
+                    setFeatured(e.target.checked)
+                  }
+                />
+                <span>Featured</span>
+              </label>
+  
+              <label className="visibility-option">
+                <input
+                  type="checkbox"
+                  checked={trending}
+                  onChange={(e) =>
+                    setTrending(e.target.checked)
+                  }
+                />
+                <span>Trending</span>
+              </label>
+  
+              <label className="visibility-option">
+                <input
+                  type="checkbox"
+                  checked={spotlight}
+                  onChange={(e) =>
+                    setSpotlight(e.target.checked)
+                  }
+                />
+                <span>Spotlight</span>
+              </label>
+  
             </div>
-
-            <div className="product-row-actions">
-
+  
+          </div>
+  
+          {/* =========================
+              SAVE / ADD ACTIONS
+          ========================= */}
+  
+          <div className="product-actions">
+  
+            <button
+              type="button"
+              className="add-product-btn"
+              onClick={() => {
+                if (editingId) {
+                  updateProduct();
+                } else {
+                  addProduct();
+                }
+              }}
+            >
+              {editingId
+                ? "Save Product"
+                : "Add Product"}
+            </button>
+  
+            {editingId && (
               <button
                 type="button"
-                className="edit-product-btn"
+                className="cancel-edit-btn"
                 onClick={() => {
-
-                  setEditingId(product.id || null);
-
-                  setProductId(product.product_id || "");
-                  setTitle(product.title || "");
-                  setBrand(product.brand || "");
-
-                  setDescription(product.description || "");
-                  setShortDescription(
-                    product.short_description || ""
-                  );
-
-                  setImage1(product.image_1 || "");
-                  setImage2(product.image_2 || "");
-                  setImage3(product.image_3 || "");
-                  setImage4(product.image_4 || "");
-                  setImage5(product.image_5 || "");
-
-                  setAffiliateUrl(
-                    product.affiliate_url || ""
-                  );
-
-                  setSourceUrl(
-                    product.source_url || ""
-                  );
-
-                  setShopName(
-                    product.shop_name || ""
-                  );
-
-                  setMarketplace(
-                    product.marketplace || ""
-                  );
-
-                  setDepartment(
-                    product.department || ""
-                  );
-
-                  setCategory(
-                    product.category || ""
-                  );
-
-                  setSubcategory(
-                    product.subcategory || ""
-                  );
-
-                  setCollection(
-                    product.collection || ""
-                  );
-
-                  setProductType(
-                    product.product_type || ""
-                  );
-
-                  setSeason(product.season || "");
-                  setStyle(product.style || "");
-                  setOccasion(product.occasion || "");
-                  setMaterial(product.material || "");
-                  setFit(product.fit || "");
-                  setGender(product.gender || "");
-
-                  setFeatured(
-                    product.featured || false
-                  );
-
-                  setTrending(
-                    product.trending || false
-                  );
-
-                  setSpotlight(
-                    product.spotlight || false
-                  );
-
+                  setEditingId(null);
                   setFacebookPublished(false);
                   setFacebookPublishError("");
-
-                  window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                  });
-
                 }}
               >
-                Edit
+                Cancel Edit
               </button>
-
+            )}
+  
+          </div>
+  
+          {/* =========================
+              PROMOTION
+          ========================= */}
+  
+          {editingId && (
+            <div className="form-section promotion-section">
+  
+              <h3>Promotion</h3>
+  
+              <div className="promotion-buttons">
+  
+                <button
+                  type="button"
+                  className="facebook-publish-btn"
+                  onClick={publishToFacebook}
+                  disabled={facebookPublishing}
+                >
+                  {facebookPublishing
+                    ? "Publishing..."
+                    : "📘 Facebook"}
+                </button>
+  
+                <button
+                  type="button"
+                  className="instagram-publish-btn"
+                  onClick={() => {
+                    alert(
+                      "Instagram promotion will be connected next."
+                    );
+                  }}
+                >
+                  📸 Instagram
+                </button>
+  
+                <button
+                  type="button"
+                  className="facebook-reel-btn"
+                  onClick={() => {
+                    alert(
+                      "Facebook Reel promotion will be connected next."
+                    );
+                  }}
+                >
+                  🎬 Facebook Reel
+                </button>
+  
+              </div>
+  
+              {facebookPublished && (
+                <div className="facebook-success-message">
+                  ✓ Published to Facebook successfully
+                </div>
+              )}
+  
+              {facebookPublishError && (
+                <div className="facebook-error-message">
+                  {facebookPublishError}
+                </div>
+              )}
+  
+            </div>
+          )}
+  
+        </div>
+  
+        {/* =========================
+            FIND PRODUCT
+        ========================= */}
+  
+        <div className="manage-products-section">
+  
+          <div className="manage-products-header">
+  
+            <div>
+  
+              <h3>Find Product</h3>
+  
+              <p>
+                Search by Product ID or Product Title.
+              </p>
+  
+            </div>
+  
+          </div>
+  
+          <div className="product-search-box">
+  
+            <input
+              type="text"
+              placeholder="Find Product by ID or Product Title..."
+              value={productSearch}
+              onChange={(e) =>
+                setProductSearch(e.target.value)
+              }
+            />
+  
+            {productSearch && (
               <button
                 type="button"
-                className="delete-product-btn"
-                onClick={async () => {
-
-                  const confirmed = window.confirm(
-                    `Delete "${product.title}"?`
-                  );
-
-                  if (!confirmed) {
-                    return;
-                  }
-
-                  const { error } = await supabase
-                    .from("products")
-                    .delete()
-                    .eq("id", product.id);
-
-                  if (error) {
-
-                    console.error(
-                      "DELETE ERROR:",
-                      error
-                    );
-
-                    alert(
-                      "Failed to delete product."
-                    );
-
-                    return;
-                  }
-
-                  if (editingId === product.id) {
-                    setEditingId(null);
-                  }
-
-                  await fetchProducts();
-
-                }}
+                className="clear-product-search"
+                onClick={() =>
+                  setProductSearch("")
+                }
               >
-                Delete
+                Clear
               </button>
-
-            </div>
-
+            )}
+  
           </div>
-
-        ))
-
-      )}
-
+  
+        </div>
+  
+      </form>
     </div>
-
-  )}
-
-</div>
-
-{showPreview && (
-<div className="product-preview">
-  <div className="preview-card">
-
-    <img
-      src={image1 || "/placeholder.png"}
-      alt={title}
-    />
-
-    <h3>{title || "Product Title"}</h3>
-
-    <p>{shortDescription || "Short description"}</p>
-
-    <div className="preview-category">
-      {department || "Department"} / {category || "Category"} / {subcategory || "Subcategory"}
-    </div>
-
-    <div className="preview-actions">
-      <a
-        href={`/product/${productId}`}
-        className="view-more-link"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View More
-      </a>
-      
-      <a
-        href={affiliateUrl || "#"}
-        className="shop-now-btn"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Shop Now
-      </a>
-    </div>
-
-  </div>
-</div>
-)}
-</div>
-
-</form>
-
-</div>
-
-);
-
-}
+  );
+  }

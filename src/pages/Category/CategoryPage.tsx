@@ -6,117 +6,104 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import "./CategoryPage.css";
 
 export default function CategoryPage() {
-  const { category } = useParams<{ category: string }>();
+  const {
+    department,
+    category,
+    subcategory,
+    collection,
+    productType,
+  } = useParams<{
+    department?: string;
+    category?: string;
+    subcategory?: string;
+    collection?: string;
+    productType?: string;
+  }>();
 
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchProducts();
-  }, [category]);
+  }, [
+    department,
+    category,
+    subcategory,
+    collection,
+    productType,
+  ]);
 
   const fetchProducts = async () => {
     setLoading(true);
 
     try {
-      let query = supabase.from("products").select("*");
+      let query = supabase
+        .from("products")
+        .select("*");
 
       /*
-       * Category URLs can contain multiple levels:
-       *
-       * /category/fashion
-       * /category/fashion/women
-       * /category/fashion/women/clothing
-       * /category/fashion/women/clothing/dresses
-       *
-       * We use the last part of the URL as the
-       * category/subcategory slug.
+       * ==========================================
+       * DEPARTMENT
+       * ==========================================
+       */
+
+      if (department) {
+        query = query.eq(
+          "department",
+          department
+        );
+      }
+
+      /*
+       * ==========================================
+       * CATEGORY
+       * ==========================================
        */
 
       if (category) {
-        const pathParts = category
-          .split("/")
-          .filter(Boolean);
+        query = query.eq(
+          "category",
+          category
+        );
+      }
 
-        const currentSlug =
-          pathParts[pathParts.length - 1];
+      /*
+       * ==========================================
+       * SUBCATEGORY
+       * ==========================================
+       */
 
-        /*
-         * ==========================================
-         * 1. CHECK CATEGORIES TABLE
-         * ==========================================
-         */
+      if (subcategory) {
+        query = query.eq(
+          "subcategory",
+          subcategory
+        );
+      }
 
-        const {
-          data: cat,
-          error: categoryError,
-        } = await supabase
-          .from("categories")
-          .select("id, name, slug")
-          .eq("slug", currentSlug)
-          .maybeSingle();
+      /*
+       * ==========================================
+       * COLLECTION
+       * ==========================================
+       */
 
-        if (categoryError) {
-          console.error(
-            "Category lookup error:",
-            categoryError
-          );
-        }
+      if (collection) {
+        query = query.eq(
+          "collection",
+          collection
+        );
+      }
 
-        if (cat) {
-          query = query.eq("category_id", cat.id);
-        } else {
-          /*
-           * ==========================================
-           * 2. CHECK SUBCATEGORIES TABLE
-           * ==========================================
-           */
+      /*
+       * ==========================================
+       * PRODUCT TYPE
+       * ==========================================
+       */
 
-          const {
-            data: subcategory,
-            error: subcategoryError,
-          } = await supabase
-            .from("subcategories")
-            .select(
-              "id, name, slug, category_id"
-            )
-            .eq("slug", currentSlug)
-            .maybeSingle();
-
-          if (subcategoryError) {
-            console.error(
-              "Subcategory lookup error:",
-              subcategoryError
-            );
-          }
-
-          if (subcategory) {
-            /*
-             * Products currently use category_id.
-             *
-             * Therefore a subcategory is matched
-             * through its parent category.
-             */
-
-            query = query.eq(
-              "category_id",
-              subcategory.category_id
-            );
-          } else {
-            /*
-             * ==========================================
-             * 3. NOTHING FOUND
-             * ==========================================
-             *
-             * Show the "collection is growing"
-             * message.
-             */
-
-            setProducts([]);
-            setLoading(false);
-            return;
-          }
-        }
+      if (productType) {
+        query = query.eq(
+          "product_type",
+          productType
+        );
       }
 
       /*
@@ -128,9 +115,12 @@ export default function CategoryPage() {
       const {
         data,
         error,
-      } = await query.order("created_at", {
-        ascending: false,
-      });
+      } = await query.order(
+        "created_at",
+        {
+          ascending: false,
+        }
+      );
 
       if (error) {
         console.error(
@@ -140,39 +130,50 @@ export default function CategoryPage() {
 
         setProducts([]);
       } else {
+        console.log(
+          "CATEGORY PRODUCTS:",
+          data
+        );
+
         setProducts(data || []);
       }
+
     } catch (error) {
+
       console.error(
         "Unexpected category error:",
         error
       );
 
       setProducts([]);
+
     } finally {
+
       setLoading(false);
+
     }
   };
 
   /*
    * ==========================================
-   * CATEGORY TITLE
+   * PAGE TITLE
    * ==========================================
    */
 
   const getCategoryTitle = () => {
-    if (!category) {
+
+    const currentSlug =
+      productType ||
+      collection ||
+      subcategory ||
+      category ||
+      department;
+
+    if (!currentSlug) {
       return "Products";
     }
 
-    const parts = category
-      .split("/")
-      .filter(Boolean);
-
-    const lastPart =
-      parts[parts.length - 1];
-
-    return lastPart
+    return currentSlug
       .replace(/-/g, " ")
       .replace(/\b\w/g, (letter) =>
         letter.toUpperCase()
@@ -187,7 +188,11 @@ export default function CategoryPage() {
       ======================================= */}
 
       <div className="category-header">
-        <h1>{getCategoryTitle()}</h1>
+
+        <h1>
+          {getCategoryTitle()}
+        </h1>
+
       </div>
 
       {/* ======================================
@@ -197,35 +202,32 @@ export default function CategoryPage() {
       <div className="product-grid">
 
         {loading ? (
+
           <div className="category-loading">
-            <p>Loading products...</p>
+            <p>
+              Loading products...
+            </p>
           </div>
+
         ) : products.length === 0 ? (
 
-          /*
-           * ====================================
-           * EMPTY CATEGORY MESSAGE
-           * ====================================
-           */
-
           <div className="empty-category-message">
-            <h2>This collection is growing</h2>
+
+            <h2>
+              This collection is growing
+            </h2>
 
             <p>
-              New products are being added regularly.
-              Check back soon for more.
+              New products are being added
+              regularly. Check back soon for more.
             </p>
+
           </div>
 
         ) : (
 
-          /*
-           * ====================================
-           * PRODUCTS
-           * ====================================
-           */
-
           products.map((product) => (
+
             <ProductCard
               key={
                 product.product_id ||
@@ -233,12 +235,13 @@ export default function CategoryPage() {
               }
               product={product}
             />
+
           ))
 
         )}
 
       </div>
+
     </div>
   );
 }
-

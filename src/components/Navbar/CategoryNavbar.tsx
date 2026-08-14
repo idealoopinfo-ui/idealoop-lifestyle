@@ -13,9 +13,9 @@ import "./CategoryNavbar.css";
 export default function CategoryNavbar() {
   const navigate = useNavigate();
 
-  const [activePath, setActivePath] = useState<
-    CategoryNode[]
-  >([]);
+  const [activePath, setActivePath] = useState<CategoryNode[]>(
+    []
+  );
 
   // =========================================
   // HOVER NODE
@@ -42,13 +42,9 @@ export default function CategoryNavbar() {
       .map((item) => item.slug)
       .filter(Boolean);
 
-    if (slugs.length === 0) {
-      return;
-    }
+    if (!slugs.length) return;
 
-    navigate(
-      `/category/${slugs.join("/")}`
-    );
+    navigate(`/category/${slugs.join("/")}`);
 
     setActivePath([]);
   };
@@ -60,6 +56,10 @@ export default function CategoryNavbar() {
   const handleLeave = () => {
     setActivePath([]);
   };
+
+  // =========================================
+  // RENDER
+  // =========================================
 
   return (
     <div
@@ -73,27 +73,20 @@ export default function CategoryNavbar() {
 
       <div className="category-left">
 
-        {categories.map(
-          (department) => (
-            <div
-              key={department.slug}
-              className="nav-item"
-              onMouseEnter={() =>
-                handleEnter(
-                  department,
-                  0
-                )
-              }
-              onClick={() =>
-                handleNavigate([
-                  department,
-                ])
-              }
-            >
-              {department.name}
-            </div>
-          )
-        )}
+        {categories.map((department) => (
+          <div
+            key={department.slug}
+            className="nav-item"
+            onMouseEnter={() =>
+              handleEnter(department, 0)
+            }
+            onClick={() =>
+              handleNavigate([department])
+            }
+          >
+            {department.name}
+          </div>
+        ))}
 
         <Link
           to="/contact"
@@ -111,6 +104,7 @@ export default function CategoryNavbar() {
 
       </div>
 
+
       {/* =====================================
           SEARCH
       ====================================== */}
@@ -119,92 +113,87 @@ export default function CategoryNavbar() {
         <SearchBar />
       </div>
 
+
       {/* =====================================
-          DROPDOWN
+          MULTI-LEVEL DROPDOWN
       ====================================== */}
 
       {activePath.length > 0 && (
         <div className="dropdown">
 
-          {activePath.map(
-            (node, level) => {
+          {activePath.map((node, level) => {
 
-              if (
-                !node.children ||
-                node.children.length === 0
-              ) {
-                return null;
-              }
-
-              return (
-                <div
-                  key={`${node.slug}-${level}`}
-                  className="dropdown-column"
-                >
-
-                  {node.children.map(
-                    (child) => {
-
-                      const hasChildren =
-                        child.children &&
-                        child.children.length > 0;
-
-                      const isActive =
-                        activePath[
-                          level + 1
-                        ]?.slug ===
-                        child.slug;
-
-                      const childPath = [
-                        ...activePath.slice(
-                          0,
-                          level + 1
-                        ),
-                        child,
-                      ];
-
-                      return (
-                        <div
-                          key={`${child.slug}-${level}`}
-                          className={`dropdown-item ${
-                            isActive
-                              ? "active"
-                              : ""
-                          }`}
-                          onMouseEnter={() =>
-                            handleEnter(
-                              child,
-                              level + 1
-                            )
-                          }
-                          onClick={(event) => {
-                            event.stopPropagation();
-
-                            handleNavigate(
-                              childPath
-                            );
-                          }}
-                        >
-
-                          <span>
-                            {child.name}
-                          </span>
-
-                          {hasChildren && (
-                            <span className="dropdown-arrow">
-                              ›
-                            </span>
-                          )}
-
-                        </div>
-                      );
-                    }
-                  )}
-
-                </div>
-              );
+            // No children = nothing more to display
+            if (
+              !node.children ||
+              node.children.length === 0
+            ) {
+              return null;
             }
-          )}
+
+            return (
+              <div
+                key={`${node.slug}-${level}`}
+                className="dropdown-column"
+              >
+
+                {node.children.map((child) => {
+
+                  const hasChildren =
+                    child.children?.length > 0;
+
+                  const isActive =
+                    activePath[level + 1]?.slug ===
+                    child.slug;
+
+                  const childPath = [
+                    ...activePath.slice(
+                      0,
+                      level + 1
+                    ),
+                    child,
+                  ];
+
+                  return (
+                    <div
+                      key={`${child.slug}-${level}`}
+                      className={`dropdown-item ${
+                        isActive
+                          ? "active"
+                          : ""
+                      }`}
+                      onMouseEnter={() =>
+                        handleEnter(
+                          child,
+                          level + 1
+                        )
+                      }
+                      onClick={(event) => {
+                        event.stopPropagation();
+
+                        handleNavigate(
+                          childPath
+                        );
+                      }}
+                    >
+
+                      <span className="dropdown-label">
+                        {child.name}
+                      </span>
+
+                      {hasChildren && (
+                        <span className="dropdown-arrow">
+                          ›
+                        </span>
+                      )}
+
+                    </div>
+                  );
+                })}
+
+              </div>
+            );
+          })}
 
         </div>
       )}

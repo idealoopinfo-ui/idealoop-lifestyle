@@ -3,6 +3,10 @@
   padding: 50px 0;
 }
 
+/* ==================================================
+   HEADER
+================================================== */
+
 .category-showcase-header {
   text-align: center;
   margin-bottom: 28px;
@@ -33,48 +37,81 @@
   opacity: 0.65;
 }
 
+
 /* ==================================================
    FOUR DEPARTMENT CONTAINERS
-   ================================================== */
+================================================== */
 
 .category-sections {
   width: 100%;
+
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
   gap: 16px;
 }
 
+
 /* ==================================================
    CONTAINER
-   ================================================== */
+================================================== */
 
 .category-container {
   position: relative;
+
   width: 100%;
+
   overflow: hidden;
+
   border-radius: 18px;
+
   background: #f5f5f5;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
+
+
+/* ==================================================
+   CONTAINER HOVER
+================================================== */
+
+.category-container:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.15);
+}
+
 
 /* ==================================================
    2 x 2 IMAGE GRID
-   ================================================== */
+   DO NOT CHANGE CONTAINER SIZE
+================================================== */
 
 .category-grid {
   width: 100%;
+
   aspect-ratio: 4 / 5;
 
   display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  grid-template-rows:
+    repeat(2, 1fr);
 
   gap: 2px;
 }
 
+
 /* ==================================================
    IMAGE LINK
-   ================================================== */
+================================================== */
 
 .category-product {
   position: relative;
@@ -86,103 +123,19 @@
 
   overflow: hidden;
 
-  background: #f2f2f2;
+  background: #ffffff;
+
+  cursor: pointer;
 }
 
+
 /* ==================================================
-   IMAGE
-   ================================================== */
+   CATEGORY GRID — FIXED 2 × 2
+================================================== */
 
-.category-product img {
-  display: block;
-
+.category-grid {
   width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  transition:
-    transform 0.45s ease,
-    opacity 0.3s ease;
-}
-
-/* ==================================================
-   STRONG HOVER EFFECT
-   ================================================== */
-
-   .category-product {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #f2f2f2;
-    cursor: pointer;
-  }
-  
-  .category-product::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0);
-    transition: background 0.3s ease;
-    pointer-events: none;
-  }
-  
-  .category-product img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  
-    transition:
-      transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
-      filter 0.3s ease;
-  }
-  
-  /* Strong image zoom */
-  .category-product:hover img {
-    transform: scale(1.12);
-    filter: brightness(0.82);
-  }
-  
-  /* Dark overlay */
-  .category-product:hover::after {
-    background: rgba(0, 0, 0, 0.18);
-  }
-  
-  /* Container interaction */
-  .category-container {
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
-  }
-  
-  .category-container:hover {
-    transform: translateY(-5px);
-    box-shadow:
-      0 14px 30px rgba(0, 0, 0, 0.15);
-  }
-
-/* ==================================================
-   EMPTY POSITION
-   ================================================== */
-
-.category-empty {
-  background: #f2f2f2;
-}
-
-/* ==================================================
-   LOADING SKELETON
-   ================================================== */
-
-.category-skeleton {
-  overflow: hidden;
-}
-
-.category-skeleton-grid {
-  width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
 
   display: grid;
 
@@ -192,55 +145,55 @@
   gap: 2px;
 }
 
-.category-skeleton-grid span {
+
+/* ==================================================
+   IMAGE CONTAINER
+================================================== */
+
+.category-product {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+}
+
+
+/* ==================================================
+   PRODUCT IMAGE
+================================================== */
+
+.category-product img {
   display: block;
-  background: #eeeeee;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  background: #ffffff;
+
+  image-rendering: auto;
+
+  transition:
+    transform 0.35s ease,
+    filter 0.3s ease;
 }
+
 
 /* ==================================================
-   TABLET
-   ================================================== */
+   HOVER
+================================================== */
 
-@media (max-width: 1000px) {
-  .category-sections {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* ==================================================
-   MOBILE
-   ================================================== */
-
-@media (max-width: 600px) {
-  .category-showcase {
-    padding: 35px 0;
-  }
-
-  .category-showcase-header {
-    margin-bottom: 20px;
-  }
-
-  .category-showcase-header p {
-    font-size: 14px;
-    padding: 0 15px;
-  }
-
-  .category-sections {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-
-  .category-container {
-    border-radius: 12px;
-  }
-}
-
-@media (max-width: 420px) {
-  .category-sections {
-    gap: 8px;
-  }
-
-  .category-container {
-    border-radius: 10px;
-  }
+.category-product:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.92);
 }

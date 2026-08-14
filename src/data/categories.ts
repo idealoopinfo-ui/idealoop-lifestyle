@@ -45,13 +45,24 @@ export const categories: CategoryNode[] = [
             level: "subcategory",
             children: [
               leaf("Dresses", "dresses"),
-              leaf("Tops", "tops"),
               leaf("Jeans", "jeans"),
               leaf("Skirts", "skirts"),
               leaf("Pants", "pants"),
               leaf("Shorts", "shorts"),
               leaf("Jackets", "jackets"),
               leaf("Hoodies", "hoodies"),
+              leaf("T-Shirt", "t-shirt"),
+
+              {
+                name: "Tops",
+                slug: "tops",
+                level: "subcategory",
+                children: [
+                  leaf("Tank Tops", "tank-tops"),
+                 
+                ],
+              },
+
               {
                 name: "Activewear",
                 slug: "women-activewear",
@@ -162,6 +173,7 @@ export const categories: CategoryNode[] = [
               leaf("Formal Shoes", "formal-shoes"),
               leaf("Boots", "men-boots"),
               leaf("Sandals", "men-sandals"),
+              leaf("Casual", "men-casual"),
             ],
           },
 
@@ -308,6 +320,15 @@ export const categories: CategoryNode[] = [
           leaf("Mirrors", "mirrors"),
           leaf("Vases", "vases"),
           leaf("Decor Items", "decor-items"),
+      
+          {
+            name: "Floor Mats",
+            slug: "floor-mats",
+            level: "subcategory",
+            children: [
+              leaf("Bath Mats", "bath-mats", "collection"),
+            ],
+          },
         ],
       },
 
@@ -380,6 +401,7 @@ export const categories: CategoryNode[] = [
           leaf("Building Blocks", "building-blocks"),
           leaf("Remote Control Toys", "remote-control-toys"),
           leaf("Plush Toys", "plush-toys"),
+          leaf("Off Road Vehicle", "off road vehicle"),
         ],
       },
 
@@ -410,88 +432,116 @@ export const categories: CategoryNode[] = [
   },
 
   /* =========================================================
-     FITNESS & WELLNESS
-  ========================================================= */
+   FITNESS & WELLNESS
+========================================================= */
 
-  {
-    name: "Fitness & Wellness",
-    slug: "fitness-wellness",
-    level: "department",
-    children: [
-      {
-        name: "Strength Training",
-        slug: "strength-training",
-        level: "category",
-        children: [
-          leaf("Dumbbells", "dumbbells"),
-          leaf("Resistance Bands", "resistance-bands"),
-          leaf("Weight Benches", "weight-benches"),
-          leaf("Strength Accessories", "strength-accessories"),
-        ],
-      },
+{
+  name: "Fitness & Wellness",
+  slug: "fitness-wellness",
+  level: "department",
+  children: [
 
-      {
-        name: "Yoga",
-        slug: "yoga",
-        level: "category",
-        children: [
-          leaf("Yoga Mats", "yoga-mats"),
-          leaf("Yoga Blocks", "yoga-blocks"),
-          leaf("Yoga Clothing", "yoga-clothing"),
-        ],
-      },
+    {
+      name: "Strength Training",
+      slug: "strength-training",
+      level: "category",
+      children: [
 
-      {
-        name: "Home Gym",
-        slug: "home-gym",
-        level: "category",
-        children: [
-          leaf("Cardio Equipment", "cardio-equipment"),
-          leaf("Gym Machines", "gym-machines"),
-          leaf("Exercise Accessories", "exercise-accessories"),
-        ],
-      },
+        leaf("Dumbbells", "dumbbells"),
 
-      {
-        name: "Fitness Ebooks",
-        slug: "fitness-ebooks",
-        level: "category",
-        children: [
-          leaf("Workout Guides", "workout-guides"),
-          leaf("Weight Loss", "weight-loss"),
-          leaf("Muscle Building", "muscle-building"),
-          leaf("Nutrition", "nutrition"),
-        ],
-      },
+        leaf("Resistance Bands", "resistance-bands"),
 
-      {
-        name: "Wellness",
-        slug: "wellness",
-        level: "category",
-        children: [
-          {
-            name: "Massage & Relaxation",
-            slug: "massage-relaxation",
-            level: "subcategory",
-            children: [
-              leaf("Neck Massagers", "neck-massagers"),
-              leaf("Massage Guns", "massage-guns"),
-              leaf("Massage Pillows", "massage-pillows"),
-            ],
-          },
+        leaf("Weight Benches", "weight-benches"),
 
-          {
-            name: "Aromatherapy",
-            slug: "aromatherapy",
-            level: "subcategory",
-            children: [
-              leaf("Essential Oils", "essential-oils"),
-              leaf("Diffusers", "diffusers"),
-              leaf("Candles & Fragrance", "candles-fragrance"),
-            ],
-          },
-        ],
-      },
-    ],
-  },
+        {
+          name: "Abdominal Training",
+          slug: "abdominal-training",
+          level: "subcategory",
+          children: [
+            leaf("Abdominal Wheels", "abdominal-wheels"),
+          ],
+        },
+
+        {
+          name: "Training Accessories",
+          slug: "training-accessories",
+          level: "subcategory",
+          children: [
+            leaf("Workout Gloves", "workout-gloves"),
+            leaf("Cable Machine Attachments", "cable-machine-attachments"),
+          ],
+        },
+
+        leaf("Strength Accessories", "strength-accessories"),
+
+      ],
+    },
+
+    {
+      name: "Yoga",
+      slug: "yoga",
+      level: "category",
+      children: [
+        leaf("Yoga Mats", "yoga-mats"),
+        leaf("Yoga Blocks", "yoga-blocks"),
+        leaf("Yoga Clothing", "yoga-clothing"),
+      ],
+    },
+
+    {
+      name: "Home Gym",
+      slug: "home-gym",
+      level: "category",
+      children: [
+        leaf("Cardio Equipment", "cardio-equipment"),
+        leaf("Gym Machines", "gym-machines"),
+        leaf("Exercise Accessories", "exercise-accessories"),
+      ],
+    },
+
+    {
+      name: "Fitness Ebooks",
+      slug: "fitness-ebooks",
+      level: "category",
+      children: [
+        leaf("Workout Guides", "workout-guides"),
+        leaf("Weight Loss", "weight-loss"),
+        leaf("Muscle Building", "muscle-building"),
+        leaf("Nutrition", "nutrition"),
+      ],
+    },
+
+    {
+      name: "Wellness",
+      slug: "wellness",
+      level: "category",
+      children: [
+
+        {
+          name: "Massage & Relaxation",
+          slug: "massage-relaxation",
+          level: "subcategory",
+          children: [
+            leaf("Neck Massagers", "neck-massagers"),
+            leaf("Massage Guns", "massage-guns"),
+            leaf("Massage Pillows", "massage-pillows"),
+          ],
+        },
+
+        {
+          name: "Aromatherapy",
+          slug: "aromatherapy",
+          level: "subcategory",
+          children: [
+            leaf("Essential Oils", "essential-oils"),
+            leaf("Diffusers", "diffusers"),
+            leaf("Candles & Fragrance", "candles-fragrance"),
+          ],
+        },
+
+      ],
+    },
+
+  ],
+},
 ];
