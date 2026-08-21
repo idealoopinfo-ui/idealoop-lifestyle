@@ -14,7 +14,7 @@
   
   min-height:100vh;
   
-  padding:20px 20px;
+  padding:15px 15px;
   
   max-width:1600px;
   
@@ -174,68 +174,46 @@
 
 
 /* ===========================
- PINTEREST MASONRY GRID
+   PINTEREST MASONRY GRID
 =========================== */
-
 
 .pinterest-grid {
 
+  column-count: 5;
 
-  column-count:5;
+  column-gap: 5px;
 
+  width: 100%;
 
-  column-gap:10px;
+  max-width: 1500px;
 
-
-  max-width:1400px;
-
-
-  margin:auto;
+  margin: 0 auto;
 
 }
 
 
 
-/* ===========================
- PIN CARD
-=========================== */
-
-
 .pin-card {
+  break-inside: avoid;
 
+  margin-bottom: 7px;
 
-  break-inside:avoid;
+  position: relative;
 
+  overflow: hidden;
 
-  margin-bottom:10px;
+  border-radius: 14px;
 
+  background: #fff;
 
-  position:relative;
-
-
-  overflow:hidden;
-
-
-  border-radius:18px;
-
-
-  background:#fff;
-
-
-  cursor:pointer;
-
+  cursor: pointer;
 
   box-shadow:
-
-  0 5px 18px rgba(0,0,0,.08);
-
+    0 5px 18px rgba(0,0,0,.08);
 
   transition:
-
-  transform .3s ease,
-
-  box-shadow .3s ease;
-
+    transform .3s ease,
+    box-shadow .3s ease;
 }
 
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -17,6 +17,23 @@ export default function CategoryNavbar() {
     []
   );
 
+  const closeTimer = useRef<ReturnType<
+    typeof setTimeout
+  > | null>(null);
+
+
+  // =========================================
+  // CANCEL CLOSE
+  // =========================================
+
+  const cancelClose = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+
+
   // =========================================
   // HOVER NODE
   // =========================================
@@ -25,11 +42,31 @@ export default function CategoryNavbar() {
     node: CategoryNode,
     level: number
   ) => {
+
+    cancelClose();
+
     setActivePath((current) => [
       ...current.slice(0, level),
       node,
     ]);
   };
+
+
+  // =========================================
+  // DELAYED CLOSE
+  // =========================================
+
+  const handleLeave = () => {
+
+    cancelClose();
+
+    closeTimer.current = setTimeout(() => {
+
+      setActivePath([]);
+
+    }, 600);
+  };
+
 
   // =========================================
   // NAVIGATE
@@ -38,6 +75,7 @@ export default function CategoryNavbar() {
   const handleNavigate = (
     path: CategoryNode[]
   ) => {
+
     const slugs = path
       .map((item) => item.slug)
       .filter(Boolean);
@@ -46,158 +84,208 @@ export default function CategoryNavbar() {
 
     navigate(`/category/${slugs.join("/")}`);
 
+    cancelClose();
+
     setActivePath([]);
   };
 
-  // =========================================
-  // LEAVE NAVBAR
-  // =========================================
-
-  const handleLeave = () => {
-    setActivePath([]);
-  };
 
   // =========================================
   // RENDER
   // =========================================
 
   return (
+
     <div
-      className="category-navbar"
+      className="category-navbar-wrapper"
+      onMouseEnter={cancelClose}
       onMouseLeave={handleLeave}
     >
 
       {/* =====================================
-          LEFT MENU
+          NAVBAR
       ====================================== */}
 
-      <div className="category-left">
+      <div className="category-navbar">
 
-        {categories.map((department) => (
-          <div
-            key={department.slug}
-            className="nav-item"
-            onMouseEnter={() =>
-              handleEnter(department, 0)
-            }
-            onClick={() =>
-              handleNavigate([department])
-            }
+        <div className="category-left">
+
+          {categories.map((department) => (
+
+            <div
+              key={department.slug}
+              className="nav-item"
+
+              onMouseEnter={() =>
+                handleEnter(
+                  department,
+                  0
+                )
+              }
+
+              onClick={() =>
+                handleNavigate([
+                  department,
+                ])
+              }
+            >
+              {department.name}
+            </div>
+
+          ))}
+
+
+          <Link
+            to="/contact"
+            className="nav-item static-link"
           >
-            {department.name}
-          </div>
-        ))}
+            Contact Us
+          </Link>
 
-        <Link
-          to="/contact"
-          className="nav-item static-link"
-        >
-          Contact Us
-        </Link>
 
-        <Link
-          to="/help"
-          className="nav-item static-link"
-        >
-          Help
-        </Link>
+          <Link
+            to="/help"
+            className="nav-item static-link"
+          >
+            Help
+          </Link>
+
+        </div>
+
+
+        {/* =====================================
+            SEARCH
+        ====================================== */}
+
+        <div className="category-search">
+
+          <SearchBar />
+
+        </div>
 
       </div>
 
 
       {/* =====================================
-          SEARCH
-      ====================================== */}
-
-      <div className="category-search">
-        <SearchBar />
-      </div>
-
-
-      {/* =====================================
-          MULTI-LEVEL DROPDOWN
+          DROPDOWN
       ====================================== */}
 
       {activePath.length > 0 && (
-        <div className="dropdown">
 
-          {activePath.map((node, level) => {
+        <div
+          className="dropdown"
 
-            // No children = nothing more to display
-            if (
-              !node.children ||
-              node.children.length === 0
-            ) {
-              return null;
-            }
+          onMouseEnter={cancelClose}
 
-            return (
-              <div
-                key={`${node.slug}-${level}`}
-                className="dropdown-column"
-              >
+          onMouseLeave={handleLeave}
+        >
 
-                {node.children.map((child) => {
+          {activePath.map(
+            (node, level) => {
 
-                  const hasChildren =
-                    child.children?.length > 0;
+              if (
+                !node.children ||
+                node.children.length === 0
+              ) {
+                return null;
+              }
 
-                  const isActive =
-                    activePath[level + 1]?.slug ===
-                    child.slug;
 
-                  const childPath = [
-                    ...activePath.slice(
-                      0,
-                      level + 1
-                    ),
-                    child,
-                  ];
+              return (
 
-                  return (
-                    <div
-                      key={`${child.slug}-${level}`}
-                      className={`dropdown-item ${
-                        isActive
-                          ? "active"
-                          : ""
-                      }`}
-                      onMouseEnter={() =>
-                        handleEnter(
-                          child,
+                <div
+                  key={`${node.slug}-${level}`}
+                  className="dropdown-column"
+                >
+
+                  {node.children.map(
+                    (child) => {
+
+                      const hasChildren =
+                        child.children?.length > 0;
+
+
+                      const isActive =
+                        activePath[
                           level + 1
-                        )
-                      }
-                      onClick={(event) => {
-                        event.stopPropagation();
+                        ]?.slug ===
+                        child.slug;
 
-                        handleNavigate(
-                          childPath
-                        );
-                      }}
-                    >
 
-                      <span className="dropdown-label">
-                        {child.name}
-                      </span>
+                      const childPath = [
+                        ...activePath.slice(
+                          0,
+                          level + 1
+                        ),
+                        child,
+                      ];
 
-                      {hasChildren && (
-                        <span className="dropdown-arrow">
-                          ›
-                        </span>
-                      )}
 
-                    </div>
-                  );
-                })}
+                      return (
 
-              </div>
-            );
-          })}
+                        <div
+                          key={`${child.slug}-${level}`}
+
+                          className={`dropdown-item ${
+                            isActive
+                              ? "active"
+                              : ""
+                          }`}
+
+                          onMouseEnter={() =>
+                            handleEnter(
+                              child,
+                              level + 1
+                            )
+                          }
+
+                          onClick={(event) => {
+
+                            event.stopPropagation();
+
+                            handleNavigate(
+                              childPath
+                            );
+
+                          }}
+                        >
+
+                          <span className="dropdown-label">
+
+                            {child.name}
+
+                          </span>
+
+
+                          {hasChildren && (
+
+                            <span className="dropdown-arrow">
+
+                              ›
+
+                            </span>
+
+                          )}
+
+                        </div>
+
+                      );
+
+                    }
+                  )}
+
+                </div>
+
+              );
+
+            }
+          )}
 
         </div>
+
       )}
 
     </div>
+
   );
 }

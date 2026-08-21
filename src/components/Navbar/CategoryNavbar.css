@@ -23,6 +23,17 @@
   z-index: 1000;
 }
 
+/* =========================
+   CATEGORY NAVBAR WRAPPER
+========================= */
+
+.category-navbar-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  z-index: 1000;
+}
 
 /* =========================
    LEFT MENU
@@ -121,6 +132,24 @@
   z-index: 2000;
 
   animation: categoryDropdownIn 0.15s ease-out;
+}
+
+
+/* Invisible hover bridge */
+
+.dropdown::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  top: -8px;
+
+  height: 8px;
+
+  background: transparent;
 }
 
 
