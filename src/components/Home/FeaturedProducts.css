@@ -1,107 +1,114 @@
-
-/* ===========================
-   FEATURED PRODUCTS
-=========================== */
+/* =========================================================
+   FEATURED PRODUCTS SECTION
+========================================================= */
 
 .featured-products {
   width: 100%;
-  box-sizing: border-box;
-
-  padding: 80px 30px;
-
-  background: #f8f8f8;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 50px 24px;
 }
 
 
-/* ===========================
+/* =========================================================
    TITLE
-=========================== */
+========================================================= */
 
 .featured-products h2 {
-  max-width: 1200px;
-
-  margin: 0 auto 40px;
-
+  margin: 0 0 30px;
   text-align: center;
-
-  color: #111;
-
-  font-size: clamp(30px, 4vw, 42px);
-
-  font-weight: 800;
-
-  letter-spacing: -0.8px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 
-/* ===========================
-   PRODUCT GRID
-=========================== */
+/* =========================================================
+   FEATURED GRID
+========================================================= */
 
 .featured-grid {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 24px;
+
+  align-items: stretch;
 }
 
-/* ===========================
-   PRODUCT CARD
-=========================== */
+
+/* =========================================================
+   PRODUCT CARD WRAPPER
+========================================================= */
 
 .featured-grid > * {
+  width: 100%;
   min-width: 0;
-
-  transition:
-    transform 0.3s ease,
-    filter 0.3s ease;
 }
 
 
-.featured-grid > *:hover {
-  transform: translateY(-6px);
-}
-
-
-/* ===========================
+/* =========================================================
    TABLET
-=========================== */
+========================================================= */
 
 @media (max-width: 1000px) {
 
   .featured-products {
-    padding: 65px 25px;
+    padding: 45px 20px;
   }
 
   .featured-grid {
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 18px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
   }
+
 }
 
 
-/* ===========================
-   MOBILE
-=========================== */
+/* =========================================================
+   SMALL TABLET
+========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
 
   .featured-products {
-    padding: 55px 18px;
+    padding: 40px 16px;
   }
 
   .featured-products h2 {
-    margin-bottom: 30px;
-
-    font-size: 30px;
+    font-size: 28px;
+    margin-bottom: 24px;
   }
 
   .featured-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
 
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .featured-products {
+    padding: 35px 12px;
+  }
+
+  .featured-products h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
+
 }

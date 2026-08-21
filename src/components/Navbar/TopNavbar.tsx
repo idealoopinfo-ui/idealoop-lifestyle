@@ -121,7 +121,7 @@ export default function TopNavbar() {
           />
 
           <span className="company-name">
-            Idealoop Lifestyle Store
+            Idealoop Lifestyle 
           </span>
 
         </Link>

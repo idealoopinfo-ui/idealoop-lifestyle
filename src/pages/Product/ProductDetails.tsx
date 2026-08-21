@@ -6,6 +6,11 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 
 import "./ProductDetails.css";
 
+type AdditionalFeature = {
+  feature: string;
+  value: string;
+};
+
 type Product = {
   id: string;
   product_id: string;
@@ -14,6 +19,8 @@ type Product = {
   department?: string;
   category?: string;
   subcategory?: string;
+  collection?: string;
+  product_type?: string;
 
   description?: string;
   short_description?: string;
@@ -25,16 +32,56 @@ type Product = {
   image_5?: string;
 
   affiliate_url: string;
+  source_url?: string;
 
   brand?: string;
+  shop_name?: string;
+  marketplace?: string;
+
+  /* =========================
+     GENERAL
+  ========================= */
+
+  model?: string;
+  warranty?: string;
+  country_origin?: string;
+  package_includes?: string;
+
+  additional_features?: AdditionalFeature[];
+
+  /* =========================
+     FASHION
+  ========================= */
+
   material?: string;
   fit?: string;
   style?: string;
   occasion?: string;
   season?: string;
   gender?: string;
+  pattern?: string;
+  fashion_type?: string;
+  sleeve_type?: string;
+  collar_style?: string;
+  fabric?: string;
+  fabric_type?: string;
+  fashion_details?: string;
+  printing_type?: string;
+  sheer?: string;
+  care_instructions?: string;
 
-  // Beauty
+  size?: string;
+  color?: string;
+  clothing_length?: string;
+  waist_type?: string;
+  closure_type?: string;
+  stretch?: string;
+  age_group?: string;
+
+  /* =========================
+     BEAUTY
+  ========================= */
+
   hair_type?: string;
   skin_type?: string;
   ingredients?: string;
@@ -43,28 +90,37 @@ type Product = {
   benefits?: string;
   suitable_for?: string;
 
-  // Home & Living
+  /* =========================
+     HOME & LIVING
+  ========================= */
+
   dimensions?: string;
-  color?: string;
   room_type?: string;
   weight?: string;
 
-  // Toys & Gifts
+  /* =========================
+     TOYS & GIFTS
+  ========================= */
+
   age_range?: string;
   educational_features?: string;
 
-  // Fitness & Wellness
+  /* =========================
+     FITNESS & WELLNESS
+  ========================= */
+
   equipment_type?: string;
   workout_type?: string;
   sport_type?: string;
-  size?: string;
   weight_capacity?: string;
   skill_level?: string;
   target_area?: string;
   accessories?: string;
+
   wellness_type?: string;
   usage_area?: string;
   wellness_benefits?: string;
+
   power_source?: string;
   battery_capacity?: string;
   heat_function?: string;
@@ -78,13 +134,18 @@ export default function ProductDetails() {
   const [selectedImage, setSelectedImage] = useState("");
   const [related, setRelated] = useState<Product[]>([]);
 
+  /* =========================
+     LOAD PRODUCT
+  ========================= */
+
   useEffect(() => {
     if (!productId) return;
 
     const loadProduct = async () => {
-      // =========================
-      // LOAD MAIN PRODUCT
-      // =========================
+      /* =========================
+         MAIN PRODUCT
+      ========================= */
+
       const { data, error } = await supabase
         .from("products")
         .select("*")
@@ -104,21 +165,27 @@ export default function ProductDetails() {
       setProduct(data);
       setSelectedImage(data.image_1 || "");
 
-      // =========================
-      // LOAD RELATED PRODUCTS
-      // =========================
+      console.log("PRODUCT DATA:", data);
+      console.log("MARKETPLACE:", data.marketplace);
+
+      /* =========================
+         RELATED PRODUCTS
+      ========================= */
+
       let relatedData: Product[] = [];
 
-      // First preference:
-      // same subcategory
+      /* SAME SUBCATEGORY */
+
       if (data.subcategory) {
-        const { data: subcategoryProducts, error: subcategoryError } =
-          await supabase
-            .from("products")
-            .select("*")
-            .eq("subcategory", data.subcategory)
-            .neq("product_id", data.product_id)
-            .limit(5);
+        const {
+          data: subcategoryProducts,
+          error: subcategoryError,
+        } = await supabase
+          .from("products")
+          .select("*")
+          .eq("subcategory", data.subcategory)
+          .neq("product_id", data.product_id)
+          .limit(5);
 
         if (subcategoryError) {
           console.error(
@@ -130,18 +197,18 @@ export default function ProductDetails() {
         }
       }
 
-      // =========================
-      // FALLBACK:
-      // SAME CATEGORY
-      // =========================
+      /* SAME CATEGORY */
+
       if (relatedData.length === 0 && data.category) {
-        const { data: categoryProducts, error: categoryError } =
-          await supabase
-            .from("products")
-            .select("*")
-            .eq("category", data.category)
-            .neq("product_id", data.product_id)
-            .limit(5);
+        const {
+          data: categoryProducts,
+          error: categoryError,
+        } = await supabase
+          .from("products")
+          .select("*")
+          .eq("category", data.category)
+          .neq("product_id", data.product_id)
+          .limit(5);
 
         if (categoryError) {
           console.error(
@@ -153,18 +220,18 @@ export default function ProductDetails() {
         }
       }
 
-      // =========================
-      // FALLBACK:
-      // SAME DEPARTMENT
-      // =========================
+      /* SAME DEPARTMENT */
+
       if (relatedData.length === 0 && data.department) {
-        const { data: departmentProducts, error: departmentError } =
-          await supabase
-            .from("products")
-            .select("*")
-            .eq("department", data.department)
-            .neq("product_id", data.product_id)
-            .limit(5);
+        const {
+          data: departmentProducts,
+          error: departmentError,
+        } = await supabase
+          .from("products")
+          .select("*")
+          .eq("department", data.department)
+          .neq("product_id", data.product_id)
+          .limit(5);
 
         if (departmentError) {
           console.error(
@@ -182,9 +249,9 @@ export default function ProductDetails() {
     loadProduct();
   }, [productId]);
 
-  // =========================
-  // LOADING
-  // =========================
+  /* =========================
+     LOADING
+  ========================= */
 
   if (!product) {
     return (
@@ -194,9 +261,9 @@ export default function ProductDetails() {
     );
   }
 
-  // =========================
-  // PRODUCT IMAGES
-  // =========================
+  /* =========================
+     PRODUCT IMAGES
+  ========================= */
 
   const images = [
     product.image_1,
@@ -206,21 +273,55 @@ export default function ProductDetails() {
     product.image_5,
   ].filter(Boolean) as string[];
 
-  // =========================
-  // PRODUCT SPECIFICATIONS
-  // =========================
+  /* =========================
+     PRODUCT SPECIFICATIONS
+  ========================= */
 
   const specifications = [
-    // General
+
+    /* =========================
+       GENERAL
+    ========================= */
+
+    ["Marketplace", product.marketplace],
     ["Brand", product.brand],
+    ["Model", product.model],
+    ["Warranty", product.warranty],
+    ["Country of Origin", product.country_origin],
+    ["Package Includes", product.package_includes],
+
+    /* =========================
+       FASHION
+    ========================= */
+
     ["Material", product.material],
     ["Fit", product.fit],
     ["Style", product.style],
     ["Occasion", product.occasion],
     ["Season", product.season],
     ["Gender", product.gender],
+    ["Pattern", product.pattern],
+    ["Fashion Type", product.fashion_type],
+    ["Sleeve Type", product.sleeve_type],
+    ["Collar Style", product.collar_style],
+    ["Fabric", product.fabric],
+    ["Fabric Type", product.fabric_type],
+    ["Fashion Details", product.fashion_details],
+    ["Printing Type", product.printing_type],
+    ["Sheer", product.sheer],
+    ["Care Instructions", product.care_instructions],
+    ["Size", product.size],
+    ["Color", product.color],
+    ["Clothing Length", product.clothing_length],
+    ["Waist Type", product.waist_type],
+    ["Closure Type", product.closure_type],
+    ["Stretch", product.stretch],
+    ["Age Group", product.age_group],
 
-    // Beauty
+    /* =========================
+       BEAUTY
+    ========================= */
+
     ["Hair Type", product.hair_type],
     ["Skin Type", product.skin_type],
     ["Ingredients", product.ingredients],
@@ -229,37 +330,52 @@ export default function ProductDetails() {
     ["Benefits", product.benefits],
     ["Suitable For", product.suitable_for],
 
-    // Home & Living
+    /* =========================
+       HOME & LIVING
+    ========================= */
+
     ["Dimensions", product.dimensions],
     ["Color", product.color],
     ["Room Type", product.room_type],
     ["Weight", product.weight],
 
-    // Toys & Gifts
+    /* =========================
+       TOYS & GIFTS
+    ========================= */
+
     ["Age Range", product.age_range],
     ["Educational Features", product.educational_features],
 
-    // Fitness & Wellness
+    /* =========================
+       FITNESS
+    ========================= */
+
     ["Equipment Type", product.equipment_type],
     ["Workout Type", product.workout_type],
     ["Sport Type", product.sport_type],
-    ["Size", product.size],
     ["Weight Capacity", product.weight_capacity],
     ["Skill Level", product.skill_level],
     ["Target Area", product.target_area],
     ["Accessories", product.accessories],
+
     ["Wellness Type", product.wellness_type],
     ["Usage Area", product.usage_area],
     ["Wellness Benefits", product.wellness_benefits],
+
     ["Power Source", product.power_source],
     ["Battery Capacity", product.battery_capacity],
     ["Heat Function", product.heat_function],
     ["Massage Type", product.massage_type],
-  ].filter((item) => item[1]);
+  ].filter(
+    ([, value]) =>
+      value !== undefined &&
+      value !== null &&
+      String(value).trim() !== ""
+  );
 
-  // =========================
-  // DESCRIPTION POINTS
-  // =========================
+  /* =========================
+     DESCRIPTION
+  ========================= */
 
   const descriptionPoints =
     product.description
@@ -267,9 +383,20 @@ export default function ProductDetails() {
       .map((line) => line.trim())
       .filter(Boolean) || [];
 
-  // =========================
-  // FACEBOOK SHARE
-  // =========================
+  /* =========================
+     ADDITIONAL FEATURES
+  ========================= */
+
+  const additionalFeatures =
+    product.additional_features?.filter(
+      (item) =>
+        item?.feature?.trim() ||
+        item?.value?.trim()
+    ) || [];
+
+  /* =========================
+     FACEBOOK SHARE
+  ========================= */
 
   const shareOnFacebook = () => {
     const productUrl = window.location.href;
@@ -289,17 +416,18 @@ export default function ProductDetails() {
   return (
     <div className="product-details-page">
 
-      {/* =========================
+      {/* =====================================================
           PRODUCT TOP
-      ========================= */}
+      ===================================================== */}
 
       <div className="product-top">
 
-        {/* =========================
+        {/* =================================================
             THUMBNAILS
-        ========================= */}
+        ================================================= */}
 
         <div className="thumbnail-list">
+
           {images.map((img) => (
             <img
               key={img}
@@ -308,26 +436,31 @@ export default function ProductDetails() {
               className={`thumbnail ${
                 selectedImage === img ? "active" : ""
               }`}
-              onClick={() => setSelectedImage(img)}
+              onClick={() =>
+                setSelectedImage(img)
+              }
             />
           ))}
+
         </div>
 
-        {/* =========================
+        {/* =================================================
             MAIN IMAGE
-        ========================= */}
+        ================================================= */}
 
         <div className="main-image-area">
+
           <img
             src={selectedImage}
             alt={product.title}
             className="main-product-image"
           />
+
         </div>
 
-        {/* =========================
+        {/* =================================================
             PRODUCT INFORMATION
-        ========================= */}
+        ================================================= */}
 
         <div className="product-info">
 
@@ -337,15 +470,27 @@ export default function ProductDetails() {
             Product ID: {product.product_id}
           </p>
 
+          {product.marketplace && (
+            <div className="product-marketplace">
+
+              <span className="marketplace-label">
+                Marketplace :
+              </span>
+
+              <span className="marketplace-value">
+                {product.marketplace}
+              </span>
+
+            </div>
+          )}
+
           {product.short_description && (
             <div className="short-description">
               {product.short_description}
             </div>
           )}
 
-          {/* =========================
-              SHOP BUTTON
-          ========================= */}
+          {/* SHOP */}
 
           <button
             type="button"
@@ -361,29 +506,29 @@ export default function ProductDetails() {
             Shop Now
           </button>
 
-          {/* =========================
-              FACEBOOK SHARE
-          ========================= */}
+          {/* FACEBOOK */}
 
           <button
             type="button"
             className="facebook-share-btn"
             onClick={shareOnFacebook}
           >
+
             <span className="facebook-share-icon">
               f
             </span>
 
             Share on Facebook
+
           </button>
 
         </div>
+
       </div>
 
-
-      {/* =========================
+      {/* =====================================================
           PRODUCT DETAILS
-      ========================= */}
+      ===================================================== */}
 
       {specifications.length > 0 && (
         <div className="product-specifications">
@@ -396,11 +541,17 @@ export default function ProductDetails() {
               ([label, value], index) => (
                 <div
                   className="spec-item"
-                  key={index}
+                  key={`${label}-${index}`}
                 >
-                  <strong>{label}</strong>
 
-                  <span>{value}</span>
+                  <strong>
+                    {label}
+                  </strong>
+
+                  <span>
+                    {value}
+                  </span>
+
                 </div>
               )
             )}
@@ -410,9 +561,44 @@ export default function ProductDetails() {
         </div>
       )}
 
-      {/* =========================
+      {/* =====================================================
+          ADDITIONAL FEATURES
+      ===================================================== */}
+
+      {additionalFeatures.length > 0 && (
+        <div className="product-specifications">
+
+          <h2>Additional Features</h2>
+
+          <div className="spec-grid">
+
+            {additionalFeatures.map(
+              (item, index) => (
+                <div
+                  className="spec-item"
+                  key={index}
+                >
+
+                  <strong>
+                    {item.feature}
+                  </strong>
+
+                  <span>
+                    {item.value}
+                  </span>
+
+                </div>
+              )
+            )}
+
+          </div>
+
+        </div>
+      )}
+
+      {/* =====================================================
           DESCRIPTION
-      ========================= */}
+      ===================================================== */}
 
       {descriptionPoints.length > 0 && (
         <div className="product-description">
@@ -421,29 +607,39 @@ export default function ProductDetails() {
 
           <div className="description-list">
 
-            {descriptionPoints.map((line, index) => (
-              <div
-                className="description-item"
-                key={index}
-              >
-                <span>•</span>
+            {descriptionPoints.map(
+              (line, index) => (
+                <div
+                  className="description-item"
+                  key={index}
+                >
 
-                <p>{line}</p>
-              </div>
-            ))}
+                  <span>
+                    •
+                  </span>
+
+                  <p>
+                    {line}
+                  </p>
+
+                </div>
+              )
+            )}
 
           </div>
 
         </div>
       )}
 
-      {/* =========================
+      {/* =====================================================
           YOU MAY ALSO LIKE
-      ========================= */}
+      ===================================================== */}
 
       <section className="related-products">
 
-        <h2>You May Also Like</h2>
+        <h2>
+          You May Also Like
+        </h2>
 
         {related.length > 0 ? (
           <div className="related-grid">

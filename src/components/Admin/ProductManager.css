@@ -1314,3 +1314,258 @@ PRODUCT MANAGER
     gap: 18px;
   }
 }
+/* =========================================================
+   GENERAL PRODUCT DETAILS
+========================================================= */
+
+.form-section {
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.form-section h3 {
+  margin: 0 0 18px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+
+/* =========================================================
+   INPUT GRID
+========================================================= */
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.input-grid input,
+.input-grid select,
+.input-grid textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #fff;
+  color: #222;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input-grid input:focus,
+.input-grid select:focus,
+.input-grid textarea:focus {
+  border-color: #ff9900;
+  box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.12);
+}
+
+.input-grid input::placeholder,
+.input-grid textarea::placeholder {
+  color: #888;
+}
+
+
+/* =========================================================
+   PACKAGE INCLUDES
+========================================================= */
+
+.package-section {
+  margin-top: 16px;
+}
+
+.package-section textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 13px 14px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #fff;
+  color: #222;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  box-sizing: border-box;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.package-section textarea:focus {
+  border-color: #ff9900;
+  box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.12);
+}
+
+.package-section textarea::placeholder {
+  color: #888;
+}
+
+
+/* =========================================================
+   ADDITIONAL FEATURES
+========================================================= */
+
+.additional-features-section {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+
+/* =========================================================
+   ADDITIONAL FEATURES HEADER
+========================================================= */
+
+.additional-features-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 16px;
+}
+
+.additional-features-header h4 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #222;
+}
+
+
+/* =========================================================
+   ADD FEATURE BUTTON
+========================================================= */
+
+.add-feature-btn {
+  border: none;
+  border-radius: 7px;
+  padding: 10px 15px;
+  background: #ff9900;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.add-feature-btn:hover {
+  background: #e88a00;
+}
+
+.add-feature-btn:active {
+  transform: scale(0.98);
+}
+
+
+/* =========================================================
+   FEATURE ROW
+========================================================= */
+
+.additional-feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.additional-feature-row input {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 13px;
+  border: 1px solid #d7d7d7;
+  border-radius: 7px;
+  background: #fff;
+  color: #222;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.additional-feature-row input:focus {
+  border-color: #ff9900;
+  box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.1);
+}
+
+.additional-feature-row input::placeholder {
+  color: #888;
+}
+
+
+/* =========================================================
+   REMOVE FEATURE BUTTON
+========================================================= */
+
+.remove-feature-btn {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid #d8d8d8;
+  border-radius: 7px;
+  background: #fff;
+  color: #c62828;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.remove-feature-btn:hover {
+  background: #fff3f3;
+  border-color: #c62828;
+}
+
+
+/* =========================================================
+   NO FEATURES MESSAGE
+========================================================= */
+
+.no-features-message {
+  margin: 0;
+  padding: 12px 0 2px;
+  color: #888;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .additional-features-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .additional-feature-row {
+    grid-template-columns: 1fr;
+  }
+
+  .remove-feature-btn {
+    width: 100%;
+  }
+
+  .add-feature-btn {
+    width: 100%;
+  }
+
+}

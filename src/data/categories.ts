@@ -34,11 +34,17 @@ export const categories: CategoryNode[] = [
     slug: "fashion",
     level: "department",
     children: [
+  
+      /* =========================================================
+         WOMEN
+      ========================================================= */
+  
       {
         name: "Women",
         slug: "women",
         level: "category",
         children: [
+  
           {
             name: "Clothing",
             slug: "women-clothing",
@@ -52,17 +58,21 @@ export const categories: CategoryNode[] = [
               leaf("Jackets", "jackets"),
               leaf("Hoodies", "hoodies"),
               leaf("T-Shirt", "t-shirt"),
-
+              leaf("Shirt", "shirt"),
+              leaf("Sweaters", "sweaters"),
+              leaf("Cami Top", "cami-Top"),
+              leaf("Jumpsuits & Rompers", "jumpsuits & rompers"),
+  
               {
                 name: "Tops",
                 slug: "tops",
                 level: "subcategory",
                 children: [
                   leaf("Tank Tops", "tank-tops"),
-                 
+                  leaf("Vest", "women-vest"),
                 ],
               },
-
+  
               {
                 name: "Activewear",
                 slug: "women-activewear",
@@ -77,7 +87,9 @@ export const categories: CategoryNode[] = [
                   leaf("Gym Sets", "gym-sets"),
                 ],
               },
+  
               leaf("Sleepwear", "women-sleepwear"),
+  
               {
                 name: "Under Garments",
                 slug: "women-under-garments",
@@ -87,11 +99,12 @@ export const categories: CategoryNode[] = [
                   leaf("Panties", "panties", "collection"),
                   leaf("Lingerie Sets", "lingerie-sets", "collection"),
                   leaf("Shapewear", "shapewear", "collection"),
+                  leaf("Bralette", "bralette", "collection"),
                 ],
               },
             ],
           },
-
+  
           {
             name: "Shoes",
             slug: "women-shoes",
@@ -102,9 +115,10 @@ export const categories: CategoryNode[] = [
               leaf("Boots", "women-boots"),
               leaf("Sandals", "women-sandals"),
               leaf("Flats", "flats"),
+              leaf("Casual", "women-casual"),
             ],
           },
-
+  
           {
             name: "Accessories",
             slug: "women-accessories",
@@ -116,16 +130,22 @@ export const categories: CategoryNode[] = [
               leaf("Backpacks", "women-backpacks"),
               leaf("Wallets", "women-wallets"),
               leaf("Jewelry", "jewelry"),
+              leaf("Belts", "belts"),
             ],
           },
         ],
       },
-
+  
+      /* =========================================================
+         MEN
+      ========================================================= */
+  
       {
         name: "Men",
         slug: "men",
         level: "category",
         children: [
+  
           {
             name: "Clothing",
             slug: "men-clothing",
@@ -134,9 +154,10 @@ export const categories: CategoryNode[] = [
               leaf("Shirts", "shirts"),
               leaf("T-Shirts", "t-shirts"),
               leaf("Jeans", "men-jeans"),
-              leaf("Trousers", "trousers"),
+              leaf("Trousers", "men-trousers"),
               leaf("Jackets", "men-jackets"),
               leaf("Hoodies", "men-hoodies"),
+  
               {
                 name: "Activewear",
                 slug: "men-activewear",
@@ -149,7 +170,9 @@ export const categories: CategoryNode[] = [
                   leaf("Gym Sets", "men-gym-sets"),
                 ],
               },
+  
               leaf("Sleepwear", "men-sleepwear"),
+  
               {
                 name: "Under Garments",
                 slug: "men-under-garments",
@@ -161,9 +184,18 @@ export const categories: CategoryNode[] = [
                   leaf("Underwear Sets", "underwear-sets", "collection"),
                 ],
               },
+  
+              {
+                name: "Shorts",
+                slug: "men-shorts",
+                level: "subcategory",
+                children: [
+                  leaf("Cargo Shorts", "men-cargo-shorts"),
+                ],
+              },
             ],
           },
-
+  
           {
             name: "Shoes",
             slug: "men-shoes",
@@ -176,14 +208,14 @@ export const categories: CategoryNode[] = [
               leaf("Casual", "men-casual"),
             ],
           },
-
+  
           {
             name: "Accessories",
             slug: "men-accessories",
             level: "subcategory",
             children: [
               leaf("Backpacks", "men-backpacks"),
-              leaf("Messenger Bags", "messenger-bags"),
+              leaf("Messenger Bags", "men-messenger-bags"),
               leaf("Wallets", "men-wallets"),
               leaf("Watches", "men-watches"),
               leaf("Belts", "belts"),
@@ -191,12 +223,17 @@ export const categories: CategoryNode[] = [
           },
         ],
       },
-
+  
+      /* =========================================================
+         KIDS & BABY
+      ========================================================= */
+  
       {
         name: "Kids & Baby",
         slug: "kids-baby",
         level: "category",
         children: [
+  
           {
             name: "Boys",
             slug: "boys",
@@ -207,6 +244,7 @@ export const categories: CategoryNode[] = [
               leaf("Accessories", "boys-accessories", "collection"),
             ],
           },
+  
           {
             name: "Girls",
             slug: "girls",
@@ -217,6 +255,7 @@ export const categories: CategoryNode[] = [
               leaf("Accessories", "girls-accessories", "collection"),
             ],
           },
+  
           {
             name: "Baby",
             slug: "baby",
@@ -469,6 +508,7 @@ export const categories: CategoryNode[] = [
           children: [
             leaf("Workout Gloves", "workout-gloves"),
             leaf("Cable Machine Attachments", "cable-machine-attachments"),
+            leaf("Wristbands", "wristbands"),
           ],
         },
 
@@ -538,10 +578,8 @@ export const categories: CategoryNode[] = [
             leaf("Candles & Fragrance", "candles-fragrance"),
           ],
         },
-
       ],
     },
-
   ],
 },
 ];

@@ -28,6 +28,9 @@ const [description,setDescription] = useState("");
 const [shortDescription,setShortDescription] = useState("");
 const [shopName,setShopName] = useState("");
 const [brand,setBrand] = useState("");
+const [additionalFeatures, setAdditionalFeatures] = useState<
+  { feature: string; value: string }[]
+>([]);
 
 const [spotlight, setSpotlight] = useState(false);
 const [facebookPublishing, setFacebookPublishing] = useState(false);
@@ -139,13 +142,20 @@ useEffect(()=>{
     setEditingId(selectedProduct.id || null);
   
     // GENERAL
-    setProductId(selectedProduct.product_id || "");
-    setTitle(selectedProduct.title || "");
-    setBrand(selectedProduct.brand || "");
-    setDescription(selectedProduct.description || "");
-    setShortDescription(
-      selectedProduct.short_description || ""
-    );
+setProductId(selectedProduct.product_id || "");
+setTitle(selectedProduct.title || "");
+setBrand(selectedProduct.brand || "");
+setDescription(selectedProduct.description || "");
+
+setShortDescription(
+  selectedProduct.short_description || ""
+);
+
+setAdditionalFeatures(
+  Array.isArray(selectedProduct.additional_features)
+    ? selectedProduct.additional_features
+    : []
+);
   
     // IMAGES
     setImage1(selectedProduct.image_1 || "");
@@ -517,6 +527,12 @@ const addProduct = async () => {
         title,
         brand,
 
+        additional_features: additionalFeatures.filter(
+          (item) =>
+            item.feature.trim() !== "" ||
+            item.value.trim() !== ""
+        ),
+
         model,
         warranty,
         country_origin: countryOrigin,
@@ -639,7 +655,7 @@ const addProduct = async () => {
   setTitle("");
   setDescription("");
   setShortDescription("");
-
+  setAdditionalFeatures([]);
   setBrand("");
   setModel("");
   setWarranty("");
@@ -747,6 +763,12 @@ const updateProduct = async () => {
 
       title,
       brand,
+
+      additional_features: additionalFeatures.filter(
+        (item) =>
+          item.feature.trim() !== "" ||
+          item.value.trim() !== ""
+      ),
 
       model,
       warranty,
@@ -981,18 +1003,27 @@ const updateProduct = async () => {
           <GeneralDetails
             model={model}
             setModel={setModel}
+
             color={color}
             setColor={setColor}
+
             dimensions={dimensions}
             setDimensions={setDimensions}
+
             weight={weight}
             setWeight={setWeight}
+
             warranty={warranty}
             setWarranty={setWarranty}
+
             countryOrigin={countryOrigin}
             setCountryOrigin={setCountryOrigin}
+
             packageIncludes={packageIncludes}
             setPackageIncludes={setPackageIncludes}
+            
+            additionalFeatures={additionalFeatures}
+            setAdditionalFeatures={setAdditionalFeatures}
           />
   
           <textarea

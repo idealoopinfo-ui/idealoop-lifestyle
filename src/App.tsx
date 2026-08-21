@@ -14,7 +14,6 @@ import CategoryNavbar from "./components/Navbar/CategoryNavbar";
 import Wishlist from "./pages/Wishlist/Wishlist";
 import Footer from "./components/Footer/Footer";
 
-import { AnimatePresence } from "framer-motion";
 import PageTransition from "./components/PageTransition/PageTransition";
 
 import "./styles/theme.css";
@@ -117,149 +116,158 @@ export default function App() {
 
   useEffect(() => {
 
+    let mounted = true;
+  
     const initializeApp = async () => {
-
+  
       try {
-
+  
         // ======================
         // CHECK MAINTENANCE
         // ======================
-
+  
         const {
           data: settings,
-          error
+          error: settingsError
         } = await supabase
-
           .from("site_settings")
-
           .select("maintenance_mode")
-
           .eq("id", 1)
-
           .single();
-
-
+  
         console.log(
           "MAINTENANCE STATUS:",
           settings
         );
-
-
-        if (!error && settings) {
-
-          setMaintenance(
-            settings.maintenance_mode
-          );
-
-        } else {
-
-          setMaintenance(false);
-
+  
+        if (mounted) {
+  
+          if (!settingsError && settings) {
+  
+            setMaintenance(
+              settings.maintenance_mode
+            );
+  
+          } else {
+  
+            setMaintenance(false);
+  
+          }
+  
         }
-
-
+  
+  
         // ======================
         // CHECK USER
         // ======================
-
+  
         const {
           data: {
             user
           }
         } = await supabase.auth.getUser();
-
-
+  
+  
         if (user) {
-
+  
           const {
-            data: profile
+            data: profile,
+            error: profileError
           } = await supabase
-
             .from("profiles")
-
             .select("is_admin")
-
             .eq("id", user.id)
-
-            .single();
-
-
+            .maybeSingle();
+  
+  
           // ======================
           // ADMIN
           // ======================
-
-          if (profile?.is_admin === true) {
-
+  
+          if (
+            mounted &&
+            !profileError &&
+            profile?.is_admin === true
+          ) {
+  
             setIsAdmin(true);
-
+  
           }
-
-
+  
+  
           // ======================
           // CREATE PROFILE
           // ======================
-
-          if (!profile) {
-
+  
+          if (!profile && !profileError) {
+  
             const metadata =
               user.user_metadata || {};
-
-
+  
             await supabase
-
               .from("profiles")
-
               .insert({
-
+  
                 id: user.id,
-
+  
                 email: user.email,
-
+  
                 first_name:
                   metadata.full_name
                     ?.split(" ")[0] || "",
-
+  
                 last_name:
                   metadata.full_name
                     ?.split(" ")
                     .slice(1)
                     .join(" ") || "",
-
+  
                 avatar_url:
                   metadata.avatar_url ||
                   metadata.picture ||
                   null
-
+  
               });
-
+  
           }
-
+  
         }
-
-      }
-
-      catch (error) {
-
-        console.log(
+  
+      } catch (error) {
+  
+        console.error(
           "APP INITIALIZE ERROR:",
           error
         );
-
-        setMaintenance(false);
-
+  
+        if (mounted) {
+          setMaintenance(false);
+        }
+  
+      } finally {
+  
+        if (mounted) {
+          setChecking(false);
+        }
+  
       }
-
-      finally {
-
-        setChecking(false);
-
-      }
-
+  
     };
-
-
+  
+  
     initializeApp();
-
+  
+  
+    // ======================
+    // CLEANUP
+    // ======================
+  
+    return () => {
+  
+      mounted = false;
+  
+    };
+  
   }, []);
 
 
@@ -311,26 +319,21 @@ export default function App() {
       {!isDiscover && <CategoryNavbar />}
   
   
-      {/* ======================
-          MAIN PAGE AREA
-      ====================== */}
-  
-      <main className="route-container">
-  
-        <AnimatePresence mode="wait">
-  
-          <Suspense
-            fallback={
-              <div className="page-loading">
-                Loading...
-              </div>
-            }
-          >
-  
-            <Routes
-              location={location}
-              key={location.pathname}
-            >
+     {/* ======================
+    MAIN PAGE AREA
+====================== */}
+
+<main className="route-container">
+
+<Suspense
+  fallback={
+    <div className="page-loading">
+      Loading...
+    </div>
+  }
+>
+
+  <Routes>
   
               {/* HOME */}
   
@@ -492,13 +495,11 @@ export default function App() {
                 element={<AffiliateDisclosure />}
               />
   
-            </Routes>
-  
-          </Suspense>
-  
-        </AnimatePresence>
-  
-      </main>
+  </Routes>
+
+</Suspense>
+
+</main>
   
   
       {/* ======================

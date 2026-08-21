@@ -1,14 +1,23 @@
 
-/* ===========================
-   HERO BANNER
-=========================== */
-
 .hero-banner {
   width: 100%;
+
   background:
-    radial-gradient(circle at 80% 20%, rgba(255, 153, 0, 0.10), transparent 30%),
-    linear-gradient(135deg, #fffaf4 0%, #ffffff 50%, #fff7ed 100%);
-  padding: 75px 0 85px;
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 153, 0, 0.10),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      135deg,
+      #fffaf4 0%,
+      #ffffff 50%,
+      #fff7ed 100%
+    );
+
+  padding: 75px 0 30px;
+
   overflow: hidden;
 }
 

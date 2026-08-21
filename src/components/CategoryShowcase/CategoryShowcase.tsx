@@ -15,21 +15,24 @@ type DepartmentConfig = {
   slug: string;
 };
 
-type CategorySection = {
-  title: string;
-  slug: string;
-  products: Product[];
+type CategoryCard = DepartmentConfig & {
+  product?: Product;
 };
 
 
 /* =========================================================
-   MAIN DEPARTMENTS
+   MAIN CATEGORIES
 ========================================================= */
 
 const DEPARTMENT_CONFIG: DepartmentConfig[] = [
   {
     name: "Fashion",
     slug: "fashion",
+  },
+
+  {
+    name: "Fitness & Wellness",
+    slug: "fitness-wellness",
   },
 
   {
@@ -43,72 +46,73 @@ const DEPARTMENT_CONFIG: DepartmentConfig[] = [
   },
 
   {
-    name: "Fitness & Wellness",
-    slug: "fitness-wellness",
+    name: "Toys & Gifts",
+    slug: "toys-gifts",
   },
 ];
 
 
 /* =========================================================
-   DAILY PRODUCT SELECTION
+   DAILY SEED
 ========================================================= */
 
-function getDailyProducts(
-  products: Product[],
-  count = 4
-): Product[] {
-
-  if (products.length <= count) {
-    return products;
-  }
+function getDaySeed(): number {
 
   const today = new Date();
 
-  /*
-   * Create a different seed every day.
-   */
-
-  const daySeed =
+  return (
     today.getFullYear() * 10000 +
     (today.getMonth() + 1) * 100 +
-    today.getDate();
+    today.getDate()
+  );
 
-  const shuffled = [...products];
+}
 
-  let seed = daySeed;
 
-  /*
-   * Deterministic daily shuffle.
-   *
-   * Same products during the same day.
-   * Different arrangement on the next day.
-   */
+/* =========================================================
+   DAILY CATEGORY ORDER
+========================================================= */
 
-  for (
-    let i = shuffled.length - 1;
-    i > 0;
-    i--
-  ) {
+function getDailyCategories(): DepartmentConfig[] {
 
-    seed =
-      (seed * 9301 + 49297) %
-      233280;
+  const departments = [
+    ...DEPARTMENT_CONFIG
+  ];
 
-    const j = Math.floor(
-      (seed / 233280) *
-      (i + 1)
-    );
+  const seed = getDaySeed();
 
-    [
-      shuffled[i],
-      shuffled[j],
-    ] = [
-      shuffled[j],
-      shuffled[i],
-    ];
+  const offset =
+    seed % departments.length;
+
+  return [
+    ...departments.slice(offset),
+    ...departments.slice(0, offset),
+  ];
+
+}
+
+
+/* =========================================================
+   DAILY PRODUCT
+========================================================= */
+
+function getDailyProduct(
+  products: Product[],
+  categoryIndex: number
+): Product | undefined {
+
+  if (!products.length) {
+    return undefined;
   }
 
-  return shuffled.slice(0, count);
+  const seed = getDaySeed();
+
+  const index =
+    (seed + categoryIndex) %
+    products.length;
+
+  return products[index];
+
 }
 
 
@@ -118,8 +122,8 @@ function getDailyProducts(
 
 export default function CategoryShowcase() {
 
-  const [sections, setSections] =
-    useState<CategorySection[]>([]);
+  const [categories, setCategories] =
+    useState<CategoryCard[]>([]);
 
   const [loading, setLoading] =
     useState(true);
@@ -142,42 +146,43 @@ export default function CategoryShowcase() {
 
     try {
 
-      const result: CategorySection[] = [];
+      const dailyCategories =
+        getDailyCategories();
+
+      const result: CategoryCard[] = [];
 
 
       /* =================================================
-         PROCESS EACH MAIN DEPARTMENT
+         LOAD EACH CATEGORY
       ================================================= */
 
       for (
-        const department of DEPARTMENT_CONFIG
+        let i = 0;
+        i < dailyCategories.length;
+        i++
       ) {
+
+        const department =
+          dailyCategories[i];
+
 
         console.log(
           `Loading ${department.name} products...`
         );
 
 
-        /* ===============================================
-           GET PRODUCTS BY MAIN DEPARTMENT
-        =============================================== */
-
         const {
           data,
           error,
         } = await supabase
-
           .from("products")
-
           .select(
             "product_id,title,image_1,department"
           )
-
           .eq(
             "department",
             department.slug
           )
-
           .not(
             "image_1",
             "is",
@@ -197,9 +202,7 @@ export default function CategoryShowcase() {
           );
 
           result.push({
-            title: department.name,
-            slug: department.slug,
-            products: [],
+            ...department,
           });
 
           continue;
@@ -225,33 +228,21 @@ export default function CategoryShowcase() {
 
 
         /* ===============================================
-           DAILY PRODUCTS
+           DAILY PRODUCT
         =============================================== */
 
-        const dailyProducts =
-          getDailyProducts(
+        const product =
+          getDailyProduct(
             validProducts,
-            4
+            i
           );
 
 
-        console.log(
-          `${department.name} today's products:`,
-          dailyProducts
-        );
-
-
-        /* ===============================================
-           ADD SECTION
-        =============================================== */
-
         result.push({
 
-          title: department.name,
+          ...department,
 
-          slug: department.slug,
-
-          products: dailyProducts,
+          product,
 
         });
 
@@ -259,15 +250,15 @@ export default function CategoryShowcase() {
 
 
       /* =================================================
-         SAVE RESULTS
+         SAVE
       ================================================= */
 
       console.log(
-        "FINAL CATEGORY SHOWCASE:",
+        "FINAL DAILY CATEGORY SHOWCASE:",
         result
       );
 
-      setSections(result);
+      setCategories(result);
 
     }
 
@@ -326,20 +317,20 @@ export default function CategoryShowcase() {
 
       {loading ? (
 
-        <div className="category-sections">
+        <div className="category-grid">
 
           {DEPARTMENT_CONFIG.map(
             (department) => (
 
               <div
-                className="category-container category-skeleton"
+                className="category-card category-skeleton"
                 key={department.slug}
               >
 
-                <div className="category-skeleton-grid">
+                <div className="category-skeleton-image" />
 
-                  <span />
-                  <span />
+                <div className="category-skeleton-content">
+
                   <span />
                   <span />
 
@@ -355,69 +346,64 @@ export default function CategoryShowcase() {
       ) : (
 
         /* =================================================
-           DEPARTMENT SECTIONS
+           CATEGORY CARDS
         ================================================= */
 
-        <div className="category-sections">
+        <div className="category-grid">
 
-          {sections.map(
-            (section) => (
+          {categories.map(
+            (category) => (
 
-              <div
-                className="category-container"
-                key={section.slug}
+              <Link
+                key={category.slug}
+                to={`/category/${category.slug}`}
+                className="category-card"
+                aria-label={`Shop ${category.name}`}
               >
 
-                <div className="category-grid">
+                {/* ======================================
+                    IMAGE
+                ====================================== */}
 
-                  {section.products.map(
-                    (product) => (
+                <div className="category-image-wrapper">
 
-                      <Link
-                        key={product.product_id}
-                        to={`/category/${section.slug}`}
-                        className="category-product"
-                        aria-label={`View ${section.title}`}
-                      >
+                  {category.product ? (
 
-                        <img
-                          src={product.image_1}
-                          alt={product.title}
-                          loading="lazy"
-                        />
+                    <img
+                      src={category.product.image_1}
+                      alt={category.product.title}
+                      className="category-image"
+                      loading="lazy"
+                    />
 
-                      </Link>
+                  ) : (
 
-                    )
-                  )}
+                    <div className="category-image-placeholder">
+                      No products available
+                    </div>
 
-
-                  {/* ====================================
-                      FILL EMPTY POSITIONS
-                  ==================================== */}
-
-                  {Array.from({
-
-                    length: Math.max(
-                      0,
-                      4 -
-                        section.products.length
-                    ),
-
-                  }).map(
-                    (_, index) => (
-
-                      <div
-                        className="category-product category-empty"
-                        key={`empty-${index}`}
-                      />
-
-                    )
                   )}
 
                 </div>
 
-              </div>
+
+                {/* ======================================
+                    CATEGORY INFO
+                ====================================== */}
+
+                <div className="category-card-content">
+
+                  <h3>
+                    {category.name}
+                  </h3>
+
+                  <span className="category-shop-link">
+                    Shop Now →
+                  </span>
+
+                </div>
+
+              </Link>
 
             )
           )}
