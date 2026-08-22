@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+
 import "./Footer.css";
 
 interface FooterProps {
@@ -94,6 +95,7 @@ export default function Footer({ className }: FooterProps) {
             href="https://web.facebook.com/idealoop.lifestyle"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Facebook"
           >
             Facebook
           </a>
@@ -103,20 +105,27 @@ export default function Footer({ className }: FooterProps) {
             href="https://www.tiktok.com/@idealooplifestyle"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="TikTok"
           >
             TikTok
           </a>
 
-          {/* INSTAGRAM - NO LINK YET */}
-          <span className="social-disabled">
-            Instagram
-          </span>
+          {/* INSTAGRAM */}
+<a
+  href="https://www.instagram.com/idealooplifestyle"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Instagram"
+>
+  Instagram
+</a>
 
           {/* PINTEREST */}
           <a
             href="https://www.pinterest.com/BloomVix/"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Pinterest Fitness"
           >
             Pinterest-Fitness
           </a>
