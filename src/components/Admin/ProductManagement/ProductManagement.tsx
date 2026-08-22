@@ -29,6 +29,10 @@ export default function ProductManagement({ onEdit }: Props) {
   const [deleting, setDeleting] = useState(false);
 
 
+  /* =========================================================
+     LOAD PRODUCTS
+  ========================================================= */
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -54,6 +58,10 @@ export default function ProductManagement({ onEdit }: Props) {
     setProducts(data || []);
   };
 
+
+  /* =========================================================
+     DELETE PRODUCT
+  ========================================================= */
 
   const handleDelete = async (id: string) => {
 
@@ -128,9 +136,13 @@ export default function ProductManagement({ onEdit }: Props) {
   };
 
 
+  /* =========================================================
+     SEARCH / FILTER
+  ========================================================= */
+
   const filteredProducts = products.filter((product) => {
 
-    const text = search.toLowerCase();
+    const text = search.toLowerCase().trim();
 
     return (
       product.title
@@ -152,6 +164,10 @@ export default function ProductManagement({ onEdit }: Props) {
   });
 
 
+  /* =========================================================
+     EDIT PRODUCT
+  ========================================================= */
+
   const startEdit = (product: any) => {
 
     console.log(
@@ -172,8 +188,9 @@ export default function ProductManagement({ onEdit }: Props) {
       </h2>
 
 
-      
-
+      {/* =====================================================
+          SEARCH
+      ===================================================== */}
 
       <input
         className="product-search"
@@ -185,145 +202,163 @@ export default function ProductManagement({ onEdit }: Props) {
       />
 
 
-      {/* PRODUCTS */}
+      {/* =====================================================
+          PRODUCTS
 
-      <div className="manage-products-list">
+          Products are hidden until the user searches.
+      ===================================================== */}
 
-        {filteredProducts.map((product) => (
+      {search.trim() !== "" && (
 
-          <div
-            className="manage-product-card"
-            key={product.id}
-          >
+        <div className="manage-products-list">
 
-            <img
-              src={
-                product.image_1 ||
-                "/placeholder.png"
-              }
-              alt={product.title}
-            />
+          {filteredProducts.length > 0 ? (
 
+            filteredProducts.map((product) => (
 
-            <div className="manage-product-info">
-
-              <h3>
-                {product.title}
-              </h3>
-
-              <p>
-                {product.product_id}
-              </p>
-
-              {product.brand && (
-                <p>
-                  {product.brand}
-                </p>
-              )}
-
-            </div>
-
-
-            {/* ACTIONS */}
-
-            <div className="manage-product-actions">
-
-              <button
-                type="button"
-                className="edit-product-btn"
-                onClick={() =>
-                  startEdit(product)
-                }
+              <div
+                className="manage-product-card"
+                key={product.id}
               >
-                Edit
-              </button>
+
+                <img
+                  src={
+                    product.image_1 ||
+                    "/placeholder.png"
+                  }
+                  alt={product.title}
+                />
 
 
-              <button
-                type="button"
-                className="delete-product-btn"
-                onClick={() => {
+                <div className="manage-product-info">
 
-                  setDeleteId(product.id);
+                  <h3>
+                    {product.title}
+                  </h3>
 
-                  setDeleteMessage({
-                    id: null,
-                    type: null,
-                    text: "",
-                  });
+                  <p>
+                    {product.product_id}
+                  </p>
 
-                }}
-                disabled={deleting}
-              >
-                Delete
-              </button>
-
-
-              {/* INLINE CONFIRMATION */}
-
-              {deleteId === product.id && (
-
-                <div className="delete-confirmation">
-
-                  <span>
-                    Are you sure?
-                  </span>
-
-
-                  <button
-                    type="button"
-                    className="confirm-delete-btn"
-                    onClick={() =>
-                      handleDelete(product.id)
-                    }
-                    disabled={deleting}
-                  >
-                    {deleting
-                      ? "Deleting..."
-                      : "Yes, Delete"}
-                  </button>
-
-
-                  <button
-                    type="button"
-                    className="cancel-delete-btn"
-                    onClick={() =>
-                      setDeleteId(null)
-                    }
-                    disabled={deleting}
-                  >
-                    Cancel
-                  </button>
+                  {product.brand && (
+                    <p>
+                      {product.brand}
+                    </p>
+                  )}
 
                 </div>
 
-              )}
 
+                {/* ACTIONS */}
 
-              {/* SUCCESS / ERROR MESSAGE */}
+                <div className="manage-product-actions">
 
-              {deleteMessage.id === product.id &&
-                deleteMessage.type && (
-
-                  <span
-                    className={
-                      deleteMessage.type === "success"
-                        ? "delete-success-message"
-                        : "delete-error-message"
+                  <button
+                    type="button"
+                    className="edit-product-btn"
+                    onClick={() =>
+                      startEdit(product)
                     }
                   >
-                    {deleteMessage.text}
-                  </span>
+                    Edit
+                  </button>
 
-                )}
 
+                  <button
+                    type="button"
+                    className="delete-product-btn"
+                    onClick={() => {
+
+                      setDeleteId(product.id);
+
+                      setDeleteMessage({
+                        id: null,
+                        type: null,
+                        text: "",
+                      });
+
+                    }}
+                    disabled={deleting}
+                  >
+                    Delete
+                  </button>
+
+
+                  {/* INLINE CONFIRMATION */}
+
+                  {deleteId === product.id && (
+
+                    <div className="delete-confirmation">
+
+                      <span>
+                        Are you sure?
+                      </span>
+
+
+                      <button
+                        type="button"
+                        className="confirm-delete-btn"
+                        onClick={() =>
+                          handleDelete(product.id)
+                        }
+                        disabled={deleting}
+                      >
+                        {deleting
+                          ? "Deleting..."
+                          : "Yes, Delete"}
+                      </button>
+
+
+                      <button
+                        type="button"
+                        className="cancel-delete-btn"
+                        onClick={() =>
+                          setDeleteId(null)
+                        }
+                        disabled={deleting}
+                      >
+                        Cancel
+                      </button>
+
+                    </div>
+
+                  )}
+
+
+                  {/* SUCCESS / ERROR MESSAGE */}
+
+                  {deleteMessage.id === product.id &&
+                    deleteMessage.type && (
+
+                      <span
+                        className={
+                          deleteMessage.type === "success"
+                            ? "delete-success-message"
+                            : "delete-error-message"
+                        }
+                      >
+                        {deleteMessage.text}
+                      </span>
+
+                    )}
+
+                </div>
+
+              </div>
+
+            ))
+
+          ) : (
+
+            <div className="no-products-found">
+              No products found.
             </div>
 
-          </div>
+          )}
 
-        ))}
+        </div>
 
-      </div>
+      )}
 
     </div>
   );

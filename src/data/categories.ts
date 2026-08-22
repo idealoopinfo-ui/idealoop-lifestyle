@@ -62,6 +62,7 @@ export const categories: CategoryNode[] = [
               leaf("Sweaters", "sweaters"),
               leaf("Cami Top", "cami-Top"),
               leaf("Jumpsuits & Rompers", "jumpsuits & rompers"),
+              leaf(" Blouse", " blouse"),
   
               {
                 name: "Tops",

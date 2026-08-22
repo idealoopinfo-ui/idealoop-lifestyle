@@ -1569,3 +1569,134 @@ PRODUCT MANAGER
   }
 
 }
+/* =========================================================
+   SPECIAL FEATURES
+========================================================= */
+
+.special-feature-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.special-feature-input input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid #d6d6d6;
+  border-radius: 6px;
+  background: #fff;
+  color: #222;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.special-feature-input input:focus {
+  border-color: #999;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.special-feature-input input::placeholder {
+  color: #999;
+}
+
+.special-feature-input button {
+  height: 44px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease,
+              transform 0.1s ease;
+}
+
+.special-feature-input button:hover {
+  background: #333;
+}
+
+.special-feature-input button:active {
+  transform: translateY(1px);
+}
+
+
+/* =========================================================
+   SPECIAL FEATURES LIST
+========================================================= */
+
+.special-features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.special-feature-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 6px 10px 6px 13px;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  background: #f7f7f7;
+  color: #222;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.special-feature-item span {
+  display: block;
+}
+
+.special-feature-item button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #ddd;
+  color: #333;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease,
+              color 0.2s ease;
+}
+
+.special-feature-item button:hover {
+  background: #111;
+  color: #fff;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .special-feature-input {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .special-feature-input input,
+  .special-feature-input button {
+    width: 100%;
+  }
+
+}

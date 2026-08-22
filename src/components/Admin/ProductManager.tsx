@@ -31,6 +31,12 @@ const [brand,setBrand] = useState("");
 const [additionalFeatures, setAdditionalFeatures] = useState<
   { feature: string; value: string }[]
 >([]);
+const [specialFeatures, setSpecialFeatures] = useState<
+  { feature: string; value: string }[]
+>([]);
+
+const [newSpecialFeature, setNewSpecialFeature] = useState("");
+const [newSpecialFeatureValue, setNewSpecialFeatureValue] = useState("");
 
 const [spotlight, setSpotlight] = useState(false);
 const [facebookPublishing, setFacebookPublishing] = useState(false);
@@ -122,7 +128,29 @@ const [batteryCapacity, setBatteryCapacity] = useState("");
 const [heatFunction, setHeatFunction] = useState("");
 const [massageType, setMassageType] = useState("");
 
+const addSpecialFeature = () => {
+  const feature = newSpecialFeature.trim();
+  const value = newSpecialFeatureValue.trim();
 
+  if (!feature || !value) return;
+
+  setSpecialFeatures((prev) => [
+    ...prev,
+    {
+      feature,
+      value,
+    },
+  ]);
+
+  setNewSpecialFeature("");
+  setNewSpecialFeatureValue("");
+};
+
+const removeSpecialFeature = (index: number) => {
+  setSpecialFeatures((prev) =>
+    prev.filter((_, i) => i !== index)
+  );
+};
 
 /* LOAD PRODUCTS */
 
@@ -154,6 +182,12 @@ setShortDescription(
 setAdditionalFeatures(
   Array.isArray(selectedProduct.additional_features)
     ? selectedProduct.additional_features
+    : []
+);
+
+setSpecialFeatures(
+  Array.isArray(selectedProduct.special_features)
+    ? selectedProduct.special_features
     : []
 );
   
@@ -533,6 +567,8 @@ const addProduct = async () => {
             item.value.trim() !== ""
         ),
 
+        special_features: specialFeatures,
+
         model,
         warranty,
         country_origin: countryOrigin,
@@ -656,6 +692,10 @@ const addProduct = async () => {
   setDescription("");
   setShortDescription("");
   setAdditionalFeatures([]);
+  setSpecialFeatures([]);
+  setNewSpecialFeature("");
+  setNewSpecialFeatureValue("");
+
   setBrand("");
   setModel("");
   setWarranty("");
@@ -1257,7 +1297,96 @@ setAgeGroup={setAgeGroup}
               setIngredients={setIngredients}
             />
           )}
-  
+
+      {/* =========================================================
+    SPECIAL FEATURES
+========================================================= */}
+
+<div className="form-section">
+
+<h3>Special Features</h3>
+
+<div className="special-feature-input">
+
+  {/* FEATURE */}
+
+  <input
+    type="text"
+    placeholder="Feature"
+    value={newSpecialFeature}
+    onChange={(e) =>
+      setNewSpecialFeature(e.target.value)
+    }
+  />
+
+  {/* VALUE */}
+
+  <input
+    type="text"
+    placeholder="Value"
+    value={newSpecialFeatureValue}
+    onChange={(e) =>
+      setNewSpecialFeatureValue(e.target.value)
+    }
+    onKeyDown={(e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        addSpecialFeature();
+      }
+    }}
+  />
+
+  {/* ADD */}
+
+  <button
+    type="button"
+    onClick={addSpecialFeature}
+  >
+    + Add
+  </button>
+
+</div>
+
+
+{/* ADDED FEATURES */}
+
+{specialFeatures.length > 0 && (
+
+  <div className="special-features-list">
+
+    {specialFeatures.map((item, index) => (
+
+      <div
+        className="special-feature-item"
+        key={`${item.feature}-${index}`}
+      >
+
+        <span className="special-feature-name">
+          {item.feature}
+        </span>
+
+        <span className="special-feature-value">
+          {item.value}
+        </span>
+
+        <button
+          type="button"
+          onClick={() =>
+            removeSpecialFeature(index)
+          }
+        >
+          ×
+        </button>
+
+      </div>
+
+    ))}
+
+  </div>
+
+)}
+
+</div>
           {/* =========================
               VISIBILITY
           ========================= */}

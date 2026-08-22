@@ -15,7 +15,6 @@ export default function Footer({ className }: FooterProps) {
 
         {/* BRAND */}
         <div className="footer-brand">
-
           <h2 className="footer-logo">
             Idealoop Lifestyle
           </h2>
@@ -24,16 +23,11 @@ export default function Footer({ className }: FooterProps) {
             A modern lifestyle marketplace offering curated
             fashion, beauty, home essentials, and trending products.
           </p>
-
         </div>
-
 
         {/* SHOP */}
         <div className="footer-col">
-
-          <h3>
-            Shop
-          </h3>
+          <h3>Shop</h3>
 
           <Link to="/">
             Home
@@ -54,16 +48,11 @@ export default function Footer({ className }: FooterProps) {
           <Link to="/category/toys-gifts">
             Toys & Gifts
           </Link>
-
         </div>
-
 
         {/* SUPPORT */}
         <div className="footer-col">
-
-          <h3>
-            Support
-          </h3>
+          <h3>Support</h3>
 
           <Link to="/about">
             About Us
@@ -72,16 +61,11 @@ export default function Footer({ className }: FooterProps) {
           <Link to="/contact">
             Contact Us
           </Link>
-
         </div>
-
 
         {/* LEGAL */}
         <div className="footer-col">
-
-          <h3>
-            Legal
-          </h3>
+          <h3>Legal</h3>
 
           <Link to="/privacy">
             Privacy Policy
@@ -94,69 +78,55 @@ export default function Footer({ className }: FooterProps) {
           <Link to="/affiliate-disclosure">
             Affiliate Disclosure
           </Link>
-
         </div>
 
       </div>
 
-
       {/* SOCIAL SECTION */}
       <div className="footer-social">
 
-        <h3>
-          Follow Us
-        </h3>
+        <h3>Follow Us</h3>
 
         <div className="social-links">
 
           {/* FACEBOOK */}
           <a
-            href="https://www.facebook.com/idealoop.lifestyle/"
+            href="https://web.facebook.com/idealoop.lifestyle"
             target="_blank"
             rel="noopener noreferrer"
           >
             Facebook
           </a>
 
+          {/* TIKTOK */}
+          <a
+            href="https://www.tiktok.com/@idealooplifestyle"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            TikTok
+          </a>
 
-          {/* PINTEREST FITNESS */}
+          {/* INSTAGRAM - NO LINK YET */}
+          <span className="social-disabled">
+            Instagram
+          </span>
+
+          {/* PINTEREST */}
           <a
             href="https://www.pinterest.com/BloomVix/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Pinterest – Fitness
+            Pinterest-Fitness
           </a>
-
-
-          {/* FUTURE PINTEREST ACCOUNTS */}
-          {/*
-          <a
-            href="BEAUTY_PINTEREST_URL"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Pinterest – Beauty
-          </a>
-
-          <a
-            href="HOME_DECOR_PINTEREST_URL"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Pinterest – Home Decor
-          </a>
-          */}
-
 
         </div>
 
       </div>
 
-
       {/* DIVIDER */}
       <div className="footer-divider"></div>
-
 
       {/* BOTTOM */}
       <div className="footer-bottom">
