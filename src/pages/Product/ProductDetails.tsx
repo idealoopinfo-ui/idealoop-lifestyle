@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { supabase } from "../../lib/supabase";
 import ProductCard from "../../components/ProductCard/ProductCard";
@@ -415,6 +415,98 @@ export default function ProductDetails() {
 
   return (
     <div className="product-details-page">
+
+      {/* =====================================================
+    PRODUCT NAVIGATION
+===================================================== */}
+
+<nav className="product-breadcrumb" aria-label="Product navigation">
+
+<Link to="/">
+  Home
+</Link>
+
+{product.department && (
+  <>
+    <span>›</span>
+
+    <Link
+      to={`/category/${product.department}`}
+    >
+      {product.department
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (letter) =>
+          letter.toUpperCase()
+        )}
+    </Link>
+  </>
+)}
+
+{product.category && (
+  <>
+    <span>›</span>
+
+    <Link
+      to={`/category/${product.department}/${product.category}`}
+    >
+      {product.category
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (letter) =>
+          letter.toUpperCase()
+        )}
+    </Link>
+  </>
+)}
+
+{product.subcategory && (
+  <>
+    <span>›</span>
+
+    <Link
+      to={`/category/${product.department}/${product.category}/${product.subcategory}`}
+    >
+      {product.subcategory
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (letter) =>
+          letter.toUpperCase()
+        )}
+    </Link>
+  </>
+)}
+
+{product.collection && (
+  <>
+    <span>›</span>
+
+    <Link
+      to={`/category/${product.department}/${product.category}/${product.subcategory}/${product.collection}`}
+    >
+      {product.collection
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (letter) =>
+          letter.toUpperCase()
+        )}
+    </Link>
+  </>
+)}
+
+{product.product_type && (
+  <>
+    <span>›</span>
+
+    <Link
+      to={`/category/${product.department}/${product.category}/${product.subcategory}/${product.collection}/${product.product_type}`}
+    >
+      {product.product_type
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (letter) =>
+          letter.toUpperCase()
+        )}
+    </Link>
+  </>
+)}
+
+</nav>
 
       {/* =====================================================
           PRODUCT TOP

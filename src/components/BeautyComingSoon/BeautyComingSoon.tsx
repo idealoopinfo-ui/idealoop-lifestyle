@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
-import ProductCard from "../ProductCard/ProductCard";
 
-import "./FeaturedProducts.css";
+import "./BeautyComingSoon.css";
 
 
-const PRODUCTS_PER_VIEW = 10;
+type BeautyProduct = {
+  id: string;
+  product_id: string;
+  title: string;
+  image_1: string;
+  category: string;
+};
 
 
 /* =========================================================
@@ -79,52 +85,15 @@ function dailyShuffle<T>(
 
 
 /* =========================================================
-   SELECT DAILY PRODUCTS
+   BEAUTY COLLECTION
 ========================================================= */
 
-function selectDailyProducts(
-  allProducts: any[]
-): any[] {
-
-  if (
-    allProducts.length <=
-    PRODUCTS_PER_VIEW
-  ) {
-
-    return allProducts;
-
-  }
-
-
-  const dailySeed =
-    getDaySeed();
-
-
-  const shuffled =
-    dailyShuffle(
-      allProducts,
-      dailySeed
-    );
-
-
-  return shuffled.slice(
-    0,
-    PRODUCTS_PER_VIEW
-  );
-
-}
-
-
-/* =========================================================
-   FEATURED PRODUCTS
-========================================================= */
-
-export default function FeaturedProducts() {
+export default function BeautyComingSoon() {
 
   const [
     products,
     setProducts,
-  ] = useState<any[]>([]);
+  ] = useState<BeautyProduct[]>([]);
 
 
   const [
@@ -134,12 +103,12 @@ export default function FeaturedProducts() {
 
 
   /* =======================================================
-     LOAD FEATURED PRODUCTS
+     LOAD BEAUTY PRODUCTS
   ======================================================= */
 
   useEffect(() => {
 
-    const fetchFeaturedProducts =
+    const fetchBeautyProducts =
       async () => {
 
         setLoading(true);
@@ -152,21 +121,28 @@ export default function FeaturedProducts() {
 
           .from("products")
 
-          .select("*")
+          .select(
+            "id,product_id,title,image_1,category"
+          )
 
           .eq(
-            "featured",
-            true
+            "department",
+            "beauty"
+          )
+
+          .not(
+            "image_1",
+            "is",
+            null
           );
 
 
         if (error) {
 
           console.error(
-            "Error loading featured products:",
+            "Beauty products error:",
             error
           );
-
 
           setLoading(false);
 
@@ -175,30 +151,22 @@ export default function FeaturedProducts() {
         }
 
 
-        const featuredProducts =
-          data || [];
-
-
-        console.log(
-          "ALL FEATURED PRODUCTS:",
-          featuredProducts
-        );
-
-
-        /* ===============================================
-           DAILY RANDOM SELECTION
-        =============================================== */
-
-        const dailyProducts =
-          selectDailyProducts(
-            featuredProducts
+        const allProducts =
+          (data || []).filter(
+            (product) =>
+              product.image_1
           );
 
 
-        console.log(
-          "TODAY'S FEATURED PRODUCTS:",
-          dailyProducts
-        );
+        /* ===============================================
+           FIVE RANDOM PRODUCTS EACH DAY
+        =============================================== */
+
+        const dailyProducts =
+          dailyShuffle(
+            allProducts,
+            getDaySeed() + 7281
+          ).slice(0, 5);
 
 
         setProducts(
@@ -211,7 +179,7 @@ export default function FeaturedProducts() {
       };
 
 
-    fetchFeaturedProducts();
+    fetchBeautyProducts();
 
   }, []);
 
@@ -222,36 +190,73 @@ export default function FeaturedProducts() {
 
   return (
 
-    <section className="featured-products">
+    <section className="beauty-coming-soon">
 
-      <h2>
-        Featured Products
-      </h2>
+<div className="beauty-coming-header">
+
+<span>
+  BEAUTY COLLECTION
+</span>
+
+<h2>
+  Explore Beauty
+</h2>
+
+<p>
+  Discover our latest beauty products and essentials.
+</p>
+
+</div>
 
 
-      <div className="featured-grid">
+      <div className="beauty-coming-grid">
 
         {loading ? (
 
-          <p>
-            Loading featured products...
-          </p>
+          Array.from({ length: 5 }).map(
+            (_, index) => (
 
-        ) : products.length === 0 ? (
+              <div
+                className="beauty-coming-card skeleton"
+                key={index}
+              />
 
-          <p>
-            No featured products yet.
-          </p>
+            )
+          )
 
         ) : (
 
           products.map(
             (product) => (
 
-              <ProductCard
+              <Link
                 key={product.id}
-                product={product}
-              />
+                to={`/category/beauty`}
+                className="beauty-coming-card"
+                aria-label={
+                  `Explore ${product.title}`
+                }
+              >
+
+                <img
+                  src={product.image_1}
+                  alt={product.title}
+                  className="beauty-coming-image"
+                  loading="lazy"
+                />
+
+
+                {/* CATEGORY ON HOVER */}
+
+                <div className="beauty-category-overlay">
+
+                  <span>
+                    {product.category || "Beauty"}
+                  </span>
+
+                </div>
+
+              </Link>
 
             )
           )

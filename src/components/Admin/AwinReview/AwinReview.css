@@ -1,0 +1,925 @@
+/* =========================================================
+   AWIN REVIEW PAGE
+========================================================= */
+
+.awin-review {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 30px;
+    box-sizing: border-box;
+    color: #222;
+  }
+  
+  
+  /* =========================================================
+     HEADER
+  ========================================================= */
+  
+  .awin-review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 25px;
+  }
+  
+  .awin-review-header h2 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  .awin-review-header p {
+    margin: 0;
+    color: #666;
+    font-size: 15px;
+  }
+  
+  .awin-feed-status {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  
+  /* =========================================================
+     ERROR
+  ========================================================= */
+  
+  .awin-error {
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    background: #fff1f1;
+    border: 1px solid #f0b5b5;
+    color: #b00020;
+  }
+  
+  
+  /* =========================================================
+     FILTER CONTAINER
+  ========================================================= */
+  
+  .awin-review-filters {
+    width: 100%;
+    box-sizing: border-box;
+  
+    margin-bottom: 25px;
+    padding: 18px;
+  
+    background: #fff;
+  
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+  
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+  
+  
+  /* =========================================================
+     FILTER ROW
+  ========================================================= */
+  
+  .awin-filter-row {
+    width: 100%;
+  
+    display: flex;
+    align-items: center;
+  
+    gap: 12px;
+  
+    box-sizing: border-box;
+  }
+  
+  
+  /* =========================================================
+     ROW 1 - SEARCH
+  ========================================================= */
+  
+  .awin-search-row {
+    margin-bottom: 12px;
+  }
+  
+  
+  /* =========================================================
+     SEARCH BOX
+  ========================================================= */
+  
+  .awin-search-box {
+    position: relative;
+  
+    flex: 1 1 auto;
+  
+    min-width: 0;
+    width: 100%;
+  
+    height: 46px;
+  }
+  
+  
+  /* =========================================================
+     SEARCH INPUT
+  ========================================================= */
+  
+  .awin-search-box input {
+    width: 100%;
+    height: 46px;
+  
+    padding: 0 75px 0 16px;
+  
+    box-sizing: border-box;
+  
+    border: 1px solid #d5d5d5;
+    border-radius: 8px;
+  
+    background: #fff;
+    color: #222;
+  
+    font-size: 14px;
+  
+    outline: none;
+  }
+  
+  .awin-search-box input::placeholder {
+    color: #999;
+  }
+  
+  .awin-search-box input:hover {
+    border-color: #aaa;
+  }
+  
+  .awin-search-box input:focus {
+    border-color: #ff9900;
+  
+    box-shadow:
+      0 0 0 3px rgba(255, 153, 0, 0.12);
+  }
+  
+  
+  /* =========================================================
+     CLEAR SEARCH BUTTON
+  ========================================================= */
+  
+  .awin-clear-search {
+    position: absolute;
+  
+    top: 7px;
+    right: 7px;
+  
+    z-index: 5;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 55px;
+    height: 32px;
+  
+    padding: 0;
+  
+    margin: 0;
+  
+    border: 1px solid #d5d5d5;
+    border-radius: 6px;
+  
+    background: #f1f1f1;
+    color: #444;
+  
+    font-size: 12px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  
+    box-sizing: border-box;
+  }
+  
+  .awin-clear-search:hover {
+    background: #ddd;
+    color: #111;
+  }
+  
+  
+  /* =========================================================
+     SEARCH BUTTON
+  ========================================================= */
+  
+  .awin-search-button {
+    flex: 0 0 110px;
+  
+    width: 110px;
+    height: 46px;
+  
+    padding: 0 20px;
+  
+    border: none;
+    border-radius: 8px;
+  
+    background: #ff9900;
+    color: #fff;
+  
+    font-size: 14px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  
+    box-sizing: border-box;
+  
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+  
+  .awin-search-button:hover {
+    background: #e88a00;
+    transform: translateY(-1px);
+  }
+  
+  .awin-search-button:active {
+    transform: translateY(0);
+  }
+  
+  
+  /* =========================================================
+     ROW 2 - FILTER OPTIONS
+  ========================================================= */
+  
+  .awin-options-row {
+    display: grid;
+  
+    grid-template-columns:
+      minmax(0, 1.5fr)
+      minmax(0, 1.5fr)
+      minmax(0, 1fr)
+      120px;
+  
+    gap: 12px;
+  }
+  
+  
+  /* =========================================================
+     SELECTS
+  ========================================================= */
+  
+  .awin-options-row select {
+    width: 100%;
+    height: 46px;
+  
+    padding: 0 14px;
+  
+    box-sizing: border-box;
+  
+    border: 1px solid #d5d5d5;
+    border-radius: 8px;
+  
+    background: #fff;
+    color: #222;
+  
+    font-size: 14px;
+  
+    outline: none;
+  
+    cursor: pointer;
+  }
+  
+  .awin-options-row select:hover {
+    border-color: #aaa;
+  }
+  
+  .awin-options-row select:focus {
+    border-color: #ff9900;
+  
+    box-shadow:
+      0 0 0 3px rgba(255, 153, 0, 0.12);
+  }
+  
+  
+  /* =========================================================
+     CLEAR ALL BUTTON
+  ========================================================= */
+  
+  .awin-clear-button {
+    width: 100%;
+    height: 46px;
+  
+    padding: 0 15px;
+  
+    box-sizing: border-box;
+  
+    border: 1px solid #d5d5d5;
+    border-radius: 8px;
+  
+    background: #f1f1f1;
+    color: #444;
+  
+    font-size: 14px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  
+    white-space: nowrap;
+  }
+  
+  .awin-clear-button:hover {
+    background: #ddd;
+    border-color: #bbb;
+    color: #111;
+  }
+  
+  
+  /* =========================================================
+     RESULTS HEADER
+  ========================================================= */
+  
+  .awin-results-header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  
+    margin-bottom: 15px;
+  
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .awin-results-header strong {
+    color: #111;
+    font-size: 18px;
+  }
+  
+  
+  /* =========================================================
+     PRODUCT LIST
+  ========================================================= */
+  
+  .awin-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  
+  /* =========================================================
+     PRODUCT CARD
+  ========================================================= */
+  
+  .awin-product-card {
+    display: grid;
+  
+    grid-template-columns:
+      75px
+      minmax(0, 1fr)
+      auto;
+  
+    gap: 12px;
+  
+    align-items: center;
+  
+    padding: 14px;
+  
+    background: #fff;
+  
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+  
+    transition:
+      box-shadow 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+  
+  .awin-product-card:hover {
+    border-color: #ccc;
+  
+    box-shadow:
+      0 5px 18px rgba(0, 0, 0, 0.07);
+  
+    transform: translateY(-1px);
+  }
+  
+  
+  /* =========================================================
+     PRODUCT IMAGE
+  ========================================================= */
+  
+  .awin-product-image {
+    width: 75px;
+    height: 75px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    overflow: hidden;
+  
+    background: #f7f7f7;
+  
+    border-radius: 8px;
+  }
+  
+  .awin-product-image img {
+    width: 100%;
+    height: 100%;
+  
+    object-fit: contain;
+  
+    display: block;
+  }
+  
+  .awin-no-image {
+    width: 100%;
+    height: 100%;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    color: #999;
+    font-size: 12px;
+  }
+  
+  
+  /* =========================================================
+     PRODUCT INFORMATION
+  ========================================================= */
+  
+  .awin-product-info {
+    min-width: 0;
+  }
+  
+  .awin-advertiser {
+    display: inline-block;
+  
+    margin-bottom: 5px;
+  
+    color: #777;
+  
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  .awin-product-info h3 {
+    margin: 0 0 8px;
+  
+    font-size: 17px;
+    line-height: 1.35;
+    font-weight: 600;
+  
+    color: #222;
+  }
+  
+  .awin-brand,
+  .awin-category,
+  .awin-price {
+    margin: 4px 0;
+  
+    color: #666;
+  
+    font-size: 13px;
+  }
+  
+  .awin-brand strong,
+  .awin-category strong,
+  .awin-price strong {
+    color: #333;
+  }
+  
+  
+  /* =========================================================
+     PRODUCT ACTION
+  ========================================================= */
+  
+  .awin-product-actions {
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .awin-product-actions button {
+    min-width: 90px;
+    height: 40px;
+  
+    padding: 0 18px;
+  
+    border: none;
+    border-radius: 7px;
+  
+    background: #ff9900;
+    color: #fff;
+  
+    font-size: 14px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  }
+  
+  .awin-product-actions button:hover {
+    background: #e88a00;
+  }
+  
+  
+  /* =========================================================
+     EMPTY STATE
+  ========================================================= */
+  
+  .awin-empty-state {
+    padding: 60px 20px;
+  
+    text-align: center;
+  
+    background: #fff;
+  
+    border: 1px dashed #ccc;
+    border-radius: 12px;
+  }
+  
+  .awin-empty-state h3 {
+    margin: 0 0 8px;
+  
+    font-size: 20px;
+  
+    color: #333;
+  }
+  
+  .awin-empty-state p {
+    margin: 0 0 6px;
+  
+    color: #777;
+  }
+  
+  
+  /* =========================================================
+     MORE RESULTS
+  ========================================================= */
+  
+  .awin-more-results {
+    padding: 18px;
+  
+    text-align: center;
+  
+    background: #f8f8f8;
+  
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+  
+    color: #666;
+  
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  
+  /* =========================================================
+     REVIEW PANEL
+  ========================================================= */
+  
+  .awin-review-panel {
+    position: fixed;
+  
+    top: 0;
+    right: 0;
+  
+    width: min(600px, 100%);
+    height: 100vh;
+  
+    z-index: 2000;
+  
+    overflow-y: auto;
+  
+    padding: 25px;
+  
+    box-sizing: border-box;
+  
+    background: #fff;
+  
+    box-shadow:
+      -5px 0 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  
+  /* =========================================================
+     REVIEW PANEL HEADER
+  ========================================================= */
+  
+  .awin-review-panel-header {
+    display: flex;
+  
+    align-items: center;
+    justify-content: space-between;
+  
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+  
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  .awin-review-panel-header h2 {
+    margin: 0;
+  
+    font-size: 23px;
+  }
+  
+  .awin-review-panel-header button {
+    width: 36px;
+    height: 36px;
+  
+    border: none;
+    border-radius: 50%;
+  
+    background: #f1f1f1;
+  
+    color: #333;
+  
+    font-size: 24px;
+    line-height: 1;
+  
+    cursor: pointer;
+  }
+  
+  .awin-review-panel-header button:hover {
+    background: #ddd;
+  }
+  
+  
+  /* =========================================================
+     REVIEW PRODUCT
+  ========================================================= */
+  
+  .awin-review-product {
+    display: grid;
+  
+    grid-template-columns:
+      150px
+      minmax(0, 1fr);
+  
+    gap: 20px;
+  
+    margin-bottom: 25px;
+  }
+  
+  .awin-review-image {
+    width: 150px;
+    height: 150px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    overflow: hidden;
+  
+    background: #f7f7f7;
+  
+    border-radius: 10px;
+  }
+  
+  .awin-review-image img {
+    width: 100%;
+    height: 100%;
+  
+    object-fit: contain;
+  }
+  
+  .awin-review-product h3 {
+    margin: 0 0 15px;
+  
+    font-size: 18px;
+    line-height: 1.4;
+  }
+  
+  .awin-review-product p {
+    margin: 8px 0;
+  
+    color: #555;
+  
+    font-size: 14px;
+  }
+  
+  
+  /* =========================================================
+     DESCRIPTION
+  ========================================================= */
+  
+  .awin-review-description {
+    padding-top: 20px;
+  
+    border-top: 1px solid #e5e5e5;
+  }
+  
+  .awin-review-description h3 {
+    margin: 0 0 10px;
+  
+    font-size: 17px;
+  }
+  
+  .awin-review-description p {
+    margin: 0;
+  
+    color: #555;
+  
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  
+  
+  /* =========================================================
+     REVIEW ACTIONS
+  ========================================================= */
+  
+  .awin-review-actions {
+    display: flex;
+  
+    gap: 10px;
+  
+    margin-top: 30px;
+  }
+  
+  .awin-review-actions button {
+    height: 44px;
+  
+    padding: 0 20px;
+  
+    border: none;
+    border-radius: 7px;
+  
+    font-size: 14px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  }
+  
+  .awin-review-actions button:first-child {
+    background: #ff9900;
+    color: #fff;
+  }
+  
+  .awin-review-actions button:first-child:hover {
+    background: #e88a00;
+  }
+  
+  .awin-review-actions button:last-child {
+    background: #eee;
+    color: #333;
+  }
+  
+  .awin-review-actions button:last-child:hover {
+    background: #ddd;
+  }
+  
+  
+  /* =========================================================
+     RESPONSIVE - 1000px
+  ========================================================= */
+  
+  @media (max-width: 1000px) {
+  
+    .awin-options-row {
+      grid-template-columns:
+        1fr
+        1fr;
+    }
+  
+    .awin-clear-button {
+      width: 100%;
+    }
+  }
+  
+  
+  /* =========================================================
+     RESPONSIVE - 700px
+  ========================================================= */
+  
+  @media (max-width: 700px) {
+  
+    .awin-review {
+      padding: 20px 15px;
+    }
+  
+    .awin-review-header {
+      flex-direction: column;
+    }
+  
+    .awin-feed-status {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  
+  
+    /* SEARCH ROW */
+  
+    .awin-search-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .awin-search-box {
+      width: 100%;
+    }
+  
+    .awin-search-button {
+      width: 100%;
+      flex: none;
+    }
+  
+  
+    /* FILTER ROW */
+  
+    .awin-options-row {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .awin-options-row select,
+    .awin-clear-button {
+      width: 100%;
+    }
+  
+  
+    /* PRODUCT */
+  
+    .awin-product-card {
+      grid-template-columns:
+        80px
+        minmax(0, 1fr);
+    }
+  
+    .awin-product-image {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .awin-product-actions {
+      grid-column: 2;
+  
+      justify-content: flex-start;
+    }
+  
+  
+    /* REVIEW */
+  
+    .awin-review-product {
+      grid-template-columns:
+        100px
+        minmax(0, 1fr);
+    }
+  
+    .awin-review-image {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  
+  /* =========================================================
+     RESPONSIVE - 480px
+  ========================================================= */
+  
+  @media (max-width: 480px) {
+  
+    .awin-review {
+      padding: 15px 10px;
+    }
+  
+    .awin-review-filters {
+      padding: 12px;
+    }
+  
+    .awin-product-card {
+      grid-template-columns:
+        70px
+        minmax(0, 1fr);
+  
+      gap: 12px;
+    }
+  
+    .awin-product-image {
+      width: 70px;
+      height: 70px;
+    }
+  
+    .awin-product-info h3 {
+      font-size: 15px;
+    }
+  
+    .awin-review-product {
+      grid-template-columns: 1fr;
+    }
+  
+    .awin-review-image {
+      width: 140px;
+      height: 140px;
+    }
+  
+    .awin-review-actions {
+      flex-direction: column;
+    }
+  
+    .awin-review-actions button {
+      width: 100%;
+    }
+  }

@@ -4,6 +4,7 @@ import { supabase } from "../../lib/supabase";
 import CategoryManager from "../../components/Admin/CategoryManager";
 import HomepageCategoryManager from "../../components/Admin/HomepageCategoryManager/HomepageCategoryManager";
 import ProductManager from "../../components/Admin/ProductManager";
+import AwinReview from "../../components/Admin/AwinReview/AwinReview";
 import HelpManager from "../../components/Admin/HelpManager";
 import ProductManagement from "../../components/Admin/ProductManagement/ProductManagement";
 import ProductMonitor from "../../components/Admin/ProductMonitor/ProductMonitor";
@@ -13,6 +14,7 @@ import "./Admin.css";
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState("dashboard");
+  const [productTab, setProductTab] = useState("products");
   const [editingProduct, setEditingProduct] = useState<any>(null);
   const [monitorCount, setMonitorCount] = useState(0);
 
@@ -717,17 +719,63 @@ Blogs
 
 
 
-{activeTab==="products" && (
+{activeTab === "products" && (
 
 <div className="admin-section">
 
-<ProductManager
-  selectedProduct={editingProduct}
-/>
+  {/* PRODUCTS SUB NAVIGATION */}
 
-<ProductManagement
-  onEdit={setEditingProduct}
-/>
+  <div className="products-subnav">
+
+    <button
+      className={
+        productTab === "products"
+          ? "active"
+          : ""
+      }
+      onClick={() => setProductTab("products")}
+    >
+      Idealoop Products
+    </button>
+
+    <button
+      className={
+        productTab === "awin"
+          ? "active"
+          : ""
+      }
+      onClick={() => setProductTab("awin")}
+    >
+      AWIN Review
+    </button>
+
+  </div>
+
+
+  {/* IDEALOOP PRODUCTS */}
+
+  {productTab === "products" && (
+
+    <>
+      <ProductManager
+        selectedProduct={editingProduct}
+      />
+
+      <ProductManagement
+        onEdit={setEditingProduct}
+      />
+    </>
+
+  )}
+
+
+  {/* AWIN REVIEW */}
+
+  {productTab === "awin" && (
+
+    <AwinReview />
+
+  )}
 
 </div>
 

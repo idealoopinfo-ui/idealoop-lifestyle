@@ -4,16 +4,27 @@ import { supabase } from "../../lib/supabase";
 
 import "./CategoryShowcase.css";
 
+
+/* =========================================================
+   PRODUCT
+========================================================= */
+
 type Product = {
   product_id: string;
   title: string;
   image_1: string;
 };
 
+
+/* =========================================================
+   DEPARTMENT CONFIG
+========================================================= */
+
 type DepartmentConfig = {
   name: string;
   slug: string;
 };
+
 
 type CategoryCard = DepartmentConfig & {
   product?: Product;
@@ -25,6 +36,7 @@ type CategoryCard = DepartmentConfig & {
 ========================================================= */
 
 const DEPARTMENT_CONFIG: DepartmentConfig[] = [
+
   {
     name: "Fashion",
     slug: "fashion",
@@ -49,6 +61,7 @@ const DEPARTMENT_CONFIG: DepartmentConfig[] = [
     name: "Toys & Gifts",
     slug: "toys-gifts",
   },
+
 ];
 
 
@@ -70,46 +83,61 @@ function getDaySeed(): number {
 
 
 /* =========================================================
-   DAILY CATEGORY ORDER
+   SEEDED RANDOM
 ========================================================= */
 
-function getDailyCategories(): DepartmentConfig[] {
+function seededRandom(seed: number): number {
 
-  const departments = [
-    ...DEPARTMENT_CONFIG
-  ];
+  const value =
+    Math.sin(seed) * 10000;
 
-  const seed = getDaySeed();
-
-  const offset =
-    seed % departments.length;
-
-  return [
-    ...departments.slice(offset),
-    ...departments.slice(0, offset),
-  ];
+  return value - Math.floor(value);
 
 }
 
 
 /* =========================================================
-   DAILY PRODUCT
+   DAILY RANDOM PRODUCT
 ========================================================= */
 
-function getDailyProduct(
+function getDailyRandomProduct(
   products: Product[],
   categoryIndex: number
 ): Product | undefined {
 
   if (!products.length) {
+
     return undefined;
+
   }
 
-  const seed = getDaySeed();
+
+  const daySeed =
+    getDaySeed();
+
+
+  /*
+   * Different seed for every category.
+   *
+   * This means Fashion, Beauty, Fitness,
+   * Home and Toys don't all select
+   * the same position.
+   */
+
+  const categorySeed =
+    daySeed +
+    (categoryIndex + 1) * 7919;
+
+
+  const random =
+    seededRandom(categorySeed);
+
 
   const index =
-    (seed + categoryIndex) %
-    products.length;
+    Math.floor(
+      random * products.length
+    );
+
 
   return products[index];
 
@@ -124,6 +152,7 @@ export default function CategoryShowcase() {
 
   const [categories, setCategories] =
     useState<CategoryCard[]>([]);
+
 
   const [loading, setLoading] =
     useState(true);
@@ -144,10 +173,8 @@ export default function CategoryShowcase() {
 
     setLoading(true);
 
-    try {
 
-      const dailyCategories =
-        getDailyCategories();
+    try {
 
       const result: CategoryCard[] = [];
 
@@ -158,12 +185,12 @@ export default function CategoryShowcase() {
 
       for (
         let i = 0;
-        i < dailyCategories.length;
+        i < DEPARTMENT_CONFIG.length;
         i++
       ) {
 
         const department =
-          dailyCategories[i];
+          DEPARTMENT_CONFIG[i];
 
 
         console.log(
@@ -175,14 +202,18 @@ export default function CategoryShowcase() {
           data,
           error,
         } = await supabase
+
           .from("products")
+
           .select(
             "product_id,title,image_1,department"
           )
+
           .eq(
             "department",
             department.slug
           )
+
           .not(
             "image_1",
             "is",
@@ -201,11 +232,16 @@ export default function CategoryShowcase() {
             error
           );
 
+
           result.push({
+
             ...department,
+
           });
 
+
           continue;
+
         }
 
 
@@ -228,11 +264,11 @@ export default function CategoryShowcase() {
 
 
         /* ===============================================
-           DAILY PRODUCT
+           DAILY RANDOM PRODUCT
         =============================================== */
 
         const product =
-          getDailyProduct(
+          getDailyRandomProduct(
             validProducts,
             i
           );
@@ -257,6 +293,7 @@ export default function CategoryShowcase() {
         "FINAL DAILY CATEGORY SHOWCASE:",
         result
       );
+
 
       setCategories(result);
 
@@ -299,9 +336,11 @@ export default function CategoryShowcase() {
           Explore our collections
         </span>
 
+
         <h2>
           Shop By Category
         </h2>
+
 
         <p>
           Discover products curated for every
@@ -379,7 +418,9 @@ export default function CategoryShowcase() {
                   ) : (
 
                     <div className="category-image-placeholder">
+
                       No products available
+
                     </div>
 
                   )}
@@ -396,6 +437,7 @@ export default function CategoryShowcase() {
                   <h3>
                     {category.name}
                   </h3>
+
 
                   <span className="category-shop-link">
                     Shop Now →

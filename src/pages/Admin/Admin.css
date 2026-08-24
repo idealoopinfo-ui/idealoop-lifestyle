@@ -642,3 +642,24 @@ NOTICE PANEL
       font-size:12px;
   
   }
+  .products-subnav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .products-subnav button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #eee;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  .products-subnav button.active {
+    background: #111;
+    color: #fff;
+  }

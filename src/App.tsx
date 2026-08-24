@@ -420,31 +420,30 @@ export default function App() {
               {/* CATEGORY */}
   
               <Route
-                path="/category/:department"
-                element={<CategoryPage />}
-              />
+  path="/category/:department"
+  element={<CategoryPage />}
+/>
+
+<Route
+  path="/category/:department/:category"
+  element={<CategoryPage />}
+/>
+
+<Route
+  path="/category/:department/:category/:subcategory"
+  element={<CategoryPage />}
+/>
+
+<Route
+  path="/category/:department/:category/:subcategory/:collection"
+  element={<CategoryPage />}
+/>
+
+<Route
+  path="/category/:department/:category/:subcategory/:collection/:productType"
+  element={<CategoryPage />}
+/>
   
-              <Route
-                path="/category/:department/:category"
-                element={<CategoryPage />}
-              />
-  
-              <Route
-                path="/category/:department/:category/:subcategory"
-                element={<CategoryPage />}
-              />
-  
-              <Route
-                path="/category/:department/:category/:subcategory/:collection"
-                element={<CategoryPage />}
-              />
-  
-              <Route
-                path="/category/:department/:category/:subcategory/:collection/:productType"
-                element={<CategoryPage />}
-              />
-  
-              {/* DISCOVER */}
   
               {/* DISCOVER */}
 

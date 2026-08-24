@@ -75,17 +75,33 @@ export default function CategoryNavbar() {
   const handleNavigate = (
     path: CategoryNode[]
   ) => {
-
+  
     const slugs = path
       .map((item) => item.slug)
       .filter(Boolean);
-
+  
     if (!slugs.length) return;
-
-    navigate(`/category/${slugs.join("/")}`);
-
+  
+    /*
+     * URL structure:
+     *
+     * /category/:department
+     * /category/:department/:category
+     * /category/:department/:category/:subcategory
+     * /category/:department/:category/:subcategory/:collection
+     * /category/:department/:category/:subcategory/:collection/:productType
+     *
+     * The hierarchy in categories.ts determines
+     * how many levels are included.
+     */
+  
+    const url =
+      `/category/${slugs.join("/")}`;
+  
+    navigate(url);
+  
     cancelClose();
-
+  
     setActivePath([]);
   };
 

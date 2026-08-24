@@ -1,292 +1,418 @@
-/* ===========================
+/* =========================================================
+   DISCOVER PAGE - FULL CSS
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL BOX SIZING
+========================================================= */
+
+.discover-page,
+.discover-page *,
+.discover-page *::before,
+.discover-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
    DISCOVER PAGE
-=========================== */
+========================================================= */
 
 .discover-page {
 
+  width: 100%;
+  max-width: none;
+
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 15px;
+
   background:
-  linear-gradient(
-  135deg,
-  #fff7ed,
-  #ffffff,
-  #fdf2f8
-  );
-  
-  min-height:100vh;
-  
-  padding:15px 15px;
-  
-  max-width:1600px;
-  
-  margin:auto;
-  
-  }
+    linear-gradient(
+      135deg,
+      #fff7ed 0%,
+      #ffffff 50%,
+      #fdf2f8 100%
+    );
+
+  overflow-x: hidden;
+}
 
 
-/* ===========================
- HEADER
-=========================== */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .discover-header {
 
-  text-align:center;
+  width: 100%;
 
-  margin-bottom:20px;
+  text-align: center;
 
+  margin: 0 0 20px 0;
 }
 
 
+/* =========================================================
+   TITLE ROW
+========================================================= */
 
-.discover-header h1 {
+.discover-title-row {
 
-  margin:0;
+  width: 100%;
 
-  font-size:42px;
+  display: flex;
 
-  font-weight:800;
+  align-items: center;
 
-  letter-spacing:-1px;
+  justify-content: space-between;
 
-  color:var(--text);
-
+  gap: 20px;
 }
 
 
+.discover-title-row h1 {
+
+  margin: 0;
+
+  font-size: 42px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  letter-spacing: -1px;
+
+  color: var(--text, #111111);
+}
+
+
+/* =========================================================
+   HEADER DESCRIPTION
+========================================================= */
 
 .discover-header p {
 
-  max-width:600px;
+  max-width: 600px;
 
-  margin:10px auto;
+  margin: 10px auto 0;
 
-  font-size:16px;
+  font-size: 16px;
 
-  line-height:1.6;
+  line-height: 1.6;
 
-  color:#666;
-
+  color: #666666;
 }
 
 
+/* =========================================================
+   HOME BUTTON
+========================================================= */
 
-/* ===========================
- CATEGORY NAVIGATION
-=========================== */
+.discover-home-button {
 
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+
+  padding: 9px 17px;
+
+  margin: 0;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  border: 1px solid #e2e2e2;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.discover-home-icon {
+
+  flex-shrink: 0;
+
+  transition:
+    transform 0.2s ease;
+}
+
+
+.discover-home-button:hover {
+
+  background: #111111;
+
+  color: #ffffff;
+
+  border-color: #111111;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 5px 14px rgba(0, 0, 0, 0.15);
+}
+
+
+.discover-home-button:hover .discover-home-icon {
+
+  transform: scale(1.08);
+}
+
+
+.discover-home-button:active {
+
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   CATEGORY NAVIGATION
+   IMPORTANT:
+   position: static = scrolls away normally
+========================================================= */
 
 .discover-nav {
 
-  display:flex;
+  width: 100%;
 
-  justify-content:center;
+  display: flex;
 
-  gap:10px;
+  align-items: center;
 
-  flex-wrap:wrap;
+  justify-content: center;
 
+  gap: 10px;
 
-  margin-bottom:20px;
+  flex-wrap: wrap;
 
+  margin: 0 0 20px 0;
 
-  position:sticky;
+  padding: 10px 0;
 
-  top:60px;
-
+  position: static;
 
   background:
-  rgba(255,255,255,.85);
+    rgba(255, 255, 255, 0.85);
 
+  backdrop-filter: blur(10px);
 
-  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
+  z-index: 20;
 
-  padding:10px 0;
-
-
-  z-index:20;
-
+  overflow: visible;
 }
 
 
+/* =========================================================
+   CATEGORY BUTTONS
+========================================================= */
 
 .discover-nav button {
 
-  background:#ffffff;
+  flex-shrink: 0;
 
-  border:1px solid #eeeeee;
+  padding: 10px 22px;
 
-  color:#333;
+  background: #ffffff;
 
+  color: #333333;
 
-  padding:10px 22px;
+  border: 1px solid #eeeeee;
 
+  border-radius: 50px;
 
-  border-radius:50px;
+  font-size: 14px;
 
+  font-weight: 600;
 
-  font-size:14px;
+  line-height: 1.2;
 
-  font-weight:600;
+  white-space: nowrap;
 
+  cursor: pointer;
 
-  cursor:pointer;
-
-
-  transition:.25s ease;
-
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    background-color 0.25s ease;
 }
-
 
 
 .discover-nav button:hover {
 
-  border-color:#ff9900;
+  color: #ff9900;
 
-  color:#ff9900;
+  border-color: #ff9900;
 
-
-  transform:translateY(-2px);
-
+  transform: translateY(-2px);
 
   box-shadow:
-
-  0 8px 20px rgba(0,0,0,.10);
-
+    0 8px 20px rgba(0, 0, 0, 0.10);
 }
-
 
 
 .discover-nav button.active {
 
-  background:#ff9900;
+  background: #ff9900;
 
-  color:white;
+  color: #ffffff;
 
-  border-color:#ff9900;
-
+  border-color: #ff9900;
 
   box-shadow:
-
-  0 8px 20px rgba(255,153,0,.35);
-
+    0 8px 20px rgba(255, 153, 0, 0.35);
 }
 
 
-
-/* ===========================
-   PINTEREST MASONRY GRID
-=========================== */
+/* =========================================================
+   PINTEREST GRID
+========================================================= */
 
 .pinterest-grid {
 
-  column-count: 5;
-
-  column-gap: 5px;
-
   width: 100%;
 
-  max-width: 1500px;
+  max-width: none;
 
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
 
+  column-count: 5;
+
+  column-gap: 8px;
+
+  box-sizing: border-box;
 }
 
 
+/* =========================================================
+   PIN CARD
+========================================================= */
 
 .pin-card {
+
+  width: 100%;
+
+  display: inline-block;
+
   break-inside: avoid;
 
-  margin-bottom: 7px;
+  -webkit-column-break-inside: avoid;
+
+  page-break-inside: avoid;
 
   position: relative;
 
   overflow: hidden;
 
-  border-radius: 14px;
+  margin: 0 0 8px 0;
 
-  background: #fff;
+  padding: 0;
+
+  background: #ffffff;
+
+  border-radius: 14px;
 
   cursor: pointer;
 
   box-shadow:
-    0 5px 18px rgba(0,0,0,.08);
+    0 5px 18px rgba(0, 0, 0, 0.08);
 
   transition:
-    transform .3s ease,
-    box-shadow .3s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
-
 
 
 .pin-card:hover {
 
-
-  transform:translateY(-5px);
-
+  transform: translateY(-5px);
 
   box-shadow:
-
-  0 15px 35px rgba(0,0,0,.16);
-
+    0 15px 35px rgba(0, 0, 0, 0.16);
 }
 
 
-
-/* ===========================
- PINTEREST IMAGE
-=========================== */
-
+/* =========================================================
+   IMAGE WRAPPER
+========================================================= */
 
 .pin-image-wrapper {
 
+  position: relative;
 
-  width:100%;
+  width: 100%;
 
+  overflow: hidden;
 
-  overflow:hidden;
-
-
-  border-radius:18px;
-
+  border-radius: 18px;
 }
 
 
+/* =========================================================
+   IMAGE
+========================================================= */
 
 .pin-image {
 
+  display: block;
 
-  width:100%;
+  width: 100%;
 
-  background:#f3f4f6;
+  height: auto;
 
-  height:auto;
+  margin: 0;
+  padding: 0;
 
+  background: #f3f4f6;
 
-  display:block;
+  border-radius: 18px;
 
-
-  border-radius:18px;
-
+  object-fit: contain;
 
   transition:
-
-  transform .35s ease;
-
+    transform 0.35s ease;
 }
-
 
 
 .pin-card:hover .pin-image {
 
-
-  transform:scale(1.05);
-
+  transform: scale(1.05);
 }
 
 
-/* ===========================
-   THREE PIN IMAGE SIZES
-=========================== */
+/* =========================================================
+   PIN IMAGE SIZES
+========================================================= */
 
 .large-pin .pin-image {
 
@@ -295,7 +421,6 @@
   object-fit: contain;
 
   background: #f3f4f6;
-
 }
 
 
@@ -306,7 +431,6 @@
   object-fit: contain;
 
   background: #f3f4f6;
-
 }
 
 
@@ -317,417 +441,381 @@
   object-fit: contain;
 
   background: #f3f4f6;
-
 }
 
 
-/* ===========================
- HOVER OVERLAY
-=========================== */
-
+/* =========================================================
+   HOVER OVERLAY
+========================================================= */
 
 .pin-card::after {
 
+  content: "";
 
-  content:"";
+  position: absolute;
 
+  inset: 0;
 
-  position:absolute;
-  z-index:2;
-  pointer-events:none;
+  z-index: 2;
 
-  inset:0;
-
+  pointer-events: none;
 
   background:
-
-  linear-gradient(
-
+    linear-gradient(
       to top,
-
-      rgba(0,0,0,.25),
-
+      rgba(0, 0, 0, 0.25),
       transparent 55%
+    );
 
-  );
+  opacity: 0;
 
-
-  opacity:0;
-
-
-  transition:.3s;
-
+  transition:
+    opacity 0.3s ease;
 }
-
 
 
 .pin-card:hover::after {
 
-
-  opacity:1;
-
+  opacity: 1;
 }
 
-/* ===========================
- RESPONSIVE
-=========================== */
+
+/* =========================================================
+   CATEGORY BADGE
+========================================================= */
+
+.pin-category-badge {
+
+  position: absolute;
+
+  left: 15px;
+  bottom: 15px;
+
+  z-index: 10;
+
+  padding: 7px 16px;
+
+  background: #111827;
+
+  color: #ffffff;
+
+  border-radius: 30px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  text-transform: capitalize;
+
+  letter-spacing: 0.3px;
+
+  opacity: 0;
+
+  transform: translateY(15px);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    background-color 0.2s ease;
+}
 
 
-@media(max-width:1400px){
+.pin-card:hover .pin-category-badge {
 
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+.pin-category-badge:hover {
+
+  background: #ff9900;
+
+  transform:
+    translateY(-3px)
+    scale(1.05);
+}
+
+
+/* =========================================================
+   REMOVE UNUSED OLD ::BEFORE BADGE
+========================================================= */
+
+.pin-card::before {
+
+  content: none;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (max-width: 1400px) {
 
   .pinterest-grid {
 
-      column-count:5;
+    column-count: 5;
 
   }
 
 }
 
 
+/* =========================================================
+   DESKTOP / LAPTOP
+========================================================= */
 
-@media(max-width:1200px){
-
+@media (max-width: 1200px) {
 
   .pinterest-grid {
 
-      column-count:4;
+    column-count: 4;
 
   }
 
 }
 
 
+/* =========================================================
+   TABLET
+========================================================= */
 
-@media(max-width:900px){
-
+@media (max-width: 900px) {
 
   .pinterest-grid {
 
-      column-count:3;
+    column-count: 3;
+
+  }
+
+
+  .discover-title-row h1 {
+
+    font-size: 36px;
 
   }
 
 }
 
 
+/* =========================================================
+   MOBILE
+========================================================= */
 
-@media(max-width:650px){
-
+@media (max-width: 650px) {
 
   .discover-page {
 
-      padding:15px;
+    width: 100%;
+
+    padding:
+      15px;
+  }
+
+
+  /* Header */
+
+  .discover-title-row {
+
+    gap: 10px;
 
   }
 
 
+  .discover-title-row h1 {
 
-  .discover-header h1 {
-
-      font-size:32px;
-
-  }
-
-
-
-  .discover-nav {
-
-
-      justify-content:flex-start;
-
-
-      overflow-x:auto;
-
-
-      flex-wrap:nowrap;
-
+    font-size: 32px;
 
   }
-
-
-
-  .discover-nav::-webkit-scrollbar {
-
-
-      display:none;
-
-  }
-
-
-
-  .discover-nav button {
-
-
-      flex-shrink:0;
-
-  }
-
-
-
-  .pinterest-grid {
-
-
-      column-count:2;
-
-
-      column-gap:10px;
-
-  }
-
-}
-
-
-
-@media(max-width:420px){
-
-
-  .discover-header h1 {
-
-
-      font-size:28px;
-
-  }
-
 
 
   .discover-header p {
 
-
-      font-size:14px;
+    font-size: 14px;
 
   }
 
+
+  /* Home button */
+
+  .discover-home-button {
+
+    padding:
+      8px 12px;
+
+    font-size: 13px;
+
+  }
+
+
+  /* Category navigation */
+
+  .discover-nav {
+
+    justify-content: flex-start;
+
+    flex-wrap: nowrap;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    padding:
+      10px 2px;
+
+    scrollbar-width: none;
+
+  }
+
+
+  .discover-nav::-webkit-scrollbar {
+
+    display: none;
+
+  }
+
+
+  .discover-nav button {
+
+    flex-shrink: 0;
+
+    padding:
+      9px 17px;
+
+  }
+
+
+  /* Grid */
+
+  .pinterest-grid {
+
+    column-count: 2;
+
+    column-gap: 8px;
+
+  }
+
+
+  .pin-card {
+
+    margin-bottom: 8px;
+
+    border-radius: 12px;
+
+  }
+
+
+  .pin-image-wrapper,
+  .pin-image {
+
+    border-radius: 14px;
+
+  }
+
+
+  /* Show category badge more naturally on mobile */
+
+  .pin-category-badge {
+
+    left: 8px;
+
+    bottom: 8px;
+
+    padding:
+      5px 10px;
+
+    font-size: 10px;
+
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .discover-page {
+
+    padding:
+      12px;
+
+  }
+
+
+  .discover-title-row h1 {
+
+    font-size: 28px;
+
+  }
+
+
+  .discover-header p {
+
+    font-size: 14px;
+
+  }
+
+
+  .discover-home-button {
+
+    padding:
+      7px 10px;
+
+  }
+
+
+  .discover-home-button span {
+
+    display: none;
+
+  }
 
 
   .pinterest-grid {
 
+    column-count: 2;
 
-      column-count:2;
+    column-gap: 7px;
+
+  }
 
 
-      column-gap:8px;
+  .pin-card {
+
+    margin-bottom: 7px;
 
   }
 
 }
-.pin-card::before {
-
-  content:"";
-  
-  position:absolute;
-  
-  bottom:15px;
-  
-  left:15px;
-  
-  background:#111827;
-  
-  color:white;
-  
-  padding:6px 14px;
-  
-  border-radius:20px;
-  
-  font-size:12px;
-  
-  font-weight:700;
-  
-  opacity:0;
-  
-  transform:translateY(10px);
-  
-  transition:.3s ease;
-  
-  z-index:5;
-  
-  }
-  
-  
-  .pin-card:hover::before {
-  
-  opacity:1;
-  
-  transform:translateY(0);
-  
-  }
-  /* ===========================
-PREMIUM CATEGORY BADGE
-=========================== */
-
-.pin-image-wrapper{
-  position:relative;
-}
 
 
-.pin-category-badge{
+/* =========================================================
+   EXTRA SAFETY AGAINST HORIZONTAL OVERFLOW
+========================================================= */
 
-  position:absolute;
+.discover-page img {
 
-  bottom:15px;
-  left:15px;
-
-  background:#111827;
-
-  color:white;
-
-  padding:7px 16px;
-
-  border-radius:30px;
-
-  font-size:12px;
-
-  font-weight:700;
-
-  text-transform:capitalize;
-
-  letter-spacing:.3px;
-
-  z-index:10;
-
-  opacity:0;
-
-  transform:translateY(15px);
-
-  transition:.35s ease;
+  max-width: 100%;
 
 }
 
 
-/* SHOW ON CARD HOVER */
+.discover-page button {
 
-.pin-card:hover .pin-category-badge{
-
-  opacity:1;
-
-  transform:translateY(0);
+  max-width: 100%;
 
 }
 
 
+.discover-page a {
 
-/* BADGE HOVER */
+  max-width: 100%;
 
-.pin-category-badge:hover{
-
-  background:#ff9900;
-
-  transform:translateY(-3px) scale(1.05);
-
-}
-.discover-home-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 9px 17px;
-  margin-bottom: 18px;
-
-  background: #ffffff;
-  color: #111111;
-
-  border: 1px solid #e2e2e2;
-  border-radius: 8px;
-
-  text-decoration: none;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.discover-home-icon {
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-
-.discover-home-button:hover {
-  background: #111111;
-  color: #ffffff;
-
-  border-color: #111111;
-
-  transform: translateY(-2px);
-
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15);
-}
-
-.discover-home-button:hover .discover-home-icon {
-  transform: scale(1.08);
-}
-
-.discover-home-button:active {
-  transform: translateY(0);
-}
-.discover-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  width: 100%;
-}
-
-.discover-title-row h1 {
-  margin: 0;
-}
-
-.discover-home-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 9px 17px;
-
-  background: #ffffff;
-  color: #111111;
-
-  border: 1px solid #e2e2e2;
-  border-radius: 8px;
-
-  text-decoration: none;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.discover-home-icon {
-  flex-shrink: 0;
-
-  transition: transform 0.2s ease;
-}
-
-.discover-home-button:hover {
-  background: #111111;
-  color: #ffffff;
-
-  border-color: #111111;
-
-  transform: translateY(-2px);
-
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15);
-}
-
-.discover-home-button:hover .discover-home-icon {
-  transform: scale(1.08);
-}
-
-.discover-home-button:active {
-  transform: translateY(0);
 }

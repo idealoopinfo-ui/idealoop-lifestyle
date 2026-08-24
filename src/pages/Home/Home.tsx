@@ -4,6 +4,7 @@ import WelcomeSection from "../../components/WelcomeSection/WelcomeSection";
 import FeaturedProducts from "../../components/Home/FeaturedProducts";
 import CategoryShowcase from "../../components/CategoryShowcase/CategoryShowcase";
 import TrendingProducts from "../../components/TrendingProducts/TrendingProducts";
+import BeautyComingSoon from "../../components/BeautyComingSoon/BeautyComingSoon";
 import WhyChoose from "../../components/WhyChoose/WhyChoose";
 
 import "./Home.css";
@@ -64,6 +65,15 @@ export default function Home() {
       <section className="home-section home-section-6">
         <SpotlightSection />
       </section>
+
+      {/* =========================
+          BEAUTY COMING SOON
+        ========================= */}
+
+      <section className="home-section home-section-7">
+      <BeautyComingSoon />
+      </section>
+
 
 
       {/* =========================
