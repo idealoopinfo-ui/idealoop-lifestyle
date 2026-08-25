@@ -26,7 +26,7 @@ interface ProductCardProps {
 
 
 export default function ProductCard({ product }: ProductCardProps) {
-
+  
 
 const navigate = useNavigate();
 

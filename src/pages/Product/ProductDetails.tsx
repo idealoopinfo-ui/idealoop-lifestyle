@@ -11,6 +11,11 @@ type AdditionalFeature = {
   value: string;
 };
 
+type SpecialFeature = {
+  feature: string;
+  value: string;
+};
+
 type Product = {
   id: string;
   product_id: string;
@@ -48,6 +53,7 @@ type Product = {
   package_includes?: string;
 
   additional_features?: AdditionalFeature[];
+  special_features?: SpecialFeature[];
 
   /* =========================
      FASHION
@@ -133,6 +139,7 @@ export default function ProductDetails() {
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [related, setRelated] = useState<Product[]>([]);
+  const [notFound, setNotFound] = useState(false);
 
   /* =========================
      LOAD PRODUCT
@@ -153,16 +160,18 @@ export default function ProductDetails() {
         .maybeSingle();
 
       if (error) {
-        console.error("PRODUCT LOAD ERROR:", error);
-        return;
-      }
+  console.error(error);
+  return;
+}
 
-      if (!data) {
-        console.log("PRODUCT NOT FOUND:", productId);
-        return;
-      }
+if (!data) {
+  setNotFound(true);
+  return;
 
-      setProduct(data);
+  
+}
+
+setProduct(data);
       setSelectedImage(data.image_1 || "");
 
       console.log("PRODUCT DATA:", data);
@@ -394,6 +403,13 @@ export default function ProductDetails() {
         item?.value?.trim()
     ) || [];
 
+    const specialFeatures =
+  product.special_features?.filter(
+    (item) =>
+      item?.feature?.trim() ||
+      item?.value?.trim()
+  ) || [];
+
   /* =========================
      FACEBOOK SHARE
   ========================= */
@@ -413,7 +429,18 @@ export default function ProductDetails() {
     );
   };
 
+  if (notFound) {
+    return (
+      <div className="product-not-found">
+        <h2>Product Not Found</h2>
+        <p>Sorry, we couldn't find the product you're looking for.</p>
+        <Link to="/">Back to Home</Link>
+      </div>
+    );
+  }
+
   return (
+
     <div className="product-details-page">
 
       {/* =====================================================
@@ -687,6 +714,41 @@ export default function ProductDetails() {
 
         </div>
       )}
+
+      {/* =====================================================
+          SPECIAL FEATURES
+          ===================================================== */}
+
+{specialFeatures.length > 0 && (
+  <div className="product-specifications">
+
+    <h2>Special Features</h2>
+
+    <div className="spec-grid">
+
+      {specialFeatures.map(
+        (item, index) => (
+          <div
+            className="spec-item"
+            key={`${item.feature}-${index}`}
+          >
+
+            <strong>
+              {item.feature}
+            </strong>
+
+            <span>
+              {item.value}
+            </span>
+
+          </div>
+        )
+      )}
+
+    </div>
+
+  </div>
+)}
 
       {/* =====================================================
           DESCRIPTION

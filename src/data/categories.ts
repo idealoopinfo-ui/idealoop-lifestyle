@@ -2,8 +2,8 @@ export type CategoryLevel =
   | "department"
   | "category"
   | "subcategory"
-  | "collections"
-  | "product-types";
+  | "collection"
+  | "product-type";
 
 export type CategoryNode = {
   name: string;
@@ -15,7 +15,7 @@ export type CategoryNode = {
 const leaf = (
   name: string,
   slug: string,
-  level: CategoryLevel = "subcategory"
+  level: CategoryLevel = "product-type"
 ): CategoryNode => ({
   name,
   slug,
@@ -24,361 +24,425 @@ const leaf = (
 });
 
 export const categories: CategoryNode[] = [
-  
-
-    /* =========================================================
-       FASHION
-    ========================================================= */
-  
-    {
-      name: "Fashion",
-      slug: "fashion",
-      level: "department",
-      children: [
-  
-        /* =========================================================
-           WOMEN
-        ========================================================= */
-  
-        {
-          name: "Women",
-          slug: "women",
-          level: "category",
-          children: [
-  
-            {
-              name: "Clothing",
-              slug: "women-clothing",
-              level: "subcategory",
-              children: [
-                leaf("Dresses", "dresses"),
-                leaf("Jeans", "jeans"),
-                leaf("Skirts", "skirts"),
-                leaf("Pants", "pants"),
-                leaf("Shorts", "shorts"),
-                leaf("Jackets", "jackets"),
-                leaf("Hoodies", "hoodies"),
-                leaf("T-Shirt", "t-shirt"),
-                leaf("Shirt", "shirt"),
-                leaf("Sweaters", "sweaters"),
-                leaf("Cami Top", "cami-top"),
-                leaf("Jumpsuits & Rompers", "jumpsuits-rompers"),
-                leaf("Blouse", "blouse"),
-  
-                {
-                  name: "Tops",
-                  slug: "tops",
-                  level: "subcategory",
-                  children: [
-                    leaf("Tank Tops", "tank-tops"),
-                    leaf("Vest", "women-vest"),
-                  ],
-                },
-  
-                {
-                  name: "Activewear",
-                  slug: "women-activewear",
-                  level: "subcategory",
-                  children: [
-                    leaf("Sports Bras", "sports-bras"),
-                    leaf("Leggings", "leggings"),
-                    leaf("Workout Shorts", "workout-shorts"),
-                    leaf("Sports Tops", "sports-tops"),
-                    leaf("Workout Shirts", "workout-shirts"),
-                    leaf("Yoga Pants", "yoga-pants"),
-                    leaf("Gym Sets", "gym-sets"),
-                  ],
-                },
-  
-                leaf("Sleepwear", "women-sleepwear"),
-  
-                {
-                  name: "Under Garments",
-                  slug: "women-under-garments",
-                  level: "subcategory",
-                  children: [
-                    leaf("Bras", "bras", "collection"),
-                    leaf("Panties", "panties", "collection"),
-                    leaf("Lingerie Sets", "lingerie-sets", "collection"),
-                    leaf("Shapewear", "shapewear", "collection"),
-                    leaf("Bralette", "bralette", "collection"),
-                  ],
-                },
-              ],
-            },
-  
-            {
-              name: "Shoes",
-              slug: "women-shoes",
-              level: "subcategory",
-              children: [
-                leaf("Sneakers", "women-sneakers"),
-                leaf("Heels", "heels"),
-                leaf("Boots", "women-boots"),
-                leaf("Sandals", "women-sandals"),
-                leaf("Flats", "flats"),
-                leaf("Casual", "women-casual"),
-              ],
-            },
-  
-            {
-              name: "Accessories",
-              slug: "women-accessories",
-              level: "subcategory",
-              children: [
-                leaf("Handbags", "handbags"),
-                leaf("Tote Bags", "tote-bags"),
-                leaf("Crossbody Bags", "crossbody-bags"),
-                leaf("Backpacks", "women-backpacks"),
-                leaf("Wallets", "women-wallets"),
-                leaf("Belts", "belts"),
-              ],
-            },
-  
-            {
-              name: "Jewelry",
-              slug: "women-jewelry",
-              level: "subcategory",
-              children: [
-                leaf("Earrings", "women-earrings"),
-                leaf("Necklaces", "women-necklaces"),
-                leaf("Bracelets", "women-bracelets"),
-                leaf("Rings", "women-rings"),
-                leaf("Jewelry Sets", "women-jewelry-sets"),
-                leaf("Hair Jewelry & Accessories", "women-hair-jewelry"),
-                leaf("Brooches & Pins", "women-brooches-pins"),
-                leaf("Anklets", "women-anklets"),
-                leaf("Body Jewelry", "women-body-jewelry"),
-              ],
-            },
-          ],
-        },
-  
-        /* =========================================================
-           MEN
-        ========================================================= */
-  
-        {
-          name: "Men",
-          slug: "men",
-          level: "category",
-          children: [
-  
-            {
-              name: "Clothing",
-              slug: "men-clothing",
-              level: "subcategory",
-              children: [
-                leaf("Shirts", "shirts"),
-                leaf("T-Shirts", "t-shirts"),
-                leaf("Jeans", "men-jeans"),
-                leaf("Trousers", "men-trousers"),
-                leaf("Jackets", "men-jackets"),
-                leaf("Hoodies", "men-hoodies"),
-  
-                {
-                  name: "Activewear",
-                  slug: "men-activewear",
-                  level: "subcategory",
-                  children: [
-                    leaf("Gym Shorts", "gym-shorts"),
-                    leaf("Training Shirts", "training-shirts"),
-                    leaf("Compression Wear", "compression-wear"),
-                    leaf("Joggers", "joggers"),
-                    leaf("Gym Sets", "men-gym-sets"),
-                  ],
-                },
-  
-                leaf("Sleepwear", "men-sleepwear"),
-  
-                {
-                  name: "Under Garments",
-                  slug: "men-under-garments",
-                  level: "subcategory",
-                  children: [
-                    leaf("Boxers", "boxers", "collection"),
-                    leaf("Briefs", "briefs", "collection"),
-                    leaf("Undershirts", "undershirts", "collection"),
-                    leaf("Underwear Sets", "underwear-sets", "collection"),
-                  ],
-                },
-  
-                {
-                  name: "Shorts",
-                  slug: "men-shorts",
-                  level: "subcategory",
-                  children: [
-                    leaf("Cargo Shorts", "men-cargo-shorts"),
-                  ],
-                },
-              ],
-            },
-  
-            {
-              name: "Shoes",
-              slug: "men-shoes",
-              level: "subcategory",
-              children: [
-                leaf("Sneakers", "men-sneakers"),
-                leaf("Formal Shoes", "formal-shoes"),
-                leaf("Boots", "men-boots"),
-                leaf("Sandals", "men-sandals"),
-                leaf("Casual", "men-casual"),
-              ],
-            },
-  
-            {
-              name: "Accessories",
-              slug: "men-accessories",
-              level: "subcategory",
-              children: [
-                leaf("Backpacks", "men-backpacks"),
-                leaf("Messenger Bags", "men-messenger-bags"),
-                leaf("Wallets", "men-wallets"),
-                leaf("Watches", "men-watches"),
-                leaf("Belts", "belts"),
-              ],
-            },
-  
-            {
-              name: "Jewelry",
-              slug: "men-jewelry",
-              level: "subcategory",
-              children: [
-                leaf("Earrings", "men-earrings"),
-                leaf("Necklaces", "men-necklaces"),
-                leaf("Bracelets", "men-bracelets"),
-                leaf("Rings", "men-rings"),
-                leaf("Jewelry Sets", "men-jewelry-sets"),
-                leaf("Brooches & Pins", "men-brooches-pins"),
-                leaf("Anklets", "men-anklets"),
-                leaf("Body Jewelry", "men-body-jewelry"),
-              ],
-            },
-          ],
-        },
-  
-        /* =========================================================
-           KIDS & BABY
-        ========================================================= */
-  
-        {
-          name: "Kids & Baby",
-          slug: "kids-baby",
-          level: "category",
-          children: [
-  
-            {
-              name: "Boys",
-              slug: "boys",
-              level: "subcategory",
-              children: [
-                leaf("Clothing", "boys-clothing", "collection"),
-                leaf("Shoes", "boys-shoes", "collection"),
-                leaf("Accessories", "boys-accessories", "collection"),
-              ],
-            },
-  
-            {
-              name: "Girls",
-              slug: "girls",
-              level: "subcategory",
-              children: [
-                leaf("Clothing", "girls-clothing", "collection"),
-                leaf("Shoes", "girls-shoes", "collection"),
-                leaf("Accessories", "girls-accessories", "collection"),
-              ],
-            },
-  
-            {
-              name: "Baby",
-              slug: "baby",
-              level: "subcategory",
-              children: [
-                leaf("Baby Clothing", "baby-clothing", "collection"),
-                leaf("Baby Shoes", "baby-shoes", "collection"),
-                leaf("Baby Care", "baby-care", "collection"),
-              ],
-            },
-          ],
-        },
-  
-      ],
-    },
-  
-    
 
   /* =========================================================
-   BEAUTY
-========================================================= */
+     FASHION
+  ========================================================= */
 
-{
-  name: "Beauty",
-  slug: "beauty",
-  level: "department",
-  children: [
-    {
-      name: "Makeup",
-      slug: "makeup",
-      level: "category",
-      children: [
-        leaf("Face", "face"),
-        leaf("Eyes", "eyes"),
-        leaf("Lips", "lips"),
-        leaf("Nails", "nails"),
-        leaf("Tools", "makeup-tools"),
-      ],
-    },
+  {
+    name: "Fashion",
+    slug: "fashion",
+    level: "department",
 
-    {
-      name: "Skincare",
-      slug: "skincare",
-      level: "category",
-      children: [
-        leaf("Cleansers", "cleansers"),
-        leaf("Moisturizers", "moisturizers"),
-        leaf("Serums", "serums"),
-        leaf("Sunscreen", "sunscreen"),
-        leaf("Toners", "toners"),
-        leaf("Masks", "masks"),
-      ],
-    },
+    children: [
 
-    {
-      name: "Hair Care",
-      slug: "hair-care",
-      level: "category",
-      children: [
-        leaf("Shampoo", "shampoo"),
-        leaf("Conditioner", "conditioner"),
-        leaf("Hair Oil", "hair-oil"),
-        leaf("Styling", "styling"),
-        leaf("Hair Tools", "hair-tools"),
-      ],
-    },
+      /* =====================================================
+         WOMEN
+      ===================================================== */
 
-    leaf("Fragrances", "fragrances", "category"),
+      {
+        name: "Women",
+        slug: "women",
+        level: "category",
 
-    leaf("Bath & Body", "bath-body", "category"),
+        children: [
 
-    {
-      name: "Personal Care",
-      slug: "personal-care",
-      level: "category",
-      children: [
-        leaf("Nail Care Tools", "nail-care-tools"),
-        leaf("Nail Clippers", "nail-clippers"),
-        leaf("Nail Files & Buffers", "nail-files-buffers"),
-        leaf("Cuticle Care", "cuticle-care"),
-        leaf("Foot Care", "foot-care"),
-        leaf("Oral Care", "oral-care"),
-        leaf("Body Care", "body-care"),
-      ],
-    },
+          /* ================= SHOES ================= */
 
-    leaf("Beauty Tools", "beauty-tools", "category"),
-  ],
-},
+          {
+            name: "Shoes",
+            slug: "shoes",
+            level: "subcategory",
+
+            children: [
+              leaf("Boots", "boots"),
+              leaf("Sneakers", "sneakers"),
+              leaf("Casual", "casual"),
+              leaf("Sandals", "sandals"),
+              leaf("Flats", "flats"),
+              leaf("Heels", "heels"),
+            ],
+          },
+
+          /* ================= ACCESSORIES ================= */
+
+          {
+            name: "Accessories",
+            slug: "accessories",
+            level: "subcategory",
+
+            children: [
+              leaf("Tote Bags", "tote-bags"),
+              leaf("Backpacks", "backpacks"),
+              leaf("Crossbody Bags", "crossbody-bags"),
+              leaf("Handbags", "handbags"),
+              leaf("Wallets", "wallets"),
+              leaf("Belts", "belts"),
+            ],
+          },
+
+          /* ================= JEWELRY ================= */
+
+          {
+            name: "Jewelry",
+            slug: "jewelry",
+            level: "subcategory",
+
+            children: [
+              leaf("Earrings", "earrings"),
+              leaf("Necklaces", "necklaces"),
+              leaf("Bracelets", "bracelets"),
+              leaf("Rings", "rings"),
+              leaf("Jewelry Sets", "jewelry-sets"),
+              leaf("Hair Jewelry & Accessories", "hair-jewelry"),
+              leaf("Brooches & Pins", "brooches-pins"),
+              leaf("Anklets", "anklets"),
+              leaf("Body Jewelry", "body-jewelry"),
+            ],
+          },
+
+          /* ================= CLOTHING ================= */
+
+          {
+            name: "Clothing",
+            slug: "clothing",
+            level: "subcategory",
+
+            children: [
+
+              leaf("Pants", "pants"),
+              leaf("Skirts", "skirts"),
+              leaf("Sleepwear", "sleepwear"),
+              leaf("Jackets", "jackets"),
+              leaf("T-Shirt", "t-shirt"),
+              leaf("Shorts", "shorts"),
+              leaf("Jumpsuits & Rompers", "jumpsuits-rompers"),
+              leaf("Sweaters", "sweaters"),
+              leaf("Jeans", "jeans"),
+
+              /* ================= TOPS ================= */
+
+              {
+                name: "Tops",
+                slug: "tops",
+                level: "collection",
+
+                children: [
+                  leaf("Tank Tops", "tank-tops"),
+                  leaf("Vest", "vest"),
+                ],
+              },
+
+              /* ================= ACTIVEWEAR ================= */
+
+              {
+                name: "Activewear",
+                slug: "activewear",
+                level: "collection",
+
+                children: [
+                  leaf("Sports Tops", "sports-tops"),
+                  leaf("Workout Shorts", "workout-shorts"),
+                  leaf("Sports Bras", "sports-bras"),
+                  leaf("Leggings", "leggings"),
+                  leaf("Yoga Pants", "yoga-pants"),
+                  leaf("Gym Sets", "gym-sets"),
+                  leaf("Workout Shirts", "workout-shirts"),
+                ],
+              },
+
+              leaf("Blouse", "blouse"),
+              leaf("Cami Top", "cami-top"),
+              leaf("Shirt", "shirt"),
+              leaf("Hoodies", "hoodies"),
+
+              /* ================= DRESSES ================= */
+
+              {
+                name: "Dresses",
+                slug: "dresses",
+                level: "collection",
+
+                children: [
+                  leaf("Bodycon Dresses", "bodycon-dresses"),
+                  leaf("Summer Dresses", "summer-dresses"),
+                  leaf("Mini Dresses", "mini-dresses"),
+                  leaf("Maxi Dresses", "maxi-dresses"),
+                  leaf("Midi Dresses", "midi-dresses"),
+                  leaf("Casual Dresses", "casual-dresses"),
+                ],
+              },
+
+              /* ================= UNDER GARMENTS ================= */
+
+              {
+                name: "Under Garments",
+                slug: "under-garments",
+                level: "collection",
+
+                children: [
+                  leaf("Bras", "bras", "product-type"),
+                  leaf("Bralette", "bralette", "product-type"),
+                  leaf("Shapewear", "shapewear", "product-type"),
+                  leaf("Lingerie Sets", "lingerie-sets", "product-type"),
+                  leaf("Panties", "panties", "product-type"),
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      /* =====================================================
+         MEN
+      ===================================================== */
+
+      {
+        name: "Men",
+        slug: "men",
+        level: "category",
+
+        children: [
+
+          /* ================= JEWELRY ================= */
+
+          {
+            name: "Jewelry",
+            slug: "jewelry",
+            level: "subcategory",
+
+            children: [
+              leaf("Earrings", "earrings"),
+              leaf("Necklaces", "necklaces"),
+              leaf("Bracelets", "bracelets"),
+              leaf("Rings", "rings"),
+              leaf("Jewelry Sets", "jewelry-sets"),
+              leaf("Brooches & Pins", "brooches-pins"),
+              leaf("Anklets", "anklets"),
+              leaf("Body Jewelry", "body-jewelry"),
+            ],
+          },
+
+          /* ================= ACCESSORIES ================= */
+
+          {
+            name: "Accessories",
+            slug: "accessories",
+            level: "subcategory",
+
+            children: [
+              leaf("Backpacks", "backpacks"),
+              leaf("Messenger Bags", "messenger-bags"),
+              leaf("Wallets", "wallets"),
+              leaf("Watches", "watches"),
+              leaf("Belts", "belts"),
+            ],
+          },
+
+          /* ================= SHOES ================= */
+
+          {
+            name: "Shoes",
+            slug: "shoes",
+            level: "subcategory",
+
+            children: [
+              leaf("Sneakers", "sneakers"),
+              leaf("Formal Shoes", "formal-shoes"),
+              leaf("Boots", "boots"),
+              leaf("Sandals", "sandals"),
+              leaf("Casual", "casual"),
+            ],
+          },
+
+          /* ================= CLOTHING ================= */
+
+          {
+            name: "Clothing",
+            slug: "clothing",
+            level: "subcategory",
+
+            children: [
+
+              leaf("T-Shirts", "t-shirts"),
+              leaf("Sleepwear", "sleepwear"),
+              leaf("Hoodies", "hoodies"),
+              leaf("Jeans", "jeans"),
+              leaf("Trousers", "trousers"),
+              leaf("Jackets", "jackets"),
+              leaf("Shirts", "shirts"),
+
+              /* ================= ACTIVEWEAR ================= */
+
+              {
+                name: "Activewear",
+                slug: "activewear",
+                level: "collection",
+
+                children: [
+                  leaf("Compression Wear", "compression-wear"),
+                  leaf("Gym Shorts", "gym-shorts"),
+                  leaf("Training Shirts", "training-shirts"),
+                  leaf("Joggers", "joggers"),
+                  leaf("Gym Sets", "gym-sets"),
+                ],
+              },
+
+              /* ================= UNDER GARMENTS ================= */
+
+              {
+                name: "Under Garments",
+                slug: "under-garments",
+                level: "collection",
+
+                children: [
+                  leaf("Boxers", "boxers"),
+                  leaf("Briefs", "briefs"),
+                  leaf("Undershirts", "undershirts"),
+                  leaf("Underwear Sets", "underwear-sets"),
+                ],
+              },
+
+              /* ================= SHORTS ================= */
+
+              {
+                name: "Shorts",
+                slug: "shorts",
+                level: "collection",
+
+                children: [
+                  leaf("Cargo Shorts", "cargo-shorts"),
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      /* =====================================================
+         KIDS & BABY
+      ===================================================== */
+
+      {
+        name: "Kids & Baby",
+        slug: "kids-baby",
+        level: "category",
+
+        children: [
+
+          {
+            name: "Girls",
+            slug: "girls",
+            level: "subcategory",
+
+            children: [
+              leaf("Girls Clothing", "girls-clothing", "collection"),
+              leaf("Girls Shoes", "girls-shoes", "collection"),
+            ],
+          },
+
+          {
+            name: "Boys",
+            slug: "boys",
+            level: "subcategory",
+
+            children: [
+              leaf("Boys Shoes", "boys-shoes", "collection"),
+            ],
+          },
+
+          {
+            name: "Baby",
+            slug: "baby",
+            level: "subcategory",
+
+            children: [
+              leaf("Baby Shoes", "baby-shoes", "collection"),
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  /* =========================================================
+     BEAUTY
+  ========================================================= */
+
+  {
+    name: "Beauty",
+    slug: "beauty",
+    level: "department",
+
+    children: [
+
+      {
+        name: "Makeup",
+        slug: "makeup",
+        level: "category",
+
+        children: [
+          leaf("Face", "face"),
+          leaf("Eyes", "eyes"),
+          leaf("Lips", "lips"),
+          leaf("Nails", "nails"),
+          leaf("Tools", "makeup-tools"),
+        ],
+      },
+
+      {
+        name: "Skincare",
+        slug: "skincare",
+        level: "category",
+
+        children: [
+          leaf("Cleansers", "cleansers"),
+          leaf("Moisturizers", "moisturizers"),
+          leaf("Serums", "serums"),
+          leaf("Sunscreen", "sunscreen"),
+          leaf("Toners", "toners"),
+          leaf("Masks", "masks"),
+        ],
+      },
+
+      {
+        name: "Hair Care",
+        slug: "hair-care",
+        level: "category",
+
+        children: [
+          leaf("Shampoo", "shampoo"),
+          leaf("Conditioner", "conditioner"),
+          leaf("Hair Oil", "hair-oil"),
+          leaf("Styling", "styling"),
+          leaf("Hair Tools", "hair-tools"),
+        ],
+      },
+
+      leaf("Fragrances", "fragrances", "category"),
+
+      leaf("Bath & Body", "bath-body", "category"),
+
+      {
+        name: "Personal Care",
+        slug: "personal-care",
+        level: "category",
+
+        children: [
+          leaf("Nail Care Tools", "nail-care-tools"),
+          leaf("Nail Clippers", "nail-clippers"),
+          leaf("Nail Files & Buffers", "nail-files-buffers"),
+          leaf("Cuticle Care", "cuticle-care"),
+          leaf("Foot Care", "foot-care"),
+          leaf("Oral Care", "oral-care"),
+          leaf("Body Care", "body-care"),
+        ],
+      },
+
+      leaf("Beauty Tools", "beauty-tools", "category"),
+    ],
+  },
+
   /* =========================================================
      HOME & LIVING
   ========================================================= */
@@ -387,11 +451,14 @@ export const categories: CategoryNode[] = [
     name: "Home & Living",
     slug: "home-living",
     level: "department",
+
     children: [
+
       {
         name: "Furniture",
         slug: "furniture",
         level: "category",
+
         children: [
           leaf("Sofas", "sofas"),
           leaf("Beds", "beds"),
@@ -405,17 +472,19 @@ export const categories: CategoryNode[] = [
         name: "Home Decor",
         slug: "home-decor",
         level: "category",
+
         children: [
           leaf("Wall Decor", "wall-decor"),
           leaf("Clocks", "clocks"),
           leaf("Mirrors", "mirrors"),
           leaf("Vases", "vases"),
           leaf("Decor Items", "decor-items"),
-      
+
           {
             name: "Floor Mats",
             slug: "floor-mats",
             level: "subcategory",
+
             children: [
               leaf("Bath Mats", "bath-mats", "collection"),
             ],
@@ -427,6 +496,7 @@ export const categories: CategoryNode[] = [
         name: "Bedding",
         slug: "bedding",
         level: "category",
+
         children: [
           leaf("Bedsheets", "bedsheets"),
           leaf("Pillows", "pillows"),
@@ -439,6 +509,7 @@ export const categories: CategoryNode[] = [
         name: "Kitchen & Dining",
         slug: "kitchen-dining",
         level: "category",
+
         children: [
           leaf("Dinnerware", "dinnerware"),
           leaf("Cookware", "cookware"),
@@ -452,6 +523,7 @@ export const categories: CategoryNode[] = [
         name: "Lighting",
         slug: "lighting",
         level: "category",
+
         children: [
           leaf("Ceiling Lights", "ceiling-lights"),
           leaf("Table Lamps", "table-lamps"),
@@ -463,6 +535,7 @@ export const categories: CategoryNode[] = [
         name: "Office Furniture",
         slug: "office-furniture",
         level: "category",
+
         children: [
           leaf("Office Chairs", "office-chairs"),
           leaf("Desks", "desks"),
@@ -480,11 +553,14 @@ export const categories: CategoryNode[] = [
     name: "Toys & Gifts",
     slug: "toys-gifts",
     level: "department",
+
     children: [
+
       {
         name: "Toys",
         slug: "toys",
         level: "category",
+
         children: [
           leaf("Action Figures", "action-figures"),
           leaf("Educational Toys", "educational-toys"),
@@ -492,7 +568,7 @@ export const categories: CategoryNode[] = [
           leaf("Building Blocks", "building-blocks"),
           leaf("Remote Control Toys", "remote-control-toys"),
           leaf("Plush Toys", "plush-toys"),
-          leaf("Off Road Vehicle", "off road vehicle"),
+          leaf("Off Road Vehicle", "off-road-vehicle"),
         ],
       },
 
@@ -500,6 +576,7 @@ export const categories: CategoryNode[] = [
         name: "Gifts",
         slug: "gifts",
         level: "category",
+
         children: [
           leaf("Birthday Gifts", "birthday-gifts"),
           leaf("Anniversary Gifts", "anniversary-gifts"),
@@ -513,6 +590,7 @@ export const categories: CategoryNode[] = [
         name: "Stationery",
         slug: "stationery",
         level: "category",
+
         children: [
           leaf("School Supplies", "school-supplies"),
           leaf("Office Supplies", "office-supplies"),
@@ -523,115 +601,128 @@ export const categories: CategoryNode[] = [
   },
 
   /* =========================================================
-   FITNESS & WELLNESS
-========================================================= */
+     FITNESS & WELLNESS
+  ========================================================= */
 
-{
-  name: "Fitness & Wellness",
-  slug: "fitness-wellness",
-  level: "department",
-  children: [
+  {
+    name: "Fitness & Wellness",
+    slug: "fitness-wellness",
+    level: "department",
 
-    {
-      name: "Strength Training",
-      slug: "strength-training",
-      level: "category",
-      children: [
+    children: [
 
-        leaf("Dumbbells", "dumbbells"),
+      {
+        name: "Strength Training",
+        slug: "strength-training",
+        level: "category",
 
-        leaf("Resistance Bands", "resistance-bands"),
+        children: [
+          leaf("Dumbbells", "dumbbells"),
+          leaf("Resistance Bands", "resistance-bands"),
+          leaf("Weight Benches", "weight-benches"),
 
-        leaf("Weight Benches", "weight-benches"),
+          {
+            name: "Abdominal Training",
+            slug: "abdominal-training",
+            level: "subcategory",
 
-        {
-          name: "Abdominal Training",
-          slug: "abdominal-training",
-          level: "subcategory",
-          children: [
-            leaf("Abdominal Wheels", "abdominal-wheels"),
-          ],
-        },
+            children: [
+              leaf("Abdominal Wheels", "abdominal-wheels"),
+            ],
+          },
 
-        {
-          name: "Training Accessories",
-          slug: "training-accessories",
-          level: "subcategory",
-          children: [
-            leaf("Workout Gloves", "workout-gloves"),
-            leaf("Cable Machine Attachments", "cable-machine-attachments"),
-            leaf("Wristbands", "wristbands"),
-          ],
-        },
+          {
+            name: "Training Accessories",
+            slug: "training-accessories",
+            level: "subcategory",
 
-        leaf("Strength Accessories", "strength-accessories"),
+            children: [
+              leaf("Workout Gloves", "workout-gloves"),
+              leaf(
+                "Cable Machine Attachments",
+                "cable-machine-attachments"
+              ),
+              leaf("Wristbands", "wristbands"),
+            ],
+          },
 
-      ],
-    },
+          leaf("Strength Accessories", "strength-accessories"),
+        ],
+      },
 
-    {
-      name: "Yoga",
-      slug: "yoga",
-      level: "category",
-      children: [
-        leaf("Yoga Mats", "yoga-mats"),
-        leaf("Yoga Blocks", "yoga-blocks"),
-        leaf("Yoga Clothing", "yoga-clothing"),
-      ],
-    },
+      {
+        name: "Yoga",
+        slug: "yoga",
+        level: "category",
 
-    {
-      name: "Home Gym",
-      slug: "home-gym",
-      level: "category",
-      children: [
-        leaf("Cardio Equipment", "cardio-equipment"),
-        leaf("Gym Machines", "gym-machines"),
-        leaf("Exercise Accessories", "exercise-accessories"),
-      ],
-    },
+        children: [
+          leaf("Yoga Mats", "yoga-mats"),
+          leaf("Yoga Blocks", "yoga-blocks"),
+          leaf("Yoga Clothing", "yoga-clothing"),
+        ],
+      },
 
-    {
-      name: "Fitness Ebooks",
-      slug: "fitness-ebooks",
-      level: "category",
-      children: [
-        leaf("Workout Guides", "workout-guides"),
-        leaf("Weight Loss", "weight-loss"),
-        leaf("Muscle Building", "muscle-building"),
-        leaf("Nutrition", "nutrition"),
-      ],
-    },
+      {
+        name: "Home Gym",
+        slug: "home-gym",
+        level: "category",
 
-    {
-      name: "Wellness",
-      slug: "wellness",
-      level: "category",
-      children: [
+        children: [
+          leaf("Cardio Equipment", "cardio-equipment"),
+          leaf("Gym Machines", "gym-machines"),
+          leaf("Exercise Accessories", "exercise-accessories"),
+        ],
+      },
 
-        {
-          name: "Massage & Relaxation",
-          slug: "massage-relaxation",
-          level: "subcategory",
-          children: [
-            leaf("Neck Massagers", "neck-massagers"),
-            leaf("Massage Guns", "massage-guns"),
-            leaf("Massage Pillows", "massage-pillows"),
-          ],
-        },
+      {
+        name: "Fitness Ebooks",
+        slug: "fitness-ebooks",
+        level: "category",
 
-        {
-          name: "Aromatherapy",
-          slug: "aromatherapy",
-          level: "subcategory",
-          children: [
-            leaf("Essential Oils", "essential-oils"),
-            leaf("Diffusers", "diffusers"),
-            leaf("Candles & Fragrance", "candles-fragrance"),
-          ],
-        },
-      ],
-    },
-  ],
-},
+        children: [
+          leaf("Workout Guides", "workout-guides"),
+          leaf("Weight Loss", "weight-loss"),
+          leaf("Muscle Building", "muscle-building"),
+          leaf("Nutrition", "nutrition"),
+        ],
+      },
+
+      {
+        name: "Wellness",
+        slug: "wellness",
+        level: "category",
+
+        children: [
+
+          {
+            name: "Massage & Relaxation",
+            slug: "massage-relaxation",
+            level: "subcategory",
+
+            children: [
+              leaf("Neck Massagers", "neck-massagers"),
+              leaf("Massage Guns", "massage-guns"),
+              leaf("Massage Pillows", "massage-pillows"),
+            ],
+          },
+
+          {
+            name: "Aromatherapy",
+            slug: "aromatherapy",
+            level: "subcategory",
+
+            children: [
+              leaf("Essential Oils", "essential-oils"),
+              leaf("Diffusers", "diffusers"),
+              leaf(
+                "Candles & Fragrance",
+                "candles-fragrance"
+              ),
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
+

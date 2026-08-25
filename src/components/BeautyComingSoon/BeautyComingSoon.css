@@ -1,52 +1,37 @@
-/* =========================================================
-   BEAUTY COLLECTION
-========================================================= */
-
 .beauty-coming-soon {
   width: 100%;
   max-width: 1800px;
   margin: 0 auto;
-  padding: 30px 24px;
+  padding: 20px 24px;
   box-sizing: border-box;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
 .beauty-coming-header {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
 .beauty-coming-header span {
   display: block;
-  margin-bottom: 5px;
-
-  font-size: 12px;
+  margin-bottom: 4px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.5px;
-
   color: #ff9900;
 }
 
 .beauty-coming-header h2 {
-  margin: 0 0 6px;
-
-  font-size: 28px;
+  margin: 0 0 4px;
+  font-size: 24px;
   line-height: 1.2;
   font-weight: 700;
-
   color: #222;
 }
 
 .beauty-coming-header p {
   margin: 0;
-
-  font-size: 14px;
-  line-height: 1.5;
-
+  font-size: 13px;
+  line-height: 1.4;
   color: #666;
 }
 
@@ -57,13 +42,9 @@
 
 .beauty-coming-grid {
   width: 100%;
-
   display: grid;
-
   grid-template-columns: repeat(5, minmax(0, 1fr));
-
-  gap: 20px;
-
+  gap: 18px;
   box-sizing: border-box;
 }
 
@@ -74,27 +55,19 @@
 
 .beauty-coming-card {
   position: relative;
-
   display: block;
-
   width: 100%;
 
-  /*
-     EXACT CARD HEIGHT
-  */
-  height: 380px !important;
-
-  min-height: 380px !important;
-  max-height: 380px !important;
+  height: 280px !important;
+  min-height: 280px !important;
+  max-height: 280px !important;
 
   overflow: hidden;
-
   box-sizing: border-box;
 
   background: #fff;
-
   border: 1px solid #e5e5e5;
-  border-radius: 14px;
+  border-radius: 12px;
 
   text-decoration: none;
 
@@ -120,29 +93,21 @@
 
   width: 100%;
 
-  /*
-     IMAGE IS ALSO LIMITED TO 380px
-  */
-
-  height: 380px !important;
-
-  min-height: 380px;
-  max-height: 380px;
+  height: 280px !important;
+  min-height: 280px;
+  max-height: 280px;
 
   object-fit: contain;
-
   object-position: center;
 
   background: #fff;
-
   box-sizing: border-box;
 
   transition:
     transform 0.3s ease;
 }
 
-.beauty-coming-card:hover
-.beauty-coming-image {
+.beauty-coming-card:hover .beauty-coming-image {
   transform: scale(1.03);
 }
 
@@ -158,7 +123,7 @@
   right: 0;
   bottom: 0;
 
-  padding: 35px 15px 15px;
+  padding: 30px 15px 12px;
 
   box-sizing: border-box;
 
@@ -177,17 +142,14 @@
     transform 0.25s ease;
 }
 
-.beauty-coming-card:hover
-.beauty-category-overlay {
+.beauty-coming-card:hover .beauty-category-overlay {
   opacity: 1;
-
   transform: translateY(0);
 }
 
 .beauty-category-overlay span {
   color: #fff;
-
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -199,12 +161,11 @@
 .beauty-coming-card.skeleton {
   width: 100%;
 
-  height: 380px !important;
-  min-height: 380px !important;
-  max-height: 380px !important;
+  height: 280px !important;
+  min-height: 280px !important;
+  max-height: 280px !important;
 
   background: #f3f3f3;
-
   border: none;
 }
 
@@ -219,7 +180,7 @@
     grid-template-columns:
       repeat(3, minmax(0, 1fr));
 
-    gap: 18px;
+    gap: 16px;
   }
 
 }
@@ -232,18 +193,18 @@
 @media (max-width: 700px) {
 
   .beauty-coming-soon {
-    padding: 25px 15px;
+    padding: 20px 15px;
   }
 
   .beauty-coming-grid {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
 
-    gap: 15px;
+    gap: 14px;
   }
 
   .beauty-coming-header h2 {
-    font-size: 24px;
+    font-size: 22px;
   }
 
 }
@@ -257,8 +218,152 @@
 
   .beauty-coming-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
 
-    gap: 15px;
+}
+/* =========================================================
+   PROFESSIONAL BEAUTY COLLECTION TRANSITIONS
+========================================================= */
+
+.beauty-coming-soon {
+  animation: beautySectionReveal 0.8s ease-out both;
+}
+
+@keyframes beautySectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   HEADER REVEAL
+========================================================= */
+
+.beauty-coming-header {
+  animation: beautyHeaderReveal 0.7s ease-out 0.1s both;
+}
+
+@keyframes beautyHeaderReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   PRODUCT CARD ENTRANCE
+========================================================= */
+
+.beauty-coming-card {
+  animation: beautyCardReveal 0.6s ease-out both;
+}
+
+.beauty-coming-card:nth-child(1) {
+  animation-delay: 0.12s;
+}
+
+.beauty-coming-card:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.beauty-coming-card:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.beauty-coming-card:nth-child(4) {
+  animation-delay: 0.30s;
+}
+
+.beauty-coming-card:nth-child(5) {
+  animation-delay: 0.36s;
+}
+
+@keyframes beautyCardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   PROFESSIONAL HOVER
+========================================================= */
+
+.beauty-coming-card {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+.beauty-coming-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   IMAGE HOVER
+========================================================= */
+
+.beauty-coming-image {
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.beauty-coming-card:hover .beauty-coming-image {
+  transform: scale(1.035);
+}
+
+
+/* =========================================================
+   OVERLAY TRANSITION
+========================================================= */
+
+.beauty-category-overlay {
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .beauty-coming-soon,
+  .beauty-coming-header,
+  .beauty-coming-card {
+    animation: none;
+  }
+
+  .beauty-coming-card,
+  .beauty-coming-image,
+  .beauty-category-overlay {
+    transition: none;
   }
 
 }

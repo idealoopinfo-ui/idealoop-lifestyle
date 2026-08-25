@@ -566,9 +566,13 @@ const addProduct = async () => {
             item.feature.trim() !== "" ||
             item.value.trim() !== ""
         ),
-
-        special_features: specialFeatures,
-
+        
+        special_features: specialFeatures.filter(
+          (item) =>
+            item.feature.trim() !== "" ||
+            item.value.trim() !== ""
+        ),
+        
         model,
         warranty,
         country_origin: countryOrigin,
