@@ -5,19 +5,26 @@ import { supabase } from "../../lib/supabase";
 import "./DiscoverPage.css";
 
 
+/* =========================================================
+   PRODUCT
+========================================================= */
+
 interface Product {
   id: string;
   product_id: string;
   image_1: string;
   department: string;
+  category?: string;
+  subcategory?: string;
 }
 
 
 /* =========================================================
-   DAILY ROTATION
+   DAILY SEED
 ========================================================= */
 
 const getDailySeed = () => {
+
   const today = new Date();
 
   return (
@@ -25,6 +32,7 @@ const getDailySeed = () => {
     (today.getMonth() + 1) * 100 +
     today.getDate()
   );
+
 };
 
 
@@ -35,25 +43,78 @@ const getDailySeed = () => {
    Different result on a new day.
 ========================================================= */
 
-const dailyShuffle = <T,>(items: T[], seed: number): T[] => {
+const dailyShuffle = <T,>(
+  items: T[],
+  seed: number
+): T[] => {
 
   const array = [...items];
 
   let randomSeed = seed;
 
-  for (let i = array.length - 1; i > 0; i--) {
+  for (
+    let i = array.length - 1;
+    i > 0;
+    i--
+  ) {
 
     randomSeed =
       (randomSeed * 9301 + 49297) % 233280;
 
-    const random = randomSeed / 233280;
+    const random =
+      randomSeed / 233280;
 
-    const j = Math.floor(random * (i + 1));
+    const j =
+      Math.floor(
+        random * (i + 1)
+      );
 
-    [array[i], array[j]] = [array[j], array[i]];
+    [array[i], array[j]] =
+      [array[j], array[i]];
+
   }
 
   return array;
+
+};
+
+
+/* =========================================================
+   DISCOVER DEPARTMENTS
+
+   Only these departments appear in Discover.
+========================================================= */
+
+const DISCOVER_DEPARTMENTS = [
+  "fashion",
+  "beauty",
+  "fitness-wellness",
+];
+
+
+/* =========================================================
+   FORMAT CATEGORY NAME
+========================================================= */
+
+const formatCategoryName = (
+  category?: string,
+  department?: string
+) => {
+
+  const value =
+    category ||
+    department ||
+    "";
+
+  return value
+    .split("-")
+    .map(
+      (word) =>
+        word.charAt(0).toUpperCase() +
+        word.slice(1)
+    )
+    .join(" ");
+
 };
 
 
@@ -63,23 +124,51 @@ const dailyShuffle = <T,>(items: T[], seed: number): T[] => {
 
 export default function DiscoverPage() {
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] =
+    useState<Product[]>([]);
+
 
   const [selectedCategory, setSelectedCategory] =
     useState("fashion");
 
-  const navigate = useNavigate();
+
+  const navigate =
+    useNavigate();
 
 
-  /* =========================================================
+  /* =======================================================
      LOAD PRODUCTS
-  ========================================================= */
+  ======================================================= */
 
   useEffect(() => {
 
     const fetchProducts = async () => {
 
-      const { data, error } = await supabase
+      /* =====================================================
+         SAFETY CHECK
+      ===================================================== */
+
+      if (
+        !DISCOVER_DEPARTMENTS.includes(
+          selectedCategory
+        )
+      ) {
+
+        setProducts([]);
+
+        return;
+
+      }
+
+
+      /* =====================================================
+         SUPABASE QUERY
+      ===================================================== */
+
+      const {
+        data,
+        error,
+      } = await supabase
 
         .from("products")
 
@@ -87,7 +176,9 @@ export default function DiscoverPage() {
           id,
           product_id,
           image_1,
-          department
+          department,
+          category,
+          subcategory
         `)
 
         .eq(
@@ -95,8 +186,18 @@ export default function DiscoverPage() {
           selectedCategory
         )
 
-        .limit(100);
+        .not(
+          "image_1",
+          "is",
+          null
+        )
 
+        .limit(200);
+
+
+      /* =====================================================
+         ERROR
+      ===================================================== */
 
       if (error) {
 
@@ -105,24 +206,48 @@ export default function DiscoverPage() {
           error.message
         );
 
+        setProducts([]);
+
         return;
+
       }
+
+
+      /* =====================================================
+         VALID PRODUCTS
+      ===================================================== */
+
+      const validProducts =
+        (data || []).filter(
+          (product: Product) =>
+            product.id &&
+            product.product_id &&
+            product.image_1
+        );
 
 
       /* =====================================================
          DAILY PRODUCT ROTATION
       ===================================================== */
 
-      const dailySeed = getDailySeed();
+      const dailySeed =
+        getDailySeed();
+
 
       const rotatedProducts =
         dailyShuffle(
-          data || [],
+          validProducts,
           dailySeed
         );
 
 
-      setProducts(rotatedProducts);
+      /* =====================================================
+         SAVE PRODUCTS
+      ===================================================== */
+
+      setProducts(
+        rotatedProducts
+      );
 
     };
 
@@ -180,6 +305,7 @@ export default function DiscoverPage() {
 
             </svg>
 
+
             <span>
               Home
             </span>
@@ -203,85 +329,74 @@ export default function DiscoverPage() {
       <div className="discover-nav">
 
 
-        {/* FASHION */}
+        {/* =================================================
+            FASHION
+        ================================================= */}
 
         <button
+          type="button"
           className={
             selectedCategory === "fashion"
               ? "active"
               : ""
           }
           onClick={() =>
-            setSelectedCategory("fashion")
+            setSelectedCategory(
+              "fashion"
+            )
           }
         >
+
           Fashion
+
         </button>
 
 
-        {/* BEAUTY */}
+        {/* =================================================
+            BEAUTY
+        ================================================= */}
 
         <button
+          type="button"
           className={
             selectedCategory === "beauty"
               ? "active"
               : ""
           }
           onClick={() =>
-            setSelectedCategory("beauty")
+            setSelectedCategory(
+              "beauty"
+            )
           }
         >
+
           Beauty
+
         </button>
 
 
-        {/* FITNESS & WELLNESS */}
+        {/* =================================================
+            FITNESS & WELLNESS
+        ================================================= */}
 
         <button
+          type="button"
           className={
-            selectedCategory === "fitness-wellness"
+            selectedCategory ===
+            "fitness-wellness"
               ? "active"
               : ""
           }
           onClick={() =>
-            setSelectedCategory("fitness-wellness")
+            setSelectedCategory(
+              "fitness-wellness"
+            )
           }
         >
+
           Fitness & Wellness
+
         </button>
-
-
-        {/* HOME & LIVING */}
-
-        <button
-          className={
-            selectedCategory === "home-living"
-              ? "active"
-              : ""
-          }
-          onClick={() =>
-            setSelectedCategory("home-living")
-          }
-        >
-          Home & Living
-        </button>
-
-
-        {/* TOYS & GIFTS */}
-
-        <button
-          className={
-            selectedCategory === "toys-gifts"
-              ? "active"
-              : ""
-          }
-          onClick={() =>
-            setSelectedCategory("toys-gifts")
-          }
-        >
-          Toys & Gifts
-        </button>
-
 
       </div>
 
@@ -292,29 +407,30 @@ export default function DiscoverPage() {
 
       <div className="pinterest-grid">
 
-
         {products.map(
-          (product, index) => {
+          (
+            product,
+            index
+          ) => {
 
 
-            /*
-             * Daily layout rotation.
-             *
-             * Because the product list itself is already
-             * shuffled daily, the card sizes also move
-             * around naturally.
-             *
-             * The additional daily offset makes the layout
-             * pattern change from day to day.
-             */
+            /* =================================================
+               DAILY LAYOUT ROTATION
+            ================================================= */
 
-            const dailySeed = getDailySeed();
+            const dailySeed =
+              getDailySeed();
+
 
             const layoutIndex =
-              (index + dailySeed) % 10;
+              (
+                index +
+                dailySeed
+              ) % 10;
 
 
-            let cardClass = "medium-pin";
+            let cardClass =
+              "medium-pin";
 
 
             if (
@@ -322,18 +438,26 @@ export default function DiscoverPage() {
               layoutIndex === 4
             ) {
 
-              cardClass = "large-pin";
+              cardClass =
+                "large-pin";
 
-            } else if (
+            }
+
+            else if (
               layoutIndex === 2 ||
               layoutIndex === 7 ||
               layoutIndex === 9
             ) {
 
-              cardClass = "small-pin";
+              cardClass =
+                "small-pin";
 
             }
 
+
+            /* =================================================
+               PRODUCT CARD
+            ================================================= */
 
             return (
 
@@ -351,6 +475,10 @@ export default function DiscoverPage() {
                 <div className="pin-image-wrapper">
 
 
+                  {/* =========================================
+                      PRODUCT IMAGE
+                  ========================================= */}
+
                   <img
                     src={
                       product.image_1 ||
@@ -364,27 +492,32 @@ export default function DiscoverPage() {
                   />
 
 
-                  <div className="pin-category-badge">
+                  {/* =========================================
+                      CATEGORY BADGE
+                  ========================================= */}
 
-                    {product.department}
+                  <div
+                    className="pin-category-badge"
+                  >
+
+                    {formatCategoryName(
+                      product.category,
+                      product.department
+                    )}
 
                   </div>
 
 
                 </div>
 
-
               </div>
 
             );
 
           }
-
         )}
 
-
       </div>
-
 
     </div>
 

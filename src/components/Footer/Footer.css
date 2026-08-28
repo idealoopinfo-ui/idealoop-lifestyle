@@ -379,3 +379,13 @@
   opacity: 0.5;
   cursor: default;
 }
+/* YouTube */
+.social-links a[aria-label="YouTube"] {
+  color: #ff0000;
+  transition: all 0.3s ease;
+}
+
+.social-links a[aria-label="YouTube"]:hover {
+  color: #cc0000;
+  transform: translateY(-2px);
+}

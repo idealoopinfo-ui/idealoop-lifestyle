@@ -52,15 +52,6 @@ const DEPARTMENT_CONFIG: DepartmentConfig[] = [
     slug: "beauty",
   },
 
-  {
-    name: "Home & Living",
-    slug: "home-living",
-  },
-
-  {
-    name: "Toys & Gifts",
-    slug: "toys-gifts",
-  },
 
 ];
 

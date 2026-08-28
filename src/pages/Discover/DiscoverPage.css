@@ -20,7 +20,6 @@
 ========================================================= */
 
 .discover-page {
-
   width: 100%;
   max-width: none;
 
@@ -46,12 +45,11 @@
 ========================================================= */
 
 .discover-header {
-
   width: 100%;
 
   text-align: center;
 
-  margin: 0 0 20px 0;
+  margin: 0 0 22px 0;
 }
 
 
@@ -60,7 +58,6 @@
 ========================================================= */
 
 .discover-title-row {
-
   width: 100%;
 
   display: flex;
@@ -74,7 +71,6 @@
 
 
 .discover-title-row h1 {
-
   margin: 0;
 
   font-size: 42px;
@@ -94,7 +90,6 @@
 ========================================================= */
 
 .discover-header p {
-
   max-width: 600px;
 
   margin: 10px auto 0;
@@ -112,7 +107,6 @@
 ========================================================= */
 
 .discover-home-button {
-
   display: inline-flex;
 
   align-items: center;
@@ -133,7 +127,7 @@
 
   border: 1px solid #e2e2e2;
 
-  border-radius: 8px;
+  border-radius: 10px;
 
   text-decoration: none;
 
@@ -156,7 +150,6 @@
 
 
 .discover-home-icon {
-
   flex-shrink: 0;
 
   transition:
@@ -165,7 +158,6 @@
 
 
 .discover-home-button:hover {
-
   background: #111111;
 
   color: #ffffff;
@@ -180,25 +172,20 @@
 
 
 .discover-home-button:hover .discover-home-icon {
-
   transform: scale(1.08);
 }
 
 
 .discover-home-button:active {
-
   transform: translateY(0);
 }
 
 
 /* =========================================================
    CATEGORY NAVIGATION
-   IMPORTANT:
-   position: static = scrolls away normally
 ========================================================= */
 
 .discover-nav {
-
   width: 100%;
 
   display: flex;
@@ -207,13 +194,13 @@
 
   justify-content: center;
 
-  gap: 10px;
+  gap: 12px;
 
   flex-wrap: wrap;
 
-  margin: 0 0 20px 0;
+  margin: 0 0 24px 0;
 
-  padding: 10px 0;
+  padding: 12px 0;
 
   position: static;
 
@@ -235,16 +222,17 @@
 ========================================================= */
 
 .discover-nav button {
-
   flex-shrink: 0;
 
-  padding: 10px 22px;
+  min-width: 120px;
+
+  padding: 11px 24px;
 
   background: #ffffff;
 
   color: #333333;
 
-  border: 1px solid #eeeeee;
+  border: 1px solid #e5e7eb;
 
   border-radius: 50px;
 
@@ -258,6 +246,9 @@
 
   cursor: pointer;
 
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.05);
+
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
@@ -268,7 +259,6 @@
 
 
 .discover-nav button:hover {
-
   color: #ff9900;
 
   border-color: #ff9900;
@@ -281,7 +271,6 @@
 
 
 .discover-nav button.active {
-
   background: #ff9900;
 
   color: #ffffff;
@@ -289,7 +278,9 @@
   border-color: #ff9900;
 
   box-shadow:
-    0 8px 20px rgba(255, 153, 0, 0.35);
+    0 8px 20px rgba(255, 153, 0, 0.30);
+
+  transform: translateY(-1px);
 }
 
 
@@ -298,12 +289,12 @@
 ========================================================= */
 
 .pinterest-grid {
-
   width: 100%;
 
   max-width: none;
 
   margin: 0;
+
   padding: 0;
 
   column-count: 5;
@@ -319,7 +310,6 @@
 ========================================================= */
 
 .pin-card {
-
   width: 100%;
 
   display: inline-block;
@@ -354,7 +344,6 @@
 
 
 .pin-card:hover {
-
   transform: translateY(-5px);
 
   box-shadow:
@@ -367,7 +356,6 @@
 ========================================================= */
 
 .pin-image-wrapper {
-
   position: relative;
 
   width: 100%;
@@ -383,7 +371,6 @@
 ========================================================= */
 
 .pin-image {
-
   display: block;
 
   width: 100%;
@@ -391,6 +378,7 @@
   height: auto;
 
   margin: 0;
+
   padding: 0;
 
   background: #f3f4f6;
@@ -405,7 +393,6 @@
 
 
 .pin-card:hover .pin-image {
-
   transform: scale(1.05);
 }
 
@@ -415,7 +402,6 @@
 ========================================================= */
 
 .large-pin .pin-image {
-
   aspect-ratio: 3 / 4;
 
   object-fit: contain;
@@ -425,7 +411,6 @@
 
 
 .medium-pin .pin-image {
-
   aspect-ratio: 1 / 1;
 
   object-fit: contain;
@@ -435,7 +420,6 @@
 
 
 .small-pin .pin-image {
-
   aspect-ratio: 4 / 3;
 
   object-fit: contain;
@@ -449,7 +433,6 @@
 ========================================================= */
 
 .pin-card::after {
-
   content: "";
 
   position: absolute;
@@ -475,7 +458,6 @@
 
 
 .pin-card:hover::after {
-
   opacity: 1;
 }
 
@@ -485,17 +467,17 @@
 ========================================================= */
 
 .pin-category-badge {
-
   position: absolute;
 
   left: 15px;
+
   bottom: 15px;
 
   z-index: 10;
 
   padding: 7px 16px;
 
-  background: #111827;
+  background: rgba(17, 24, 39, 0.92);
 
   color: #ffffff;
 
@@ -523,7 +505,6 @@
 
 
 .pin-card:hover .pin-category-badge {
-
   opacity: 1;
 
   transform: translateY(0);
@@ -531,7 +512,6 @@
 
 
 .pin-category-badge:hover {
-
   background: #ff9900;
 
   transform:
@@ -545,7 +525,6 @@
 ========================================================= */
 
 .pin-card::before {
-
   content: none;
 }
 
@@ -557,9 +536,7 @@
 @media (max-width: 1400px) {
 
   .pinterest-grid {
-
     column-count: 5;
-
   }
 
 }
@@ -572,9 +549,7 @@
 @media (max-width: 1200px) {
 
   .pinterest-grid {
-
     column-count: 4;
-
   }
 
 }
@@ -587,16 +562,25 @@
 @media (max-width: 900px) {
 
   .pinterest-grid {
-
     column-count: 3;
-
   }
 
 
   .discover-title-row h1 {
-
     font-size: 36px;
+  }
 
+
+  .discover-nav {
+    gap: 10px;
+  }
+
+
+  .discover-nav button {
+    min-width: 110px;
+
+    padding:
+      10px 19px;
   }
 
 }
@@ -609,53 +593,48 @@
 @media (max-width: 650px) {
 
   .discover-page {
-
     width: 100%;
 
-    padding:
-      15px;
+    padding: 15px;
   }
 
 
-  /* Header */
+  /* -----------------------------------------------
+     Header
+  ----------------------------------------------- */
 
   .discover-title-row {
-
     gap: 10px;
-
   }
 
 
   .discover-title-row h1 {
-
     font-size: 32px;
-
   }
 
 
   .discover-header p {
-
     font-size: 14px;
-
   }
 
 
-  /* Home button */
+  /* -----------------------------------------------
+     Home button
+  ----------------------------------------------- */
 
   .discover-home-button {
-
     padding:
       8px 12px;
 
     font-size: 13px;
-
   }
 
 
-  /* Category navigation */
+  /* -----------------------------------------------
+     Category navigation
+  ----------------------------------------------- */
 
   .discover-nav {
-
     justify-content: flex-start;
 
     flex-wrap: nowrap;
@@ -667,60 +646,58 @@
     padding:
       10px 2px;
 
-    scrollbar-width: none;
+    gap: 8px;
 
+    scrollbar-width: none;
   }
 
 
   .discover-nav::-webkit-scrollbar {
-
     display: none;
-
   }
 
 
   .discover-nav button {
+    min-width: auto;
 
     flex-shrink: 0;
 
     padding:
       9px 17px;
 
+    font-size: 13px;
   }
 
 
-  /* Grid */
+  /* -----------------------------------------------
+     Pinterest grid
+  ----------------------------------------------- */
 
   .pinterest-grid {
-
     column-count: 2;
 
     column-gap: 8px;
-
   }
 
 
   .pin-card {
-
     margin-bottom: 8px;
 
     border-radius: 12px;
-
   }
 
 
   .pin-image-wrapper,
   .pin-image {
-
     border-radius: 14px;
-
   }
 
 
-  /* Show category badge more naturally on mobile */
+  /* -----------------------------------------------
+     Category badge
+  ----------------------------------------------- */
 
   .pin-category-badge {
-
     left: 8px;
 
     bottom: 8px;
@@ -729,7 +706,6 @@
       5px 10px;
 
     font-size: 10px;
-
   }
 
 }
@@ -742,55 +718,53 @@
 @media (max-width: 420px) {
 
   .discover-page {
-
     padding:
       12px;
-
   }
 
 
   .discover-title-row h1 {
-
     font-size: 28px;
-
   }
 
 
   .discover-header p {
-
     font-size: 14px;
-
   }
 
 
   .discover-home-button {
-
     padding:
       7px 10px;
-
   }
 
 
   .discover-home-button span {
-
     display: none;
-
   }
 
 
   .pinterest-grid {
-
     column-count: 2;
 
     column-gap: 7px;
-
   }
 
 
   .pin-card {
-
     margin-bottom: 7px;
+  }
 
+
+  .pin-category-badge {
+    left: 7px;
+
+    bottom: 7px;
+
+    padding:
+      5px 9px;
+
+    font-size: 9px;
   }
 
 }
@@ -801,21 +775,15 @@
 ========================================================= */
 
 .discover-page img {
-
   max-width: 100%;
-
 }
 
 
 .discover-page button {
-
   max-width: 100%;
-
 }
 
 
 .discover-page a {
-
   max-width: 100%;
-
 }

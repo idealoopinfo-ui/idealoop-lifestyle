@@ -20,8 +20,9 @@ export default function Hero() {
           </h1>
 
           <p>
-            Explore curated products, discover new ideas,
-            and find inspiration for your everyday lifestyle.
+            Explore curated fashion, beauty, wellness,
+            and everyday lifestyle products made to inspire
+            your next find.
           </p>
 
           <div className="hero-buttons">
@@ -44,46 +45,70 @@ export default function Hero() {
 
         </div>
 
+
+        {/* =================================================
+            HERO IMAGE GALLERY
+        ================================================= */}
+
         <div className="hero-gallery">
 
+          {/* FASHION */}
+
           <Link
-            to="/discover"
+            to="/category/fashion"
             className="hero-card hero-card-1"
           >
+
             <img
-              src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600"
-              alt="Lifestyle fashion"
+              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=85"
+              alt="Fashion lifestyle"
             />
+
           </Link>
 
+
+          {/* EYEWEAR / ACCESSORIES */}
+
           <Link
-            to="/discover"
+            to="/category/fashion"
             className="hero-card hero-card-2"
           >
+
             <img
-              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=700"
-              alt="Lifestyle home"
+              src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700&q=85"
+              alt="Fashion accessories and eyewear"
             />
+
           </Link>
 
+
+          {/* BEAUTY */}
+
           <Link
-            to="/discover"
+            to="/category/beauty"
             className="hero-card hero-card-3"
           >
+
             <img
-              src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600"
-              alt="Lifestyle beauty"
+              src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700&q=85"
+              alt="Beauty and skincare"
             />
+
           </Link>
 
+
+          {/* FITNESS & WELLNESS */}
+
           <Link
-            to="/discover"
+            to="/category/fitness-wellness"
             className="hero-card hero-card-4"
           >
+
             <img
-              src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600"
-              alt="Lifestyle products"
+              src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=700&q=85"
+              alt="Fitness and wellness lifestyle"
             />
+
           </Link>
 
         </div>

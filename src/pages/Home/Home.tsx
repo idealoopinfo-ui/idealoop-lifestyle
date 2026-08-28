@@ -5,6 +5,7 @@ import FeaturedProducts from "../../components/Home/FeaturedProducts";
 import CategoryShowcase from "../../components/CategoryShowcase/CategoryShowcase";
 import TrendingProducts from "../../components/TrendingProducts/TrendingProducts";
 import BeautyComingSoon from "../../components/BeautyComingSoon/BeautyComingSoon";
+import JewelryCollection from "../../components/JewelryCollection/JewelryCollection";
 import WhyChoose from "../../components/WhyChoose/WhyChoose";
 
 import "./Home.css";
@@ -73,6 +74,14 @@ export default function Home() {
       <section className="home-section home-section-7">
       <BeautyComingSoon />
       </section>
+
+       {/* =========================
+          JEWELRY COLLECTION
+      ========================= */}
+
+<section className="home-section home-section-8">
+  <JewelryCollection />
+</section>
 
 
 

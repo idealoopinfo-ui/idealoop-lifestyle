@@ -1,125 +1,281 @@
-/* =========================
-   HOME PAGE
-========================= */
-
-.home-page {
+.jewelry-collection {
   width: 100%;
-  min-height: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  box-sizing: border-box;
 
-  background: #fafafa;
+  animation: jewelrySectionReveal 0.8s ease-out both;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.jewelry-collection-header {
+  margin-bottom: 15px;
+  text-align: center;
+
+  animation: jewelryHeaderReveal 0.7s ease-out 0.1s both;
+}
+
+.jewelry-collection-header span {
+  display: block;
+  margin-bottom: 4px;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+
+  color: #ff9900;
+}
+
+.jewelry-collection-header h2 {
+  margin: 0 0 4px;
+
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 700;
+
+  color: #222;
+}
+
+.jewelry-collection-header p {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  color: #666;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.jewelry-collection-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 18px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.jewelry-collection-card {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  height: 280px !important;
+  min-height: 280px !important;
+  max-height: 280px !important;
+
+  overflow: hidden;
 
   box-sizing: border-box;
 
+  background: #fff;
+
+  border: 1px solid #e5e5e5;
+
+  border-radius: 12px;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+
+  animation:
+    jewelryCardReveal 0.6s ease-out both;
+}
+
+
+/* =========================================================
+   CARD HOVER
+========================================================= */
+
+.jewelry-collection-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.jewelry-collection-image {
+  display: block;
+
+  width: 100%;
+
+  height: 280px !important;
+  min-height: 280px;
+  max-height: 280px;
+
+  object-fit: contain;
+  object-position: center;
+
+  background: #fff;
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.jewelry-collection-card:hover
+.jewelry-collection-image {
+  transform: scale(1.035);
+}
+
+
+/* =========================================================
+   CATEGORY OVERLAY
+========================================================= */
+
+.jewelry-category-overlay {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 30px 15px 12px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      transparent,
+      rgba(0, 0, 0, 0.75)
+    );
+
   opacity: 0;
+
   transform: translateY(10px);
 
-  animation: homePageEnter 0.6s ease-out forwards;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.jewelry-collection-card:hover
+.jewelry-category-overlay {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.jewelry-category-overlay span {
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 600;
 }
 
 
-/* =========================
-   HOME SECTIONS
-========================= */
+/* =========================================================
+   SKELETON
+========================================================= */
 
-.home-section {
+.jewelry-collection-card.skeleton {
   width: 100%;
-  max-width: 1200px;
 
-  margin: 0 auto;
+  height: 280px !important;
+  min-height: 280px !important;
+  max-height: 280px !important;
 
-  padding: 20px 20px;
+  background: #f3f3f3;
 
-  box-sizing: border-box;
+  border: none;
 
-  opacity: 0;
-  transform: translateY(12px);
-
-  animation: homeSectionEnter 0.55s ease-out forwards;
+  animation: none;
 }
 
 
-/* =========================
-   FIRST SECTION
-========================= */
+/* =========================================================
+   SECTION ANIMATION
+========================================================= */
 
-.home-section:first-child {
-  padding-top: 30px;
-}
+@keyframes jewelrySectionReveal {
 
-
-/* =========================
-   SECTION CONTENT
-========================= */
-
-.home-section > * {
-  width: 100%;
-}
-
-
-/* =========================
-   SECTION DIVIDER
-========================= */
-
-.home-section:not(:last-child) {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-}
-
-
-/* =========================
-   STAGGERED ANIMATION
-========================= */
-
-.home-section-1 {
-  animation-delay: 0.05s;
-}
-
-.home-section-2 {
-  animation-delay: 0.12s;
-}
-
-.home-section-3 {
-  animation-delay: 0.19s;
-}
-
-.home-section-4 {
-  animation-delay: 0.26s;
-}
-
-.home-section-5 {
-  animation-delay: 0.33s;
-}
-
-.home-section-6 {
-  animation-delay: 0.40s;
-}
-
-.home-section-7 {
-  animation-delay: 0.47s;
-}
-
-
-/* =========================
-   PAGE TRANSITION
-========================= */
-
-@keyframes homePageEnter {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(14px);
   }
 
   to {
     opacity: 1;
     transform: translateY(0);
   }
+
 }
 
 
-/* =========================
-   SECTION TRANSITION
-========================= */
+/* =========================================================
+   HEADER ANIMATION
+========================================================= */
 
-@keyframes homeSectionEnter {
+@keyframes jewelryHeaderReveal {
+
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   CARD ANIMATION
+========================================================= */
+
+.jewelry-collection-card:nth-child(1) {
+  animation-delay: 0.12s;
+}
+
+.jewelry-collection-card:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.jewelry-collection-card:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.jewelry-collection-card:nth-child(4) {
+  animation-delay: 0.30s;
+}
+
+.jewelry-collection-card:nth-child(5) {
+  animation-delay: 0.36s;
+}
+
+
+@keyframes jewelryCardReveal {
+
   from {
     opacity: 0;
     transform: translateY(12px);
@@ -129,41 +285,81 @@
     opacity: 1;
     transform: translateY(0);
   }
+
 }
 
 
-/* =========================
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .jewelry-collection-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+  }
+
+}
+
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
-@media (max-width: 768px) {
-  .home-section {
-    padding: 40px 15px;
+@media (max-width: 700px) {
+
+  .jewelry-collection {
+    padding: 20px 15px;
   }
 
-  .home-section:first-child {
-    padding-top: 25px;
+  .jewelry-collection-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
   }
 
-  .home-page {
-    transform: translateY(6px);
+  .jewelry-collection-header h2 {
+    font-size: 22px;
   }
 
-  .home-section {
-    transform: translateY(8px);
-  }
 }
 
 
-/* =========================
-   REDUCE MOTION
-========================= */
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+  .jewelry-collection-grid {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .home-page,
-  .home-section {
+
+  .jewelry-collection,
+  .jewelry-collection-header,
+  .jewelry-collection-card {
     animation: none;
-    opacity: 1;
-    transform: none;
   }
+
+  .jewelry-collection-card,
+  .jewelry-collection-image,
+  .jewelry-category-overlay {
+    transition: none;
+  }
+
 }

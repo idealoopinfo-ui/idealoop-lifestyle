@@ -78,6 +78,8 @@ export const categories: CategoryNode[] = [
               leaf("Handbags", "handbags"),
               leaf("Wallets", "wallets"),
               leaf("Belts", "belts"),
+              leaf("Eyewear", "eyewear"),
+              leaf("Caps & Hats", "caps-hats"),
             ],
           },
 
@@ -170,6 +172,7 @@ export const categories: CategoryNode[] = [
                   leaf("Maxi Dresses", "maxi-dresses"),
                   leaf("Midi Dresses", "midi-dresses"),
                   leaf("Casual Dresses", "casual-dresses"),
+                  leaf("Cami Dresses", "cami-dresses"),
                 ],
               },
 
@@ -186,6 +189,7 @@ export const categories: CategoryNode[] = [
                   leaf("Shapewear", "shapewear", "product-type"),
                   leaf("Lingerie Sets", "lingerie-sets", "product-type"),
                   leaf("Panties", "panties", "product-type"),
+                  leaf("Vest", "vest", "product-type"),
                 ],
               },
             ],
@@ -236,6 +240,8 @@ export const categories: CategoryNode[] = [
               leaf("Wallets", "wallets"),
               leaf("Watches", "watches"),
               leaf("Belts", "belts"),
+              leaf("Eyewear", "eyewear"),
+              leaf("Caps & Hats", "caps-hats"),
             ],
           },
 

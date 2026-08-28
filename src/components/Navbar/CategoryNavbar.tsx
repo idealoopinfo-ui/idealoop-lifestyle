@@ -126,18 +126,24 @@ export default function CategoryNavbar() {
 
         <div className="category-left">
 
-          {categories.map((department) => (
+        {categories
+  .filter(
+    (department) =>
+      department.slug !== "home-living" &&
+      department.slug !== "toys-gifts"
+  )
+  .map((department) => (
 
-            <div
-              key={department.slug}
-              className="nav-item"
+    <div
+      key={department.slug}
+      className="nav-item"
 
-              onMouseEnter={() =>
-                handleEnter(
-                  department,
-                  0
-                )
-              }
+      onMouseEnter={() =>
+        handleEnter(
+          department,
+          0
+        )
+      }
 
               onClick={() =>
                 handleNavigate([

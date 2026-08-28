@@ -120,6 +120,16 @@ export default function Footer({ className }: FooterProps) {
   Instagram
 </a>
 
+{/* YOUTUBE */}
+<a
+      href="https://www.youtube.com/@idealooplifestyle"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="YouTube"
+    >
+      YouTube
+    </a>
+
           {/* PINTEREST */}
           <a
             href="https://www.pinterest.com/BloomVix/"
