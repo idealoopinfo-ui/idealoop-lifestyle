@@ -121,6 +121,7 @@ export const categories: CategoryNode[] = [
               leaf("Jumpsuits & Rompers", "jumpsuits-rompers"),
               leaf("Sweaters", "sweaters"),
               leaf("Jeans", "jeans"),
+              leaf("Matching Sets", "matching sets"),
 
               /* ================= TOPS ================= */
 
@@ -408,6 +409,8 @@ export const categories: CategoryNode[] = [
           leaf("Sunscreen", "sunscreen"),
           leaf("Toners", "toners"),
           leaf("Masks", "masks"),
+          leaf("Body Lotion", "body lotion"),
+          leaf("Lip Care", "lip care"),
         ],
       },
 
@@ -415,7 +418,7 @@ export const categories: CategoryNode[] = [
         name: "Hair Care",
         slug: "hair-care",
         level: "category",
-
+      
         children: [
           leaf("Shampoo", "shampoo"),
           leaf("Conditioner", "conditioner"),
@@ -424,16 +427,37 @@ export const categories: CategoryNode[] = [
           leaf("Hair Tools", "hair-tools"),
         ],
       },
-
-      leaf("Fragrances", "fragrances", "category"),
-
-      leaf("Bath & Body", "bath-body", "category"),
-
+      
+      {
+        name: "Fragrances",
+        slug: "fragrances",
+        level: "category",
+      
+        children: [
+          leaf("Women's Fragrance", "womens-fragrance"),
+          leaf("Men's Fragrance", "mens-fragrance"),
+          leaf("Body Mists", "body-mists"),
+          leaf("Perfume", "perfume"),
+          leaf("Cologne", "cologne"),
+          leaf("Fragrance Sets", "fragrance-sets"),
+        ],
+      },
+      
+      {
+        name: "Bath & Body",
+        slug: "bath-body",
+        level: "category",
+      
+        children: [
+          leaf("Body Wash", "body-wash"),
+        ],
+      },
+      
       {
         name: "Personal Care",
         slug: "personal-care",
         level: "category",
-
+      
         children: [
           leaf("Nail Care Tools", "nail-care-tools"),
           leaf("Nail Clippers", "nail-clippers"),
@@ -444,7 +468,7 @@ export const categories: CategoryNode[] = [
           leaf("Body Care", "body-care"),
         ],
       },
-
+      
       leaf("Beauty Tools", "beauty-tools", "category"),
     ],
   },
@@ -665,6 +689,7 @@ export const categories: CategoryNode[] = [
           leaf("Yoga Mats", "yoga-mats"),
           leaf("Yoga Blocks", "yoga-blocks"),
           leaf("Yoga Clothing", "yoga-clothing"),
+          leaf("Accesssories", "accessories"),
         ],
       },
 
@@ -677,6 +702,7 @@ export const categories: CategoryNode[] = [
           leaf("Cardio Equipment", "cardio-equipment"),
           leaf("Gym Machines", "gym-machines"),
           leaf("Exercise Accessories", "exercise-accessories"),
+          leaf("Pull Up Bar", "pull up bar"),
         ],
       },
 
@@ -730,5 +756,6 @@ export const categories: CategoryNode[] = [
       },
     ],
   },
-];
+]
+  
 

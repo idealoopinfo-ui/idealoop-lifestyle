@@ -140,6 +140,16 @@ export default function Footer({ className }: FooterProps) {
             Pinterest-Fitness
           </a>
 
+          {/* PINTEREST BEAUTY */}
+          <a
+            href="https://www.pinterest.com/idealoopbeauty/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Pinterest Beauty"
+          >
+            Pinterest-Beauty
+          </a>
+
         </div>
 
       </div>
