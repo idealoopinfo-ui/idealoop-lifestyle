@@ -372,106 +372,365 @@ export const categories: CategoryNode[] = [
     ],
   },
 
-  /* =========================================================
-     BEAUTY
-  ========================================================= */
+/* =========================================================
+   BEAUTY
+========================================================= */
 
-  {
-    name: "Beauty",
-    slug: "beauty",
-    level: "department",
+{
+  name: "Beauty",
+  slug: "beauty",
+  level: "department",
 
-    children: [
+  children: [
 
-      {
-        name: "Makeup",
-        slug: "makeup",
-        level: "category",
+    /* =====================================================
+       MAKEUP
+    ===================================================== */
 
-        children: [
-          leaf("Face", "face"),
-          leaf("Eyes", "eyes"),
-          leaf("Lips", "lips"),
-          leaf("Nails", "nails"),
-          leaf("Tools", "makeup-tools"),
-        ],
-      },
+    {
+      name: "Makeup",
+      slug: "makeup",
+      level: "category",
 
-      {
-        name: "Skincare",
-        slug: "skincare",
-        level: "category",
+      children: [
 
-        children: [
-          leaf("Cleansers", "cleansers"),
-          leaf("Moisturizers", "moisturizers"),
-          leaf("Serums", "serums"),
-          leaf("Sunscreen", "sunscreen"),
-          leaf("Toners", "toners"),
-          leaf("Masks", "masks"),
-          leaf("Body Lotion", "body lotion"),
-          leaf("Lip Care", "lip care"),
-        ],
-      },
+        /* ================= FACE ================= */
 
-      {
-        name: "Hair Care",
-        slug: "hair-care",
-        level: "category",
-      
-        children: [
-          leaf("Shampoo", "shampoo"),
-          leaf("Conditioner", "conditioner"),
-          leaf("Hair Oil", "hair-oil"),
-          leaf("Styling", "styling"),
-          leaf("Hair Tools", "hair-tools"),
-        ],
-      },
-      
-      {
-        name: "Fragrances",
-        slug: "fragrances",
-        level: "category",
-      
-        children: [
-          leaf("Women's Fragrance", "womens-fragrance"),
-          leaf("Men's Fragrance", "mens-fragrance"),
-          leaf("Body Mists", "body-mists"),
-          leaf("Perfume", "perfume"),
-          leaf("Cologne", "cologne"),
-          leaf("Fragrance Sets", "fragrance-sets"),
-        ],
-      },
-      
-      {
-        name: "Bath & Body",
-        slug: "bath-body",
-        level: "category",
-      
-        children: [
-          leaf("Body Wash", "body-wash"),
-        ],
-      },
-      
-      {
-        name: "Personal Care",
-        slug: "personal-care",
-        level: "category",
-      
-        children: [
-          leaf("Nail Care Tools", "nail-care-tools"),
-          leaf("Nail Clippers", "nail-clippers"),
-          leaf("Nail Files & Buffers", "nail-files-buffers"),
-          leaf("Cuticle Care", "cuticle-care"),
-          leaf("Foot Care", "foot-care"),
-          leaf("Oral Care", "oral-care"),
-          leaf("Body Care", "body-care"),
-        ],
-      },
-      
-      leaf("Beauty Tools", "beauty-tools", "category"),
-    ],
-  },
+        {
+          name: "Face",
+          slug: "face",
+          level: "subcategory",
+
+          children: [
+            leaf("Foundation", "foundation"),
+            leaf("Concealer", "concealer"),
+            leaf("Powder", "powder"),
+            leaf("Blush", "blush"),
+            leaf("Bronzer", "bronzer"),
+            leaf("Highlighter", "highlighter"),
+            leaf("Primer", "makeup-primer"),
+            leaf("Setting Spray", "setting-spray"),
+          ],
+        },
+
+        /* ================= EYES ================= */
+
+        {
+          name: "Eyes",
+          slug: "eyes",
+          level: "subcategory",
+
+          children: [
+            leaf("Eyeshadow", "eyeshadow"),
+            leaf("Eyeliner", "eyeliner"),
+            leaf("Mascara", "mascara"),
+            leaf("Eyebrow Products", "eyebrow-products"),
+            leaf("False Eyelashes", "false-eyelashes"),
+          ],
+        },
+
+        /* ================= LIPS ================= */
+
+        {
+          name: "Lips",
+          slug: "lips",
+          level: "subcategory",
+
+          children: [
+            leaf("Lipstick", "lipstick"),
+            leaf("Lip Gloss", "lip-gloss"),
+            leaf("Lip Liner", "lip-liner"),
+            leaf("Lip Tint", "lip-tint"),
+          ],
+        },
+
+        /* ================= NAILS ================= */
+
+        {
+          name: "Nails",
+          slug: "nails",
+          level: "subcategory",
+
+          children: [
+            leaf("Nail Polish", "nail-polish"),
+            leaf("Gel Nail Polish", "gel-nail-polish"),
+            leaf("Press-On Nails", "press-on-nails"),
+            leaf("Nail Art", "nail-art"),
+          ],
+        },
+
+        /* ================= MAKEUP TOOLS ================= */
+
+        {
+          name: "Makeup Tools",
+          slug: "makeup-tools",
+          level: "subcategory",
+
+          children: [
+            leaf("Makeup Brushes", "makeup-brushes"),
+            leaf("Makeup Sponges", "makeup-sponges"),
+            leaf("Eyelash Tools", "eyelash-tools"),
+            leaf("Makeup Organizers", "makeup-organizers"),
+          ],
+        },
+      ],
+    },
+
+    /* =====================================================
+       SKINCARE
+    ===================================================== */
+
+    {
+      name: "Skincare",
+      slug: "skincare",
+      level: "category",
+
+      children: [
+
+        /* ================= FACE CARE ================= */
+
+        {
+          name: "Face Care",
+          slug: "face-care",
+          level: "subcategory",
+
+          children: [
+            leaf("Cleansers", "cleansers"),
+            leaf("Toners", "toners"),
+            leaf("Serums", "serums"),
+            leaf("Moisturizers", "moisturizers"),
+            leaf("Sunscreen", "sunscreen"),
+            leaf("Face Masks", "face-masks"),
+            leaf("Facial Kits", "facial-kits"),
+            leaf("Face Treatments", "face-treatments"),
+          ],
+        },
+
+        /* ================= LIP CARE ================= */
+
+        {
+          name: "Lip Care",
+          slug: "lip-care",
+          level: "subcategory",
+
+          children: [
+            leaf("Lip Balm", "lip-balm"),
+            leaf("Lip Scrub", "lip-scrub"),
+            leaf("Lip Mask", "lip-mask"),
+            leaf("Lip Oil", "lip-oil"),
+            leaf("Lip Treatment", "lip-treatment"),
+            leaf("Lip Plumper", "lip-plumper"),
+            leaf("Lip SPF", "lip-spf"),
+          ],
+        },
+
+        /* ================= EYE CARE ================= */
+
+        {
+          name: "Eye Care",
+          slug: "eye-care",
+          level: "subcategory",
+
+          children: [
+            leaf("Eye Cream", "eye-cream"),
+            leaf("Eye Serum", "eye-serum"),
+            leaf("Under Eye Treatment", "under-eye-treatment"),
+            leaf("Eye Masks", "eye-masks"),
+          ],
+        },
+
+        /* ================= SUN CARE ================= */
+
+        {
+          name: "Sun Care",
+          slug: "sun-care",
+          level: "subcategory",
+
+          children: [
+            leaf("Sunscreen", "sunscreen"),
+            leaf("Sun Protection", "sun-protection"),
+            leaf("After Sun Care", "after-sun-care"),
+          ],
+        },
+
+        /* ================= HAND CARE ================= */
+
+        {
+          name: "Hand Care",
+          slug: "hand-care",
+          level: "subcategory",
+
+          children: [
+            leaf("Hand Cream", "hand-cream"),
+            leaf("Hand Lotion", "hand-lotion"),
+            leaf("Hand Masks", "hand-masks"),
+            leaf("Hand Treatment", "hand-treatment"),
+          ],
+        },
+
+        /* ================= FOOT CARE ================= */
+
+        {
+          name: "Foot Care",
+          slug: "foot-care",
+          level: "subcategory",
+
+          children: [
+            leaf("Foot Cream", "foot-cream"),
+            leaf("Foot Masks", "foot-masks"),
+            leaf("Foot Scrubs", "foot-scrubs"),
+            leaf("Heel Care", "heel-care"),
+            leaf("Foot Treatments", "foot-treatments"),
+          ],
+        },
+
+        /* ================= BODY CARE ================= */
+
+        {
+          name: "Body Care",
+          slug: "body-care",
+          level: "subcategory",
+
+          children: [
+            leaf("Body Lotion", "body-lotion"),
+            leaf("Body Cream", "body-cream"),
+            leaf("Body Oil", "body-oil"),
+            leaf("Body Scrub", "body-scrub"),
+            leaf("Body Butter", "body-butter"),
+            leaf("Talc & Body Powder", "talc-body-powder"),
+          ],
+        },
+      ],
+    },
+
+    /* =====================================================
+       HAIR CARE
+    ===================================================== */
+
+    {
+      name: "Hair Care",
+      slug: "hair-care",
+      level: "category",
+
+      children: [
+        leaf("Shampoo", "shampoo"),
+        leaf("Shampoo Conditioner Set", "shampoo conditioner set"),
+        leaf("Conditioner", "conditioner"),
+        leaf("Hair Mask", "hair-mask"),
+        leaf("Hair Oil", "hair-oil"),
+        leaf("Hair Serum", "hair-serum"),
+        leaf("Hair Treatments", "hair-treatments"),
+        leaf("Hair Styling", "hair-styling"),
+        leaf("Hair Tools", "hair-tools"),
+        leaf(
+          "Chemical Hair Straighteners",
+          "chemical-hair-straighteners"
+        ),
+      ],
+    },
+
+    /* =====================================================
+       FRAGRANCES
+    ===================================================== */
+
+    {
+      name: "Fragrances",
+      slug: "fragrances",
+      level: "category",
+
+      children: [
+        leaf("Women's Fragrance", "womens-fragrance"),
+        leaf("Men's Fragrance", "mens-fragrance"),
+        leaf("Perfume", "perfume"),
+        leaf("Cologne", "cologne"),
+        leaf("Body Mists", "body-mists"),
+        leaf("Fragrance Sets", "fragrance-sets"),
+      ],
+    },
+
+    /* =====================================================
+       BATH & BODY
+    ===================================================== */
+
+    {
+      name: "Bath & Body",
+      slug: "bath-body",
+      level: "category",
+
+      children: [
+        leaf("Body Wash", "body-wash"),
+        leaf("Bath Products", "bath-products"),
+        leaf("Body Soap", "body-soap"),
+        leaf("Shower Products", "shower-products"),
+      ],
+    },
+
+    /* =====================================================
+       PERSONAL CARE
+    ===================================================== */
+
+    {
+      name: "Personal Care",
+      slug: "personal-care",
+      level: "category",
+
+      children: [
+
+        /* ================= NAIL CARE ================= */
+
+        {
+          name: "Nail Care",
+          slug: "nail-care",
+          level: "subcategory",
+
+          children: [
+            leaf("Nail Clippers", "nail-clippers"),
+            leaf("Nail Files & Buffers", "nail-files-buffers"),
+            leaf("Cuticle Care", "cuticle-care"),
+            leaf("Nail Care Tools", "nail-care-tools"),
+            leaf("Nail Polish Remover", "nail-polish-remover"),
+            leaf("Manicure Tools", "manicure-tools"),
+            leaf("Pedicure Tools", "pedicure-tools"),
+          ],
+        },
+
+        /* ================= ORAL CARE ================= */
+
+        leaf("Oral Care", "oral-care"),
+
+        /* ================= FEMININE CARE ================= */
+
+        leaf("Feminine Care", "feminine-care"),
+
+        /* ================= PERSONAL HYGIENE ================= */
+
+        leaf("Personal Hygiene", "personal-hygiene"),
+      ],
+    },
+
+    /* =====================================================
+       BEAUTY TOOLS
+    ===================================================== */
+
+    {
+      name: "Beauty Tools",
+      slug: "beauty-tools",
+      level: "category",
+
+      children: [
+        leaf("Facial Tools", "facial-tools"),
+        leaf("Hair Removal Tools", "hair-removal-tools"),
+        leaf(
+          "Manicure & Pedicure Tools",
+          "manicure-pedicure-tools"
+        ),
+        leaf("Beauty Devices", "beauty-devices"),
+        leaf("Beauty Accessories", "beauty-accessories"),
+      ],
+    },
+  ],
+},
+
 
   /* =========================================================
      HOME & LIVING
