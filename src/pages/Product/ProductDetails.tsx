@@ -52,6 +52,17 @@ type Product = {
   country_origin?: string;
   package_includes?: string;
 
+  /* =========================
+   RATINGS & POPULARITY
+========================= */
+
+rating?: number;
+review_count?: number;
+sold_count?: number;
+rating_source?: string;
+stats_last_checked?: string;
+
+
   additional_features?: AdditionalFeature[];
   special_features?: SpecialFeature[];
 
@@ -76,7 +87,15 @@ type Product = {
   sheer?: string;
   care_instructions?: string;
 
-  size?: string;
+  size_systems?: string[];
+  available_sizes_us?: string;
+  available_sizes_uk?: string;
+  available_sizes_eu?: string;
+  available_sizes_international?: string;
+  size_accuracy?: string;
+  size_chart?: string;
+
+
   color?: string;
   clothing_length?: string;
   waist_type?: string;
@@ -133,6 +152,26 @@ type Product = {
   massage_type?: string;
 };
 
+const formatPopularityNumber = (value?: number | null) => {
+  if (value === undefined || value === null) return "";
+
+  const number = Number(value);
+
+  if (number >= 1_000_000) {
+    return `${(number / 1_000_000)
+      .toFixed(1)
+      .replace(/\.0$/, "")}M`;
+  }
+
+  if (number >= 1_000) {
+    return `${(number / 1_000)
+      .toFixed(1)
+      .replace(/\.0$/, "")}K`;
+  }
+
+  return number.toLocaleString();
+};
+
 export default function ProductDetails() {
   const { productId } = useParams();
 
@@ -140,6 +179,7 @@ export default function ProductDetails() {
   const [selectedImage, setSelectedImage] = useState("");
   const [related, setRelated] = useState<Product[]>([]);
   const [notFound, setNotFound] = useState(false);
+  const [showRatings, setShowRatings] = useState(false);
 
   /* =========================
      LOAD PRODUCT
@@ -299,6 +339,7 @@ setProduct(data);
     ["Country of Origin", product.country_origin],
     ["Package Includes", product.package_includes],
 
+   
     /* =========================
        FASHION
     ========================= */
@@ -649,36 +690,154 @@ setProduct(data);
           PRODUCT DETAILS
       ===================================================== */}
 
-      {specifications.length > 0 && (
-        <div className="product-specifications">
+{specifications.length > 0 && (
+  <div className="product-specifications">
 
-          <h2>Product Details</h2>
+    <h2>Product Details</h2>
 
-          <div className="spec-grid">
+    {/* =========================
+        GENERAL PRODUCT DETAILS
+    ========================= */}
 
-            {specifications.map(
-              ([label, value], index) => (
-                <div
-                  className="spec-item"
-                  key={`${label}-${index}`}
-                >
+    <div className="spec-grid">
+
+      {specifications.map(
+        ([label, value], index) => (
+          <div
+            className="spec-item"
+            key={`${label}-${index}`}
+          >
+
+            <strong>
+              {label}
+            </strong>
+
+            <span>
+              {value}
+            </span>
+
+          </div>
+        )
+      )}
+
+    </div>
+
+    {/* =========================
+        RATINGS & POPULARITY
+    ========================= */}
+
+    {(product.rating !== undefined && product.rating !== null) ||
+    (product.review_count !== undefined && product.review_count !== null) ||
+    (product.sold_count !== undefined && product.sold_count !== null) ||
+    product.rating_source ||
+    product.stats_last_checked ? (
+
+      <div className="ratings-popularity-section">
+
+        <button
+          type="button"
+          className="ratings-popularity-toggle"
+          onClick={() =>
+            setShowRatings((previous) => !previous)
+          }
+          aria-expanded={showRatings}
+        >
+
+          <span>
+            ⭐ Ratings & Popularity
+          </span>
+
+          <span className="ratings-toggle-arrow">
+            {showRatings ? "▲" : "▼"}
+          </span>
+
+        </button>
+
+        {showRatings && (
+          <div className="spec-grid ratings-popularity-grid">
+
+            {product.rating !== undefined &&
+              product.rating !== null && (
+                <div className="spec-item">
 
                   <strong>
-                    {label}
+                    Rating
                   </strong>
 
                   <span>
-                    {value}
+                    ⭐ {Number(product.rating).toFixed(1)} / 5
                   </span>
 
                 </div>
-              )
+              )}
+
+            {product.review_count !== undefined &&
+              product.review_count !== null && (
+                <div className="spec-item">
+
+                  <strong>
+                    Reviews
+                  </strong>
+
+                  <span>
+                  More than {formatPopularityNumber(product.review_count)} reviews
+                  </span>
+
+                </div>
+              )}
+
+            {product.sold_count !== undefined &&
+              product.sold_count !== null && (
+                <div className="spec-item">
+
+                  <strong>
+                    Sold
+                  </strong>
+
+                  <span>
+                  Over {formatPopularityNumber(product.sold_count)} sold
+                  </span>
+
+                </div>
+              )}
+
+            {product.rating_source && (
+              <div className="spec-item">
+
+                <strong>
+                  Rating Source
+                </strong>
+
+                <span>
+                  {product.rating_source}
+                </span>
+
+              </div>
+            )}
+
+            {product.stats_last_checked && (
+              <div className="spec-item">
+
+                <strong>
+                  Stats Last Checked
+                </strong>
+
+                <span>
+                  {product.stats_last_checked}
+                </span>
+
+              </div>
             )}
 
           </div>
+        )}
 
-        </div>
-      )}
+      </div>
+
+    ) : null}
+
+  </div>
+)}
 
       {/* =====================================================
           ADDITIONAL FEATURES

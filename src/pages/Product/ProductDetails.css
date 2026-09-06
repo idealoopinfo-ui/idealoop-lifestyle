@@ -706,3 +706,119 @@
   color: #999;
   font-size: 16px;
 }
+/* =====================================================
+   RATINGS & POPULARITY — PREMIUM ACCORDION
+===================================================== */
+
+.ratings-popularity-section {
+  margin-top: 24px;
+  border: 1px solid #e7e7e7;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Clickable header */
+
+.ratings-popularity-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 18px;
+
+  background: #fafafa;
+  border: none;
+
+  color: #222;
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+  text-align: left;
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ratings-popularity-toggle:hover {
+  background: #f5f5f5;
+}
+
+/* Left side */
+
+.ratings-popularity-toggle span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+/* Arrow */
+
+.ratings-toggle-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 50%;
+
+  background: #fff;
+  border: 1px solid #ddd;
+
+  font-size: 11px;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+/* Open content */
+
+.ratings-popularity-grid {
+  margin: 0;
+  padding: 18px;
+
+  border-top: 1px solid #eeeeee;
+
+  background: #fff;
+}
+
+/* Rating items */
+
+.ratings-popularity-grid .spec-item {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 13px 14px;
+
+  border: 1px solid #eeeeee;
+}
+
+/* Highlight the actual rating */
+
+.ratings-popularity-grid .spec-item:first-child span {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .ratings-popularity-section {
+    margin-top: 18px;
+    border-radius: 10px;
+  }
+
+  .ratings-popularity-toggle {
+    padding: 14px 15px;
+    font-size: 15px;
+  }
+
+  .ratings-popularity-grid {
+    padding: 14px;
+  }
+}

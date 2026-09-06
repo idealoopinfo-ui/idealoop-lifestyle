@@ -342,6 +342,15 @@ export default function CategoryPage() {
       /* =====================================================
          EXECUTE
       ===================================================== */
+      console.log("FINAL URL:", window.location.pathname);
+
+      console.log("FINAL FILTER VALUES:", {
+      department: normalizedDepartment,
+      category: normalizedCategory,
+      subcategory: resolvedSubcategory,
+      collection: normalizedCollection,
+      productType: normalizedProductType,
+      });
 
       const {
         data,
@@ -381,7 +390,17 @@ export default function CategoryPage() {
         data?.length || 0
       );
 
+      console.log("FINAL PRODUCTS BEFORE SET:", data);
+      console.log("FINAL PRODUCT COUNT BEFORE SET:", data?.length || 0);
+
       setProducts(data || []);
+
+      setTimeout(() => {
+        console.log(
+          "PRODUCT STATE AFTER SET:",
+          data?.length || 0
+        );
+      }, 0);
 
     } catch (error) {
 

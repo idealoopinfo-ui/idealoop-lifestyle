@@ -165,19 +165,18 @@
 .product-title {
   font-size: 14px;
   font-weight: 550;
-
   color: #111827;
 
   display: -webkit-box;
-
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-
   overflow: hidden;
 
-  min-height: 42px;
-  line-height: 21px;
+  /* Reserve space for exactly 3 lines */
+  height: 63px;
+  min-height: 63px;
 
+  line-height: 21px;
   margin: 0;
 }
 
@@ -188,15 +187,12 @@
 
 .product-actions {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-
   gap: 10px;
 
-  margin-top: 15px;
+  margin-top: auto;
 }
-
 
 /* =========================
    VIEW MORE

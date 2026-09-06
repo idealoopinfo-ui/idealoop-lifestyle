@@ -521,6 +521,7 @@ export const categories: CategoryNode[] = [
             leaf("Lip Treatment", "lip-treatment"),
             leaf("Lip Plumper", "lip-plumper"),
             leaf("Lip SPF", "lip-spf"),
+            leaf("Lipstick", "lipstick"),
           ],
         },
 
@@ -662,6 +663,7 @@ export const categories: CategoryNode[] = [
         leaf("Bath Products", "bath-products"),
         leaf("Body Soap", "body-soap"),
         leaf("Shower Products", "shower-products"),
+        leaf("Body Care Sets", "body care sets"),
       ],
     },
 

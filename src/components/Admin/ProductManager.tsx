@@ -3,6 +3,7 @@ import { supabase } from "../../lib/supabase";
 
 import GeneralDetails from "./ProductDetails/GeneralDetails";
 import FashionDetails from "./ProductDetails/FashionDetails";
+import SizeAndFit from "./ProductForm/SizeAndFit";
 import BeautyDetails from "./ProductDetails/BeautyDetails";
 import HomeLivingDetails from "./ProductDetails/HomeLivingDetails";
 import ToysGiftsDetails from "./ProductDetails/ToysGiftsDetails";
@@ -11,6 +12,7 @@ import FitnessDetails from "./ProductDetails/FitnessDetails";
 import ProductImages from "./ProductForm/ProductImages";
 import AffiliateInformation from "./ProductForm/AffiliateInformation";
 import CategorySelector from "./ProductForm/CategorySelector";
+import RatingsPopularity from "./ProductForm/RatingsPopularity";
 
 import "./ProductManager.css";
 
@@ -72,6 +74,14 @@ const [collection,setCollection] = useState("");
 const [productType, setProductType] = useState("");
 const [material,setMaterial] = useState("");
 const [fit,setFit] = useState("");
+const [sizeSystems, setSizeSystems] = useState<string[]>([]);
+const [availableSizesUS, setAvailableSizesUS] = useState("");
+const [availableSizesUK, setAvailableSizesUK] = useState("");
+const [availableSizesEU, setAvailableSizesEU] = useState("");
+const [availableSizesInternational, setAvailableSizesInternational] = useState("");
+const [sizeAccuracy, setSizeAccuracy] = useState("");
+const [sizeChart, setSizeChart] = useState("");
+
 const [pattern, setPattern] = useState("");
 const [fashionType, setFashionType] = useState("");
 const [sleeveType, setSleeveType] = useState("");
@@ -105,6 +115,15 @@ const [model,setModel] = useState("");
 const [warranty,setWarranty] = useState("");
 const [countryOrigin,setCountryOrigin] = useState("");
 const [packageIncludes,setPackageIncludes] = useState("");
+
+/* =========================
+   RATINGS & POPULARITY
+========================= */
+const [rating, setRating] = useState("");
+const [reviewCount, setReviewCount] = useState("");
+const [soldCount, setSoldCount] = useState("");
+const [ratingSource, setRatingSource] = useState("");
+const [statsLastChecked, setStatsLastChecked] = useState("");
 
 const [equipmentType, setEquipmentType] = useState("");
 const [workoutType, setWorkoutType] = useState("");
@@ -578,6 +597,27 @@ const addProduct = async () => {
         country_origin: countryOrigin,
         package_includes: packageIncludes,
 
+        /* =========================
+   RATINGS & POPULARITY
+========================= */
+
+rating: rating
+? Number(rating)
+: null,
+
+review_count: reviewCount
+? Number(reviewCount)
+: null,
+
+sold_count: soldCount
+? Number(soldCount)
+: null,
+
+rating_source: ratingSource || null,
+
+stats_last_checked:
+statsLastChecked || null,
+
         description,
         short_description: shortDescription,
 
@@ -612,7 +652,16 @@ const addProduct = async () => {
         occasion,
         material,
         fit,
+
         gender,
+
+        size_systems: sizeSystems,
+        available_sizes_us: availableSizesUS,
+        available_sizes_uk: availableSizesUK,
+        available_sizes_eu: availableSizesEU,
+        available_sizes_international: availableSizesInternational,
+        size_accuracy: sizeAccuracy,
+        size_chart: sizeChart,
 
         pattern,
         fashion_type: fashionType,
@@ -706,6 +755,18 @@ const addProduct = async () => {
   setCountryOrigin("");
   setPackageIncludes("");
 
+  /* =========================
+   RESET RATINGS & POPULARITY
+========================= */
+
+setRating("");
+setReviewCount("");
+setSoldCount("");
+setRatingSource("");
+setStatsLastChecked("");
+
+
+
   setImage1("");
   setImage2("");
   setImage3("");
@@ -730,6 +791,13 @@ const addProduct = async () => {
   setOccasion("");
   setMaterial("");
   setFit("");
+  setSizeSystems([]);
+  setAvailableSizesUS("");
+  setAvailableSizesUK("");
+  setAvailableSizesEU("");
+  setAvailableSizesInternational("");
+  setSizeAccuracy("");
+  setSizeChart("");
   setGender("");
 
   setPattern("");
@@ -802,22 +870,49 @@ const updateProduct = async () => {
   if (!editingId) return;
 
   const { error } = await supabase
-    .from("products")
-    .update({
+  .from("products")
+  .update({
 
-      title,
-      brand,
+    title,
+    brand,
 
-      additional_features: additionalFeatures.filter(
-        (item) =>
-          item.feature.trim() !== "" ||
-          item.value.trim() !== ""
-      ),
+    additional_features: additionalFeatures.filter(
+      (item) =>
+        item.feature.trim() !== "" ||
+        item.value.trim() !== ""
+    ),
+
+    special_features: specialFeatures.filter(
+      (item) =>
+        item.feature.trim() !== "" ||
+        item.value.trim() !== ""
+    ),
 
       model,
       warranty,
       country_origin: countryOrigin,
       package_includes: packageIncludes,
+
+      /* =========================
+   RATINGS & POPULARITY
+========================= */
+
+rating: rating
+? Number(rating)
+: null,
+
+review_count: reviewCount
+? Number(reviewCount)
+: null,
+
+sold_count: soldCount
+? Number(soldCount)
+: null,
+
+rating_source: ratingSource || null,
+
+stats_last_checked:
+statsLastChecked || null,
 
       description,
       short_description: shortDescription,
@@ -850,7 +945,13 @@ const updateProduct = async () => {
       material,
       fit,
       gender,
-
+      size_systems: sizeSystems,
+      available_sizes_us: availableSizesUS,
+      available_sizes_uk: availableSizesUK,
+      available_sizes_eu: availableSizesEU,
+      available_sizes_international: availableSizesInternational,
+      size_accuracy: sizeAccuracy,
+      size_chart: sizeChart,
       pattern,
       fashion_type: fashionType,
       sleeve_type: sleeveType,
@@ -1123,6 +1224,19 @@ const updateProduct = async () => {
             setProductType={setProductType}
           />
   
+  <RatingsPopularity
+  rating={rating}
+  setRating={setRating}
+  reviewCount={reviewCount}
+  setReviewCount={setReviewCount}
+  soldCount={soldCount}
+  setSoldCount={setSoldCount}
+  ratingSource={ratingSource}
+  setRatingSource={setRatingSource}
+  statsLastChecked={statsLastChecked}
+  setStatsLastChecked={setStatsLastChecked}
+/> 
+
           {/* =========================
               FASHION DETAILS
           ========================= */}
@@ -1199,6 +1313,34 @@ ageGroup={ageGroup}
 setAgeGroup={setAgeGroup}
           />
           )}
+
+{department === "fashion" && (
+  <SizeAndFit
+    sizeSystems={sizeSystems}
+    setSizeSystems={setSizeSystems}
+
+    availableSizesUS={availableSizesUS}
+    setAvailableSizesUS={setAvailableSizesUS}
+
+    availableSizesUK={availableSizesUK}
+    setAvailableSizesUK={setAvailableSizesUK}
+
+    availableSizesEU={availableSizesEU}
+    setAvailableSizesEU={setAvailableSizesEU}
+
+    availableSizesInternational={availableSizesInternational}
+    setAvailableSizesInternational={setAvailableSizesInternational}
+
+    fit={fit}
+    setFit={setFit}
+
+    sizeAccuracy={sizeAccuracy}
+    setSizeAccuracy={setSizeAccuracy}
+
+    sizeChart={sizeChart}
+    setSizeChart={setSizeChart}
+  />
+)}
   
           {/* =========================
               BEAUTY DETAILS
