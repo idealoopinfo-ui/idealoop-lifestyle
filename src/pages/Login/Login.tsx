@@ -231,7 +231,7 @@ export default function Login() {
 
 
       options: {
-        redirectTo: `${window.location.origin}/admin`
+        redirectTo: "https://idealoop-lifestyle.netlify.app/admin"
     }
 
 
