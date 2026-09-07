@@ -9,6 +9,7 @@ import HelpManager from "../../components/Admin/HelpManager";
 import ProductManagement from "../../components/Admin/ProductManagement/ProductManagement";
 import ProductMonitor from "../../components/Admin/ProductMonitor/ProductMonitor";
 import PromotionCenter from "../../components/Admin/PromotionCenter/PromotionCenter";
+import Analytics from "../../components/Admin/Analytics/Analytics";
 
 import "./Admin.css";
 
@@ -435,7 +436,16 @@ Dashboard
 
 </button>
 
-
+<button
+  className={
+    activeTab === "analytics"
+      ? "active"
+      : ""
+  }
+  onClick={() => setActiveTab("analytics")}
+>
+  Analytics
+</button>
 
 
 <button
@@ -701,30 +711,20 @@ Blogs
 </p>
 
 </div>
-
-
 </div>
-
-
 </div>
-
-
 )
-
 }
 
 
-
-
-
+{activeTab === "analytics" && (
+  <Analytics />
+)}
 
 
 {activeTab === "products" && (
-
 <div className="admin-section">
-
   {/* PRODUCTS SUB NAVIGATION */}
-
   <div className="products-subnav">
 
     <button

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { trackEvent } from "../../lib/analytics";
 import { Link, useParams } from "react-router-dom";
 
 import { supabase } from "../../lib/supabase";
 import ProductCard from "../../components/ProductCard/ProductCard";
+
 
 import "./ProductDetails.css";
 
@@ -207,9 +209,20 @@ export default function ProductDetails() {
 if (!data) {
   setNotFound(true);
   return;
-
-  
 }
+
+// Track product view
+trackEvent({
+  eventType: "product_view",
+  product: {
+    product_id: data.product_id,
+    title: data.title,
+    marketplace: data.marketplace,
+    department: data.department,
+    category: data.category,
+    subcategory: data.subcategory,
+  },
+});
 
 setProduct(data);
       setSelectedImage(data.image_1 || "");
@@ -653,18 +666,30 @@ setProduct(data);
           {/* SHOP */}
 
           <button
-            type="button"
-            className="detail-shop-btn"
-            onClick={() =>
-              window.open(
-                product.affiliate_url,
-                "_blank",
-                "noopener,noreferrer"
-              )
-            }
-          >
-            Shop Now
-          </button>
+  type="button"
+  className="detail-shop-btn"
+  onClick={() => {
+    trackEvent({
+      eventType: "shop_now_click",
+      product: {
+        product_id: product.product_id,
+        title: product.title,
+        marketplace: product.marketplace,
+        department: product.department,
+        category: product.category,
+        subcategory: product.subcategory,
+      },
+    });
+
+    window.open(
+      product.affiliate_url,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  }}
+>
+  Shop Now
+</button>
 
           {/* FACEBOOK */}
 
