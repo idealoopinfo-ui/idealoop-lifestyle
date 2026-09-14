@@ -5,6 +5,7 @@ import "./Analytics.css";
 type AnalyticsEvent = {
   id: number;
   event_type: string;
+  country: string | null;
   visitor_id: string | null;
   session_id: string | null;
   product_id: string | null;
@@ -30,6 +31,12 @@ type SourceStat = {
   source: string;
   visitors: number;
   views: number;
+  clicks: number;
+};
+
+type PlatformProductStat = {
+  source: string;
+  product: string;
   clicks: number;
 };
 
@@ -171,6 +178,88 @@ export default function Analytics() {
     (a, b) => b.clicks - a.clicks
   );
 
+  // ----------------------------------------
+// PLATFORM + PRODUCT CLICK STATS
+// ----------------------------------------
+
+const platformProductMap: Record<string, PlatformProductStat> = {};
+
+events.forEach((event) => {
+  if (event.event_type !== "shop_now_click") return;
+
+  const source = event.source || "unknown";
+  const product = event.product_name || "Unknown Product";
+
+  const key = `${source}__${product}`;
+
+  if (!platformProductMap[key]) {
+    platformProductMap[key] = {
+      source,
+      product,
+      clicks: 0,
+    };
+  }
+
+  platformProductMap[key].clicks++;
+});
+
+const platformProductClicks = Object.values(
+  platformProductMap
+).sort((a, b) => b.clicks - a.clicks);
+
+  // ----------------------------------------
+// VISIT REGION STATS
+// ----------------------------------------
+
+type RegionStat = {
+  country: string;
+  visitors: number;
+  views: number;
+  clicks: number;
+};
+
+const regionMap: Record<string, RegionStat> = {};
+
+const regionVisitors: Record<string, Set<string>> = {};
+
+events.forEach((event) => {
+  const country = event.country || "Unknown";
+
+  if (!regionMap[country]) {
+    regionMap[country] = {
+      country,
+      visitors: 0,
+      views: 0,
+      clicks: 0,
+    };
+  }
+
+  if (!regionVisitors[country]) {
+    regionVisitors[country] = new Set();
+  }
+
+  if (event.visitor_id) {
+    regionVisitors[country].add(event.visitor_id);
+  }
+
+  if (event.event_type === "product_view") {
+    regionMap[country].views++;
+  }
+
+  if (event.event_type === "shop_now_click") {
+    regionMap[country].clicks++;
+  }
+});
+
+Object.keys(regionMap).forEach((country) => {
+  regionMap[country].visitors =
+    regionVisitors[country]?.size || 0;
+});
+
+const topRegions = Object.values(regionMap).sort(
+  (a, b) => b.visitors - a.visitors
+);
+
   return (
     <div className="analytics-page">
 
@@ -291,6 +380,66 @@ export default function Analytics() {
 
           </div>
 
+                  {/* VISIT REGIONS */}
+
+                  <div className="analytics-section">
+
+<h2>Visit Regions</h2>
+
+{topRegions.length === 0 ? (
+  <p className="analytics-empty">
+    No region data yet.
+  </p>
+) : (
+
+  <div className="analytics-table-wrapper">
+
+    <table className="analytics-table">
+
+      <thead>
+        <tr>
+          <th>Region</th>
+          <th>Visitors</th>
+          <th>Product Views</th>
+          <th>Shop Now</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        {topRegions.map((region) => (
+
+          <tr key={region.country}>
+
+            <td>
+              {region.country}
+            </td>
+
+            <td>
+              {region.visitors}
+            </td>
+
+            <td>
+              {region.views}
+            </td>
+
+            <td>
+              {region.clicks}
+            </td>
+
+          </tr>
+
+        ))}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+)}
+
+</div>
 
           {/* TOP PRODUCTS */}
 
@@ -388,31 +537,27 @@ export default function Analytics() {
 
                 <tbody>
 
-                  {events
-                    .filter(
-                      (event) =>
-                        event.event_type ===
-                        "shop_now_click"
-                    )
-                    .slice(0, 20)
-                    .map((event) => (
+                {platformProductClicks
+  .slice(0, 20)
+  .map((item, index) => (
 
-                      <tr key={event.id}>
+    <tr key={`${item.source}-${item.product}-${index}`}>
 
-                        <td>
-                          {event.source || "unknown"}
-                        </td>
+      <td>
+        {item.source}
+      </td>
 
-                        <td>
-                          {event.product_name ||
-                            "Unknown Product"}
-                        </td>
+      <td>
+        {item.product}
+      </td>
 
-                        <td>1</td>
+      <td>
+        {item.clicks}
+      </td>
 
-                      </tr>
+    </tr>
 
-                    ))}
+  ))}
 
                 </tbody>
 

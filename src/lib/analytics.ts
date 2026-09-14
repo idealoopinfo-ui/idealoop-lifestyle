@@ -31,6 +31,23 @@ export function getSessionId(): string {
   return sessionId;
 }
 
+async function getVisitorCountry(): Promise<string | null> {
+  try {
+    const response = await fetch("https://ipapi.co/json/");
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const data = await response.json();
+
+    return data.country_name || null;
+  } catch (error) {
+    console.error("Country detection failed:", error);
+    return null;
+  }
+}
+
 function getTrafficSource() {
   const params = new URLSearchParams(window.location.search);
 
@@ -127,11 +144,16 @@ export async function trackEvent({
   try {
     const traffic = getTrafficSource();
 
-    await supabase.from("analytics_events").insert({
-      event_type: eventType,
+const country = await getVisitorCountry();
 
-      visitor_id: getVisitorId(),
-      session_id: getSessionId(),
+
+await supabase.from("analytics_events").insert({
+  event_type: eventType,
+
+  visitor_id: getVisitorId(),
+  session_id: getSessionId(),
+  country: country,
+      
 
       product_id: product?.product_id || null,
       product_name: product?.title || null,

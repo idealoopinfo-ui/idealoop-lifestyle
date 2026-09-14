@@ -43,11 +43,11 @@ export default function Footer({ className }: FooterProps) {
           </Link>
 
           <Link to="/category/home-living">
-            Home & Living
+           
           </Link>
 
           <Link to="/category/toys-gifts">
-            Toys & Gifts
+            
           </Link>
         </div>
 

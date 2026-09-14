@@ -1,4 +1,5 @@
 import { monitorProducts } from "./monitorProducts.js";
+import { checkSixMonthReviews } from "./sixMonthReview.js";
 
 
 export function startScheduler(){
@@ -10,16 +11,49 @@ export function startScheduler(){
 
     // Test run
 
-    monitorProducts();
+    monitorProducts()
+        .then(() => {
+
+            console.log(
+                "✅ Product monitoring completed"
+            );
+
+            return checkSixMonthReviews();
+
+        })
+        .catch((error) => {
+
+            console.error(
+                "❌ Monitoring error:",
+                error
+            );
+
+        });
 
 
     // Every 12 hours
 
-    setInterval(()=>{
+    setInterval(() => {
 
-        monitorProducts();
+        monitorProducts()
+            .then(() => {
+
+                console.log(
+                    "✅ Product monitoring completed"
+                );
+
+                return checkSixMonthReviews();
+
+            })
+            .catch((error) => {
+
+                console.error(
+                    "❌ Monitoring error:",
+                    error
+                );
+
+            });
 
     }, 12 * 60 * 60 * 1000);
-
 
 }
