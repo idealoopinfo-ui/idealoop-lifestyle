@@ -122,6 +122,7 @@ export const categories: CategoryNode[] = [
               leaf("Sweaters", "sweaters"),
               leaf("Jeans", "jeans"),
               leaf("Matching Sets", "matching-sets"),
+              leaf("Bikini Sets", "bikini-sets"),
 
               /* ================= TOPS ================= */
 
@@ -174,6 +175,9 @@ export const categories: CategoryNode[] = [
                   leaf("Midi Dresses", "midi-dresses"),
                   leaf("Casual Dresses", "casual-dresses"),
                   leaf("Cami Dresses", "cami-dresses"),
+                  leaf("Suspender Dresses", "suspender-dresses"),
+                  leaf("Long Dresses", "long-dresses"),
+                  leaf("Slim Fit Dresses", "Slim-Fit-dresses"),
                 ],
               },
 

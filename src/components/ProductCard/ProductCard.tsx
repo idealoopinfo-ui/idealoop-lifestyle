@@ -248,10 +248,10 @@ return (
   
   
   <div className="product-category-badge">
-  
-  {product.category || product.department}
-  
-  </div>
+  {product.department && product.category
+    ? `${product.department} ${product.category}`
+    : product.category || product.department}
+</div>
   
   
   

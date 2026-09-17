@@ -675,7 +675,6 @@ statsLastChecked || null,
         care_instructions: careInstructions,
 
         size,
-        color,
         clothing_length: clothingLength,
         waist_type: waistType,
         closure_type: closureType,
@@ -812,7 +811,6 @@ setStatsLastChecked("");
   setCareInstructions("");
 
   setSize("");
-  setColor("");
   setClothingLength("");
   setWaistType("");
   setClosureType("");
@@ -964,7 +962,6 @@ statsLastChecked || null,
       care_instructions: careInstructions,
 
       size,
-      color,
       clothing_length: clothingLength,
       waist_type: waistType,
       closure_type: closureType,
@@ -1237,82 +1234,291 @@ statsLastChecked || null,
   setStatsLastChecked={setStatsLastChecked}
 /> 
 
-          {/* =========================
-              FASHION DETAILS
-          ========================= */}
-  
-          {department === "fashion" && (
-            <FashionDetails
-            material={material}
-            setMaterial={setMaterial}
-          
-            fit={fit}
-            setFit={setFit}
-          
-            style={style}
-            setStyle={setStyle}
-          
-            occasion={occasion}
-            setOccasion={setOccasion}
-          
-            season={season}
-            setSeason={setSeason}
-          
-            gender={gender}
-            setGender={setGender}
-          
-            pattern={pattern}
-            setPattern={setPattern}
-          
-            type={fashionType}
-            setType={setFashionType}
-          
-            sleeveType={sleeveType}
-            setSleeveType={setSleeveType}
-          
-            collarStyle={collarStyle}
-            setCollarStyle={setCollarStyle}
-          
-            fabric={fabric}
-            setFabric={setFabric}
-          
-            fabricType={fabricType}
-            setFabricType={setFabricType}
-          
-            details={fashionDetails}
-            setDetails={setFashionDetails}
-          
-            printingType={printingType}
-            setPrintingType={setPrintingType}
-          
-            sheer={sheer}
-            setSheer={setSheer}
-          
-            careInstructions={careInstructions}
-setCareInstructions={setCareInstructions}
+    {/* =====================================================
+    CATEGORY DETAILS
+===================================================== */}
 
-size={size}
-setSize={setSize}
+{/* =========================
+    FASHION DETAILS
+========================= */}
 
-color={color}
-setColor={setColor}
+{department === "fashion" && (
+  <FashionDetails
+    material={material}
+    setMaterial={setMaterial}
 
-clothingLength={clothingLength}
-setClothingLength={setClothingLength}
+    fit={fit}
+    setFit={setFit}
 
-waistType={waistType}
-setWaistType={setWaistType}
+    style={style}
+    setStyle={setStyle}
 
-closureType={closureType}
-setClosureType={setClosureType}
+    occasion={occasion}
+    setOccasion={setOccasion}
 
-stretch={stretch}
-setStretch={setStretch}
+    season={season}
+    setSeason={setSeason}
 
-ageGroup={ageGroup}
-setAgeGroup={setAgeGroup}
-          />
-          )}
+    gender={gender}
+    setGender={setGender}
+
+    pattern={pattern}
+    setPattern={setPattern}
+
+    type={fashionType}
+    setType={setFashionType}
+
+    sleeveType={sleeveType}
+    setSleeveType={setSleeveType}
+
+    collarStyle={collarStyle}
+    setCollarStyle={setCollarStyle}
+
+    fabric={fabric}
+    setFabric={setFabric}
+
+    fabricType={fabricType}
+    setFabricType={setFabricType}
+
+    details={fashionDetails}
+    setDetails={setFashionDetails}
+
+    printingType={printingType}
+    setPrintingType={setPrintingType}
+
+    sheer={sheer}
+    setSheer={setSheer}
+
+    careInstructions={careInstructions}
+    setCareInstructions={setCareInstructions}
+
+    clothingLength={clothingLength}
+    setClothingLength={setClothingLength}
+
+    waistType={waistType}
+    setWaistType={setWaistType}
+
+    closureType={closureType}
+    setClosureType={setClosureType}
+
+    stretch={stretch}
+    setStretch={setStretch}
+
+    ageGroup={ageGroup}
+    setAgeGroup={setAgeGroup}
+  />
+)}
+
+{/* =========================
+    BEAUTY DETAILS
+========================= */}
+
+{department === "beauty" && (
+  <BeautyDetails
+    hairType={hairType}
+    setHairType={setHairType}
+
+    skinType={skinType}
+    setSkinType={setSkinType}
+
+    ingredients={ingredients}
+    setIngredients={setIngredients}
+
+    volumeSize={volumeSize}
+    setVolumeSize={setVolumeSize}
+
+    scent={scent}
+    setScent={setScent}
+
+    benefits={benefits}
+    setBenefits={setBenefits}
+
+    suitableFor={suitableFor}
+    setSuitableFor={setSuitableFor}
+  />
+)}
+
+{/* =========================
+    HOME & LIVING DETAILS
+========================= */}
+
+{department === "home-living" && (
+  <HomeLivingDetails
+    dimensions={dimensions}
+    setDimensions={setDimensions}
+
+    color={color}
+    setColor={setColor}
+
+    roomType={roomType}
+    setRoomType={setRoomType}
+
+    weight={weight}
+    setWeight={setWeight}
+  />
+)}
+
+{/* =========================
+    TOYS & GIFTS DETAILS
+========================= */}
+
+{department === "toys-gifts" && (
+  <ToysGiftsDetails
+    ageRange={ageRange}
+    setAgeRange={setAgeRange}
+
+    educationalFeatures={educationalFeatures}
+    setEducationalFeatures={setEducationalFeatures}
+
+    dimensions={dimensions}
+    setDimensions={setDimensions}
+  />
+)}
+
+{/* =========================
+    FITNESS & WELLNESS
+========================= */}
+
+{department === "fitness-wellness" && (
+  <FitnessDetails
+    equipmentType={equipmentType}
+    setEquipmentType={setEquipmentType}
+
+    workoutType={workoutType}
+    setWorkoutType={setWorkoutType}
+
+    sportType={sportType}
+    setSportType={setSportType}
+
+    material={material}
+    setMaterial={setMaterial}
+
+    size={size}
+    setSize={setSize}
+
+    weightCapacity={weightCapacity}
+    setWeightCapacity={setWeightCapacity}
+
+    skillLevel={skillLevel}
+    setSkillLevel={setSkillLevel}
+
+    targetArea={targetArea}
+    setTargetArea={setTargetArea}
+
+    accessories={accessories}
+    setAccessories={setAccessories}
+
+    wellnessType={wellnessType}
+    setWellnessType={setWellnessType}
+
+    usageArea={usageArea}
+    setUsageArea={setUsageArea}
+
+    wellnessBenefits={wellnessBenefits}
+    setWellnessBenefits={setWellnessBenefits}
+
+    powerSource={powerSource}
+    setPowerSource={setPowerSource}
+
+    batteryCapacity={batteryCapacity}
+    setBatteryCapacity={setBatteryCapacity}
+
+    heatFunction={heatFunction}
+    setHeatFunction={setHeatFunction}
+
+    massageType={massageType}
+    setMassageType={setMassageType}
+
+    scent={scent}
+    setScent={setScent}
+
+    volumeSize={volumeSize}
+    setVolumeSize={setVolumeSize}
+
+    ingredients={ingredients}
+    setIngredients={setIngredients}
+  />
+)}
+
+{/* =====================================================
+    FEATURE + VALUE + ADD
+    Used by ALL categories
+===================================================== */}
+
+<div className="form-section">
+
+  <div className="special-feature-input">
+
+    <input
+      type="text"
+      placeholder="Feature"
+      value={newSpecialFeature}
+      onChange={(e) =>
+        setNewSpecialFeature(e.target.value)
+      }
+    />
+
+    <input
+      type="text"
+      placeholder="Value"
+      value={newSpecialFeatureValue}
+      onChange={(e) =>
+        setNewSpecialFeatureValue(e.target.value)
+      }
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          addSpecialFeature();
+        }
+      }}
+    />
+
+    <button
+      type="button"
+      onClick={addSpecialFeature}
+    >
+      + Add
+    </button>
+
+  </div>
+
+  {specialFeatures.length > 0 && (
+    <div className="special-features-list">
+
+      {specialFeatures.map((item, index) => (
+        <div
+          className="special-feature-item"
+          key={`${item.feature}-${index}`}
+        >
+
+          <span className="special-feature-name">
+            {item.feature}
+          </span>
+
+          <span className="special-feature-value">
+            {item.value}
+          </span>
+
+          <button
+            type="button"
+            onClick={() =>
+              removeSpecialFeature(index)
+            }
+          >
+            ×
+          </button>
+
+        </div>
+      ))}
+
+    </div>
+  )}
+
+</div>
+
+{/* =========================
+    SIZE & FIT — FASHION ONLY
+========================= */}
 
 {department === "fashion" && (
   <SizeAndFit
@@ -1341,244 +1547,62 @@ setAgeGroup={setAgeGroup}
     setSizeChart={setSizeChart}
   />
 )}
-  
-          {/* =========================
-              BEAUTY DETAILS
-          ========================= */}
-  
-          {department === "beauty" && (
-            <BeautyDetails
-              hairType={hairType}
-              setHairType={setHairType}
-              skinType={skinType}
-              setSkinType={setSkinType}
-              ingredients={ingredients}
-              setIngredients={setIngredients}
-              volumeSize={volumeSize}
-              setVolumeSize={setVolumeSize}
-              scent={scent}
-              setScent={setScent}
-              benefits={benefits}
-              setBenefits={setBenefits}
-              suitableFor={suitableFor}
-              setSuitableFor={setSuitableFor}
-            />
-          )}
-  
-          {/* =========================
-              HOME & LIVING DETAILS
-          ========================= */}
-  
-          {department === "home-living" && (
-            <HomeLivingDetails
-              dimensions={dimensions}
-              setDimensions={setDimensions}
-              color={color}
-              setColor={setColor}
-              roomType={roomType}
-              setRoomType={setRoomType}
-              weight={weight}
-              setWeight={setWeight}
-            />
-          )}
-  
-          {/* =========================
-              TOYS & GIFTS DETAILS
-          ========================= */}
-  
-          {department === "toys-gifts" && (
-            <ToysGiftsDetails
-              ageRange={ageRange}
-              setAgeRange={setAgeRange}
-              educationalFeatures={educationalFeatures}
-              setEducationalFeatures={setEducationalFeatures}
-              dimensions={dimensions}
-              setDimensions={setDimensions}
-            />
-          )}
-  
-          {/* =========================
-              FITNESS & WELLNESS
-          ========================= */}
-  
-          {department === "fitness-wellness" && (
-            <FitnessDetails
-              equipmentType={equipmentType}
-              setEquipmentType={setEquipmentType}
-              workoutType={workoutType}
-              setWorkoutType={setWorkoutType}
-              sportType={sportType}
-              setSportType={setSportType}
-              material={material}
-              setMaterial={setMaterial}
-              size={size}
-              setSize={setSize}
-              weightCapacity={weightCapacity}
-              setWeightCapacity={setWeightCapacity}
-              skillLevel={skillLevel}
-              setSkillLevel={setSkillLevel}
-              targetArea={targetArea}
-              setTargetArea={setTargetArea}
-              accessories={accessories}
-              setAccessories={setAccessories}
-              wellnessType={wellnessType}
-              setWellnessType={setWellnessType}
-              usageArea={usageArea}
-              setUsageArea={setUsageArea}
-              wellnessBenefits={wellnessBenefits}
-              setWellnessBenefits={setWellnessBenefits}
-              powerSource={powerSource}
-              setPowerSource={setPowerSource}
-              batteryCapacity={batteryCapacity}
-              setBatteryCapacity={setBatteryCapacity}
-              heatFunction={heatFunction}
-              setHeatFunction={setHeatFunction}
-              massageType={massageType}
-              setMassageType={setMassageType}
-              scent={scent}
-              setScent={setScent}
-              volumeSize={volumeSize}
-              setVolumeSize={setVolumeSize}
-              ingredients={ingredients}
-              setIngredients={setIngredients}
-            />
-          )}
 
-      {/* =========================================================
-    SPECIAL FEATURES
-========================================================= */}
+{/* =========================
+    VISIBILITY
+========================= */}
 
-<div className="form-section">
+<div className="form-section visibility-section">
 
-<h3>Special Features</h3>
+  <h3>Visibility</h3>
 
-<div className="special-feature-input">
+  <div className="checkbox-group">
 
-  {/* FEATURE */}
+    <label className="visibility-option">
 
-  <input
-    type="text"
-    placeholder="Feature"
-    value={newSpecialFeature}
-    onChange={(e) =>
-      setNewSpecialFeature(e.target.value)
-    }
-  />
+      <input
+        type="checkbox"
+        checked={featured}
+        onChange={(e) =>
+          setFeatured(e.target.checked)
+        }
+      />
 
-  {/* VALUE */}
+      <span>Featured</span>
 
-  <input
-    type="text"
-    placeholder="Value"
-    value={newSpecialFeatureValue}
-    onChange={(e) =>
-      setNewSpecialFeatureValue(e.target.value)
-    }
-    onKeyDown={(e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        addSpecialFeature();
-      }
-    }}
-  />
+    </label>
 
-  {/* ADD */}
+    <label className="visibility-option">
 
-  <button
-    type="button"
-    onClick={addSpecialFeature}
-  >
-    + Add
-  </button>
+      <input
+        type="checkbox"
+        checked={trending}
+        onChange={(e) =>
+          setTrending(e.target.checked)
+        }
+      />
 
-</div>
+      <span>Trending</span>
 
+    </label>
 
-{/* ADDED FEATURES */}
+    <label className="visibility-option">
 
-{specialFeatures.length > 0 && (
+      <input
+        type="checkbox"
+        checked={spotlight}
+        onChange={(e) =>
+          setSpotlight(e.target.checked)
+        }
+      />
 
-  <div className="special-features-list">
+      <span>Spotlight</span>
 
-    {specialFeatures.map((item, index) => (
-
-      <div
-        className="special-feature-item"
-        key={`${item.feature}-${index}`}
-      >
-
-        <span className="special-feature-name">
-          {item.feature}
-        </span>
-
-        <span className="special-feature-value">
-          {item.value}
-        </span>
-
-        <button
-          type="button"
-          onClick={() =>
-            removeSpecialFeature(index)
-          }
-        >
-          ×
-        </button>
-
-      </div>
-
-    ))}
+    </label>
 
   </div>
 
-)}
-
 </div>
-          {/* =========================
-              VISIBILITY
-          ========================= */}
-  
-          <div className="form-section visibility-section">
-  
-            <h3>Visibility</h3>
-  
-            <div className="checkbox-group">
-  
-              <label className="visibility-option">
-                <input
-                  type="checkbox"
-                  checked={featured}
-                  onChange={(e) =>
-                    setFeatured(e.target.checked)
-                  }
-                />
-                <span>Featured</span>
-              </label>
-  
-              <label className="visibility-option">
-                <input
-                  type="checkbox"
-                  checked={trending}
-                  onChange={(e) =>
-                    setTrending(e.target.checked)
-                  }
-                />
-                <span>Trending</span>
-              </label>
-  
-              <label className="visibility-option">
-                <input
-                  type="checkbox"
-                  checked={spotlight}
-                  onChange={(e) =>
-                    setSpotlight(e.target.checked)
-                  }
-                />
-                <span>Spotlight</span>
-              </label>
-  
-            </div>
-  
-          </div>
   
           {/* =========================
               SAVE / ADD ACTIONS

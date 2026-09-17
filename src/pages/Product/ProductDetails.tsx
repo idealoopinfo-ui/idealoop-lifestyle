@@ -231,81 +231,109 @@ setProduct(data);
       console.log("MARKETPLACE:", data.marketplace);
 
       /* =========================
-         RELATED PRODUCTS
-      ========================= */
+   RELATED PRODUCTS
+========================= */
 
-      let relatedData: Product[] = [];
+let relatedData: Product[] = [];
 
-      /* SAME SUBCATEGORY */
+/* SAME PRODUCT TYPE + GENDER */
 
-      if (data.subcategory) {
-        const {
-          data: subcategoryProducts,
-          error: subcategoryError,
-        } = await supabase
-          .from("products")
-          .select("*")
-          .eq("subcategory", data.subcategory)
-          .neq("product_id", data.product_id)
-          .limit(5);
+if (data.product_type) {
+  let productTypeQuery = supabase
+    .from("products")
+    .select("*")
+    .eq("product_type", data.product_type)
+    .neq("product_id", data.product_id);
 
-        if (subcategoryError) {
-          console.error(
-            "SUBCATEGORY RELATED PRODUCTS ERROR:",
-            subcategoryError
-          );
-        } else {
-          relatedData = subcategoryProducts || [];
-        }
-      }
+  if (data.gender) {
+    productTypeQuery = productTypeQuery.eq("gender", data.gender);
+  }
 
-      /* SAME CATEGORY */
+  const {
+    data: productTypeProducts,
+    error: productTypeError,
+  } = await productTypeQuery.limit(5);
 
-      if (relatedData.length === 0 && data.category) {
-        const {
-          data: categoryProducts,
-          error: categoryError,
-        } = await supabase
-          .from("products")
-          .select("*")
-          .eq("category", data.category)
-          .neq("product_id", data.product_id)
-          .limit(5);
+  if (productTypeError) {
+    console.error(
+      "PRODUCT TYPE RELATED PRODUCTS ERROR:",
+      productTypeError
+    );
+  } else {
+    relatedData = productTypeProducts || [];
+  }
+}
 
-        if (categoryError) {
-          console.error(
-            "CATEGORY RELATED PRODUCTS ERROR:",
-            categoryError
-          );
-        } else {
-          relatedData = categoryProducts || [];
-        }
-      }
+/* SAME SUBCATEGORY */
 
-      /* SAME DEPARTMENT */
+if (relatedData.length === 0 && data.subcategory) {
+  const {
+    data: subcategoryProducts,
+    error: subcategoryError,
+  } = await supabase
+    .from("products")
+    .select("*")
+    .eq("subcategory", data.subcategory)
+    .neq("product_id", data.product_id)
+    .limit(5);
 
-      if (relatedData.length === 0 && data.department) {
-        const {
-          data: departmentProducts,
-          error: departmentError,
-        } = await supabase
-          .from("products")
-          .select("*")
-          .eq("department", data.department)
-          .neq("product_id", data.product_id)
-          .limit(5);
+  if (subcategoryError) {
+    console.error(
+      "SUBCATEGORY RELATED PRODUCTS ERROR:",
+      subcategoryError
+    );
+  } else {
+    relatedData = subcategoryProducts || [];
+  }
+}
 
-        if (departmentError) {
-          console.error(
-            "DEPARTMENT RELATED PRODUCTS ERROR:",
-            departmentError
-          );
-        } else {
-          relatedData = departmentProducts || [];
-        }
-      }
+/* SAME CATEGORY */
 
-      setRelated(relatedData);
+if (relatedData.length === 0 && data.category) {
+  const {
+    data: categoryProducts,
+    error: categoryError,
+  } = await supabase
+    .from("products")
+    .select("*")
+    .eq("category", data.category)
+    .neq("product_id", data.product_id)
+    .limit(5);
+
+  if (categoryError) {
+    console.error(
+      "CATEGORY RELATED PRODUCTS ERROR:",
+      categoryError
+    );
+  } else {
+    relatedData = categoryProducts || [];
+  }
+}
+
+/* SAME DEPARTMENT */
+
+if (relatedData.length === 0 && data.department) {
+  const {
+    data: departmentProducts,
+    error: departmentError,
+  } = await supabase
+    .from("products")
+    .select("*")
+    .eq("department", data.department)
+    .neq("product_id", data.product_id)
+    .limit(5);
+
+  if (departmentError) {
+    console.error(
+      "DEPARTMENT RELATED PRODUCTS ERROR:",
+      departmentError
+    );
+  } else {
+    relatedData = departmentProducts || [];
+  }
+}
+
+setRelated(relatedData);
     };
 
     loadProduct();
@@ -403,7 +431,6 @@ setProduct(data);
     ========================= */
 
     ["Dimensions", product.dimensions],
-    ["Color", product.color],
     ["Room Type", product.room_type],
     ["Weight", product.weight],
 
