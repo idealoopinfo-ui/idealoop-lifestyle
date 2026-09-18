@@ -230,114 +230,157 @@ setProduct(data);
       console.log("PRODUCT DATA:", data);
       console.log("MARKETPLACE:", data.marketplace);
 
-      /* =========================
+     /* =========================
    RELATED PRODUCTS
 ========================= */
 
 let relatedData: Product[] = [];
 
-/* SAME PRODUCT TYPE + GENDER */
+/* =====================================================
+   1. SAME SUBCATEGORY + CATEGORY + DEPARTMENT + GENDER
+===================================================== */
 
-if (data.product_type) {
-  let productTypeQuery = supabase
+if (data.subcategory) {
+  let query = supabase
+    .from("products")
+    .select("*")
+    .eq("subcategory", data.subcategory)
+    .neq("product_id", data.product_id);
+
+  if (data.category) {
+    query = query.eq("category", data.category);
+  }
+
+  if (data.department) {
+    query = query.eq("department", data.department);
+  }
+
+  if (data.gender) {
+    query = query.eq("gender", data.gender);
+  }
+
+  const {
+    data: products,
+    error,
+  } = await query.limit(5);
+
+  if (error) {
+    console.error(
+      "SUBCATEGORY RELATED PRODUCTS ERROR:",
+      error
+    );
+  } else {
+    relatedData = products || [];
+  }
+}
+
+/* =====================================================
+   2. SAME CATEGORY + DEPARTMENT + GENDER
+===================================================== */
+
+if (relatedData.length === 0 && data.category) {
+  let query = supabase
+    .from("products")
+    .select("*")
+    .eq("category", data.category)
+    .neq("product_id", data.product_id);
+
+  if (data.department) {
+    query = query.eq("department", data.department);
+  }
+
+  if (data.gender) {
+    query = query.eq("gender", data.gender);
+  }
+
+  const {
+    data: products,
+    error,
+  } = await query.limit(5);
+
+  if (error) {
+    console.error(
+      "CATEGORY RELATED PRODUCTS ERROR:",
+      error
+    );
+  } else {
+    relatedData = products || [];
+  }
+}
+
+/* =====================================================
+   3. SAME PRODUCT TYPE + DEPARTMENT + GENDER
+===================================================== */
+
+if (relatedData.length === 0 && data.product_type) {
+  let query = supabase
     .from("products")
     .select("*")
     .eq("product_type", data.product_type)
     .neq("product_id", data.product_id);
 
+  if (data.department) {
+    query = query.eq("department", data.department);
+  }
+
   if (data.gender) {
-    productTypeQuery = productTypeQuery.eq("gender", data.gender);
+    query = query.eq("gender", data.gender);
   }
 
   const {
-    data: productTypeProducts,
-    error: productTypeError,
-  } = await productTypeQuery.limit(5);
+    data: products,
+    error,
+  } = await query.limit(5);
 
-  if (productTypeError) {
+  if (error) {
     console.error(
       "PRODUCT TYPE RELATED PRODUCTS ERROR:",
-      productTypeError
+      error
     );
   } else {
-    relatedData = productTypeProducts || [];
+    relatedData = products || [];
   }
 }
 
-/* SAME SUBCATEGORY */
-
-if (relatedData.length === 0 && data.subcategory) {
-  const {
-    data: subcategoryProducts,
-    error: subcategoryError,
-  } = await supabase
-    .from("products")
-    .select("*")
-    .eq("subcategory", data.subcategory)
-    .neq("product_id", data.product_id)
-    .limit(5);
-
-  if (subcategoryError) {
-    console.error(
-      "SUBCATEGORY RELATED PRODUCTS ERROR:",
-      subcategoryError
-    );
-  } else {
-    relatedData = subcategoryProducts || [];
-  }
-}
-
-/* SAME CATEGORY */
-
-if (relatedData.length === 0 && data.category) {
-  const {
-    data: categoryProducts,
-    error: categoryError,
-  } = await supabase
-    .from("products")
-    .select("*")
-    .eq("category", data.category)
-    .neq("product_id", data.product_id)
-    .limit(5);
-
-  if (categoryError) {
-    console.error(
-      "CATEGORY RELATED PRODUCTS ERROR:",
-      categoryError
-    );
-  } else {
-    relatedData = categoryProducts || [];
-  }
-}
-
-/* SAME DEPARTMENT */
+/* =====================================================
+   4. SAME DEPARTMENT + GENDER
+===================================================== */
 
 if (relatedData.length === 0 && data.department) {
-  const {
-    data: departmentProducts,
-    error: departmentError,
-  } = await supabase
+  let query = supabase
     .from("products")
     .select("*")
     .eq("department", data.department)
-    .neq("product_id", data.product_id)
-    .limit(5);
+    .neq("product_id", data.product_id);
 
-  if (departmentError) {
+  if (data.gender) {
+    query = query.eq("gender", data.gender);
+  }
+
+  const {
+    data: products,
+    error,
+  } = await query.limit(5);
+
+  if (error) {
     console.error(
       "DEPARTMENT RELATED PRODUCTS ERROR:",
-      departmentError
+      error
     );
   } else {
-    relatedData = departmentProducts || [];
+    relatedData = products || [];
   }
 }
 
-setRelated(relatedData);
-    };
+/* =====================================================
+   SET RELATED PRODUCTS
+===================================================== */
 
-    loadProduct();
-  }, [productId]);
+setRelated(relatedData);
+};
+
+loadProduct();
+}, [productId]);
 
   /* =========================
      LOADING
@@ -373,12 +416,13 @@ setRelated(relatedData);
        GENERAL
     ========================= */
 
-    ["Marketplace", product.marketplace],
-    ["Brand", product.brand],
-    ["Model", product.model],
-    ["Warranty", product.warranty],
-    ["Country of Origin", product.country_origin],
-    ["Package Includes", product.package_includes],
+["Marketplace", product.marketplace],
+["Brand", product.brand],
+["Model", product.model],
+["Color", product.color],
+["Warranty", product.warranty],
+["Country of Origin", product.country_origin],
+["Package Includes", product.package_includes],
 
    
     /* =========================
@@ -407,7 +451,7 @@ setRelated(relatedData);
     ["Available Sizes (International)", product.available_sizes_international],
     ["Size Accuracy", product.size_accuracy],
     ["Size Chart", product.size_chart],
-    ["Color", product.color],
+    
     ["Clothing Length", product.clothing_length],
     ["Waist Type", product.waist_type],
     ["Closure Type", product.closure_type],

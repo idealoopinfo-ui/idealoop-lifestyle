@@ -288,10 +288,6 @@ setSpecialFeatures(
       selectedProduct.size || ""
     );
     
-    setColor(
-      selectedProduct.color || ""
-    );
-    
     setClothingLength(
       selectedProduct.clothing_length || ""
     );
@@ -380,10 +376,6 @@ setSpecialFeatures(
     // HOME & LIVING
     setDimensions(
       selectedProduct.dimensions || ""
-    );
-  
-    setColor(
-      selectedProduct.color || ""
     );
   
     setRoomType(
@@ -593,6 +585,7 @@ const addProduct = async () => {
         ),
         
         model,
+        color,
         warranty,
         country_origin: countryOrigin,
         package_includes: packageIncludes,
@@ -748,11 +741,12 @@ statsLastChecked || null,
   setNewSpecialFeature("");
   setNewSpecialFeatureValue("");
 
-  setBrand("");
-  setModel("");
-  setWarranty("");
-  setCountryOrigin("");
-  setPackageIncludes("");
+setBrand("");
+setModel("");
+setColor("");
+setWarranty("");
+setCountryOrigin("");
+setPackageIncludes("");
 
   /* =========================
    RESET RATINGS & POPULARITY
@@ -886,10 +880,11 @@ const updateProduct = async () => {
         item.value.trim() !== ""
     ),
 
-      model,
-      warranty,
-      country_origin: countryOrigin,
-      package_includes: packageIncludes,
+    model,
+    color,
+    warranty,
+    country_origin: countryOrigin,
+    package_includes: packageIncludes,
 
       /* =========================
    RATINGS & POPULARITY
@@ -1346,9 +1341,6 @@ statsLastChecked || null,
   <HomeLivingDetails
     dimensions={dimensions}
     setDimensions={setDimensions}
-
-    color={color}
-    setColor={setColor}
 
     roomType={roomType}
     setRoomType={setRoomType}

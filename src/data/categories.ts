@@ -152,6 +152,7 @@ export const categories: CategoryNode[] = [
                   leaf("Yoga Pants", "yoga-pants"),
                   leaf("Gym Sets", "gym-sets"),
                   leaf("Workout Shirts", "workout-shirts"),
+                  leaf("Leg Pants", "leg-pants"),
                 ],
               },
 
