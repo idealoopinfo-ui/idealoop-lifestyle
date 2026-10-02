@@ -315,9 +315,28 @@ export default function DiscoverPage() {
         </div>
 
 
-        <p>
+        <p className="discover-subtitle">
           Find inspiration for your lifestyle.
         </p>
+
+
+        {/* =================================================
+            DISCOVER BRAND MESSAGE
+        ================================================= */}
+
+        <div className="discover-intro">
+
+          <h2>
+            Different people. Different tastes.
+            <span> Different things to discover.</span>
+          </h2>
+
+          <p>
+            Explore fashion, beauty, and fitness & wellness —
+            and discover something that feels right for you.
+          </p>
+
+        </div>
 
       </div>
 

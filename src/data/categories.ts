@@ -123,6 +123,8 @@ export const categories: CategoryNode[] = [
               leaf("Jeans", "jeans"),
               leaf("Matching Sets", "matching-sets"),
               leaf("Bikini Sets", "bikini-sets"),
+              leaf("Cardigans", "cardigans"),
+
 
               /* ================= TOPS ================= */
 

@@ -60,7 +60,7 @@ export default function Hero() {
           >
 
             <img
-              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=85"
+              src="https://img.kwcdn.com/product/fancy/bcb28d24-c5b0-43a1-9532-cfad8358c51f.jpg?imageView2/2/w/1300/q/90/format/avif"
               alt="Fashion lifestyle"
             />
 

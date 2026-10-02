@@ -22,7 +22,7 @@ export default function Footer({ className }: FooterProps) {
 
           <p className="footer-text">
             A modern lifestyle marketplace offering curated
-            fashion, beauty, home essentials, and trending products.
+            fashion, beauty, fitness essentials, and trending products.
           </p>
         </div>
 
@@ -40,6 +40,10 @@ export default function Footer({ className }: FooterProps) {
 
           <Link to="/category/beauty">
             Beauty
+          </Link>
+
+          <Link to="/category/fitness">
+            Fitness
           </Link>
 
           <Link to="/category/home-living">

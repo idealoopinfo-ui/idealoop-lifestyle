@@ -10,7 +10,12 @@ export default function AffiliateInformation({
     setShopName,
 
     marketplace,
-    setMarketplace
+    setMarketplace,
+
+    marketplaceProductId,
+    setMarketplaceProductId,
+
+    duplicateMessage
 
 }: any) {
 
@@ -71,11 +76,21 @@ Other
 </select>
 
 
+<div className="marketplace-product-id-field">
+
 <input
-    placeholder="Marketplace"
-    value={marketplace}
-    onChange={(e)=>setMarketplace(e.target.value)}
+    placeholder="Marketplace Product ID"
+    value={marketplaceProductId}
+    onChange={(e)=>setMarketplaceProductId(e.target.value)}
 />
+
+{duplicateMessage && (
+    <div className="duplicate-product-message">
+        {duplicateMessage}
+    </div>
+)}
+
+</div>
 
 
 </div>

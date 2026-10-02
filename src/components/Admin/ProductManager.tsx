@@ -56,6 +56,15 @@ const [image5,setImage5] = useState("");
 const [affiliateUrl,setAffiliateUrl] = useState("");
 const [sourceUrl, setSourceUrl] = useState("");
 const [marketplace,setMarketplace] = useState("");
+const [marketplaceProductId, setMarketplaceProductId] = useState("");
+const [duplicateMessage, setDuplicateMessage] = useState("");
+useEffect(() => {
+  const timer = setTimeout(() => {
+    checkMarketplaceProduct(marketplace, marketplaceProductId);
+  }, 500);
+
+  return () => clearTimeout(timer);
+}, [marketplace, marketplaceProductId]);
 
 const [productId,setProductId] = useState("");
 const [featured,setFeatured] = useState(false);
@@ -124,6 +133,7 @@ const [reviewCount, setReviewCount] = useState("");
 const [soldCount, setSoldCount] = useState("");
 const [ratingSource, setRatingSource] = useState("");
 const [statsLastChecked, setStatsLastChecked] = useState("");
+const [validationError, setValidationError] = useState("");
 
 const [equipmentType, setEquipmentType] = useState("");
 const [workoutType, setWorkoutType] = useState("");
@@ -233,6 +243,8 @@ setSpecialFeatures(
     setMarketplace(
       selectedProduct.marketplace || ""
     );
+
+    setMarketplaceProductId(selectedProduct.marketplace_product_id || "");
   
     // CATEGORY
     setDepartment(
@@ -558,10 +570,91 @@ const generateProductId = async () => {
 
 };
 
+const checkMarketplaceProduct = async (
+  marketplaceValue: string,
+  productIdValue: string
+) => {
+  const cleanMarketplace = marketplaceValue.trim();
+  const cleanProductId = productIdValue.trim();
+
+  // Nothing to check yet
+  if (!cleanMarketplace || !cleanProductId) {
+    setDuplicateMessage("");
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from("products")
+    .select("id")
+    .ilike("marketplace", cleanMarketplace)
+    .eq("marketplace_product_id", cleanProductId)
+    .limit(1);
+
+  if (error) {
+    console.error("Duplicate product check error:", error);
+    setDuplicateMessage("");
+    return;
+  }
+
+  if (data && data.length > 0) {
+    setDuplicateMessage("Product already exists");
+  } else {
+    setDuplicateMessage("");
+  }
+};
+
+const validateProductStandard = () => {
+
+  console.log("VALIDATION TEST:", {
+    rating,
+    reviewCount,
+    productRating: Number(rating),
+    productReviews: Number(reviewCount),
+  });
+
+  const productRating = Number(rating);
+  const productReviews = Number(reviewCount);
+
+  setValidationError("");
+
+  if (!rating || Number.isNaN(productRating)) {
+    setValidationError(
+      "Rating is required. Idealoop requires a rating of 4.6 or higher."
+    );
+    return false;
+  }
+
+  if (productRating < 4.6) {
+    setValidationError(
+      `Product rating is ${productRating}. Idealoop requires a rating of 4.6 or higher.`
+    );
+    return false;
+  }
+
+  if (!reviewCount || Number.isNaN(productReviews)) {
+    setValidationError(
+      "Review count is required. Idealoop requires at least 100 reviews."
+    );
+    return false;
+  }
+
+  if (productReviews < 100) {
+    setValidationError(
+      `Product has ${productReviews} reviews. Idealoop requires at least 100 reviews.`
+    );
+    return false;
+  }
+
+  return true;
+};
 
 /* ADD PRODUCT */
 
 const addProduct = async () => {
+
+  if (!validateProductStandard()) {
+    return;
+  }
 
   const { error } = await supabase
     .from("products")
@@ -589,6 +682,27 @@ const addProduct = async () => {
         warranty,
         country_origin: countryOrigin,
         package_includes: packageIncludes,
+
+        /* =========================
+           RATINGS & POPULARITY
+        ========================= */
+
+        rating: rating
+          ? Number(rating)
+          : null,
+
+        review_count: reviewCount
+          ? Number(reviewCount)
+          : null,
+
+        sold_count: soldCount
+          ? Number(soldCount)
+          : null,
+
+        rating_source: ratingSource || null,
+
+        stats_last_checked:
+          statsLastChecked || null,
 
         /* =========================
    RATINGS & POPULARITY
@@ -770,6 +884,7 @@ setStatsLastChecked("");
   setSourceUrl("");
   setShopName("");
   setMarketplace("");
+  setMarketplaceProductId("");
 
   setDepartment("");
   setCategory("");
@@ -861,31 +976,35 @@ const updateProduct = async () => {
 
   if (!editingId) return;
 
+  // Validate Idealoop product standard
+  if (!validateProductStandard()) {
+    return;
+  }
+
   const { error } = await supabase
-  .from("products")
-  .update({
+    .from("products")
+    .update({
 
-    title,
-    brand,
+      title,
+      brand,
 
-    additional_features: additionalFeatures.filter(
-      (item) =>
-        item.feature.trim() !== "" ||
-        item.value.trim() !== ""
-    ),
+      additional_features: additionalFeatures.filter(
+        (item) =>
+          item.feature.trim() !== "" ||
+          item.value.trim() !== ""
+      ),
 
-    special_features: specialFeatures.filter(
-      (item) =>
-        item.feature.trim() !== "" ||
-        item.value.trim() !== ""
-    ),
+      special_features: specialFeatures.filter(
+        (item) =>
+          item.feature.trim() !== "" ||
+          item.value.trim() !== ""
+      ),
 
-    model,
-    color,
-    warranty,
-    country_origin: countryOrigin,
-    package_includes: packageIncludes,
-
+      model,
+      color,
+      warranty,
+      country_origin: countryOrigin,
+      package_includes: packageIncludes,
       /* =========================
    RATINGS & POPULARITY
 ========================= */
@@ -921,6 +1040,7 @@ statsLastChecked || null,
 
       shop_name: shopName,
       marketplace,
+      marketplace_product_id: marketplaceProductId,
 
       department,
       category,
@@ -1192,16 +1312,19 @@ statsLastChecked || null,
             setImage5={setImage5}
           />
   
-          <AffiliateInformation
-            affiliateUrl={affiliateUrl}
-            setAffiliateUrl={setAffiliateUrl}
-            sourceUrl={sourceUrl}
-            setSourceUrl={setSourceUrl}
-            shopName={shopName}
-            setShopName={setShopName}
-            marketplace={marketplace}
-            setMarketplace={setMarketplace}
-          />
+  <AffiliateInformation 
+  affiliateUrl={affiliateUrl} 
+  setAffiliateUrl={setAffiliateUrl} 
+  sourceUrl={sourceUrl} 
+  setSourceUrl={setSourceUrl} 
+  shopName={shopName} 
+  setShopName={setShopName} 
+  marketplace={marketplace} 
+  setMarketplace={setMarketplace}
+  marketplaceProductId={marketplaceProductId}
+  setMarketplaceProductId={setMarketplaceProductId}
+  duplicateMessage={duplicateMessage}
+/>
   
           <CategorySelector
             department={department}
@@ -1602,21 +1725,43 @@ statsLastChecked || null,
   
           <div className="product-actions">
   
-            <button
-              type="button"
-              className="add-product-btn"
-              onClick={() => {
-                if (editingId) {
-                  updateProduct();
-                } else {
-                  addProduct();
-                }
-              }}
-            >
-              {editingId
-                ? "Save Product"
-                : "Add Product"}
-            </button>
+          <div className="save-product-area">
+
+{validationError && (
+  <div className="validation-popup">
+    <span className="validation-popup-icon">⚠</span>
+
+    <div className="validation-popup-content">
+      <strong>Product Not Saved</strong>
+      <span>{validationError}</span>
+    </div>
+
+    <button
+      type="button"
+      className="validation-popup-close"
+      onClick={() => setValidationError("")}
+      aria-label="Close"
+    >
+      ×
+    </button>
+  </div>
+)}
+
+<button
+  type="button"
+  className="add-product-btn"
+  onClick={() => {
+    if (editingId) {
+      updateProduct();
+    } else {
+      addProduct();
+    }
+  }}
+>
+  {editingId ? "Save Product" : "Add Product"}
+</button>
+
+</div>
   
             {editingId && (
               <button
