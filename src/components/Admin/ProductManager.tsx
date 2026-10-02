@@ -704,27 +704,6 @@ const addProduct = async () => {
         stats_last_checked:
           statsLastChecked || null,
 
-        /* =========================
-   RATINGS & POPULARITY
-========================= */
-
-rating: rating
-? Number(rating)
-: null,
-
-review_count: reviewCount
-? Number(reviewCount)
-: null,
-
-sold_count: soldCount
-? Number(soldCount)
-: null,
-
-rating_source: ratingSource || null,
-
-stats_last_checked:
-statsLastChecked || null,
-
         description,
         short_description: shortDescription,
 

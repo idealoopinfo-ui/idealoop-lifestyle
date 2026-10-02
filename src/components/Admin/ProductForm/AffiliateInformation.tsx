@@ -9,9 +9,6 @@ export default function AffiliateInformation({
     shopName,
     setShopName,
 
-    marketplace,
-    setMarketplace,
-
     marketplaceProductId,
     setMarketplaceProductId,
 
