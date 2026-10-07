@@ -38,7 +38,6 @@ export async function monitorProducts(){
         .eq("monitor_enabled", true);
 
 
-
     if(error){
 
         console.error(
@@ -51,21 +50,20 @@ export async function monitorProducts(){
     }
 
 
-
     console.log(
         "Products found:",
         data.length
     );
 
 
-
     for(const product of data){
-
 
         console.log(
             "\nChecking:",
             product.title
         );
+
+
         const productImages = [
             product.image_1,
             product.image_2,
@@ -81,102 +79,152 @@ export async function monitorProducts(){
                     .filter(Boolean)
             )
             .slice(0, 5);
-        
+
+
         console.log(
             "📸 Product images:",
             productImages.length
         );
 
 
+        /*
+         * =========================
+         * MARKETPLACE CHECKER
+         * =========================
+         */
+
+        const marketplace =
+    product.marketplace?.trim().toLowerCase();
+
 
         if(
-            product.marketplace?.toLowerCase()
-            === "aliexpress"
+            marketplace !== "aliexpress" &&
+            marketplace !== "temu" &&
+            marketplace !== "amazon"
         ){
 
-
-            if(!product.source_url){
-
-                const result = {
-            
-                    stock_status: "unknown",
-            
-                    price: null,
-            
-                    error: "Missing source URL"
-            
-                };
-            
-            
-                await saveCheckLog(
-                    product,
-                    result
-                );
-            
-            
-                console.log(
-                    "⚠ Missing source URL, skipping:",
-                    product.title
-                );
-            
-            
-                continue;
-            
-            }
-
-
-            const checker =
-            getChecker(product.marketplace);
-
-
-
-            const result =
-            await checker(
-                product.source_url
-            );
-
-
-
             console.log(
-                result
+                "⚠ Unsupported marketplace, skipping:",
+                product.marketplace
             );
-            
-            
+
+            continue;
+
+        }
+
+
+        /*
+         * =========================
+         * SOURCE URL CHECK
+         * =========================
+         */
+
+        if(!product.source_url){
+
+            const result = {
+
+                stock_status: "unknown",
+
+                price: null,
+
+                error: "Missing source URL"
+
+            };
+
+
             await saveCheckLog(
                 product,
                 result
             );
 
 
-            // Product removed
-
-            if(result.stock_status === "removed"){
-
-
-                await updateProductStatus(
-                    product.id,
-                    false
-                );
+            console.log(
+                "⚠ Missing source URL, skipping:",
+                product.title
+            );
 
 
-                await createNotification(
-
-                    product,
-
-                    "removed",
-
-                    `${product.title} was removed from ${product.marketplace}`,
-
-                    "critical"
-
-                );
-
-
-            }
-
+            continue;
 
         }
 
+
+        /*
+         * =========================
+         * GET CHECKER
+         * =========================
+         */
+
+        const checker =
+            getChecker(
+                product.marketplace
+            );
+
+
+        if(!checker){
+
+            console.log(
+                "⚠ No checker available for:",
+                product.marketplace
+            );
+
+            continue;
+
+        }
+
+
+        /*
+         * =========================
+         * RUN CHECKER
+         * =========================
+         */
+
+        const result =
+            await checker(
+                product.source_url
+            );
+
+
+        console.log(
+            result
+        );
+
+
+        await saveCheckLog(
+            product,
+            result
+        );
+
+
+        /*
+         * =========================
+         * PRODUCT REMOVED
+         * =========================
+         */
+
+        if(
+            result.stock_status === "removed"
+        ){
+
+            await updateProductStatus(
+                product.id,
+                false
+            );
+
+
+            await createNotification(
+
+                product,
+
+                "removed",
+
+                `${product.title} was removed from ${product.marketplace}`,
+
+                "critical"
+
+            );
+
+        }
 
     }
 
