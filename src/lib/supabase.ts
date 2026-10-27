@@ -1,18 +1,24 @@
 
+
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+const supabaseKey =
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+  import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl) {
   throw new Error('VITE_SUPABASE_URL is missing');
 }
 
-if (!supabasePublishableKey) {
-  throw new Error('VITE_SUPABASE_PUBLISHABLE_KEY is missing');
+if (!supabaseKey) {
+  throw new Error(
+    'Supabase key is missing. Configure VITE_SUPABASE_PUBLISHABLE_KEY or VITE_SUPABASE_ANON_KEY.'
+  );
 }
 
 export const supabase = createClient(
   supabaseUrl,
-  supabasePublishableKey
+  supabaseKey
 );
